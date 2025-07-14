@@ -533,7 +533,7 @@ def main():
     llamaparse_api_key = st.sidebar.text_input(
         "LlamaIndex API Key",
         type="password",
-        value="llx-2uTsxLAvQ9K64yhww0GLfBwWYSJkwokpHSmCXmWTJ2U9bDH8",
+        value="",
         help="Enter your LlamaIndex API key for document parsing"
     )
     

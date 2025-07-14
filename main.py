@@ -20,7 +20,7 @@ load_dotenv()
 # Configuration - Update these values as needed
 COUNTRY = "Germany"
 ICP = "Global People"  # Options: "Global People", "goGlobal", "Parakar", "Atlas"
-INPUT_FOLDER = "expense_files"
+INPUT_FOLDER = "temporary"
 LLAMAPARSE_API_KEY = os.getenv("LLAMAPARSE_API_KEY")
 DEBUG_MODE = True
 
