@@ -1,0 +1,99 @@
+{
+  "source_file": "page-4.md",
+  "processing_timestamp": "2025-07-14T16:38:05.396321",
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "German",
+    "language_confidence": 95,
+    "document_location": "Germany",
+    "expected_location": "Germany",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 98,
+    "reasoning": "The document is a receipt from a restaurant, containing vendor details, transaction date, items purchased, and total amounts, typical for an expense document. The language is German with high confidence. Document location matches the expected location of Germany."
+  },
+  "extraction_result": {
+    "supplier_name": "Hotel Restaurant Nordpol",
+    "supplier_address": "Werftstra\u00dfe 5, 23774 Heiligenhafen",
+    "vat_number": "DE51Z770000150923",
+    "currency": "EUR",
+    "total_amount": 52.1,
+    "date_of_issue": "2019-08-27",
+    "country": "Germany",
+    "line_items": [
+      {
+        "description": "Kleiner Salat",
+        "quantity": 1,
+        "unit_price": 4.9,
+        "total_price": 4.9
+      },
+      {
+        "description": "Ostseescholle Finkenwerder SK",
+        "quantity": 1,
+        "unit_price": 20.9,
+        "total_price": 20.9
+      },
+      {
+        "description": "Pannfischteller BK",
+        "quantity": 1,
+        "unit_price": 17.9,
+        "total_price": 17.9
+      },
+      {
+        "description": "Weizen alkoholfrei",
+        "quantity": 2,
+        "unit_price": 4.2,
+        "total_price": 8.4
+      }
+    ],
+    "transaction_time": "16:50",
+    "transaction_reference": "34660",
+    "tax_rate_7_percent": 0.0,
+    "tax_rate_19_percent": 8.32,
+    "nett_amount": 43.78,
+    "payment_method": "BAR",
+    "server": "kellner1"
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 3,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "Supplier name on the receipt does not match the mandatory requirement for Global People ICP.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure the supplier name is 'Global People DE GmbH'.",
+          "knowledge_base_reference": "Must be Global People DE GmbH"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "Supplier address on the receipt does not match the mandatory requirement for Global People ICP.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure the supplier address matches 'Taunusanlage 8, 60329 Frankfurt, Germany'.",
+          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "VAT number on the receipt does not match the mandatory requirement for Global People ICP.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure the VAT number is 'DE356366640'.",
+          "knowledge_base_reference": "DE356366640"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt has multiple compliance violations related to mandatory field requirements for Global People ICP. The supplier name, address, and VAT number do not adhere to the specified standards."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 3,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed"
+}

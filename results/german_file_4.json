@@ -1,0 +1,98 @@
+{
+  "source_file": "german_file_4.md",
+  "processing_timestamp": "2025-07-14T16:38:05.361514",
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "English",
+    "language_confidence": 95,
+    "document_location": "Germany",
+    "expected_location": "Germany",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 100,
+    "reasoning": "The document clearly outlines a transaction for a meal purchase, including itemized food items with prices, a total amount, a date and time of transaction, and a vendor located in Berlin, Germany. It fits the characteristics of an expense document related to meals with high confidence."
+  },
+  "extraction_result": {
+    "supplier_name": "BEETS AND ROOTS",
+    "supplier_address": "Leipziger Platz 18, 10117 Berlin",
+    "vat_number": null,
+    "currency": "EUR",
+    "total_amount": 16.3,
+    "date_of_issue": "2025-01-15",
+    "line_items": [
+      {
+        "description": "Japanese Salmon Bowl",
+        "quantity": 1,
+        "unit_price": 14.95,
+        "total_price": 14.95
+      },
+      {
+        "description": "Add Almond Crunch",
+        "quantity": 1,
+        "unit_price": 1.25,
+        "total_price": 1.25
+      },
+      {
+        "description": "Oneway Bowl",
+        "quantity": 1,
+        "unit_price": 0.1,
+        "total_price": 0.1
+      }
+    ],
+    "transaction_time": "13:11:44",
+    "order_code": "Angelina Jolie 6",
+    "order_type": "take away",
+    "pickup_receipt": true,
+    "tax_rate": null,
+    "vat": null,
+    "name": null,
+    "address": null,
+    "supplier": null,
+    "expense": null,
+    "route": null,
+    "car_details": null,
+    "purpose": null,
+    "odometer_reading": null,
+    "travel_date": null,
+    "a1_certificate": null,
+    "payment_receipt": null,
+    "manager_approval": null,
+    "personal_phone_proof": null,
+    "storage_period": null
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 2,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "Mandatory supplier name 'Global People DE GmbH' not present. Current supplier name is 'BEETS AND ROOTS'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "FileRelatedRequirements state that the Supplier Name must be 'Global People DE GmbH' for the 'Global People' ICP."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "Missing mandatory VAT number for 'Global People' ICP.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "FileRelatedRequirements dictate that the VAT Number must be 'DE356366640' for the 'Global People' ICP."
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt data violates compliance rules due to missing mandatory fields for the 'Global People' ICP in Germany. The supplier name and VAT number do not match required standards. The expense is not tax-exempt."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 2,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed"
+}

@@ -1,0 +1,108 @@
+{
+  "source_file": "italia_file.md",
+  "processing_timestamp": "2025-07-14T16:38:05.361514",
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "telecommunications",
+    "language": "Italian",
+    "language_confidence": 95,
+    "document_location": "Italy",
+    "expected_location": "Germany",
+    "location_match": false,
+    "error_type": "File location is not same as project's location",
+    "error_message": "The detected location is Italy which does not match the expected location of Germany.",
+    "classification_confidence": 90,
+    "reasoning": "The document contains typical expense elements with telecommunication services, an invoice format, vendor details, transaction amounts, and tax information. The content is in Italian and is consistent with telecommunications expenses provided by a supplier in Italy."
+  },
+  "extraction_result": {
+    "supplier_name": "Telecom Italia S.p.A.",
+    "supplier_address": "Piazza degli Affari 2, 20123 Milan, Italy",
+    "vat_number": "4213345/2",
+    "currency": "EUR",
+    "total_amount": 334.19,
+    "date_of_issue": "2013-01-11",
+    "invoice_number": "D938548182",
+    "due_date": "2013-02-10",
+    "customer_account_number": "C8375751-2",
+    "cell_number": "0348439841",
+    "line_items": [
+      {
+        "description": "Apple iPhone 5 Nero 32GB (SN:C7DG31W/DTWS)",
+        "date": "gennaio",
+        "quantity": null,
+        "unit_price": 199.99,
+        "vat": 39.99,
+        "total_price": 239.98
+      },
+      {
+        "description": "Servizi di Abbonamento (iPhone) Piano 12 Mesi Minuti illim. testi illim. 10 GB",
+        "date": "gennaio",
+        "quantity": null,
+        "unit_price": 78.0,
+        "vat": 15.7,
+        "total_price": 93.7
+      },
+      {
+        "description": "HSPA+ Voce Tariffa",
+        "date": "gennaio",
+        "quantity": null,
+        "unit_price": 9.0,
+        "vat": 1.79,
+        "total_price": 10.79
+      },
+      {
+        "description": "Extra 5G Data Rooftop",
+        "date": "gennaio",
+        "quantity": null,
+        "unit_price": 8.0,
+        "vat": 1.71,
+        "total_price": 9.71
+      }
+    ],
+    "sub_total": 278.49,
+    "vat_total": 55.7,
+    "transaction_reference": "P8348194-2",
+    "payment_schedule": "Il tuo conto in banca verr\u00e0 addebitato con l'intero saldo che si riflette su questa dichiarazione sulla 1 Febbraio 2014.",
+    "receipt_type": "Fattura Fiscale"
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 3,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name 'Telecom Italia S.p.A.' does not match the mandatory requirement 'Global People DE GmbH'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Rule: Must be Global People DE GmbH"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "The supplier address 'Piazza degli Affari 2, 20123 Milan, Italy' does not match the mandatory address 'Taunusanlage 8, 60329 Frankfurt, Germany'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Rule: Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "The VAT number '4213345/2' does not comply with the mandatory VAT number 'DE356366640' required for the 'Global People' ICP.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Rule: DE356366640"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt has critical compliance violations concerning mandatory supplier name, address, and VAT number, which do not meet the 'Global People' ICP requirements for telecommunications receipts in Germany."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "telecommunications",
+      "issues_count": 3,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed"
+}

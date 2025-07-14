@@ -1,0 +1,101 @@
+{
+  "source_file": "page-1_1.md",
+  "processing_timestamp": "2025-07-14T16:38:05.370045",
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "office_supplies",
+    "language": "English",
+    "language_confidence": 95,
+    "document_location": "United Kingdom",
+    "expected_location": "Germany",
+    "location_match": false,
+    "error_type": "File location is not same as project's location",
+    "error_message": "The document location (United Kingdom) does not match the expected location (Germany).",
+    "classification_confidence": 98,
+    "reasoning": "The document contains supplier information, monetary amounts, VAT information, and product details, all indicative of an office supplies expense. The invoice is issued by Herman Miller Ltd in the UK, evident from the address and VAT number format. Language identified as English with high confidence."
+  },
+  "extraction_result": {
+    "supplier_name": "Herman Miller Ltd",
+    "supplier_address": "1 Portal Road, Melksham, SN12 6GN",
+    "vat_number": "GB543212088",
+    "currency": "GBP",
+    "total_amount": 2350.0,
+    "date_of_issue": "2025-05-12",
+    "country": null,
+    "tax_rate": 20.0,
+    "vat": 391.67,
+    "line_items": [
+      {
+        "description": "Aeron Office Chair, Size B",
+        "quantity": 1,
+        "unit_price": 1338.0,
+        "total_price": 1338.0,
+        "vat": 20.0
+      },
+      {
+        "description": "Nevi Sit Stand Desk, Chalk White",
+        "quantity": 1,
+        "unit_price": 1012.0,
+        "total_price": 1012.0,
+        "vat": 20.0
+      }
+    ],
+    "invoice_number": "20250512036",
+    "due_date": "2025-05-26",
+    "delivery_date": "2025-05-12",
+    "subtotal": 2350.0,
+    "total_excl_vat": 1958.33,
+    "amount_due": 2350.0,
+    "client_name": "Oliver Thomson",
+    "client_address": "185 Rivington St, London, EC2A 3AY",
+    "payment_method": "Bank Transfer",
+    "contact_email": "info@hermanmiller.com"
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 4,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name on the receipt 'Herman Miller Ltd' does not match the mandatory requirement 'Global People DE GmbH'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to correct the supplier name as per compliance rules.",
+          "knowledge_base_reference": "Must be Global People DE GmbH"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "The supplier address '1 Portal Road, Melksham, SN12 6GN' does not match the mandatory requirement 'Taunusanlage 8, 60329 Frankfurt, Germany'.",
+          "recommendation": "Please obtain the correct supplier address from the supplier or provider.",
+          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "The VAT number 'GB543212088' does not match the mandatory Global People ICP-specific VAT number requirement 'DE356366640'.",
+          "recommendation": "Verify VAT number with the supplier to ensure it is compliant with Global People's requirements.",
+          "knowledge_base_reference": "DE356366640"
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "currency",
+          "description": "Receipt is issued in GBP whereas compliance rules require it to be in the local currency for Global People, which is EUR.",
+          "recommendation": "Ensure that receipts are issued in EUR to comply with Global People ICP requirements.",
+          "knowledge_base_reference": "Same currency with"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt has several compliance issues related to mandatory fields (supplier name, address, VAT number) and needs correction of the currency to ensure compliance with Global People's ICP requirements. The invoice can be compliant if alterations are made to make it align with the required formats and details."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "office_supplies",
+      "issues_count": 4,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed"
+}

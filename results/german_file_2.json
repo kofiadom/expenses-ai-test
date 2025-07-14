@@ -1,0 +1,109 @@
+{
+  "source_file": "german_file_2.md",
+  "processing_timestamp": "2025-07-14T16:38:05.325900",
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "German",
+    "language_confidence": 95,
+    "document_location": "Germany",
+    "expected_location": "Germany",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 98,
+    "reasoning": "The document is a restaurant receipt with vendor details, monetary amounts, tax information, and a transaction date. The language is identified as German with high confidence. The document and expected locations match as Germany."
+  },
+  "extraction_result": {
+    "supplier_name": "Pizzeria Pisa",
+    "supplier_address": "Cora-Berliner Str.2, 10117 Berlin",
+    "vat_number": "34/476/00588",
+    "currency": "EUR",
+    "total_amount": 9.5,
+    "date_of_issue": "2014-10-20",
+    "line_items": [
+      {
+        "description": "0,4 Cola Light",
+        "quantity": 1,
+        "unit_price": 3.6,
+        "total_price": 3.6
+      },
+      {
+        "description": "Currywurst Pommes",
+        "quantity": 1,
+        "unit_price": 5.9,
+        "total_price": 5.9
+      }
+    ],
+    "transaction_time": "13:45",
+    "table_number": "120",
+    "server": "Bediener 3",
+    "net_sales": 7.98,
+    "vat": 1.52,
+    "tax_rate": 19.0,
+    "payment_method": "cash",
+    "special_notes": "Tip is not included.",
+    "country": null,
+    "name": null,
+    "address": null,
+    "supplier": null,
+    "expense": null,
+    "route": null,
+    "car_details": null,
+    "purpose": null,
+    "odometer_reading": null,
+    "travel_date": null,
+    "a1_certificate": null,
+    "payment_receipt": null,
+    "manager_approval": null,
+    "personal_phone_proof": null,
+    "storage_period": null
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 4,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name on the receipt 'Pizzeria Pisa' does not match the required 'Global People DE GmbH'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider by ensuring the receipt reflects the correct company name as per compliance requirements.",
+          "knowledge_base_reference": "Must be Global People DE GmbH."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "The supplier address 'Cora-Berliner Str.2, 10117 Berlin' does not match 'Taunusanlage 8, 60329 Frankfurt, Germany'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider by ensuring the receipt reflects the correct company address as per compliance requirements.",
+          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "The VAT number '34/476/00588' does not match the required 'DE356366640'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider by ensuring the receipt reflects the correct VAT number as per compliance requirements.",
+          "knowledge_base_reference": "DE356366640."
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "expense_type",
+          "description": "Personal meals are not tax exempt as per 'Global People' requirements outside business travel.",
+          "recommendation": "Ensure compliance by providing appropriate context or proof of business-related activity to make it tax-compliant; otherwise, the meal expense will not be exempt.",
+          "knowledge_base_reference": "Not tax exempt (outside business travel)."
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt for meals is non-compliant due to incorrect supplier details and VAT number, alongside non-tax-exempt personal meal expenses outside business travel."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 4,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed"
+}

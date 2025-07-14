@@ -1,0 +1,110 @@
+{
+  "source_file": "austrian_file.md",
+  "processing_timestamp": "2025-07-14T16:38:05.321490",
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "flights",
+    "language": "English",
+    "language_confidence": 90,
+    "document_location": "Austria",
+    "expected_location": "Germany",
+    "location_match": false,
+    "error_type": "File location is not same as project's location",
+    "error_message": "The document location (Austria) does not match the expected location (Germany).",
+    "classification_confidence": 95,
+    "reasoning": "The document is a flight receipt with clear expense-related content such as flight data, billing address, and ticket information. It is recognized in English with high confidence and pertains to flights operated by Austrian Airlines, indicating Austria as the document location."
+  },
+  "extraction_result": {
+    "supplier_name": "Austrian Airlines AG",
+    "supplier_address": "Office Park 2, A-1300 Vienna-Airport",
+    "vat_number": "ATU15447707",
+    "currency": null,
+    "tax_rate": null,
+    "vat": null,
+    "name": "FORISEK / MICHAL DR MR",
+    "address": "Lubovnianska 14, 85107 Bratislava, Slovakia",
+    "supplier": null,
+    "expense": null,
+    "route": [
+      {
+        "flight_number": "OS561",
+        "date": "2013-08-31",
+        "from": "Vienna Intl",
+        "to": "Zurich",
+        "departure": "7:20 AM",
+        "arrival": "8:45 AM",
+        "class": "Y (OK)",
+        "baggage": "1 PC"
+      },
+      {
+        "flight_number": "OS568",
+        "date": "2013-09-08",
+        "from": "Zurich",
+        "to": "Vienna Intl",
+        "departure": "7:45 AM",
+        "arrival": "9:10 AM",
+        "class": "Y (OK)",
+        "baggage": "1 PC"
+      }
+    ],
+    "car_details": null,
+    "purpose": null,
+    "odometer_reading": null,
+    "travel_date": null,
+    "a1_certificate": null,
+    "payment_receipt": null,
+    "manager_approval": null,
+    "personal_phone_proof": null,
+    "storage_period": null,
+    "booking_code": "6GHMCV",
+    "ticket_number": "257-2133783831",
+    "transaction_reference": "213000508057"
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 4,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name on the invoice should be 'Global People DE GmbH' as specified for ICP 'Global People'. Currently, it is 'Austrian Airlines AG'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Name of the supplier/vendor on invoice, must be Global People DE GmbH."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "Missing mandatory supplier address: 'Taunusanlage 8, 60329 Frankfurt, Germany' for 'Global People'. Currently, the address listed is 'Office Park 2, A-1300 Vienna-Airport'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Address of the supplier on invoice must be 'Taunusanlage 8, 60329 Frankfurt, Germany'."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "Missing or incorrect VAT number. Expected 'DE356366640' as per Global People requirements. Current VAT number is 'ATU15447707'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "VAT identification number must be 'DE356366640'."
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "a1_certificate",
+          "description": "An A1 certificate is required when traveling for 'Global People', but it is missing from the provided documentation.",
+          "recommendation": "Specify exact documentation requirements and obtain an A1 certificate for compliance.",
+          "knowledge_base_reference": "A1 Certificate required when traveling."
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt has major compliance violations due to incorrect supplier information and missing mandatory documentation. Immediate corrections are needed to avoid compliance penalties."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "flights",
+      "issues_count": 4,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed"
+}

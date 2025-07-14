@@ -1,0 +1,101 @@
+{
+  "source_file": "page-1_2.md",
+  "processing_timestamp": "2025-07-14T16:38:05.372561",
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "mileage",
+    "language": "English",
+    "language_confidence": 98,
+    "document_location": "Canada",
+    "expected_location": "Germany",
+    "location_match": false,
+    "error_type": "File location is not same as project's location",
+    "error_message": "The document location is Canada, which does not match the expected location of Germany.",
+    "classification_confidence": 95,
+    "reasoning": "The document is a receipt from a fuel pump purchase, indicating an expense related to vehicle mileage. It includes vendor information, transaction total, and taxes, and the language is recognized as English with high confidence. However, the identified location is Canada, not matching the expected location."
+  },
+  "extraction_result": {
+    "supplier_name": "PETRO-CANADA",
+    "supplier_address": "3075 DON MILLS RD, WILLOWDALE, ONTARIO, M2J3C2",
+    "vat_number": "874383177",
+    "currency": "CAD",
+    "total_amount": 30.0,
+    "date_of_issue": "2023-06-21",
+    "transaction_time": "13:13:37",
+    "terminal": "*****8501",
+    "transaction_reference": "614216",
+    "invoice_number": "075795",
+    "receipt_type": "Preauth receipt",
+    "line_items": [
+      {
+        "description": "Pump 6 PRE-PAID Regular",
+        "quantity": 18.416,
+        "unit_price": 1.629,
+        "total_price": 30.0
+      }
+    ],
+    "taxes_included": {
+      "fhst": 1.33,
+      "phst": 2.12
+    },
+    "interac_card_number": "************8720",
+    "account": "Flash Default",
+    "authorization_number": "001903",
+    "tvr": "8000008000",
+    "loyalty_transaction_number": "859356"
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 5,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "Supplier Name does not match the mandatory requirement for Global People. Expected 'Global People DE GmbH', found 'PETRO-CANADA'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Must be Global People DE GmbH"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "Supplier Address does not match the mandatory requirement for Global People. Expected 'Taunusanlage 8, 60329 Frankfurt, Germany', found '3075 DON MILLS RD, WILLOWDALE, ONTARIO, M2J3C2'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "VAT Number does not match mandatory requirement for Global People. Expected 'DE356366640', found '874383177'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "DE356366640"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "currency",
+          "description": "Currency is not in compliance. The receipt currency 'CAD' does not match the expected local requirement.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Must use the local currency"
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "car_details",
+          "description": "Missing mandatory car details and destination for mileage receipts.",
+          "recommendation": "Please provide car details and destination information in mileage logs.",
+          "knowledge_base_reference": "Car details and destination required for mileage"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt is not in compliance with Global People requirements due to mismatches in supplier name, address, VAT number, currency, and missing car details for mileage. Immediate corrective action is required."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "mileage",
+      "issues_count": 5,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed"
+}

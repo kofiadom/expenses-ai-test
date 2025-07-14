@@ -1,0 +1,140 @@
+{
+  "source_file": "german_file_3.md",
+  "processing_timestamp": "2025-07-14T16:38:05.357498",
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "German",
+    "language_confidence": 95,
+    "document_location": "Germany",
+    "expected_location": "Germany",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 95,
+    "reasoning": "The document is a receipt from a restaurant containing details of food items purchased, prices, and total amount, indicating it's an expense document for meals. The location and language align with the expected criteria, and the text is clear and processable."
+  },
+  "extraction_result": {
+    "country": "Germany",
+    "supplier_name": "THE SUSHI CLUB",
+    "supplier_address": "Mohrenstr.42, 10117 Berlin",
+    "vat_number": null,
+    "currency": "EUR",
+    "total_amount": 64.4,
+    "date_of_issue": "2019-02-05",
+    "line_items": [
+      {
+        "description": "Miso Soup",
+        "quantity": 1,
+        "unit_price": 3.9,
+        "total_price": 3.9
+      },
+      {
+        "description": "Rock Shrimps",
+        "quantity": 1,
+        "unit_price": 11.5,
+        "total_price": 11.5
+      },
+      {
+        "description": "Tuna Tataki",
+        "quantity": 1,
+        "unit_price": 12.0,
+        "total_price": 12.0
+      },
+      {
+        "description": "Sake Tataki",
+        "quantity": 1,
+        "unit_price": 10.0,
+        "total_price": 10.0
+      },
+      {
+        "description": "Cola Light",
+        "quantity": 2,
+        "unit_price": 3.0,
+        "total_price": 6.0
+      },
+      {
+        "description": "Dessert",
+        "quantity": 1,
+        "unit_price": 4.5,
+        "total_price": 4.5
+      },
+      {
+        "description": "K\u00fcche Divers",
+        "quantity": 1,
+        "unit_price": 12.0,
+        "total_price": 12.0
+      },
+      {
+        "description": "Ice & Sorbet",
+        "quantity": 1,
+        "unit_price": 4.5,
+        "total_price": 4.5
+      }
+    ],
+    "contact_phone": "+49 30 23 916 036",
+    "contact_email": "info@thesushiclub.de",
+    "contact_website": "www.thesushiclub.de",
+    "transaction_time": "23:10:54",
+    "receipt_type": "Rechnung",
+    "table_number": "24",
+    "transaction_reference": "L0001 FR\u00dcH",
+    "special_notes": "TIP IS NOT INCLUDED",
+    "tax_rate": null,
+    "vat": null,
+    "name": null,
+    "address": null,
+    "supplier": null,
+    "expense": null,
+    "route": null,
+    "car_details": null,
+    "purpose": null,
+    "odometer_reading": null,
+    "travel_date": null,
+    "a1_certificate": null,
+    "payment_receipt": null,
+    "manager_approval": null,
+    "personal_phone_proof": null,
+    "storage_period": null
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 3,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "Supplier name should be 'Global People DE GmbH' as per the mandatory requirement for 'Global People' ICP.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Must be Global People DE GmbH"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "Supplier address must be 'Taunusanlage 8, 60329 Frankfurt, Germany' as per compliance requirements for 'Global People'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "VAT number is mandatory and should be 'DE356366640' for transactions processed by 'Global People'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "DE356366640"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "Found critical compliance violations including incorrect supplier details and missing VAT number. No gross-up scenarios identified."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 3,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed"
+}

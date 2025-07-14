@@ -1,0 +1,477 @@
+{
+  "FileRelatedRequirements": [
+    {
+      "FieldType": "Supplier Name",
+      "Description": "Name of the supplier/vendor on invoice",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Must be Global People DE GmbH"
+    },
+    {
+      "FieldType": "Supplier Name",
+      "Description": "Name of the supplier/vendor on invoice",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "goGlobal",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Must be GoGlobal Germany GmbH"
+    },
+    {
+      "FieldType": "Supplier Name",
+      "Description": "Name of the supplier/vendor on invoice",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Must be Parakar Germany GmbH"
+    },
+    {
+      "FieldType": "Supplier Name",
+      "Description": "Exception for flights/hotels",
+      "ReceiptType": "Travel",
+      "ICPSpecific": true,
+      "ICPName": "goGlobal",
+      "MandatoryOptional": "Optional",
+      "Rule": "Worker's name acceptable when company name not possible"
+    },
+    {
+      "FieldType": "Supplier Address",
+      "Description": "Address of the supplier on invoice",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Taunusanlage 8, 60329 Frankfurt, Germany"
+    },
+    {
+      "FieldType": "Supplier Address",
+      "Description": "Address of the supplier on invoice",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "goGlobal",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Prielmayerstrasse 3, 80335 Munich, Germany"
+    },
+    {
+      "FieldType": "Supplier Address",
+      "Description": "Address of the supplier on invoice",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Friesenpl. 4, 50672 Koin, Germany"
+    },
+    {
+      "FieldType": "VAT Number",
+      "Description": "VAT identification number",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "DE356366640"
+    },
+    {
+      "FieldType": "VAT Number",
+      "Description": "VAT identification number",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "goGlobal",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Not specified in document"
+    },
+    {
+      "FieldType": "VAT Number",
+      "Description": "VAT identification number",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Not specified in document"
+    },
+    {
+      "FieldType": "Currency",
+      "Description": "Receipt currency",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Same currency with"
+    },
+    {
+      "FieldType": "Tax Rate",
+      "Description": "Applicable",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required for invoices over €450"
+    },
+    {
+      "FieldType": "VAT",
+      "Description": "VAT amount",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required for invoices over €450"
+    },
+    {
+      "FieldType": "Name",
+      "Description": "employee",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required for invoices over €450"
+    },
+    {
+      "FieldType": "Address",
+      "Description": "employee",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required for invoices over €450"
+    },
+    {
+      "FieldType": "Supplier",
+      "Description": "Tax ID of",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required for invoices over €450"
+    },
+    {
+      "FieldType": "Expense",
+      "Description": "Detailed",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Must be precise and detailed"
+    },
+    {
+      "FieldType": "Route",
+      "Description": "Travel route",
+      "ReceiptType": "Mileage",
+      "ICPSpecific": true,
+      "ICPName": "Atlas",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Date, route"
+    },
+    {
+      "FieldType": "Car Details",
+      "Description": "Vehicle information",
+      "ReceiptType": "Mileage",
+      "ICPSpecific": true,
+      "ICPName": "Atlas",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required for mileage logbook"
+    },
+    {
+      "FieldType": "Car Details",
+      "Description": "Vehicle information",
+      "ReceiptType": "Mileage",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Car details and destination"
+    },
+    {
+      "FieldType": "Purpose",
+      "Description": "Business purpose of trip",
+      "ReceiptType": "Mileage",
+      "ICPSpecific": true,
+      "ICPName": "Atlas",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required for mileage logbook"
+    },
+    {
+      "FieldType": "Odometer Reading",
+      "Description": "Vehicle mileage reading",
+      "ReceiptType": "Mileage",
+      "ICPSpecific": true,
+      "ICPName": "Atlas",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required for mileage logbook"
+    },
+    {
+      "FieldType": "Travel Date",
+      "Description": "Date of travel",
+      "ReceiptType": "Mileage",
+      "ICPSpecific": true,
+      "ICPName": "Atlas",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required for mileage logbook"
+    },
+    {
+      "FieldType": "A1 Certificate",
+      "Description": "Work authorization document",
+      "ReceiptType": "Travel",
+      "ICPSpecific": true,
+      "ICPName": "goGlobal",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required when travelling"
+    },
+    {
+      "FieldType": "Payment Receipt",
+      "Description": "Payment",
+      "ReceiptType": "",
+      "ICPSpecific": "",
+      "ICPName": "",
+      "MandatoryOptional": "",
+      "Rule": ""
+    },
+    {
+      "FieldType": "Manager Approval",
+      "Description": "Direct manager approval",
+      "ReceiptType": "Training",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required for training expenses"
+    },
+    {
+      "FieldType": "Personal Phone Proof",
+      "Description": "Proof of separate personal phone",
+      "ReceiptType": "Phone",
+      "ICPSpecific": true,
+      "ICPName": "goGlobal",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required for mobile phone reimbursement"
+    },
+    {
+      "FieldType": "Personal Phone Proof",
+      "Description": "Proof of separate personal phone",
+      "ReceiptType": "Phone",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Required for mobile phone reimbursement"
+    },
+    {
+      "FieldType": "Storage Period",
+      "Description": "Document retention requirement",
+      "ReceiptType": "All",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "MandatoryOptional": "Mandatory",
+      "Rule": "Original invoices must be kept for 10 years"
+    }
+  ],
+  "ExpenseTypes": [
+    {
+      "Type": "Business Expenses (Non-Travel)",
+      "Description": "General business expenses for job completion",
+      "ICPSpecific": false,
+      "ICPName": "All ICPs",
+      "GrossUpLimit": "No limit specified",
+      "GrossUpRule": "Usually tax exempt if purely business related",
+      "AdditionalInfoRequired": true,
+      "AdditionalInfoDescription": "Receipt alone is not enough - you must provide proper tax receipts or invoices with sufficient proof"
+    },
+    {
+      "Type": "Office Supplies",
+      "Description": "Relevant office supplies",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "GrossUpLimit": "Reasonable amounts",
+      "GrossUpRule": "Tax exempt if relevant and reasonable",
+      "AdditionalInfoRequired": true,
+      "AdditionalInfoDescription": "Receipt alone is not enough - invoice must have Global People's name and details"
+    },
+    {
+      "Type": "Office Equipment",
+      "Description": "Business use office equipment",
+      "ICPSpecific": true,
+      "ICPName": "Atlas",
+      "GrossUpLimit": "No limit specified",
+      "GrossUpRule": "Tax exempt if genuine business use",
+      "AdditionalInfoRequired": false,
+      "AdditionalInfoDescription": "Receipt is enough - no additional information needed"
+    },
+    {
+      "Type": "Training",
+      "Description": "Job-related training",
+      "ICPSpecific": true,
+      "ICPName": "Atlas",
+      "GrossUpLimit": "No limit specified",
+      "GrossUpRule": "Tax exempt if job-related",
+      "AdditionalInfoRequired": false,
+      "AdditionalInfoDescription": "Receipt is enough - no additional information needed"
+    },
+    {
+      "Type": "Training",
+      "Description": "Training expenses",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "GrossUpLimit": "No limit specified",
+      "GrossUpRule": "Tax exempt",
+      "AdditionalInfoRequired": true,
+      "AdditionalInfoDescription": "Receipt alone is not enough - you must get approval from your direct manager"
+    },
+    {
+      "Type": "Phone/Internet",
+      "Description": "Phone and internet expenses",
+      "ICPSpecific": true,
+      "ICPName": "Atlas",
+      "GrossUpLimit": "€20/month max",
+      "GrossUpRule": "Tax exempt up to €20/month",
+      "AdditionalInfoRequired": false,
+      "AdditionalInfoDescription": "Receipt is enough - no additional information needed"
+    },
+    {
+      "Type": "Mobile Phone",
+      "Description": "Mobile phone usage",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "GrossUpLimit": "No limit specified",
+      "GrossUpRule": "Tax-free if separate personal phone used",
+      "AdditionalInfoRequired": true,
+      "AdditionalInfoDescription": "Receipt alone is not enough - you must provide proof of separate personal phone"
+    },
+    {
+      "Type": "Mobile Phone Contract",
+      "Description": "Business mobile phone contract",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "GrossUpLimit": "No limit specified",
+      "GrossUpRule": "Tax-free even if used for private purposes",
+      "AdditionalInfoRequired": true,
+      "AdditionalInfoDescription": "Receipt alone is not enough - client must conclude contract and may purchase phone"
+    },
+    {
+      "Type": "Internet",
+      "Description": "Internet expenses",
+      "ICPSpecific": true,
+      "ICPName": "goGlobal",
+      "GrossUpLimit": "No limit specified",
+      "GrossUpRule": "Tax-free at flat rate of 25% of invoice",
+      "AdditionalInfoRequired": false,
+      "AdditionalInfoDescription": "Receipt is enough - no additional information needed"
+    },
+    {
+      "Type": "Internet",
+      "Description": "Home internet expenses",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "GrossUpLimit": "No limit specified",
+      "GrossUpRule": "Tax-free with proper documentation",
+      "AdditionalInfoRequired": true,
+      "AdditionalInfoDescription": "Receipt alone is not enough - include 'Parakar Germany'"
+    },
+    {
+      "Type": "Home Office",
+      "Description": "Home office expenses",
+      "ICPSpecific": true,
+      "ICPName": "Atlas",
+      "GrossUpLimit": "€1,260/year max",
+      "GrossUpRule": "Tax exempt €6/day, max €1,260/year",
+      "AdditionalInfoRequired": false,
+      "AdditionalInfoDescription": "Receipt is enough - no additional information needed"
+    },
+    {
+      "Type": "Wellness Benefits",
+      "Description": "Wellness benefits",
+      "ICPSpecific": true,
+      "ICPName": "Atlas",
+      "GrossUpLimit": "€600/year max",
+      "GrossUpRule": "Tax exempt max €600/year",
+      "AdditionalInfoRequired": false,
+      "AdditionalInfoDescription": "Receipt is enough - no additional information needed"
+    },
+    {
+      "Type": "Meals",
+      "Description": "Personal meals",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "GrossUpLimit": "Not tax exempt",
+      "GrossUpRule": "Not tax exempt (outside business travel)",
+      "AdditionalInfoRequired": false,
+      "AdditionalInfoDescription": "Receipt is enough - no additional information needed"
+    },
+    {
+      "Type": "Meals",
+      "Description": "Personal meals",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "GrossUpLimit": "Not tax exempt",
+      "GrossUpRule": "Cannot be reimbursed tax-free",
+      "AdditionalInfoRequired": false,
+      "AdditionalInfoDescription": "Receipt is enough - no additional information needed"
+    },
+    {
+      "Type": "Office Groceries",
+      "Description": "Office groceries",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "GrossUpLimit": "Not tax exempt",
+      "GrossUpRule": "Not tax exempt",
+      "AdditionalInfoRequired": false,
+      "AdditionalInfoDescription": "Receipt is enough - no additional information needed"
+    },
+    {
+      "Type": "Entertainment",
+      "Description": "Entertainment expenses",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "GrossUpLimit": "No limit specified",
+      "GrossUpRule": "Tax exempt if third party involved",
+      "AdditionalInfoRequired": true,
+      "AdditionalInfoDescription": "Receipt alone is not enough - entertainment must be offered to external third party, invoice must have Global People's name, address and VAT"
+    },
+    {
+      "Type": "Domestic Business Travel",
+      "Description": "Domestic business travel",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "GrossUpLimit": "€28 full day, €14 partial",
+      "GrossUpRule": "€28 for full day, €14 for arrival/departure days",
+      "AdditionalInfoRequired": true,
+      "AdditionalInfoDescription": "Receipt alone is not enough - you must use specific travel expense report template"
+    },
+    {
+      "Type": "Domestic Business Travel",
+      "Description": "Domestic business travel",
+      "ICPSpecific": true,
+      "ICPName": "goGlobal",
+      "GrossUpLimit": "Per diem rates apply",
+      "GrossUpRule": "Total allowance reduced to zero when all meals provided",
+      "AdditionalInfoRequired": false,
+      "AdditionalInfoDescription": "Receipt is enough - no receipts needed for per diem method"
+    },
+    {
+      "Type": "Domestic Business Travel",
+      "Description": "Domestic business travel",
+      "ICPSpecific": true,
+      "ICPName": "Parakar",
+      "GrossUpLimit": "Per diem rates apply",
+      "GrossUpRule": "Total allowance reduced to zero when all meals provided",
+      "AdditionalInfoRequired": false,
+      "AdditionalInfoDescription": "Receipt is enough - no receipts needed for per diem method"
+    },
+    {
+      "Type": "International Business Travel",
+      "Description": "International business travel",
+      "ICPSpecific": true,
+      "ICPName": "Global People",
+      "GrossUpLimit": "Per country rates",
+      "GrossUpRule": "Per diem rates vary according to country of travel",
+      "AdditionalInfoRequired": true,
+      "AdditionalInfoDescription": "Receipt alone is not enough - you must use specific travel expense report template"
+    },
+    {
+      "Type": "International Business Travel",
+      "Description": "International business travel",
+      "ICPSpecific": false,
+      "ICPName": "All ICPs",
+      "GrossUpLimit": "Per country rates",
+      "GrossUpRule": "German government sets amounts per country, updated annually",
+      "AdditionalInfoRequired": true,
+      "AdditionalInfoDescription": "Receipt alone is not enough - other costs like travel need receipts, per diem covers hotel costs only"
+    }
+  ]
+}
