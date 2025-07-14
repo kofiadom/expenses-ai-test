@@ -1,14 +1,19 @@
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 from agno.models.anthropic import Claude
+from agno.utils.log import logger
+from langchain_anthropic import ChatAnthropic
+from llm_output_checker import ExpenseComplianceUQLMValidator
 from textwrap import dedent
 import json
+import os
 from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
 
-
+llm_client = ChatAnthropic(model="claude-3-7-sonnet-20250219",
+                        api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 # Create the issue detection and analysis agent
 issue_detection_agent = Agent(
@@ -126,7 +131,7 @@ VALIDATION CHECKLIST:
     show_tool_calls=False
 )
 
-def analyze_compliance_issues(country: str, receipt_type: str, icp: str, compliance_json: dict, extracted_json: dict) -> str:
+async def analyze_compliance_issues(country: str, receipt_type: str, icp: str, compliance_json: dict, extracted_json: dict) -> str:
     """
     Analyze extracted receipt data against compliance requirements to detect issues.
     
@@ -174,8 +179,31 @@ Analyze systematically and provide detailed findings in the specified format."""
         print(f"DEBUG: Compliance content type: {type(response.content)}")
         print(f"DEBUG: Compliance content length: {len(response.content) if response.content else 'None'}")
         print(f"DEBUG: Compliance content preview: {response.content[:200] if response.content else 'None'}")
+        
+    # Validate the compliance response using UQLM
+    try:
+        vals = ExpenseComplianceUQLMValidator(primary_llm=llm_client, logger=logger)
 
-    return response
+        validation_results = await vals.validate_compliance_response(
+            ai_response=response.content,
+            country=country,
+            icp=icp,
+            receipt_type=receipt_type,
+            compliance_json=compliance_json,
+            extracted_json=extracted_json
+        )
+
+        logger.info(f"✅ UQLM validation completed with confidence: {validation_results['validation_summary']['overall_confidence']:.2f}")
+        logger.info(f"📊 Reliability level: {validation_results['validation_summary']['reliability_level']}")
+
+        # Store validation results in a way that can be accessed by the workflow
+        # Since we can't modify the response object, we'll return both the response and validation results
+        return response, validation_results
+
+    except Exception as e:
+        logger.error(f"❌ UQLM validation failed: {str(e)}")
+        logger.warning("⚠️ Continuing without validation results")
+        return response, None
 
 
 

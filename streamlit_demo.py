@@ -15,6 +15,66 @@ import fitz  # PyMuPDF for PDF preview
 from agno.utils.log import logger
 from expense_processing_workflow import ExpenseProcessingWorkflow
 
+def make_json_serializable(obj, _seen=None, _depth=0):
+    """Convert objects to JSON-serializable format with recursion protection."""
+    if _seen is None:
+        _seen = set()
+
+    # Prevent infinite recursion with depth limit
+    if _depth > 10:
+        return f"<Max depth reached for {type(obj).__name__}>"
+
+    # Check for circular references
+    obj_id = id(obj)
+    if obj_id in _seen:
+        return f"<Circular reference to {type(obj).__name__}>"
+
+    try:
+        # Try direct JSON serialization first
+        json.dumps(obj)
+        return obj
+    except (TypeError, ValueError):
+        pass
+
+    # Add to seen set for recursion protection
+    _seen.add(obj_id)
+
+    try:
+        if hasattr(obj, '__dict__'):
+            # Convert dataclass or object to dict
+            result = {}
+            for key, value in obj.__dict__.items():
+                try:
+                    result[key] = make_json_serializable(value, _seen, _depth + 1)
+                except Exception:
+                    result[key] = str(value)  # Fallback to string representation
+            return result
+        elif isinstance(obj, dict):
+            result = {}
+            for key, value in obj.items():
+                try:
+                    result[key] = make_json_serializable(value, _seen, _depth + 1)
+                except Exception:
+                    result[key] = str(value)  # Fallback to string representation
+            return result
+        elif isinstance(obj, (list, tuple)):
+            result = []
+            for item in obj:
+                try:
+                    result.append(make_json_serializable(item, _seen, _depth + 1))
+                except Exception:
+                    result.append(str(item))  # Fallback to string representation
+            return result
+        elif hasattr(obj, 'value'):
+            # Handle enum values
+            return obj.value
+        else:
+            # Fallback to string representation for unknown types
+            return str(obj)
+    finally:
+        # Remove from seen set when done
+        _seen.discard(obj_id)
+
 # Page configuration
 st.set_page_config(
     page_title="Expense Processing System Demo",
@@ -226,21 +286,18 @@ def display_compliance_result(compliance):
     if not compliance or 'validation_result' not in compliance:
         st.warning("No compliance data available")
         return
-    
+
     validation = compliance['validation_result']
-    
-    col1, col2, col3 = st.columns(3)
-    
+
+    col1, col2 = st.columns(2)
+
     with col1:
         is_valid = validation.get('is_valid', False)
         st.metric("Compliance Status", "✅ Valid" if is_valid else "❌ Issues Found")
-    
+
     with col2:
-        st.metric("Confidence Score", f"{validation.get('confidence_score', 0):.2f}")
-    
-    with col3:
         st.metric("Issues Count", validation.get('issues_count', 0))
-    
+
     # Display issues
     if validation.get('issues'):
         st.subheader("Compliance Issues")
@@ -248,10 +305,201 @@ def display_compliance_result(compliance):
             with st.expander(f"Issue {i}: {issue.get('issue_type', 'Unknown')}"):
                 st.write(f"**Field:** {issue.get('field', 'N/A')}")
                 st.write(f"**Description:** {issue.get('description', 'N/A')}")
-                st.write(f"**Recommendation:** {issue.get('recommendation', 'N/A')}")
-    
-    if validation.get('compliance_summary'):
-        st.text_area("Compliance Summary", validation['compliance_summary'], height=100)
+
+                # Highlight the recommendation
+                recommendation = issue.get('recommendation', 'N/A')
+                if recommendation and recommendation != 'N/A':
+                    st.info(f"**💡 Recommendation:** {recommendation}")
+                else:
+                    st.write(f"**Recommendation:** {recommendation}")
+
+    # Display overall compliance summary and recommendation if available
+    if compliance.get('compliance_summary'):
+        st.subheader("📋 Compliance Summary")
+        st.text_area("Summary", compliance['compliance_summary'], height=100, disabled=True)
+
+    # Display overall recommendation if available at the top level
+    if compliance.get('recommendation'):
+        st.subheader("🎯 Overall Recommendation")
+        st.info(compliance['recommendation'])
+
+def load_validation_result(result_file_path):
+    """Load UQLM validation results from separate validation file."""
+    try:
+        # Get the base name of the result file
+        base_name = pathlib.Path(result_file_path).stem
+        validation_file = pathlib.Path("validation_results") / f"{base_name}_validation.json"
+
+        if validation_file.exists():
+            with open(validation_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        else:
+            return None
+    except Exception as e:
+        st.error(f"Error loading validation results: {e}")
+        return None
+
+def display_validation_result(validation):
+    """Display UQLM validation results in a formatted way."""
+    if not validation:
+        st.info("No UQLM validation data available")
+        return
+
+    st.subheader("🎯 UQLM Validation Results")
+
+    # Check if this is the new readable format
+    if 'validation_report' in validation:
+        # New readable format
+        report = validation['validation_report']
+        overall = report.get('overall_assessment', {})
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        with col1:
+            confidence = overall.get('confidence_score', 0)
+            st.metric("Overall Confidence", f"{confidence:.2f}")
+
+        with col2:
+            reliability = overall.get('reliability_level', 'Unknown')
+            color = "🟢" if reliability == "HIGH" else "🟡" if reliability == "MEDIUM" else "🔴"
+            st.metric("Reliability", f"{color} {reliability}")
+
+        with col3:
+            is_reliable = overall.get('is_reliable', False)
+            st.metric("Is Reliable", "✅ Yes" if is_reliable else "❌ No")
+
+        with col4:
+            issues_count = report.get('critical_issues_summary', {}).get('total_issues', 0)
+            st.metric("Critical Issues", issues_count)
+
+        # Recommendation
+        if overall.get('recommendation'):
+            st.info(f"**Recommendation:** {overall['recommendation']}")
+
+        # Critical Issues
+        critical_issues = report.get('critical_issues_summary', {}).get('issues', [])
+        if critical_issues:
+            st.warning("**Critical Issues Found:**")
+            for issue in critical_issues[:5]:  # Show top 5
+                st.write(f"• {issue}")
+
+
+
+        # Detailed Analysis with Tabs
+        detailed = validation.get('detailed_analysis', {})
+        if detailed:
+            st.subheader("🔍 Detailed UQLM Analysis")
+
+            # Metadata section
+            metadata = detailed.get('metadata', {})
+            if metadata:
+                with st.expander("📊 Validation Metadata"):
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        st.write(f"**Country:** {metadata.get('country', 'Unknown')}")
+                        st.write(f"**Receipt Type:** {metadata.get('receipt_type', 'Unknown')}")
+                        st.write(f"**ICP:** {metadata.get('icp', 'Unknown')}")
+                    with col2:
+                        st.write(f"**Validation Method:** {metadata.get('validation_method', 'Unknown')}")
+                        st.write(f"**Panel Judges:** {metadata.get('panel_judges', 0)}")
+                        st.write(f"**Original Issues:** {metadata.get('original_issues_found', 0)}")
+
+            # Dimension Details with Tabs
+            dimension_details = detailed.get('dimension_details', {})
+            if dimension_details:
+                # Create tabs for each validation dimension
+                dimension_names = list(dimension_details.keys())
+                if dimension_names:
+                    # Create user-friendly tab names
+                    tab_names = []
+                    for dim in dimension_names:
+                        friendly_name = dim.replace('_', ' ').title()
+                        # Add emojis for better UX
+                        emoji_map = {
+                            'Factual Grounding': '📋',
+                            'Knowledge Base Adherence': '📚',
+                            'Compliance Accuracy': '⚖️',
+                            'Issue Categorization': '🏷️',
+                            'Recommendation Validity': '💡',
+                            'Hallucination Detection': '🔍'
+                        }
+                        emoji = emoji_map.get(friendly_name, '📊')
+                        tab_names.append(f"{emoji} {friendly_name}")
+
+                    # Create tabs
+                    tabs = st.tabs(tab_names)
+
+                    # Display content for each tab
+                    for tab, dim_key in zip(tabs, dimension_names):
+                        with tab:
+                            details = dimension_details[dim_key]
+                            if isinstance(details, dict):
+                                # Metrics row
+                                col1, col2, col3 = st.columns(3)
+                                with col1:
+                                    confidence = details.get('confidence_score', 0)
+                                    st.metric("Confidence Score", f"{confidence:.2f}")
+                                with col2:
+                                    reliability = details.get('reliability_level', 'unknown').upper()
+                                    color = "🟢" if reliability == "HIGH" else "🟡" if reliability == "MEDIUM" else "🔴"
+                                    st.metric("Reliability", f"{color} {reliability}")
+                                with col3:
+                                    issues_count = details.get('total_issues', len(details.get('issues_found', [])))
+                                    st.metric("Issues Found", issues_count)
+
+                                # Summary
+                                summary = details.get('summary', 'No summary available')
+                                if summary:
+                                    st.subheader("📝 Analysis Summary")
+                                    st.write(summary)
+
+                                # Issues
+                                issues = details.get('issues_found', [])
+                                if issues:
+                                    st.subheader("⚠️ Issues Identified")
+                                    for i, issue in enumerate(issues, 1):
+                                        st.write(f"**{i}.** {issue}")
+
+                                # Raw response (optional, in expander)
+                                raw_response = details.get('raw_response', '')
+                                if raw_response and len(raw_response) > 100:
+                                    with st.expander("🔍 Detailed Analysis Response"):
+                                        st.text_area("Raw Analysis", raw_response, height=200, disabled=True)
+                            else:
+                                st.write(str(details))
+
+    else:
+        # Legacy format fallback
+        summary = validation.get('validation_summary', {})
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        with col1:
+            confidence = summary.get('overall_confidence', 0)
+            st.metric("Overall Confidence", f"{confidence:.2f}")
+
+        with col2:
+            reliability = summary.get('reliability_level', 'Unknown')
+            color = "🟢" if reliability == "HIGH" else "🟡" if reliability == "MEDIUM" else "🔴"
+            st.metric("Reliability", f"{color} {reliability}")
+
+        with col3:
+            is_reliable = summary.get('is_reliable', False)
+            st.metric("Is Reliable", "✅ Yes" if is_reliable else "❌ No")
+
+        with col4:
+            issues_count = summary.get('validated_issues_count', 0)
+            st.metric("Validated Issues", issues_count)
+
+        # Recommendation
+        if summary.get('recommendation'):
+            st.info(f"**Recommendation:** {summary['recommendation']}")
+
+        # Critical Issues
+        if summary.get('critical_issues'):
+            st.warning("**Critical Issues Found:**")
+            for issue in summary['critical_issues'][:5]:  # Show top 5
+                st.write(f"• {issue}")
 
 def main():
     """Main Streamlit application."""
@@ -362,22 +610,34 @@ def main():
                 if result.get('status') == 'completed':
                     
                     # Tabs for different result types
-                    tab1, tab2, tab3, tab4 = st.tabs(["🏷️ Classification", "📋 Extraction", "⚖️ Compliance", "📄 Raw JSON"])
-                    
+                    tab1, tab2, tab3, tab4, tab5 = st.tabs(["🏷️ Classification", "📋 Extraction", "⚖️ Compliance", "🎯 UQLM Validation", "📄 Raw JSON"])
+
                     with tab1:
                         display_classification_result(result.get('classification'))
-                    
+
                     with tab2:
                         display_extraction_result(result.get('extraction'))
-                    
+
                     with tab3:
                         display_compliance_result(result.get('compliance'))
-                    
+
                     with tab4:
+                        # Load validation results from separate file
+                        validation_data = load_validation_result(file_name)
+                        display_validation_result(validation_data)
+
+                    with tab5:
                         st.json(result)
                         
                         # Download button for JSON
-                        json_str = json.dumps(result, indent=2)
+                        try:
+                            # Create a JSON-serializable version of the result
+                            serializable_result = make_json_serializable(result)
+                            json_str = json.dumps(serializable_result, indent=2)
+                        except Exception as e:
+                            st.error(f"Error preparing JSON for download: {e}")
+                            json_str = json.dumps({"error": "Could not serialize result"}, indent=2)
+
                         st.download_button(
                             label="💾 Download JSON",
                             data=json_str,

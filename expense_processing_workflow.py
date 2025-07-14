@@ -193,6 +193,7 @@ class ExpenseProcessingWorkflow(Workflow):
 
             # Step 2c: Compliance analysis (only if extraction succeeded)
             compliance_result = {}
+            validation_result = {}
             if not isinstance(extraction_result, dict) or "error" not in extraction_result:
                 try:
                     # Get the expense type from classification result
@@ -201,13 +202,22 @@ class ExpenseProcessingWorkflow(Workflow):
                         expense_type = classification_result["expense_type"] or "All"
 
                     logger.info(f"Starting compliance analysis for {markdown_file.name} (type: {expense_type})")
-                    compliance_result = await self._analyze_compliance(
+                    compliance_analysis_result = await self._analyze_compliance(
                         extraction_result, country, icp, expense_type
                     )
+
+                    # Handle the new return format (compliance_result, validation_result)
+                    if isinstance(compliance_analysis_result, tuple):
+                        compliance_result, validation_result = compliance_analysis_result
+                    else:
+                        compliance_result = compliance_analysis_result
+                        validation_result = {}
+
                     logger.info(f"Compliance analysis completed for {markdown_file.name}")
                 except Exception as e:
                     logger.error(f"Compliance analysis failed: {str(e)}")
                     compliance_result = {"error": str(e)}
+                    validation_result = {}
             else:
                 logger.warning(f"Skipping compliance analysis for {markdown_file.name} due to extraction failure")
 
@@ -216,6 +226,7 @@ class ExpenseProcessingWorkflow(Workflow):
                 "classification": classification_result,
                 "extraction": extraction_result,
                 "compliance": compliance_result,
+                "validation": validation_result or {},
                 "status": "completed"
             }
 
@@ -326,9 +337,16 @@ class ExpenseProcessingWorkflow(Workflow):
                 logger.warning(f"No compliance data found for {country}")
 
             logger.debug(f"Sending extracted data to compliance agent - Keys: {list(extraction_result.keys())}")
-            result = analyze_compliance_issues(
+            compliance_result = await analyze_compliance_issues(
                 country, receipt_type, icp, compliance_data, extraction_result
             )
+
+            # Handle the new return format (response, validation_results)
+            if isinstance(compliance_result, tuple):
+                result, validation_results = compliance_result
+            else:
+                result = compliance_result
+                validation_results = None
 
             # Handle different response formats
             if hasattr(result, 'content'):
@@ -346,19 +364,19 @@ class ExpenseProcessingWorkflow(Workflow):
 
                 parsed_result = json.loads(content)
                 logger.debug(f"Compliance analysis result: {parsed_result}")
-                return parsed_result
+                return parsed_result, validation_results
             else:
                 # If result doesn't have content attribute, assume it's already parsed
                 parsed_result = result
                 logger.debug(f"Compliance analysis result (no content attr): {parsed_result}")
-                return parsed_result
+                return parsed_result, validation_results
         except json.JSONDecodeError as e:
             logger.error(f"JSON parsing error in compliance analysis: {str(e)}")
             logger.error(f"Raw content: {getattr(result, 'content', 'No content attribute') if 'result' in locals() else 'No result'}")
-            return {"error": f"Invalid JSON response from compliance analysis agent: {str(e)}"}
+            return {"error": f"Invalid JSON response from compliance analysis agent: {str(e)}"}, None
         except Exception as e:
             logger.error(f"Compliance analysis error: {str(e)}")
-            return {"error": str(e)}
+            return {"error": str(e)}, None
 
     def _save_individual_results(self, results: List[Dict]) -> None:
         """Save individual processing results to separate JSON files."""
@@ -372,22 +390,57 @@ class ExpenseProcessingWorkflow(Workflow):
                 base_name = pathlib.Path(file_name).stem
                 output_file = results_dir / f"{base_name}.json"
 
-                # Create comprehensive result structure
+                # Create comprehensive result structure (without UQLM validation)
                 individual_result = {
                     "source_file": file_name,
                     "processing_timestamp": datetime.now().isoformat(),
                     "classification_result": result.get("classification", {}),
                     "extraction_result": result.get("extraction", {}),
                     "compliance_result": result.get("compliance", {}),
-                    "processing_status": result.get("status", "unknown")
+                    "processing_status": result.get("status", "unknown"),
+                    "uqlm_validation_available": bool(result.get("validation", {}))
                 }
 
                 try:
+                    # Convert the entire result to JSON-serializable format first
+                    serializable_result = self._make_json_serializable(individual_result)
+
                     with open(output_file, 'w', encoding='utf-8') as f:
-                        json.dump(individual_result, f, indent=2)
+                        json.dump(serializable_result, f, indent=2)
                     logger.info(f"Saved individual result: {output_file}")
+
+                    # Save detailed validation results if available
+                    validation_data = result.get("validation", {})
+                    if validation_data:
+                        validation_dir = pathlib.Path("validation_results")
+                        validation_dir.mkdir(exist_ok=True)
+                        validation_file = validation_dir / f"{base_name}_validation.json"
+
+                        # Create a more readable validation report
+                        readable_validation = self._create_readable_validation_report(validation_data)
+
+                        with open(validation_file, 'w', encoding='utf-8') as f:
+                            json.dump(readable_validation, f, indent=2)
+                        logger.info(f"Saved validation result: {validation_file}")
+
                 except Exception as e:
                     logger.error(f"Failed to save result for {file_name}: {e}")
+                    # Try to save a simplified version without validation data
+                    try:
+                        simplified_result = {
+                            "source_file": file_name,
+                            "processing_timestamp": datetime.now().isoformat(),
+                            "classification_result": result.get("classification", {}),
+                            "extraction_result": result.get("extraction", {}),
+                            "compliance_result": result.get("compliance", {}),
+                            "validation_result": {"error": "Validation data could not be serialized"},
+                            "processing_status": result.get("status", "unknown")
+                        }
+                        with open(output_file, 'w', encoding='utf-8') as f:
+                            json.dump(simplified_result, f, indent=2)
+                        logger.info(f"Saved simplified result: {output_file}")
+                    except Exception as e2:
+                        logger.error(f"Failed to save even simplified result for {file_name}: {e2}")
             else:
                 logger.warning(f"Skipping result save for failed processing: {result.get('file_name', 'unknown')}")
 
@@ -404,3 +457,128 @@ class ExpenseProcessingWorkflow(Workflow):
                 expenses += 1
 
         return f"Processed {total_files} files: {successful} successful, {failed} failed, {expenses} valid expenses"
+
+    def _make_json_serializable(self, obj, _seen=None, _depth=0):
+        """Convert objects to JSON-serializable format with recursion protection."""
+        if _seen is None:
+            _seen = set()
+
+        # Prevent infinite recursion with depth limit
+        if _depth > 10:
+            return f"<Max depth reached for {type(obj).__name__}>"
+
+        # Check for circular references
+        obj_id = id(obj)
+        if obj_id in _seen:
+            return f"<Circular reference to {type(obj).__name__}>"
+
+        try:
+            # Try direct JSON serialization first
+            json.dumps(obj)
+            return obj
+        except (TypeError, ValueError):
+            pass
+
+        # Add to seen set for recursion protection
+        _seen.add(obj_id)
+
+        try:
+            if hasattr(obj, '__dict__'):
+                # Convert dataclass or object to dict
+                result = {}
+                for key, value in obj.__dict__.items():
+                    try:
+                        result[key] = self._make_json_serializable(value, _seen, _depth + 1)
+                    except Exception as e:
+                        logger.warning(f"Failed to serialize field {key}: {e}")
+                        result[key] = str(value)  # Fallback to string representation
+                return result
+            elif isinstance(obj, dict):
+                result = {}
+                for key, value in obj.items():
+                    try:
+                        result[key] = self._make_json_serializable(value, _seen, _depth + 1)
+                    except Exception as e:
+                        logger.warning(f"Failed to serialize dict key {key}: {e}")
+                        result[key] = str(value)  # Fallback to string representation
+                return result
+            elif isinstance(obj, (list, tuple)):
+                result = []
+                for item in obj:
+                    try:
+                        result.append(self._make_json_serializable(item, _seen, _depth + 1))
+                    except Exception as e:
+                        logger.warning(f"Failed to serialize list item: {e}")
+                        result.append(str(item))  # Fallback to string representation
+                return result
+            elif hasattr(obj, 'value'):
+                # Handle enum values
+                return obj.value
+            else:
+                # Fallback to string representation for unknown types
+                return str(obj)
+        finally:
+            # Remove from seen set when done
+            _seen.discard(obj_id)
+
+    def _create_readable_validation_report(self, validation_data):
+        """Create a readable validation report similar to terminal logs."""
+        if not validation_data:
+            return {"error": "No validation data available"}
+
+        summary = validation_data.get('validation_summary', {})
+        dimensional = validation_data.get('dimensional_analysis', {})
+        metadata = validation_data.get('compliance_metadata', {})
+
+        report = {
+            "validation_report": {
+                "timestamp": datetime.now().isoformat(),
+                "overall_assessment": {
+                    "confidence_score": summary.get('overall_confidence', 0),
+                    "reliability_level": summary.get('reliability_level', 'UNKNOWN'),
+                    "is_reliable": summary.get('is_reliable', False),
+                    "recommendation": summary.get('recommendation', 'No recommendation available')
+                },
+                "critical_issues_summary": {
+                    "total_issues": len(summary.get('critical_issues', [])),
+                    "issues": summary.get('critical_issues', [])
+                },
+                "dimensional_analysis_summary": {}
+            },
+            "detailed_analysis": {
+                "metadata": {
+                    "country": metadata.get('country', 'Unknown'),
+                    "receipt_type": metadata.get('receipt_type', 'Unknown'),
+                    "icp": metadata.get('icp', 'Unknown'),
+                    "validation_method": metadata.get('validation_method', 'UQLM'),
+                    "panel_judges": metadata.get('panel_judges', 0),
+                    "original_issues_found": metadata.get('original_issues_found', 0)
+                },
+                "dimension_details": {}
+            }
+        }
+
+        # Add dimensional analysis in readable format
+        for dimension, result in dimensional.items():
+            if hasattr(result, '__dict__'):
+                dimension_data = {
+                    "confidence_score": getattr(result, 'confidence_score', 0),
+                    "reliability_level": getattr(result, 'reliability_level', 'unknown'),
+                    "summary": getattr(result, 'summary', 'No summary available'),
+                    "issues_found": getattr(result, 'issues', []),
+                    "total_issues": len(getattr(result, 'issues', []))
+                }
+            else:
+                dimension_data = str(result)
+
+            # Add to summary
+            report["validation_report"]["dimensional_analysis_summary"][dimension] = {
+                "confidence": dimension_data.get("confidence_score", 0) if isinstance(dimension_data, dict) else "N/A",
+                "reliability": dimension_data.get("reliability_level", "unknown") if isinstance(dimension_data, dict) else "N/A",
+                "issues_count": dimension_data.get("total_issues", 0) if isinstance(dimension_data, dict) else 0
+            }
+
+            # Add to detailed analysis
+            report["detailed_analysis"]["dimension_details"][dimension] = dimension_data
+
+        return report
