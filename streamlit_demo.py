@@ -14,6 +14,7 @@ from PIL import Image
 import fitz  # PyMuPDF for PDF preview
 from agno.utils.log import logger
 from expense_processing_workflow import ExpenseProcessingWorkflow
+from damage_detection import ReceiptDamageAnalyzer
 
 def make_json_serializable(obj, _seen=None, _depth=0):
     """Convert objects to JSON-serializable format with recursion protection."""
@@ -137,6 +138,39 @@ def initialize_session_state():
         st.session_state.processing_results = []
     if 'processing_complete' not in st.session_state:
         st.session_state.processing_complete = False
+
+def analyze_uploaded_file_quality(uploaded_file):
+    """Analyze the quality of an uploaded image file."""
+    try:
+        # Save uploaded file temporarily for analysis
+        with tempfile.NamedTemporaryFile(delete=False, suffix=pathlib.Path(uploaded_file.name).suffix) as tmp_file:
+            tmp_file.write(uploaded_file.getvalue())
+            tmp_file_path = tmp_file.name
+
+        # Initialize damage analyzer
+        analyzer = ReceiptDamageAnalyzer(debug_mode=False)
+
+        # Analyze image quality
+        quality_results = analyzer.analyze_receipt_damage(tmp_file_path)
+
+        # Clean up temporary file
+        pathlib.Path(tmp_file_path).unlink()
+
+        return quality_results
+
+    except Exception as e:
+        logger.error(f"Image quality analysis failed for {uploaded_file.name}: {str(e)}")
+        return {
+            "error": str(e),
+            "overall_score": 0.0,
+            "ocr_suitable": {"suitable": False, "confidence": "error", "expected_accuracy": "unknown"},
+            "damage_details": {
+                "folds": {"coverage": 0, "severity": "unknown"},
+                "tears": {"coverage": 0, "severity": "unknown"},
+                "stains": {"coverage": 0, "severity": "unknown"},
+                "contrast": {"quality": "unknown"}
+            }
+        }
 
 def display_file_preview(uploaded_file):
     """Display preview of uploaded file (image or PDF)."""
@@ -338,6 +372,85 @@ def load_validation_result(result_file_path):
     except Exception as e:
         st.error(f"Error loading validation results: {e}")
         return None
+
+def display_image_quality_result(image_quality):
+    """Display image quality analysis results."""
+    if not image_quality:
+        st.info("No image quality analysis available")
+        return
+
+    if "error" in image_quality:
+        st.error(f"Image quality analysis failed: {image_quality['error']}")
+        return
+
+    st.subheader("📸 Image Quality Analysis")
+
+    # Overall metrics
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        overall_score = image_quality.get('overall_score', 0)
+        st.metric("Overall Quality Score", f"{overall_score:.3f}")
+
+    with col2:
+        ocr_suitable = image_quality.get('ocr_suitable', {})
+        suitable = ocr_suitable.get('suitable', False)
+        confidence = ocr_suitable.get('confidence', 'unknown')
+        st.metric("OCR Suitable", f"{'✅ Yes' if suitable else '❌ No'} ({confidence})")
+
+    with col3:
+        expected_accuracy = ocr_suitable.get('expected_accuracy', 'Unknown')
+        st.metric("Expected OCR Accuracy", expected_accuracy)
+
+    # Damage details
+    damage_details = image_quality.get('damage_details', {})
+    if damage_details:
+        st.subheader("🔍 Damage Analysis Details")
+
+        # Create tabs for different damage types
+        tab1, tab2, tab3, tab4 = st.tabs(["📄 Folds", "💥 Tears", "🟤 Stains", "🌟 Contrast"])
+
+        with tab1:
+            folds = damage_details.get('folds', {})
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Coverage", f"{folds.get('coverage', 0):.1%}")
+                st.metric("Severity", folds.get('severity', 'unknown').title())
+            with col2:
+                st.metric("Line Count", folds.get('line_count', 0))
+                st.metric("Shadow Score", f"{folds.get('shadow_score', 0):.3f}")
+
+        with tab2:
+            tears = damage_details.get('tears', {})
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Coverage", f"{tears.get('coverage', 0):.1%}")
+                st.metric("Severity", tears.get('severity', 'unknown').title())
+            with col2:
+                st.metric("Irregular Ratio", f"{tears.get('irregular_ratio', 0):.3f}")
+                st.metric("High Gradient Areas", tears.get('high_gradient_areas', 0))
+
+        with tab3:
+            stains = damage_details.get('stains', {})
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Coverage", f"{stains.get('coverage', 0):.1%}")
+                st.metric("Severity", stains.get('severity', 'unknown').title())
+            with col2:
+                st.metric("Texture Score", f"{stains.get('texture_score', 0):.3f}")
+                st.metric("Dark Stain Ratio", f"{stains.get('dark_stain_ratio', 0):.1%}")
+
+        with tab4:
+            contrast = damage_details.get('contrast', {})
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("Contrast", f"{contrast.get('contrast', 0):.1f}")
+                st.metric("Dynamic Range", f"{contrast.get('dynamic_range', 0):.1f}")
+                st.metric("Quality", contrast.get('quality', 'unknown').title())
+            with col2:
+                st.metric("Overexposed Ratio", f"{contrast.get('overexposed_ratio', 0):.1%}")
+                st.metric("Underexposed Ratio", f"{contrast.get('underexposed_ratio', 0):.1%}")
+                st.metric("Entropy", f"{contrast.get('entropy', 0):.2f}")
 
 def display_validation_result(validation):
     """Display UQLM validation results in a formatted way."""
@@ -550,14 +663,56 @@ def main():
     if uploaded_files:
         st.success(f"📄 {len(uploaded_files)} file(s) uploaded successfully!")
 
-        # Display uploaded files with previews
+        # Analyze image quality for uploaded files
+        st.subheader("📸 Image Quality Analysis")
+
+        # Store quality results in session state
+        if 'image_quality_results' not in st.session_state:
+            st.session_state.image_quality_results = {}
+
+        # Analyze each uploaded file
+        quality_progress = st.progress(0)
+        quality_status = st.empty()
+
+        for i, file in enumerate(uploaded_files):
+            if file.type.startswith('image/'):
+                quality_status.text(f"Analyzing image quality: {file.name}")
+
+                # Check if we already analyzed this file
+                file_key = f"{file.name}_{file.size}"
+                if file_key not in st.session_state.image_quality_results:
+                    quality_result = analyze_uploaded_file_quality(file)
+                    st.session_state.image_quality_results[file_key] = quality_result
+
+                quality_progress.progress((i + 1) / len(uploaded_files))
+
+        quality_status.text("✅ Image quality analysis complete!")
+        time.sleep(0.5)  # Brief pause to show completion
+        quality_status.empty()
+        quality_progress.empty()
+
+        # Display uploaded files with previews and quality results
         if len(uploaded_files) == 1:
-            # Single file - show full preview
-            st.subheader("📋 File Preview")
-            display_file_preview(uploaded_files[0])
+            # Single file - show full preview and quality
+            st.subheader("📋 File Preview & Quality Analysis")
+
+            col1, col2 = st.columns([1, 1])
+
+            with col1:
+                st.write("**File Preview:**")
+                display_file_preview(uploaded_files[0])
+
+            with col2:
+                if uploaded_files[0].type.startswith('image/'):
+                    st.write("**Image Quality:**")
+                    file_key = f"{uploaded_files[0].name}_{uploaded_files[0].size}"
+                    quality_result = st.session_state.image_quality_results.get(file_key, {})
+                    display_image_quality_result(quality_result)
+                else:
+                    st.info("Image quality analysis only available for image files")
         else:
             # Multiple files - show in tabs or expanders
-            st.subheader("📋 File Previews")
+            st.subheader("📋 File Previews & Quality Analysis")
 
             # Create tabs for each file
             if len(uploaded_files) <= 5:  # Use tabs for up to 5 files
@@ -566,12 +721,38 @@ def main():
 
                 for tab, file in zip(tabs, uploaded_files):
                     with tab:
-                        display_file_preview(file)
+                        col1, col2 = st.columns([1, 1])
+
+                        with col1:
+                            st.write("**File Preview:**")
+                            display_file_preview(file)
+
+                        with col2:
+                            if file.type.startswith('image/'):
+                                st.write("**Image Quality:**")
+                                file_key = f"{file.name}_{file.size}"
+                                quality_result = st.session_state.image_quality_results.get(file_key, {})
+                                display_image_quality_result(quality_result)
+                            else:
+                                st.info("Image quality analysis only available for image files")
             else:
                 # Use expanders for many files
                 for i, file in enumerate(uploaded_files):
                     with st.expander(f"📄 {file.name} ({file.size} bytes)", expanded=(i == 0)):
-                        display_file_preview(file)
+                        col1, col2 = st.columns([1, 1])
+
+                        with col1:
+                            st.write("**File Preview:**")
+                            display_file_preview(file)
+
+                        with col2:
+                            if file.type.startswith('image/'):
+                                st.write("**Image Quality:**")
+                                file_key = f"{file.name}_{file.size}"
+                                quality_result = st.session_state.image_quality_results.get(file_key, {})
+                                display_image_quality_result(quality_result)
+                            else:
+                                st.info("Image quality analysis only available for image files")
         
         # Process button
         if st.button("🚀 Process Expenses", type="primary"):
