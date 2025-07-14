@@ -21,7 +21,7 @@ load_dotenv()
 COUNTRY = "Germany"
 ICP = "Global People"  # Options: "Global People", "goGlobal", "Parakar", "Atlas"
 INPUT_FOLDER = "expense_files"
-LLAMAPARSE_API_KEY = "llx-2uTsxLAvQ9K64yhww0GLfBwWYSJkwokpHSmCXmWTJ2U9bDH8"
+LLAMAPARSE_API_KEY = os.getenv("LLAMAPARSE_API_KEY")
 DEBUG_MODE = True
 
 def validate_setup() -> bool:
