@@ -5,6 +5,7 @@ Professional Expense Processing Workflow
 import asyncio
 import json
 import pathlib
+import time
 from datetime import datetime
 from typing import Dict, List, AsyncGenerator
 
@@ -77,7 +78,8 @@ class ExpenseProcessingWorkflow(Workflow):
         Yields:
             RunResponse objects with processing updates and final results
         """
-        logger.info(f"Starting expense processing workflow for {country}/{icp}")
+        workflow_start_time = time.time()
+        logger.info(f"🕐 Starting expense processing workflow for {country}/{icp}")
         logger.info(f"Input folder: {input_folder}")
         logger.info(f"Debug mode: {self.debug_mode}")
 
@@ -129,13 +131,19 @@ class ExpenseProcessingWorkflow(Workflow):
                 content="🔄 Step 3: Saving results and generating summary..."
             )
 
+            save_start_time = time.time()
             self._save_individual_results(results)
             summary = self._generate_summary(results)
+            save_time = time.time() - save_start_time
+            logger.info(f"⏱️ Results saving completed in {save_time:.2f} seconds")
             logger.info(f"Processing summary: {summary}")
 
             # Save results to session state
             self.session_state["processing_results"] = results
             self.session_state["summary"] = summary
+
+            total_workflow_time = time.time() - workflow_start_time
+            logger.info(f"⏱️ Total workflow completed in {total_workflow_time:.2f} seconds")
 
             yield RunResponse(
                 content=summary
@@ -151,8 +159,15 @@ class ExpenseProcessingWorkflow(Workflow):
     async def _extract_documents(self, api_key: str, input_folder: str) -> List[pathlib.Path]:
         """Extract documents using LlamaParse."""
         try:
+            start_time = time.time()
+            logger.info("🕐 Starting document extraction timing")
+
             # Run document extraction
             markdown_files = process_expense_files(api_key, input_folder)
+
+            extraction_time = time.time() - start_time
+            logger.info(f"⏱️ Document extraction completed in {extraction_time:.2f} seconds")
+
             return markdown_files
         except Exception as e:
             logger.error(f"Document extraction failed: {str(e)}")
@@ -166,18 +181,26 @@ class ExpenseProcessingWorkflow(Workflow):
     ) -> Dict:
         """Process a single document through classification, extraction, and analysis."""
         try:
+            document_start_time = time.time()
+
             with open(markdown_file, 'r', encoding='utf-8') as f:
                 markdown_content = f.read()
 
-            logger.info(f"Processing {markdown_file.name} - Markdown length: {len(markdown_content)} characters")
+            logger.info(f"🕐 Processing {markdown_file.name} - Markdown length: {len(markdown_content)} characters")
 
             # Step 2a & 2b: Run classification and extraction concurrently
+            agents_start_time = time.time()
+            logger.info("🕐 Starting concurrent classification and extraction")
+
             classification_task = self._classify_document(markdown_content, country)
             extraction_task = self._extract_data(markdown_content, country)
 
             classification_result, extraction_result = await asyncio.gather(
                 classification_task, extraction_task, return_exceptions=True
             )
+
+            agents_time = time.time() - agents_start_time
+            logger.info(f"⏱️ Classification and extraction completed in {agents_time:.2f} seconds")
 
             if isinstance(classification_result, Exception):
                 logger.error(f"Classification failed: {str(classification_result)}")
@@ -201,10 +224,15 @@ class ExpenseProcessingWorkflow(Workflow):
                     if isinstance(classification_result, dict) and "expense_type" in classification_result:
                         expense_type = classification_result["expense_type"] or "All"
 
-                    logger.info(f"Starting compliance analysis for {markdown_file.name} (type: {expense_type})")
+                    compliance_start_time = time.time()
+                    logger.info(f"🕐 Starting compliance analysis for {markdown_file.name} (type: {expense_type})")
+
                     compliance_analysis_result = await self._analyze_compliance(
                         extraction_result, country, icp, expense_type
                     )
+
+                    compliance_time = time.time() - compliance_start_time
+                    logger.info(f"⏱️ Compliance analysis completed in {compliance_time:.2f} seconds")
 
                     # Handle the new return format (compliance_result, validation_result)
                     if isinstance(compliance_analysis_result, tuple):
@@ -221,12 +249,20 @@ class ExpenseProcessingWorkflow(Workflow):
             else:
                 logger.warning(f"Skipping compliance analysis for {markdown_file.name} due to extraction failure")
 
+            total_document_time = time.time() - document_start_time
+            logger.info(f"⏱️ Total document processing time for {markdown_file.name}: {total_document_time:.2f} seconds")
+
             return {
                 "file_name": markdown_file.name,
                 "classification": classification_result,
                 "extraction": extraction_result,
                 "compliance": compliance_result,
                 "validation": validation_result or {},
+                "processing_time": {
+                    "total_seconds": round(total_document_time, 2),
+                    "agents_seconds": round(agents_time, 2) if 'agents_time' in locals() else 0,
+                    "compliance_seconds": round(compliance_time, 2) if 'compliance_time' in locals() else 0
+                },
                 "status": "completed"
             }
 
@@ -241,8 +277,13 @@ class ExpenseProcessingWorkflow(Workflow):
     async def _classify_document(self, markdown_content: str, country: str) -> Dict:
         """Classify document using file classification agent."""
         try:
-            logger.debug(f"Sending markdown to classification agent - Length: {len(markdown_content)}")
+            start_time = time.time()
+            logger.debug(f"🕐 Sending markdown to classification agent - Length: {len(markdown_content)}")
+
             result = classify_file(markdown_content, country)
+
+            classification_time = time.time() - start_time
+            logger.debug(f"⏱️ Classification agent completed in {classification_time:.2f} seconds")
 
             # Handle different response formats
             if hasattr(result, 'content'):
@@ -286,8 +327,13 @@ class ExpenseProcessingWorkflow(Workflow):
                 compliance_json = "{}"
                 logger.warning(f"No compliance data found for {country}")
 
-            logger.debug(f"Sending markdown to data extraction agent - Length: {len(markdown_content)}")
+            start_time = time.time()
+            logger.debug(f"🕐 Sending markdown to data extraction agent - Length: {len(markdown_content)}")
+
             result = extract_data_from_receipt(compliance_json, markdown_content)
+
+            extraction_time = time.time() - start_time
+            logger.debug(f"⏱️ Data extraction agent completed in {extraction_time:.2f} seconds")
 
             # Handle different response formats
             if hasattr(result, 'content'):
@@ -336,10 +382,15 @@ class ExpenseProcessingWorkflow(Workflow):
                 compliance_data = {}
                 logger.warning(f"No compliance data found for {country}")
 
-            logger.debug(f"Sending extracted data to compliance agent - Keys: {list(extraction_result.keys())}")
+            start_time = time.time()
+            logger.debug(f"🕐 Sending extracted data to compliance agent - Keys: {list(extraction_result.keys())}")
+
             compliance_result = await analyze_compliance_issues(
                 country, receipt_type, icp, compliance_data, extraction_result
             )
+
+            compliance_agent_time = time.time() - start_time
+            logger.debug(f"⏱️ Compliance agent completed in {compliance_agent_time:.2f} seconds")
 
             # Handle the new return format (response, validation_results)
             if isinstance(compliance_result, tuple):

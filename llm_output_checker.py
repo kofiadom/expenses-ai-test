@@ -2,6 +2,7 @@ import os
 import json
 import re
 import logging
+import time
 from langchain_anthropic import ChatAnthropic
 from typing import Dict, List, Any
 from dataclasses import dataclass
@@ -119,7 +120,8 @@ class ExpenseComplianceUQLMValidator:
         if not self.panel:
             raise ValueError("UQLM panel not properly initialized")
 
-        self.logger.info("🔍 Starting UQLM-based compliance validation")
+        validation_start_time = time.time()
+        self.logger.info("🕐 Starting UQLM-based compliance validation")
         
         # Parse the AI response to understand its structure
         try:
@@ -184,7 +186,9 @@ class ExpenseComplianceUQLMValidator:
                 "ai_reported_confidence": parsed_response.get("validation_result", {}).get("confidence_score", 0.0)
             }
         }
-        self.logger.info("✅ UQLM compliance validation completed successfully")
+
+        validation_time = time.time() - validation_start_time
+        self.logger.info(f"⏱️ UQLM compliance validation completed in {validation_time:.2f} seconds")
         self.logger.info(f"Validation results: {formatted_res}")
         return formatted_res
 
@@ -320,7 +324,8 @@ class ExpenseComplianceUQLMValidator:
         """Use UQLM panel to validate a specific dimension"""
         
         try:
-            self.logger.info(f"🔍 Starting UQLM panel validation for {dimension.value}")
+            dimension_start_time = time.time()
+            self.logger.info(f"🕐 Starting UQLM panel validation for {dimension.value}")
             
             # Generate and score using UQLM panel
             results = await self.panel.generate_and_score(prompts=[validation_prompt])
@@ -361,7 +366,10 @@ class ExpenseComplianceUQLMValidator:
                 issues = self._extract_issues_from_text(response_content)
                 summary = f'UQLM panel analysis for {dimension.value} completed with {confidence_score:.2f} confidence score'
                 reliability_level = 'high' if confidence_score > 0.7 else 'medium' if confidence_score > 0.4 else 'low'
-            
+
+            dimension_time = time.time() - dimension_start_time
+            self.logger.info(f"⏱️ UQLM panel validation for {dimension.value} completed in {dimension_time:.2f} seconds")
+
             return ComplianceValidationResult(
                 dimension=dimension,
                 confidence_score=confidence_score,
