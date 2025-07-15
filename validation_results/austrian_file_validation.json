@@ -1,0 +1,131 @@
+{
+  "validation_report": {
+    "timestamp": "2025-07-15T09:23:23.940010",
+    "overall_assessment": {
+      "confidence_score": 0.7849999999999999,
+      "reliability_level": "MEDIUM",
+      "is_reliable": true,
+      "recommendation": "AI response is generally reliable but review flagged issues before using."
+    },
+    "critical_issues_summary": {
+      "total_issues": 10,
+      "issues": [
+        "Did not validate supplier name against compliance requirements",
+        "Did not validate supplier address against compliance requirements",
+        "Did not validate VAT number against compliance requirements",
+        "Knowledge base reference for business trip reporting could be more specific",
+        "Knowledge base reference for business trip reporting is paraphrased rather than quoted directly",
+        "Failed to address supplier name exception for flights where worker's name is acceptable",
+        "Failed to validate if this is an actual tax receipt versus a booking confirmation",
+        "Missing validation on per diem rules and requirements for travel expenses",
+        "No validation of whether the template for travel expense reporting is actually being used",
+        "Recommendations for currency and amount issues lack specific actions to remedy the situation"
+      ]
+    },
+    "dimensional_analysis_summary": {
+      "factual_grounding": {
+        "confidence": 0.7,
+        "reliability": "medium",
+        "issues_count": 4
+      },
+      "knowledge_base_adherence": {
+        "confidence": 0.6,
+        "reliability": "medium",
+        "issues_count": 5
+      },
+      "compliance_accuracy": {
+        "confidence": 0.85,
+        "reliability": "high",
+        "issues_count": 2
+      },
+      "issue_categorization": {
+        "confidence": 1.0,
+        "reliability": "high",
+        "issues_count": 0
+      },
+      "recommendation_validity": {
+        "confidence": 0.65,
+        "reliability": "medium",
+        "issues_count": 4
+      },
+      "hallucination_detection": {
+        "confidence": 1.0,
+        "reliability": "high",
+        "issues_count": 0
+      }
+    }
+  },
+  "detailed_analysis": {
+    "metadata": {
+      "country": "Austria",
+      "receipt_type": "flights",
+      "icp": "Global People",
+      "validation_method": "UQLM LLMPanel",
+      "panel_judges": 2,
+      "original_issues_found": 3
+    },
+    "dimension_details": {
+      "factual_grounding": {
+        "confidence_score": 0.7,
+        "reliability_level": "medium",
+        "summary": "The AI correctly identified three legitimate compliance issues (missing currency, missing amount, and business trip reporting requirements). The issues were accurately described with proper references to the compliance database. However, the analysis failed to check whether supplier name, address and VAT number meet requirements, which is especially relevant since flight receipts have specific exceptions. The knowledge base references were generally accurate, though the one for business trip reporting could be more specific.",
+        "issues_found": [
+          "Did not validate supplier name against compliance requirements",
+          "Did not validate supplier address against compliance requirements",
+          "Did not validate VAT number against compliance requirements",
+          "Knowledge base reference for business trip reporting could be more specific"
+        ],
+        "total_issues": 4
+      },
+      "knowledge_base_adherence": {
+        "confidence_score": 0.6,
+        "reliability_level": "medium",
+        "summary": "The AI analysis identified valid issues related to missing currency and amount fields, which are required according to the knowledge base. It also correctly identified the need for a travel expense report template. However, the knowledge base references were paraphrased rather than directly quoted from the source data, and several important validations were omitted entirely, including the supplier name exception for flights, validation of receipt type versus booking confirmation, and per diem considerations. The issue types used were appropriate, but the analysis was incomplete.",
+        "issues_found": [
+          "Knowledge base reference for business trip reporting is paraphrased rather than quoted directly",
+          "Failed to address supplier name exception for flights where worker's name is acceptable",
+          "Failed to validate if this is an actual tax receipt versus a booking confirmation",
+          "Missing validation on per diem rules and requirements for travel expenses",
+          "No validation of whether the template for travel expense reporting is actually being used"
+        ],
+        "total_issues": 5
+      },
+      "compliance_accuracy": {
+        "confidence_score": 0.85,
+        "reliability_level": "high",
+        "summary": "The AI correctly identified the three main compliance issues (missing currency, missing amount, and required business trip reporting template). The AI properly applied the exception for supplier names on travel receipts. One potential issue that wasn't addressed was whether the personal information on the receipt needs redaction. Overall, the compliance validation was mostly accurate, with only one potentially missed validation point.",
+        "issues_found": [
+          "The AI did not evaluate whether the personal information present on the receipt (FORISEK / MICHAL DR MR) should be redacted per compliance requirements",
+          "The AI did not explicitly address the supplier name exception for travel receipts, though this is technically correct"
+        ],
+        "total_issues": 2
+      },
+      "issue_categorization": {
+        "confidence_score": 1.0,
+        "reliability_level": "high",
+        "summary": "The AI correctly categorized all three issues. The 'Fix Identified' category was appropriately used for the missing currency and amount fields, which are clear compliance violations requiring correction. The 'Follow-up Action Identified' category was correctly applied to the business trip reporting template requirement, as this represents a procedural step beyond the receipt itself. No 'Gross-up Identified' issues were reported, which is appropriate as none of the identified issues relate to tax implications or grossing up expenses. All issue categorizations match the actual problems found and are consistent with the source data.",
+        "issues_found": [],
+        "total_issues": 0
+      },
+      "recommendation_validity": {
+        "confidence_score": 0.65,
+        "reliability_level": "medium",
+        "summary": "The recommendations provided are generally aligned with the compliance requirements but lack sufficient specificity to be fully actionable. Three recommendations were provided addressing currency, amount, and business trip reporting requirements. The business trip reporting recommendation was specific and actionable, but the currency and amount recommendations were vague about how to remedy these issues. Additionally, several important recommendations were missing entirely, including handling personal information on the receipt, verification of receipt type validity, and the supplier name exception for flights.",
+        "issues_found": [
+          "Recommendations for currency and amount issues lack specific actions to remedy the situation",
+          "No recommendation regarding the personal information that should be removed from receipts",
+          "No verification of whether this passenger receipt qualifies as a proper tax receipt/invoice",
+          "No mention of the supplier name exception relevant for flight receipts"
+        ],
+        "total_issues": 4
+      },
+      "hallucination_detection": {
+        "confidence_score": 1.0,
+        "reliability_level": "high",
+        "summary": "The AI analysis correctly identified three valid compliance issues: missing currency, missing amount, and the need for business trip reporting using the required template. All three issues are supported by the source data. The AI did not hallucinate any requirements or rules - all statements made were based on actual requirements in the compliance database. The knowledge base references used slightly different wording in some cases but accurately represented the underlying rules.",
+        "issues_found": [],
+        "total_issues": 0
+      }
+    }
+  }
+}

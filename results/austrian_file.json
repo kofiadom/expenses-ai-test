@@ -1,39 +1,60 @@
 {
   "source_file": "austrian_file.md",
-  "processing_timestamp": "2025-07-14T16:38:05.321490",
+  "processing_timestamp": "2025-07-15T09:23:23.928575",
+  "dataset_metadata": {
+    "filepath": "expense_files/austrian_file.png",
+    "filename ": "austrian_file.png",
+    "country": "Austria",
+    "icp": "Global People",
+    "dataset_file": "austrian_file.json"
+  },
   "classification_result": {
     "is_expense": true,
     "expense_type": "flights",
-    "language": "English",
-    "language_confidence": 90,
+    "language": "German",
+    "language_confidence": 95,
     "document_location": "Austria",
-    "expected_location": "Germany",
-    "location_match": false,
-    "error_type": "File location is not same as project's location",
-    "error_message": "The document location (Austria) does not match the expected location (Germany).",
+    "expected_location": "Austria",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
     "classification_confidence": 95,
-    "reasoning": "The document is a flight receipt with clear expense-related content such as flight data, billing address, and ticket information. It is recognized in English with high confidence and pertains to flights operated by Austrian Airlines, indicating Austria as the document location."
+    "reasoning": "The document is a flight receipt with detailed flight information including flight numbers, dates, departure and arrival locations. It is consistent with an expense related to flights. The language is German with high confidence, and the document location matches the expected location (Austria)."
   },
   "extraction_result": {
     "supplier_name": "Austrian Airlines AG",
-    "supplier_address": "Office Park 2, A-1300 Vienna-Airport",
+    "supplier_address": "Office Park 2, A-1300 Vienna-Airport, Vienna",
     "vat_number": "ATU15447707",
     "currency": null,
-    "tax_rate": null,
-    "vat": null,
-    "name": "FORISEK / MICHAL DR MR",
-    "address": "Lubovnianska 14, 85107 Bratislava, Slovakia",
-    "supplier": null,
-    "expense": null,
-    "route": [
+    "amount": null,
+    "receipt_type": "Passenger Receipt / Invoice / Rechnung",
+    "receipt_quality": null,
+    "personal_information": "FORISEK / MICHAL DR MR",
+    "business_trip_reporting": null,
+    "travel_template": null,
+    "manager_approval": null,
+    "route_map": null,
+    "kilometer_record": null,
+    "car_details": null,
+    "parking_documentation": null,
+    "billing_address": {
+      "name": "Michal Forisek",
+      "address": "Lubovnianska 14",
+      "postal_code": "85107",
+      "city": "Bratislava",
+      "country": "Slovakia"
+    },
+    "booking_code": "6GHMCV",
+    "ticket_number": "257-2133783831",
+    "flight_data": [
       {
         "flight_number": "OS561",
         "date": "2013-08-31",
         "from": "Vienna Intl",
         "to": "Zurich",
-        "departure": "7:20 AM",
-        "arrival": "8:45 AM",
-        "class": "Y (OK)",
+        "departure": "07:20 AM",
+        "arrival": "08:45 AM",
+        "class": "Y",
         "baggage": "1 PC"
       },
       {
@@ -41,70 +62,53 @@
         "date": "2013-09-08",
         "from": "Zurich",
         "to": "Vienna Intl",
-        "departure": "7:45 AM",
-        "arrival": "9:10 AM",
-        "class": "Y (OK)",
+        "departure": "07:45 AM",
+        "arrival": "09:10 AM",
+        "class": "Y",
         "baggage": "1 PC"
       }
     ],
-    "car_details": null,
-    "purpose": null,
-    "odometer_reading": null,
-    "travel_date": null,
-    "a1_certificate": null,
-    "payment_receipt": null,
-    "manager_approval": null,
-    "personal_phone_proof": null,
-    "storage_period": null,
-    "booking_code": "6GHMCV",
-    "ticket_number": "257-2133783831",
-    "transaction_reference": "213000508057"
+    "operated_by": "TYROLEAN AIRWAYS"
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 4,
+      "issues_count": 3,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_name",
-          "description": "The supplier name on the invoice should be 'Global People DE GmbH' as specified for ICP 'Global People'. Currently, it is 'Austrian Airlines AG'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Name of the supplier/vendor on invoice, must be Global People DE GmbH."
+          "field": "currency",
+          "description": "Currency field is missing, which is mandatory according to compliance rules for all receipts.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure currency is recorded on the receipt.",
+          "knowledge_base_reference": "Austria Expense Reimbursement Database requires same currency with clear exchange rate on all ICPs."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_address",
-          "description": "Missing mandatory supplier address: 'Taunusanlage 8, 60329 Frankfurt, Germany' for 'Global People'. Currently, the address listed is 'Office Park 2, A-1300 Vienna-Airport'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Address of the supplier on invoice must be 'Taunusanlage 8, 60329 Frankfurt, Germany'."
-        },
-        {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "vat_number",
-          "description": "Missing or incorrect VAT number. Expected 'DE356366640' as per Global People requirements. Current VAT number is 'ATU15447707'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "VAT identification number must be 'DE356366640'."
+          "field": "amount",
+          "description": "Amount field is missing, which is mandatory for expense validation.",
+          "recommendation": "It is recommended to ensure that the amount is clearly stated on the receipt.",
+          "knowledge_base_reference": "Expense Reimbursement rules mandate the amount must be clearly stated on receipt for all ICPs."
         },
         {
           "issue_type": "Standards & Compliance | Follow-up Action Identified",
-          "field": "a1_certificate",
-          "description": "An A1 certificate is required when traveling for 'Global People', but it is missing from the provided documentation.",
-          "recommendation": "Specify exact documentation requirements and obtain an A1 certificate for compliance.",
-          "knowledge_base_reference": "A1 Certificate required when traveling."
+          "field": "business_trip_reporting",
+          "description": "Business trip reporting template usage is required for travel expenses.",
+          "recommendation": "It is necessary to submit a separate report for each trip using the 'Travel Expense Report Template Austria EUR.xlsx'.",
+          "knowledge_base_reference": "Austria corporate travel policy mandates the use of specific templates for all travel receipts."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt has major compliance violations due to incorrect supplier information and missing mandatory documentation. Immediate corrections are needed to avoid compliance penalties."
+      "compliance_summary": "The receipt is invalid due to missing currency and amount fields. Additionally, adherence to business trip reporting templates is necessary."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
-      "country": "Germany",
+      "country": "Austria",
       "icp": "Global People",
       "receipt_type": "flights",
-      "issues_count": 4,
+      "issues_count": 3,
       "has_reasoning": true
     }
   },
-  "processing_status": "completed"
+  "processing_status": "completed",
+  "uqlm_validation_available": true
 }

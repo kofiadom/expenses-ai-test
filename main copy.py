@@ -18,7 +18,8 @@ from expense_processing_workflow import ExpenseProcessingWorkflow
 load_dotenv()
 
 # Configuration - Update these values as needed
-DATASET_DIR = "dataset"
+COUNTRY = "Germany"
+ICP = "Global People"  # Options: "Global People", "goGlobal", "Parakar", "Atlas"
 INPUT_FOLDER = "expense_files"
 LLAMAPARSE_API_KEY = os.getenv("LLAMAPARSE_API_KEY")
 DEBUG_MODE = True
@@ -34,9 +35,9 @@ def validate_setup() -> bool:
         logger.error(f"Input folder not found: {INPUT_FOLDER}")
         return False
 
-    dataset_path = pathlib.Path(DATASET_DIR)
-    if not dataset_path.exists():
-        logger.error(f"Dataset directory not found: {DATASET_DIR}")
+    compliance_file = pathlib.Path(f"data/{COUNTRY.lower()}.json")
+    if not compliance_file.exists():
+        logger.error(f"Compliance data not found: {compliance_file}")
         return False
 
     if not LLAMAPARSE_API_KEY:
@@ -55,13 +56,12 @@ async def main():
         import logging
         logging.getLogger("agno").setLevel(logging.DEBUG)
 
-    logger.info("Starting dataset-based expense processing workflow")
-    logger.info(f"Dataset directory: {DATASET_DIR}")
-    logger.info(f"Input folder: {INPUT_FOLDER}")
+    logger.info("Starting expense processing workflow")
+    logger.info(f"Country: {COUNTRY}, ICP: {ICP}")
 
     try:
         workflow = ExpenseProcessingWorkflow(
-            session_id=f"expense-processing-dataset-{DATASET_DIR}",
+            session_id=f"expense-processing-{COUNTRY.lower()}-{ICP.replace(' ', '-').lower()}",
             storage=SqliteStorage(
                 table_name="expense_processing_workflows",
                 db_file="expense_processing.db"
@@ -70,7 +70,8 @@ async def main():
         )
 
         async for response in workflow.process_expenses(
-            dataset_dir=DATASET_DIR,
+            country=COUNTRY,
+            icp=ICP,
             llamaparse_api_key=LLAMAPARSE_API_KEY,
             input_folder=INPUT_FOLDER
         ):
