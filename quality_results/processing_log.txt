@@ -1,0 +1,23 @@
+IMAGE QUALITY ANALYSIS LOG
+==================================================
+
+Analysis completed: 2025-07-15 10:29:44
+Total files processed: 4
+Successful analyses: 4
+Failed analyses: 0
+Success rate: 100.0%
+Total processing time: 8.07 seconds
+Average time per file: 2.02 seconds
+
+QUALITY STATISTICS
+--------------------
+Average quality score: 0.729
+Score range: 0.597 - 0.789
+OCR suitability rate: 100.0%
+
+QUALITY DISTRIBUTION
+--------------------
+excellent (≥0.8): 0 files
+good (0.6-0.8): 3 files
+fair (0.4-0.6): 1 files
+poor (<0.4): 0 files

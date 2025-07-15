@@ -1,0 +1,44 @@
+{
+  "overall_score": 0.7888553108808289,
+  "ocr_suitable": {
+    "suitable": true,
+    "confidence": "medium",
+    "expected_accuracy": "85-95%"
+  },
+  "damage_details": {
+    "folds": {
+      "coverage": 0.06832804404145078,
+      "line_count": 301,
+      "shadow_score": 0.14999514248704662,
+      "severity": "low"
+    },
+    "tears": {
+      "coverage": 0.02,
+      "irregular_ratio": 0.0,
+      "high_gradient_areas": 61760,
+      "severity": "low"
+    },
+    "stains": {
+      "coverage": 0.15286593264248705,
+      "texture_score": 0.2992602609742879,
+      "dark_stain_ratio": 0.15232772020725388,
+      "color_variation_ratio": 0.08439961139896374,
+      "severity": "high"
+    },
+    "contrast": {
+      "contrast": 61.701406929030284,
+      "dynamic_range": 249.0,
+      "overexposed_ratio": 0.3945809585492228,
+      "underexposed_ratio": 0.002282383419689119,
+      "entropy": 5.14736270904541,
+      "quality": "good"
+    }
+  },
+  "metadata": {
+    "file_path": "expense_files\\german_file_4.png",
+    "file_name": "german_file_4.png",
+    "file_size": 1554748,
+    "analysis_timestamp": "2025-07-15T10:29:44.345994",
+    "file_extension": ".png"
+  }
+}

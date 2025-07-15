@@ -107,7 +107,7 @@ Include all fields from the extraction requirements (using snake_case of FieldTy
 )
 
 # Example usage function
-def extract_data_from_receipt(extraction_requirement_json: str, receipt_text: str) -> str:
+def extract_data_from_receipt(extraction_requirement_json: str, receipt_text: str) -> dict:
     """
     Extract data from receipt text using the specified extraction field types and additional relevant fields.
 
@@ -116,7 +116,9 @@ def extract_data_from_receipt(extraction_requirement_json: str, receipt_text: st
         receipt_text: The raw receipt text to analyze
 
     Returns:
-        JSON string with extracted data including specified fields and line items
+        Dictionary containing:
+        - 'extracted_data': The extracted data as JSON string
+        - 'schema_used': The schema that was used for extraction
     """
     # Format the prompt with the actual data
     formatted_prompt = f"""EXTRACTION REQUIREMENTS (JSON):
@@ -124,9 +126,20 @@ def extract_data_from_receipt(extraction_requirement_json: str, receipt_text: st
 
 RECEIPT TEXT (MARKDOWN):
 {receipt_text}"""
-    
+
     # Get the response from the agent
     response = data_extraction_agent.run(formatted_prompt)
-    return response
+
+    # Parse the extraction requirements to capture the schema
+    try:
+        import json
+        schema_used = json.loads(extraction_requirement_json)
+    except json.JSONDecodeError:
+        schema_used = {"error": "Could not parse extraction requirements as JSON"}
+
+    return {
+        'extracted_data': response,
+        'schema_used': schema_used
+    }
 
 

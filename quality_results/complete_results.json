@@ -1,0 +1,230 @@
+{
+  "results": [
+    {
+      "overall_score": 0.7496108030538309,
+      "ocr_suitable": {
+        "suitable": true,
+        "confidence": "medium",
+        "expected_accuracy": "85-95%"
+      },
+      "damage_details": {
+        "folds": {
+          "coverage": 0.09841288860103627,
+          "line_count": 7057,
+          "shadow_score": 0.1499928756476684,
+          "severity": "medium"
+        },
+        "tears": {
+          "coverage": 0.024914507772020724,
+          "irregular_ratio": 0.06731019590552931,
+          "high_gradient_areas": 61755,
+          "severity": "low"
+        },
+        "stains": {
+          "coverage": 0.093875,
+          "texture_score": 0.8315773411870117,
+          "dark_stain_ratio": 0.09387597150259068,
+          "color_variation_ratio": 0.023373704663212435,
+          "severity": "medium"
+        },
+        "contrast": {
+          "contrast": 31.31342483747986,
+          "dynamic_range": 237.0,
+          "overexposed_ratio": 0.9289148316062176,
+          "underexposed_ratio": 0.0,
+          "entropy": 1.0253055095672607,
+          "quality": "poor"
+        }
+      },
+      "metadata": {
+        "file_path": "expense_files\\austrian_file.png",
+        "file_name": "austrian_file.png",
+        "file_size": 419820,
+        "analysis_timestamp": "2025-07-15T10:29:37.971779",
+        "file_extension": ".png"
+      }
+    },
+    {
+      "overall_score": 0.7793969397668393,
+      "ocr_suitable": {
+        "suitable": true,
+        "confidence": "medium",
+        "expected_accuracy": "85-95%"
+      },
+      "damage_details": {
+        "folds": {
+          "coverage": 0.0812645725388601,
+          "line_count": 533,
+          "shadow_score": 0.14999417098445597,
+          "severity": "medium"
+        },
+        "tears": {
+          "coverage": 0.01999190414507772,
+          "irregular_ratio": 0.0,
+          "high_gradient_areas": 61735,
+          "severity": "low"
+        },
+        "stains": {
+          "coverage": 0.14997215025906735,
+          "texture_score": 0.44405399706493803,
+          "dark_stain_ratio": 0.1508202720207254,
+          "color_variation_ratio": 0.08292033678756476,
+          "severity": "high"
+        },
+        "contrast": {
+          "contrast": 65.79909485086591,
+          "dynamic_range": 236.0,
+          "overexposed_ratio": 0.3942253886010363,
+          "underexposed_ratio": 0.0,
+          "entropy": 5.069704055786133,
+          "quality": "good"
+        }
+      },
+      "metadata": {
+        "file_path": "expense_files\\german_file_2.png",
+        "file_name": "german_file_2.png",
+        "file_size": 1298848,
+        "analysis_timestamp": "2025-07-15T10:29:40.181582",
+        "file_extension": ".png"
+      }
+    },
+    {
+      "overall_score": 0.597095207253886,
+      "ocr_suitable": {
+        "suitable": true,
+        "confidence": "low",
+        "expected_accuracy": "70-85%"
+      },
+      "damage_details": {
+        "folds": {
+          "coverage": 0.2386722797927461,
+          "line_count": 25661,
+          "shadow_score": 0.14999773316062176,
+          "severity": "high"
+        },
+        "tears": {
+          "coverage": 0.035974093264248705,
+          "irregular_ratio": 0.6076145789075056,
+          "high_gradient_areas": 61749,
+          "severity": "low"
+        },
+        "stains": {
+          "coverage": 0.166860103626943,
+          "texture_score": 0.31449513939594015,
+          "dark_stain_ratio": 0.16676165803108808,
+          "color_variation_ratio": 0.07418588082901555,
+          "severity": "high"
+        },
+        "contrast": {
+          "contrast": 87.67955083936492,
+          "dynamic_range": 255.0,
+          "overexposed_ratio": 0.3944070595854922,
+          "underexposed_ratio": 0.03472830310880829,
+          "entropy": 5.35191535949707,
+          "quality": "good"
+        }
+      },
+      "metadata": {
+        "file_path": "expense_files\\german_file_3.png",
+        "file_name": "german_file_3.png",
+        "file_size": 2155104,
+        "analysis_timestamp": "2025-07-15T10:29:42.633932",
+        "file_extension": ".png"
+      }
+    },
+    {
+      "overall_score": 0.7888553108808289,
+      "ocr_suitable": {
+        "suitable": true,
+        "confidence": "medium",
+        "expected_accuracy": "85-95%"
+      },
+      "damage_details": {
+        "folds": {
+          "coverage": 0.06832804404145078,
+          "line_count": 301,
+          "shadow_score": 0.14999514248704662,
+          "severity": "low"
+        },
+        "tears": {
+          "coverage": 0.02,
+          "irregular_ratio": 0.0,
+          "high_gradient_areas": 61760,
+          "severity": "low"
+        },
+        "stains": {
+          "coverage": 0.15286593264248705,
+          "texture_score": 0.2992602609742879,
+          "dark_stain_ratio": 0.15232772020725388,
+          "color_variation_ratio": 0.08439961139896374,
+          "severity": "high"
+        },
+        "contrast": {
+          "contrast": 61.701406929030284,
+          "dynamic_range": 249.0,
+          "overexposed_ratio": 0.3945809585492228,
+          "underexposed_ratio": 0.002282383419689119,
+          "entropy": 5.14736270904541,
+          "quality": "good"
+        }
+      },
+      "metadata": {
+        "file_path": "expense_files\\german_file_4.png",
+        "file_name": "german_file_4.png",
+        "file_size": 1554748,
+        "analysis_timestamp": "2025-07-15T10:29:44.345994",
+        "file_extension": ".png"
+      }
+    }
+  ],
+  "summary": {
+    "processing_summary": {
+      "total_files": 4,
+      "successful_analyses": 4,
+      "failed_analyses": 0,
+      "start_time": "2025-07-15T10:29:36.271850",
+      "processing_times": [
+        1.6999294757843018,
+        2.209803342819214,
+        2.4488344192504883,
+        1.712061882019043
+      ],
+      "end_time": "2025-07-15T10:29:44.350046",
+      "total_processing_time": 8.070629119873047,
+      "average_processing_time": 2.0176572799682617
+    },
+    "analysis_summary": {
+      "total_files_analyzed": 4,
+      "successful_analyses": 4,
+      "failed_analyses": 0,
+      "success_rate": 1.0
+    },
+    "quality_statistics": {
+      "overall_scores": {
+        "min": 0.597095207253886,
+        "max": 0.7888553108808289,
+        "average": 0.7287395652388463,
+        "median": 0.7793969397668393
+      },
+      "quality_distribution": {
+        "excellent (≥0.8)": 0,
+        "good (0.6-0.8)": 3,
+        "fair (0.4-0.6)": 1,
+        "poor (<0.4)": 0
+      },
+      "ocr_suitability": {
+        "suitable_count": 4,
+        "unsuitable_count": 0,
+        "suitability_rate": 1.0
+      },
+      "damage_statistics": {
+        "average_fold_coverage": 0.1216694462435233,
+        "average_tear_coverage": 0.02522012629533679,
+        "average_stain_coverage": 0.14089329663212435,
+        "max_fold_coverage": 0.2386722797927461,
+        "max_tear_coverage": 0.035974093264248705,
+        "max_stain_coverage": 0.166860103626943
+      }
+    }
+  }
+}

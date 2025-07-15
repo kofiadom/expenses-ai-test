@@ -373,6 +373,85 @@ def load_validation_result(result_file_path):
         st.error(f"Error loading validation results: {e}")
         return None
 
+def load_extraction_schema(result_file_path):
+    """Load extraction schema from separate schema file."""
+    try:
+        # Get the base name of the result file
+        base_name = pathlib.Path(result_file_path).stem
+        schema_file = pathlib.Path("schemas") / f"{base_name}_schema.json"
+
+        if schema_file.exists():
+            with open(schema_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        else:
+            return None
+    except Exception as e:
+        st.error(f"Error loading extraction schema: {e}")
+        return None
+
+def display_extraction_schema(schema):
+    """Display extraction schema in a formatted way."""
+    if not schema:
+        st.info("No extraction schema available")
+        return
+
+    st.subheader("📋 Extraction Schema Used")
+
+    # Check if this is a structured schema with file_related_requirements
+    if isinstance(schema, dict):
+        # Display schema title if available
+        if 'title' in schema:
+            st.write(f"**Schema Title:** {schema['title']}")
+
+        # Display file related requirements if available
+        if 'file_related_requirements' in schema:
+            requirements = schema['file_related_requirements']
+            st.write(f"**Total Field Requirements:** {len(requirements)}")
+
+            # Create a table of field requirements
+            if requirements:
+                st.subheader("🔍 Field Requirements")
+
+                # Prepare data for table
+                table_data = []
+                for req in requirements:
+                    table_data.append({
+                        "Field Type": req.get('field_type', 'N/A'),
+                        "Description": req.get('description', 'N/A'),
+                        "Receipt Type": req.get('receipt_type', 'N/A'),
+                        "ICP Specific": "Yes" if req.get('icp_specific') else "No",
+                        "ICP Name": req.get('icp_name', 'N/A'),
+                        "Mandatory": req.get('mandatory_optional', 'N/A')
+                    })
+
+                st.dataframe(table_data, use_container_width=True)
+
+        # Display other schema sections
+        other_sections = {k: v for k, v in schema.items()
+                         if k not in ['title', 'file_related_requirements']}
+
+        if other_sections:
+            st.subheader("📊 Additional Schema Sections")
+            for section_name, section_data in other_sections.items():
+                with st.expander(f"📁 {section_name.replace('_', ' ').title()}"):
+                    if isinstance(section_data, list) and section_data:
+                        st.write(f"**Items:** {len(section_data)}")
+                        # Show first few items as examples
+                        for i, item in enumerate(section_data[:3]):
+                            st.write(f"**Item {i+1}:**")
+                            if isinstance(item, dict):
+                                for key, value in item.items():
+                                    st.write(f"  - {key}: {value}")
+                            else:
+                                st.write(f"  - {item}")
+                        if len(section_data) > 3:
+                            st.write(f"... and {len(section_data) - 3} more items")
+                    else:
+                        st.json(section_data)
+    else:
+        # Fallback for non-structured schemas
+        st.json(schema)
+
 def display_image_quality_result(image_quality):
     """Display image quality analysis results."""
     if not image_quality:
@@ -791,7 +870,14 @@ def main():
                 if result.get('status') == 'completed':
                     
                     # Tabs for different result types
-                    tab1, tab2, tab3, tab4, tab5 = st.tabs(["🏷️ Classification", "📋 Extraction", "⚖️ Compliance", "🎯 UQLM Validation", "📄 Raw JSON"])
+                    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+                        "🏷️ Classification",
+                        "📋 Extraction",
+                        "⚖️ Compliance",
+                        "🎯 UQLM Validation",
+                        "� Extraction Schema",
+                        "�📄 Raw JSON"
+                    ])
 
                     with tab1:
                         display_classification_result(result.get('classification'))
@@ -808,6 +894,11 @@ def main():
                         display_validation_result(validation_data)
 
                     with tab5:
+                        # Load extraction schema from separate file
+                        schema_data = load_extraction_schema(file_name)
+                        display_extraction_schema(schema_data)
+
+                    with tab6:
                         st.json(result)
                         
                         # Download button for JSON

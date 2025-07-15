@@ -358,14 +358,19 @@ class ExpenseProcessingWorkflow(Workflow):
             start_time = time.time()
             logger.debug(f"🕐 Sending markdown to data extraction agent - Length: {len(markdown_content)}")
 
-            result = extract_data_from_receipt(compliance_json, markdown_content)
+            # Get result with schema information
+            result_with_schema = extract_data_from_receipt(compliance_json, markdown_content)
 
             extraction_time = time.time() - start_time
             logger.debug(f"⏱️ Data extraction agent completed in {extraction_time:.2f} seconds")
 
-            # Handle different response formats
-            if hasattr(result, 'content'):
-                content = result.content
+            # Extract the actual data response and schema
+            extracted_data_response = result_with_schema.get('extracted_data')
+            schema_used = result_with_schema.get('schema_used', {})
+
+            # Handle different response formats for the extracted data
+            if hasattr(extracted_data_response, 'content'):
+                content = extracted_data_response.content
                 if content is None or content.strip() == "":
                     logger.error("Empty content returned from data extraction agent")
                     return {"error": "Empty response from data extraction agent"}
@@ -380,13 +385,24 @@ class ExpenseProcessingWorkflow(Workflow):
                 parsed_result = json.loads(content)
             else:
                 # If result doesn't have content attribute, assume it's already parsed
-                parsed_result = result
+                parsed_result = extracted_data_response
+
+            # Add schema information to the result
+            if isinstance(parsed_result, dict):
+                parsed_result['_extraction_schema'] = schema_used
+                logger.debug(f"Added schema information to extraction result")
+            else:
+                # If parsed_result is not a dict, wrap it with schema
+                parsed_result = {
+                    'extracted_data': parsed_result,
+                    '_extraction_schema': schema_used
+                }
 
             logger.debug(f"Extraction result keys: {list(parsed_result.keys()) if isinstance(parsed_result, dict) else 'Not a dict'}")
             return parsed_result
         except json.JSONDecodeError as e:
             logger.error(f"JSON parsing error in data extraction: {str(e)}")
-            logger.error(f"Raw content: {getattr(result, 'content', 'No content attribute') if 'result' in locals() else 'No result'}")
+            logger.error(f"Raw content: {getattr(extracted_data_response, 'content', 'No content attribute') if 'extracted_data_response' in locals() else 'No result'}")
             return {"error": f"Invalid JSON response from data extraction agent: {str(e)}"}
         except Exception as e:
             logger.error(f"Data extraction error: {str(e)}")
@@ -462,6 +478,10 @@ class ExpenseProcessingWorkflow(Workflow):
         results_dir = pathlib.Path("results")
         results_dir.mkdir(exist_ok=True)
 
+        # Create schema directory for saving extraction schemas
+        schema_dir = pathlib.Path("schemas")
+        schema_dir.mkdir(exist_ok=True)
+
         for result in results:
             if result.get("status") == "completed":
                 file_name = result.get("file_name", "unknown")
@@ -469,16 +489,28 @@ class ExpenseProcessingWorkflow(Workflow):
                 base_name = pathlib.Path(file_name).stem
                 output_file = results_dir / f"{base_name}.json"
 
+                # Extract schema information from extraction result
+                extraction_result = result.get("extraction", {})
+                extraction_schema = None
+                clean_extraction_result = extraction_result.copy() if extraction_result else {}
+
+                # Check if schema is embedded in extraction result
+                if isinstance(extraction_result, dict) and '_extraction_schema' in extraction_result:
+                    extraction_schema = extraction_result['_extraction_schema']
+                    # Remove schema from the main extraction result to keep it clean
+                    clean_extraction_result = {k: v for k, v in extraction_result.items() if k != '_extraction_schema'}
+
                 # Create comprehensive result structure (without UQLM validation)
                 individual_result = {
                     "source_file": file_name,
                     "processing_timestamp": datetime.now().isoformat(),
                     "dataset_metadata": result.get("dataset_metadata", {}),
                     "classification_result": result.get("classification", {}),
-                    "extraction_result": result.get("extraction", {}),
+                    "extraction_result": clean_extraction_result,
                     "compliance_result": result.get("compliance", {}),
                     "processing_status": result.get("status", "unknown"),
-                    "uqlm_validation_available": bool(result.get("validation", {}))
+                    "uqlm_validation_available": bool(result.get("validation", {})),
+                    "extraction_schema_available": bool(extraction_schema)
                 }
 
                 try:
@@ -488,6 +520,18 @@ class ExpenseProcessingWorkflow(Workflow):
                     with open(output_file, 'w', encoding='utf-8') as f:
                         json.dump(serializable_result, f, indent=2)
                     logger.info(f"Saved individual result: {output_file}")
+
+                    # Save extraction schema if available
+                    if extraction_schema:
+                        schema_file = schema_dir / f"{base_name}_schema.json"
+                        try:
+                            # Make schema serializable
+                            serializable_schema = self._make_json_serializable(extraction_schema)
+                            with open(schema_file, 'w', encoding='utf-8') as f:
+                                json.dump(serializable_schema, f, indent=2)
+                            logger.info(f"Saved extraction schema: {schema_file}")
+                        except Exception as schema_error:
+                            logger.error(f"Failed to save schema for {file_name}: {schema_error}")
 
                     # Save detailed validation results if available
                     validation_data = result.get("validation", {})

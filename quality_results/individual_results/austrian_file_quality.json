@@ -1,0 +1,44 @@
+{
+  "overall_score": 0.7496108030538309,
+  "ocr_suitable": {
+    "suitable": true,
+    "confidence": "medium",
+    "expected_accuracy": "85-95%"
+  },
+  "damage_details": {
+    "folds": {
+      "coverage": 0.09841288860103627,
+      "line_count": 7057,
+      "shadow_score": 0.1499928756476684,
+      "severity": "medium"
+    },
+    "tears": {
+      "coverage": 0.024914507772020724,
+      "irregular_ratio": 0.06731019590552931,
+      "high_gradient_areas": 61755,
+      "severity": "low"
+    },
+    "stains": {
+      "coverage": 0.093875,
+      "texture_score": 0.8315773411870117,
+      "dark_stain_ratio": 0.09387597150259068,
+      "color_variation_ratio": 0.023373704663212435,
+      "severity": "medium"
+    },
+    "contrast": {
+      "contrast": 31.31342483747986,
+      "dynamic_range": 237.0,
+      "overexposed_ratio": 0.9289148316062176,
+      "underexposed_ratio": 0.0,
+      "entropy": 1.0253055095672607,
+      "quality": "poor"
+    }
+  },
+  "metadata": {
+    "file_path": "expense_files\\austrian_file.png",
+    "file_name": "austrian_file.png",
+    "file_size": 419820,
+    "analysis_timestamp": "2025-07-15T10:29:37.971779",
+    "file_extension": ".png"
+  }
+}

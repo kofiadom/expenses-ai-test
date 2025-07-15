@@ -1,0 +1,50 @@
+{
+  "processing_summary": {
+    "total_files": 4,
+    "successful_analyses": 4,
+    "failed_analyses": 0,
+    "start_time": "2025-07-15T10:29:36.271850",
+    "processing_times": [
+      1.6999294757843018,
+      2.209803342819214,
+      2.4488344192504883,
+      1.712061882019043
+    ],
+    "end_time": "2025-07-15T10:29:44.350046",
+    "total_processing_time": 8.070629119873047,
+    "average_processing_time": 2.0176572799682617
+  },
+  "analysis_summary": {
+    "total_files_analyzed": 4,
+    "successful_analyses": 4,
+    "failed_analyses": 0,
+    "success_rate": 1.0
+  },
+  "quality_statistics": {
+    "overall_scores": {
+      "min": 0.597095207253886,
+      "max": 0.7888553108808289,
+      "average": 0.7287395652388463,
+      "median": 0.7793969397668393
+    },
+    "quality_distribution": {
+      "excellent (≥0.8)": 0,
+      "good (0.6-0.8)": 3,
+      "fair (0.4-0.6)": 1,
+      "poor (<0.4)": 0
+    },
+    "ocr_suitability": {
+      "suitable_count": 4,
+      "unsuitable_count": 0,
+      "suitability_rate": 1.0
+    },
+    "damage_statistics": {
+      "average_fold_coverage": 0.1216694462435233,
+      "average_tear_coverage": 0.02522012629533679,
+      "average_stain_coverage": 0.14089329663212435,
+      "max_fold_coverage": 0.2386722797927461,
+      "max_tear_coverage": 0.035974093264248705,
+      "max_stain_coverage": 0.166860103626943
+    }
+  }
+}
