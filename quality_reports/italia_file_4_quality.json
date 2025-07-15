@@ -1,0 +1,225 @@
+{
+  "image_path": "expense_files\\italia_file_4.jpg",
+  "document_type": "receipt",
+  "image_type_detection": {
+    "is_digital_screenshot": "False",
+    "confidence": 0.17,
+    "image_subtype": "photo_capture",
+    "indicators": {
+      "low_color_variety": true,
+      "matches_common_resolution": false,
+      "has_regular_edges": "False",
+      "has_uniform_background": false,
+      "has_many_straight_lines": false,
+      "low_histogram_entropy": "False"
+    },
+    "metadata": {
+      "unique_colors": 3801,
+      "edge_density": 0.086,
+      "histogram_entropy": "6.97"
+    }
+  },
+  "timestamp": "2025-07-15T16:05:51.366176",
+  "processing_time_seconds": 0.68,
+  "overall_assessment": {
+    "score": "54.0",
+    "level": "Poor",
+    "pass_fail": "False",
+    "issues_summary": [
+      "Poor resolution quality",
+      "No clear document boundary detected",
+      "Physical damage: tears"
+    ],
+    "recommendations": [
+      "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+      "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings.",
+      "\u2705 Image sharpness is excellent.",
+      "\u2705 Lighting and exposure are optimal.",
+      "\ud83d\udd04 Ensure entire document is visible and well-lit"
+    ]
+  },
+  "detailed_results": {
+    "resolution": {
+      "dimensions": {
+        "width": 330,
+        "height": 450,
+        "megapixels": 0.15
+      },
+      "dpi": {
+        "horizontal": 1,
+        "vertical": 1,
+        "average": 1.0
+      },
+      "quality": {
+        "score": 0.0,
+        "level": "Poor",
+        "meets_ocr_requirements": false
+      },
+      "aspect_ratio": {
+        "actual": 0.73,
+        "expected": 0.37,
+        "deviation_percent": 99.5
+      },
+      "recommendations": [
+        "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+        "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings."
+      ]
+    },
+    "blur": {
+      "metrics": {
+        "laplacian_variance": 2338.06,
+        "is_blurry": false,
+        "blur_score": 100.0,
+        "blur_level": "Very Sharp"
+      },
+      "motion_blur": {
+        "detected": "False",
+        "score": 8.367589225589226,
+        "direction": "vertical"
+      },
+      "focus_distribution": {
+        "sharp_areas_percent": 70.8,
+        "uniform_sharpness": false
+      },
+      "recommendations": [
+        "\u2705 Image sharpness is excellent."
+      ]
+    },
+    "glare": {
+      "exposure_metrics": {
+        "mean_brightness": 147.0,
+        "overexposed_percent": "0.05",
+        "is_overexposed": "False",
+        "contrast_ratio": 0.39
+      },
+      "glare_analysis": {
+        "glare_score": "99.9",
+        "glare_level": "None",
+        "num_glare_spots": 0,
+        "glare_coverage_percent": 0.0,
+        "glare_patterns": {
+          "type": "none",
+          "description": "No glare detected"
+        }
+      },
+      "affected_regions": [],
+      "recommendations": [
+        "\u2705 Lighting and exposure are optimal."
+      ]
+    },
+    "completeness": {
+      "boundary_detected": false,
+      "completeness_score": 0,
+      "completeness_level": "Cannot Detect",
+      "issues": [
+        "No clear document boundary detected"
+      ],
+      "recommendations": [
+        "\ud83d\udd04 Ensure entire document is visible and well-lit",
+        "\ud83d\udcf8 Place document on contrasting background"
+      ]
+    },
+    "damage": {
+      "damage_score": 60.0,
+      "damage_level": "Significant Damage",
+      "damage_types": [
+        "tears"
+      ],
+      "stain_analysis": {
+        "count": 0,
+        "coverage_percent": 0.0,
+        "regions": []
+      },
+      "tear_analysis": {
+        "count": 6,
+        "max_length": 510.6173117160797,
+        "regions": [
+          {
+            "bbox": [
+              101,
+              432,
+              34,
+              13
+            ],
+            "length": 178.39696860313416,
+            "irregularity": 0.326,
+            "angle_variance": 27928.7,
+            "severity": "moderate"
+          },
+          {
+            "bbox": [
+              265,
+              306,
+              13,
+              21
+            ],
+            "length": 170.95331740379333,
+            "irregularity": 0.343,
+            "angle_variance": 26270.0,
+            "severity": "moderate"
+          },
+          {
+            "bbox": [
+              62,
+              281,
+              34,
+              20
+            ],
+            "length": 362.13708305358887,
+            "irregularity": 0.429,
+            "angle_variance": 28223.4,
+            "severity": "moderate"
+          }
+        ]
+      },
+      "fold_analysis": {
+        "count": 0,
+        "pattern": "none",
+        "lines": []
+      },
+      "recommendations": [
+        "\ud83d\udcce Minor tears detected. Handle document carefully."
+      ]
+    }
+  },
+  "score_breakdown": {
+    "resolution": {
+      "score": 0.0,
+      "weight": 0.2,
+      "contribution": 0.0
+    },
+    "blur": {
+      "score": 100.0,
+      "weight": 0.25,
+      "contribution": 25.0
+    },
+    "glare": {
+      "score": "99.9",
+      "weight": 0.2,
+      "contribution": "19.980001"
+    },
+    "completeness": {
+      "score": 0,
+      "weight": 0.2,
+      "contribution": 0.0
+    },
+    "damage": {
+      "score": 60.0,
+      "weight": 0.15,
+      "contribution": 9.0
+    }
+  },
+  "quality_passed": "False",
+  "quality_score": "54.0",
+  "quality_level": "Poor",
+  "main_issues": [
+    "Poor resolution quality",
+    "No clear document boundary detected",
+    "Physical damage: tears"
+  ],
+  "top_recommendations": [
+    "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+    "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings.",
+    "\u2705 Image sharpness is excellent."
+  ]
+}

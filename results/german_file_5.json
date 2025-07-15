@@ -1,0 +1,155 @@
+{
+  "source_file": "german_file_5.md",
+  "processing_timestamp": "2025-07-15T16:26:19.259953",
+  "dataset_metadata": {
+    "filepath": "expense_files/german_file_5.png",
+    "filename ": "german_file_5.png",
+    "country": "Germany",
+    "icp": "Global People",
+    "dataset_file": "german_file_5.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "German",
+    "language_confidence": 95,
+    "document_location": "Germany",
+    "expected_location": "Germany",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 90,
+    "reasoning": "The document is a receipt ('Quittung') from a restaurant with itemized food and drink purchases, monetary values, VAT information, and date/time of transaction, which aligns with expense criteria for a meals category. Language identified as German based on vocabulary and formatting."
+  },
+  "extraction_result": {
+    "supplier_name": "Trachtenheim",
+    "supplier_address": "R\u00f6merstr.2, 87700 Memmingen",
+    "vat_number": null,
+    "currency": "EUR",
+    "total_amount": 59.7,
+    "date_of_issue": "2023-04-20",
+    "line_items": [
+      {
+        "description": "Cola 0,4l",
+        "quantity": 2,
+        "total_price": 6.8,
+        "tax_rate": 19.0
+      },
+      {
+        "description": "Helles Bier 0,5l",
+        "quantity": 1,
+        "total_price": 4.0,
+        "tax_rate": 19.0
+      },
+      {
+        "description": "Schnitzel Wiener Art",
+        "quantity": 1,
+        "total_price": 15.9,
+        "tax_rate": 7.0
+      },
+      {
+        "description": "Schw\u00e4b. Zwiebelrostbraten",
+        "quantity": 1,
+        "total_price": 18.9,
+        "tax_rate": 7.0
+      },
+      {
+        "description": "Abgebratener Leberk\u00e4s",
+        "quantity": 1,
+        "total_price": 9.8,
+        "tax_rate": 7.0
+      },
+      {
+        "description": "Diverse K\u00fcche",
+        "quantity": 1,
+        "total_price": 1.0,
+        "tax_rate": 7.0
+      },
+      {
+        "description": "Dunkles Bier 0,25l",
+        "quantity": 1,
+        "total_price": 3.4,
+        "tax_rate": 19.0
+      }
+    ],
+    "contact_phone": "08331/3726",
+    "transaction_reference": "Beleg 50",
+    "transaction_time": "21:05",
+    "table_number": "3",
+    "payment_method": "BAR",
+    "change_given": 0.0,
+    "tax_details": [
+      {
+        "rate": 19.0,
+        "amount": 2.27
+      },
+      {
+        "rate": 7.0,
+        "amount": 2.98
+      }
+    ],
+    "tse_details": {
+      "tanr": "50",
+      "sigz": "267",
+      "start_time": "19:58:30",
+      "end_time": "21:05:20",
+      "serial_number": "3967:987084",
+      "signature": "XsNuR3iWdj53CiXti75lJI5RzHcB14XVLmF5QbyuSbfXOG3tdCpmN1AEF1/fdrFPRIOfQ4gAYeOXOSBBm9dTagyXUjuxxDMkIcWoTtEtymFhg4Gt4hmHJMizrOTfhhhU"
+    },
+    "name": null,
+    "address": null,
+    "supplier": null,
+    "expense": null,
+    "route": null,
+    "car_details": null,
+    "purpose": null,
+    "odometer_reading": null,
+    "travel_date": null,
+    "a1_certificate": null,
+    "payment_receipt": null,
+    "manager_approval": null,
+    "personal_phone_proof": null,
+    "storage_period": null
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 3,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "Supplier name does not match the mandatory requirement for Global People (should be 'Global People DE GmbH').",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to correct the supplier name.",
+          "knowledge_base_reference": "Must be Global People DE GmbH"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "Supplier address is incorrect according to the mandatory requirement for Global People (should be 'Taunusanlage 8, 60329 Frankfurt, Germany').",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to correct the supplier address.",
+          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "Mandatory VAT Number is missing for Global People.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to include the VAT Number 'DE356366640'.",
+          "knowledge_base_reference": "DE356366640"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt contains compliance issues specifically related to incorrect supplier information and missing VAT number, which are mandatory fields for Global People."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 3,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": true
+}

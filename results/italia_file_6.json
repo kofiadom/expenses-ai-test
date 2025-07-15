@@ -1,0 +1,57 @@
+{
+  "source_file": "italia_file_6.md",
+  "processing_timestamp": "2025-07-15T17:02:38.087200",
+  "dataset_metadata": {
+    "filepath": "expense_files/italia_file_6.jpg",
+    "filename ": "italia_file_6.jpg",
+    "country": "Italy",
+    "icp": "Global People",
+    "dataset_file": "italia_file_6.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "Italian",
+    "language_confidence": 95,
+    "document_location": "Italy",
+    "expected_location": "Italy",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 100,
+    "reasoning": "The document contains typical expense elements such as a vendor address in Italy, itemized purchase list, monetary amounts and tax details. The language is identified as Italian with high confidence, and the location matches the expected location. The expense type is classified under 'meals' as it involves the purchase of beverages at a bar."
+  },
+  "extraction_result": {
+    "supplier_name": "GIAMAICA CAFFE' SRL",
+    "supplier_address": "VIA DEL TRITONE,54, 00187 ROMA",
+    "vat_number": "01845911005",
+    "currency": "EUR",
+    "amount": 42.12,
+    "receipt_type": "DOCUMENTO COMMERCIALE di vendita o prestazione",
+    "payment_method": "contante",
+    "line_items": [
+      {
+        "description": "4 x BIRRA IN BOTTIGLIA/SIDRO",
+        "quantity": 4,
+        "unit_price": 9.0,
+        "total_price": 36.0
+      }
+    ],
+    "subtotal": 36.0,
+    "service_charge": 6.12,
+    "total_amount": 42.12,
+    "tax": 3.83,
+    "tax_rate": 10.0,
+    "contact_phone": "06/6793585",
+    "payment_cash": 42.12,
+    "payment_electronic": 0.0,
+    "amount_due": 42.12,
+    "amount_paid": 42.12,
+    "change": 0.0
+  },
+  "compliance_result": {
+    "error": "Invalid JSON response from compliance analysis agent: Expecting value: line 1 column 1 (char 0)"
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": false
+}

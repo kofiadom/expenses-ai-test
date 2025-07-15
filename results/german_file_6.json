@@ -1,0 +1,121 @@
+{
+  "source_file": "german_file_6.md",
+  "processing_timestamp": "2025-07-15T16:28:37.930338",
+  "dataset_metadata": {
+    "filepath": "expense_files/german_file_6.png",
+    "filename ": "german_file_6.png",
+    "country": "Germany",
+    "icp": "Global People",
+    "dataset_file": "german_file_6.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "German",
+    "language_confidence": 95,
+    "document_location": "Germany",
+    "expected_location": "Germany",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 98,
+    "reasoning": "The document is a restaurant bill with vendor information, itemized costs, and contains a payment method and tax details. It clearly fits the criteria for an expense related to meals. The language is German with high confidence, and the location matches the expected location of Germany."
+  },
+  "extraction_result": {
+    "supplier_name": "Hotel Restaurant Nordpol",
+    "supplier_address": "Werftstra\u00dfe 5, 23774 Heiligenhafen",
+    "vat_number": "DE51Z770000150923",
+    "currency": "EUR",
+    "total_amount": 52.1,
+    "date_of_issue": "2019-08-27",
+    "line_items": [
+      {
+        "description": "Kleiner Salat",
+        "quantity": 1,
+        "unit_price": 4.9,
+        "total_price": 4.9
+      },
+      {
+        "description": "Ostseescholle Finkenwerder SK",
+        "quantity": 1,
+        "unit_price": 20.9,
+        "total_price": 20.9
+      },
+      {
+        "description": "Pannfischteller BK",
+        "quantity": 1,
+        "unit_price": 17.9,
+        "total_price": 17.9
+      },
+      {
+        "description": "Weizen alkoholfrei",
+        "quantity": 2,
+        "unit_price": 4.2,
+        "total_price": 8.4
+      }
+    ],
+    "transaction_time": "16:50",
+    "receipt_number": "34660",
+    "payment_method": "BAR",
+    "tax_rate": [
+      7.0,
+      19.0
+    ],
+    "tax_amount": {
+      "7.00": 0.0,
+      "19.00": 8.32
+    },
+    "net_amount": 43.78,
+    "table_number": "43",
+    "server": "kellner1",
+    "contact_phone": "04362/2075"
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 4,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name 'Hotel Restaurant Nordpol' does not match the mandatory requirement for Global People receipts, which should be 'Global People DE GmbH'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Must be Global People DE GmbH"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "The supplier address 'Werftstra\u00dfe 5, 23774 Heiligenhafen' does not match the mandatory requirement for Global People receipts, which should be 'Taunusanlage 8, 60329 Frankfurt, Germany'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "The VAT number 'DE51Z770000150923' does not match the required VAT number 'DE356366640' for Global People.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "DE356366640"
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "total_amount",
+          "description": "The meal expense of 52.1 EUR is not tax exempt outside business travel according to Global People's policies.",
+          "recommendation": "This expense is not tax exempt and must be grossed up according to tax compliance guidelines.",
+          "knowledge_base_reference": "Not tax exempt (outside business travel)"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt has key compliance violations, including incorrect supplier name, address, and VAT number. Additionally, the meal expenses are not tax exempt, leading to a gross-up requirement."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 4,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": true
+}

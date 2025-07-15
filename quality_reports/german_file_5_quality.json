@@ -1,0 +1,206 @@
+{
+  "image_path": "expense_files\\german_file_5.png",
+  "document_type": "receipt",
+  "image_type_detection": {
+    "is_digital_screenshot": "True",
+    "confidence": 0.67,
+    "image_subtype": "mobile_app_screenshot",
+    "indicators": {
+      "low_color_variety": true,
+      "matches_common_resolution": false,
+      "has_regular_edges": "False",
+      "has_uniform_background": true,
+      "has_many_straight_lines": true,
+      "low_histogram_entropy": "True"
+    },
+    "metadata": {
+      "unique_colors": 119050,
+      "edge_density": 0.078,
+      "histogram_entropy": "4.33"
+    }
+  },
+  "timestamp": "2025-07-15T16:05:00.718217",
+  "processing_time_seconds": 15.55,
+  "overall_assessment": {
+    "score": 80.0,
+    "level": "Acceptable",
+    "pass_fail": true,
+    "issues_summary": [
+      "Severe glare detected"
+    ],
+    "recommendations": [
+      "\ud83d\udcf1 This is a mobile_app_screenshot - physical document checks have been adjusted.",
+      "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture.",
+      "\u2705 Resolution quality is excellent for document processing.",
+      "\u2705 Image sharpness is excellent.",
+      "\ud83d\udcf7 Image is overexposed. Reduce camera exposure or lighting."
+    ]
+  },
+  "detailed_results": {
+    "resolution": {
+      "dimensions": {
+        "width": 1654,
+        "height": 2339,
+        "megapixels": 3.87
+      },
+      "dpi": {
+        "horizontal": 529.0,
+        "vertical": 275.0,
+        "average": 402.0
+      },
+      "quality": {
+        "score": 100.0,
+        "level": "Digital Quality",
+        "meets_ocr_requirements": true
+      },
+      "aspect_ratio": {
+        "actual": 0.71,
+        "expected": 0.37,
+        "deviation_percent": 92.3
+      },
+      "recommendations": [
+        "\u2705 Resolution quality is excellent for document processing."
+      ]
+    },
+    "blur": {
+      "metrics": {
+        "laplacian_variance": 574.55,
+        "is_blurry": false,
+        "blur_score": 100.0,
+        "blur_level": "Very Sharp"
+      },
+      "motion_blur": {
+        "detected": "False",
+        "score": 6.497832867113707,
+        "direction": "vertical"
+      },
+      "focus_distribution": {
+        "sharp_areas_percent": 38.9,
+        "uniform_sharpness": false
+      },
+      "recommendations": [
+        "\u2705 Image sharpness is excellent."
+      ]
+    },
+    "glare": {
+      "exposure_metrics": {
+        "mean_brightness": 210.9,
+        "overexposed_percent": "54.31",
+        "is_overexposed": "True",
+        "contrast_ratio": 0.29
+      },
+      "glare_analysis": {
+        "glare_score": 0,
+        "glare_level": "Severe",
+        "num_glare_spots": 1,
+        "glare_coverage_percent": 54.26,
+        "glare_patterns": {
+          "type": "flash",
+          "description": "Camera flash reflection detected"
+        }
+      },
+      "affected_regions": [
+        {
+          "bbox": [
+            "0",
+            "0",
+            "1654",
+            "2339"
+          ],
+          "center": [
+            827,
+            1338
+          ],
+          "area": "2099249",
+          "intensity": 215.16351746552982
+        }
+      ],
+      "recommendations": [
+        "\ud83d\udcf7 Image is overexposed. Reduce camera exposure or lighting.",
+        "\ud83d\udd26 Disable camera flash to avoid reflections.",
+        "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture."
+      ]
+    },
+    "completeness": {
+      "boundary_detected": true,
+      "completeness_score": 100.0,
+      "completeness_level": "Digital Document",
+      "edge_analysis": {
+        "edge_coverage": 100.0,
+        "has_gaps": false,
+        "num_gaps": 0
+      },
+      "corner_analysis": {
+        "visible_corners": 4,
+        "missing_corners": [],
+        "is_rectangular": true
+      },
+      "issues": [],
+      "boundary_points": [],
+      "recommendations": [
+        "\u2705 Digital screenshot - no physical boundaries to check."
+      ]
+    },
+    "damage": {
+      "damage_score": 100.0,
+      "damage_level": "Digital (No Physical Damage)",
+      "damage_types": [],
+      "stain_analysis": {
+        "count": 0,
+        "coverage_percent": 0.0,
+        "regions": []
+      },
+      "tear_analysis": {
+        "count": 0,
+        "max_length": 0,
+        "regions": []
+      },
+      "fold_analysis": {
+        "count": 0,
+        "pattern": "none",
+        "lines": []
+      },
+      "recommendations": [
+        "\u2705 Digital image - no physical damage possible."
+      ]
+    }
+  },
+  "score_breakdown": {
+    "resolution": {
+      "score": 100.0,
+      "weight": 0.2,
+      "contribution": 20.0
+    },
+    "blur": {
+      "score": 100.0,
+      "weight": 0.25,
+      "contribution": 25.0
+    },
+    "glare": {
+      "score": 0,
+      "weight": 0.2,
+      "contribution": 0.0
+    },
+    "completeness": {
+      "score": 100.0,
+      "weight": 0.2,
+      "contribution": 20.0
+    },
+    "damage": {
+      "score": 100.0,
+      "weight": 0.15,
+      "contribution": 15.0
+    }
+  },
+  "quality_passed": true,
+  "quality_score": 80.0,
+  "quality_level": "Acceptable",
+  "main_issues": [
+    "Severe glare detected"
+  ],
+  "top_recommendations": [
+    "\ud83d\udcf1 This is a mobile_app_screenshot - physical document checks have been adjusted.",
+    "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture.",
+    "\u2705 Resolution quality is excellent for document processing."
+  ]
+}

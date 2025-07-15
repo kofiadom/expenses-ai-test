@@ -1,0 +1,192 @@
+{
+  "source_file": "swiss_file_4.md",
+  "processing_timestamp": "2025-07-15T17:14:51.730897",
+  "dataset_metadata": {
+    "filepath": "expense_files/swiss_file_4.jpg",
+    "filename ": "swiss_file_4.jpg",
+    "country": "Switzerland",
+    "icp": "Global People",
+    "dataset_file": "swiss_file_4.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "German",
+    "language_confidence": 95,
+    "document_location": "Switzerland",
+    "expected_location": "Switzerland",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 100,
+    "reasoning": "The document is a receipt from Restaurant Luca\u00b2 detailing food items purchased, with quantities and prices. It includes transaction date, vendor details, and a total amount, fitting criteria for an expense document. The text is in German with location-related elements matching Switzerland."
+  },
+  "extraction_result": {
+    "supplier_name": null,
+    "supplier_address": null,
+    "company_registration": "CHE-210.230.241",
+    "currency": "CHF",
+    "amount": 367.0,
+    "receipt_type": "tax_receipt",
+    "personal_information": null,
+    "business_trip_reporting": null,
+    "travel_template": null,
+    "manager_approval": null,
+    "route_map": null,
+    "car_details": null,
+    "logbook": null,
+    "combined_mileage": null,
+    "line_items": [
+      {
+        "description": "Thunfischtatar",
+        "quantity": 1,
+        "unit_price": 22.5,
+        "total_price": 22.5
+      },
+      {
+        "description": "Amuse",
+        "quantity": 4,
+        "unit_price": 0.0,
+        "total_price": 0.0
+      },
+      {
+        "description": "Entenbrust",
+        "quantity": 1,
+        "unit_price": 23.5,
+        "total_price": 23.5
+      },
+      {
+        "description": "Zuppa di Roveja",
+        "quantity": 2,
+        "unit_price": 18.5,
+        "total_price": 37.0
+      },
+      {
+        "description": "Pulpo",
+        "quantity": 1,
+        "unit_price": 43.0,
+        "total_price": 43.0
+      },
+      {
+        "description": "Geschmorte Ribs",
+        "quantity": 1,
+        "unit_price": 39.5,
+        "total_price": 39.5
+      },
+      {
+        "description": "Ravioli Brasato",
+        "quantity": 1,
+        "unit_price": 29.0,
+        "total_price": 29.0
+      },
+      {
+        "description": "Scaloppine",
+        "quantity": 1,
+        "unit_price": 44.5,
+        "total_price": 44.5
+      },
+      {
+        "description": "Tiramisu",
+        "quantity": 1,
+        "unit_price": 13.5,
+        "total_price": 13.5
+      },
+      {
+        "description": "Glace 1 Kugel",
+        "quantity": 1,
+        "unit_price": 4.5,
+        "total_price": 4.5
+      },
+      {
+        "description": "Glace 2 Kugel",
+        "quantity": 1,
+        "unit_price": 9.0,
+        "total_price": 9.0
+      },
+      {
+        "description": "Schlagrahm",
+        "quantity": 1,
+        "unit_price": 1.5,
+        "total_price": 1.5
+      },
+      {
+        "description": "Limoncello Kuchen",
+        "quantity": 1,
+        "unit_price": 12.5,
+        "total_price": 12.5
+      },
+      {
+        "description": "A Quo",
+        "quantity": 1,
+        "unit_price": 56.0,
+        "total_price": 56.0
+      },
+      {
+        "description": "Santis",
+        "quantity": 1,
+        "unit_price": 5.5,
+        "total_price": 5.5
+      },
+      {
+        "description": "Still 1L",
+        "quantity": 2,
+        "unit_price": 9.5,
+        "total_price": 19.0
+      },
+      {
+        "description": "Thee",
+        "quantity": 1,
+        "unit_price": 6.5,
+        "total_price": 6.5
+      }
+    ],
+    "total_amount": 367.0,
+    "transaction_date": "2017-12-02",
+    "transaction_reference": "RechnungNr.: 11140",
+    "table_number": "6",
+    "contact_phone": "044 252 03 53",
+    "restaurant_name": "Restaurant Luca\u00b2",
+    "restaurant_address": "Asylstrasse 81, 8032 Z\u00fcrich"
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 3,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "Missing mandatory supplier name for Global PPL CH GmbH transactions.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure the supplier name is provided as 'Global PPL CH GmbH'.",
+          "knowledge_base_reference": "Name of the supplier/vendor on invoice: Must be Global PPL CH GmbH"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "Missing mandatory supplier address for Global PPL CH GmbH transactions.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure the supplier address is provided as 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland'.",
+          "knowledge_base_reference": "Address of the supplier on invoice: Freigutstrasse 2 8002 Z\u00fcrich, Switzerland"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "company_registration",
+          "description": "Incorrect Swiss company registration number provided.",
+          "recommendation": "It is recommended to update the company registration number to 'CHE-295.369.918' to comply with local regulations.",
+          "knowledge_base_reference": "Swiss company registration number: CHE-295.369.918"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt is non-compliant due to missing supplier information and an incorrect registration number. These issues need resolution to meet compliance standards."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Switzerland",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 3,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": true
+}

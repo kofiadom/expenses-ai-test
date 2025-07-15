@@ -1,0 +1,120 @@
+{
+  "source_file": "swiss_file_3.md",
+  "processing_timestamp": "2025-07-15T17:11:28.692755",
+  "dataset_metadata": {
+    "filepath": "expense_files/swiss_file_3.pdf",
+    "filename ": "swiss_file_3.pdf",
+    "country": "Switzerland",
+    "icp": "Global People",
+    "dataset_file": "swiss_file_3.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "travel",
+    "language": "English",
+    "language_confidence": 95,
+    "document_location": "Switzerland",
+    "expected_location": "Switzerland",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 90,
+    "reasoning": "The document contains a purchase receipt for a Swiss Half Fare Card, indicating a travel expense. It includes vendor information, monetary amounts, product details, and transaction context related to transportation services. The language is predominantly English with high confidence, and the detected country matches the expected location."
+  },
+  "extraction_result": {
+    "supplier_name": null,
+    "supplier_address": null,
+    "company_registration": null,
+    "currency": "CHF",
+    "amount": 120.0,
+    "receipt_type": null,
+    "personal_information": null,
+    "business_trip_reporting": null,
+    "travel_template": null,
+    "manager_approval": null,
+    "route_map": null,
+    "car_details": null,
+    "logbook": null,
+    "combined_mileage": null,
+    "line_items": [
+      {
+        "description": "Swiss Half Fare Card",
+        "order_no": "25302067899",
+        "unit_price": 120.0,
+        "vat_rate": 7.7,
+        "vat_included": true
+      }
+    ],
+    "ticket_id": "329584805708",
+    "reference_no": "67676084D / 13121548 19099",
+    "validity": "2022 - 2023",
+    "traveler_name": "GONUGUNTLA HAREESH KUMAR",
+    "date_of_birth": "1995-06-11",
+    "discount_details": "Up to 50% discount on 1st and 2nd class tickets within one month.",
+    "website": "www.MySwitzerland.com/swisshalffarecard",
+    "conditions_url": "www.MySwitzerland.com/swisstravelguide",
+    "article_no": "11528"
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 6,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "Missing mandatory supplier information.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to obtain proper supplier details.",
+          "knowledge_base_reference": "Supplier Name is mandatory and must be Global PPL CH GmbH for compliance."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "Mandatory supplier address information is missing.",
+          "recommendation": "It is recommended to obtain and include the supplier's address to conform to compliance standards.",
+          "knowledge_base_reference": "Supplier Address is mandatory and must be listed as Freigutstrasse 2 8002 Z\u00fcrich, Switzerland."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "company_registration",
+          "description": "Missing company registration number.",
+          "recommendation": "Obtain and include the correct Swiss company registration CHE-295.369.918.",
+          "knowledge_base_reference": "Company Registration is mandatory and should match CHE-295.369.918."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "business_trip_reporting",
+          "description": "Each business trip should be reported separately.",
+          "recommendation": "Ensure separate reports are submitted for each travel according to company policy.",
+          "knowledge_base_reference": "Separate report per business trip is a mandatory requirement."
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "travel_template",
+          "description": "Use of required Travel Expense Report Template Switzerland CHF.xlsx is missing.",
+          "recommendation": "Complete travel expense reports using the specified template.",
+          "knowledge_base_reference": "Mandatory use of Travel Expense Report Template Switzerland CHF.xlsx."
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "personal_information",
+          "description": "Receipts may need personal data scrutinizing/removal for compliance with privacy.",
+          "recommendation": "Ensure personal information not needed for reimbursement is adequately removed.",
+          "knowledge_base_reference": "Personal Information not required must be removed to meet privacy standards."
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "Overall, the receipt validation revealed significant compliance issues, primarily due to missing critical supplier details, company registration, and business travel-specific documentation."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Switzerland",
+      "icp": "Global People",
+      "receipt_type": "travel",
+      "issues_count": 6,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": true
+}

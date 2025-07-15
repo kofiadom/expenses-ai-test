@@ -1,0 +1,176 @@
+{
+  "source_file": "german_file_7.md",
+  "processing_timestamp": "2025-07-15T16:31:07.718257",
+  "dataset_metadata": {
+    "filepath": "expense_files/german_file_7.png",
+    "filename ": "german_file_7.png",
+    "country": "Germany",
+    "icp": "Global People",
+    "dataset_file": "german_file_7.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "German",
+    "language_confidence": 95,
+    "document_location": "Germany",
+    "expected_location": "Germany",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 90,
+    "reasoning": "The document contains a list of items sold (e.g., beverages, milk, pastries), prices, total amount, tax information, and payment details, characteristic of a receipt from a grocery store. The language is identified as German with high confidence. The transaction location matches the expected location."
+  },
+  "extraction_result": {
+    "supplier_name": null,
+    "supplier_address": "BERLIN, GERICHTSTRASSE 2-3",
+    "vat_number": null,
+    "currency": "EUR",
+    "tax_rate": 7.0,
+    "vat": 0.86,
+    "name": null,
+    "address": null,
+    "supplier": null,
+    "expense": null,
+    "route": null,
+    "car_details": null,
+    "purpose": null,
+    "odometer_reading": null,
+    "travel_date": null,
+    "a1_certificate": null,
+    "payment_receipt": null,
+    "manager_approval": null,
+    "personal_phone_proof": null,
+    "storage_period": null,
+    "total_amount": 19.06,
+    "date_of_issue": null,
+    "line_items": [
+      {
+        "description": "ORANGENSAFT, GEK\u00dcHLT",
+        "quantity": 2,
+        "unit_price": 1.49,
+        "total_price": 2.98
+      },
+      {
+        "description": "BIO VOLLMILCH",
+        "quantity": 1,
+        "unit_price": 1.09,
+        "total_price": 1.09
+      },
+      {
+        "description": "SCHNITZELTASCHE MILANO-GS",
+        "quantity": 1,
+        "unit_price": 2.79,
+        "total_price": 2.79
+      },
+      {
+        "description": "URSI PUDDING MIT SAHNE",
+        "quantity": 3,
+        "unit_price": 0.79,
+        "total_price": 2.37
+      },
+      {
+        "description": "HAFERBR\u00d6TCHEN",
+        "quantity": 2,
+        "unit_price": 0.79,
+        "total_price": 1.58
+      },
+      {
+        "description": "ECHT GEWALZTE BANDNUDELN",
+        "quantity": 1,
+        "unit_price": 1.29,
+        "total_price": 1.29
+      },
+      {
+        "description": "BIO-EIER, 6 ST\u00dcCK",
+        "quantity": 1,
+        "unit_price": 1.89,
+        "total_price": 1.89
+      },
+      {
+        "description": "FRISCHE PASTA",
+        "quantity": 2,
+        "unit_price": 1.19,
+        "total_price": 2.38
+      },
+      {
+        "description": "K\u00c4SEABSCHNITT",
+        "quantity": 1,
+        "unit_price": 1.29,
+        "total_price": 1.29
+      },
+      {
+        "description": "NUDELSAUCE",
+        "quantity": 1,
+        "unit_price": 0.79,
+        "total_price": 0.79
+      },
+      {
+        "description": "LANDBROT",
+        "quantity": 1,
+        "unit_price": 1.5,
+        "total_price": 1.5
+      }
+    ],
+    "payment_method": "Cash",
+    "change_due": 30.94,
+    "number_of_items": 16,
+    "taxes": [
+      {
+        "tax_code": "C",
+        "rate": 7.0,
+        "net": 12.24,
+        "tax_amount": 0.86,
+        "gross": 13.1
+      },
+      {
+        "tax_code": "D",
+        "rate": 19.0,
+        "net": 2.5,
+        "tax_amount": 0.48,
+        "gross": 2.98
+      }
+    ]
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 3,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name is missing, but it is a mandatory field for compliance with Global People rules. It should be 'Global People DE GmbH'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider",
+          "knowledge_base_reference": "FileRelatedRequirements - Supplier Name: Must be Global People DE GmbH for ICP 'Global People'."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "The supplier address does not match the required address 'Taunusanlage 8, 60329 Frankfurt, Germany' as per Global People compliance.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider",
+          "knowledge_base_reference": "FileRelatedRequirements - Supplier Address: Must be 'Taunusanlage 8, 60329 Frankfurt, Germany' for ICP 'Global People'."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "The VAT number is missing and is a mandatory field for compliance with Global People's requirements.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider",
+          "knowledge_base_reference": "FileRelatedRequirements - VAT Number: DE356366640 is mandatory for ICP 'Global People'."
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt is not compliant due to missing mandatory supplier information such as name and VAT number, as well as incorrect supplier address, which is required under Global People Germany ICP-specific requirements."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 3,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": true
+}

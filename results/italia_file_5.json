@@ -1,0 +1,117 @@
+{
+  "source_file": "italia_file_5.md",
+  "processing_timestamp": "2025-07-15T17:01:57.263492",
+  "dataset_metadata": {
+    "filepath": "expense_files/italia_file_5.jpg",
+    "filename ": "italia_file_5.jpg",
+    "country": "Italy",
+    "icp": "Global People",
+    "dataset_file": "italia_file_5.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "Italian",
+    "language_confidence": 95,
+    "document_location": "Italy",
+    "expected_location": "Italy",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 95,
+    "reasoning": "The document contains restaurant-related expense content with specific information on items purchased, prices, and a total amount, indicating a meal expense. The language is identified as Italian with high confidence due to the presence of Italian vocabulary and currency format (\u20ac). The location in the document matches the expected location (Italy), and no errors are identified."
+  },
+  "extraction_result": {
+    "supplier_name": "GIAMAICA CAFFE' SRL",
+    "supplier_address": "Via del Tritone, 54 00187 Roma",
+    "vat_number": "01845911005",
+    "currency": "EUR",
+    "total_amount": 26.33,
+    "date_of_issue": "2023-07-11",
+    "receipt_type": null,
+    "payment_method": null,
+    "line_items": [
+      {
+        "description": "PIZZA MARGHERITA",
+        "quantity": 1,
+        "unit_price": 9.0,
+        "total_price": 9.0
+      },
+      {
+        "description": "MEDIUM LIGHT",
+        "quantity": 1,
+        "unit_price": 9.5,
+        "total_price": 9.5
+      },
+      {
+        "description": "MINERALE CL 50",
+        "quantity": 1,
+        "unit_price": 4.0,
+        "total_price": 4.0
+      }
+    ],
+    "service_charge": 3.83,
+    "subtotal": 22.5,
+    "contact_phone": "06/6793585",
+    "transaction_id": "SF. 193",
+    "transaction_time": "18:50",
+    "table_number": "56",
+    "tax_code": null,
+    "vehicle_make_model": null,
+    "vehicle_fuel_type": null,
+    "distance_traveled": null,
+    "route_documentation": null,
+    "car_registration": null,
+    "personal_information": null,
+    "business_trip_reporting": null,
+    "per_diem_method": null
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 4,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Supplier Name",
+          "description": "The supplier name 'GIAMAICA CAFFE' SRL' does not match the mandatory requirement 'Global People s.r.l.' for the ICP.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure the supplier name matches 'Global People s.r.l.'",
+          "knowledge_base_reference": "For ICP 'Global People s.r.l.', the supplier name must be 'Global People s.r.l.'."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Supplier Address",
+          "description": "The supplier address 'Via del Tritone, 54 00187 Roma' does not match the required address 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy' for the ICP 'Global People s.r.l.'.",
+          "recommendation": "It is recommended to contact the supplier to rectify the address to 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy'.",
+          "knowledge_base_reference": "For ICP 'Global People s.r.l.', the supplier address must be 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy'."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "VAT Number",
+          "description": "The VAT number '01845911005' does not match the mandatory requirement 'IT12455930011' for the ICP 'Global People s.r.l.'.",
+          "recommendation": "It is recommended to contact the supplier to ensure the correct VAT number 'IT12455930011' is used on receipts.",
+          "knowledge_base_reference": "For ICP 'Global People s.r.l.', the VAT number must be 'IT12455930011'."
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "Meal Expense",
+          "description": "The meal expense may exceed tax-free limits if greater than \u20ac75 tax-free portion for entertainment expenses.",
+          "recommendation": "Check if this expense falls under 'Entertainment Expenses' tax-free limit and provide additional documentation if required.",
+          "knowledge_base_reference": "Entertainment Expenses are tax-free up to 75% for meals labeled as 'spese di rappresentanza'."
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt data is non-compliant due to mismatched supplier information and VAT number. Additionally, the meal expense may have tax implications if it exceeds the permissible tax-free limit."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Italy",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 4,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": true
+}

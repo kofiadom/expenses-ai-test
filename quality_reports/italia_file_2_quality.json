@@ -1,0 +1,299 @@
+{
+  "image_path": "expense_files\\italia_file_2.jpg",
+  "document_type": "receipt",
+  "image_type_detection": {
+    "is_digital_screenshot": "False",
+    "confidence": 0.17,
+    "image_subtype": "photo_capture",
+    "indicators": {
+      "low_color_variety": true,
+      "matches_common_resolution": false,
+      "has_regular_edges": "False",
+      "has_uniform_background": false,
+      "has_many_straight_lines": false,
+      "low_histogram_entropy": "False"
+    },
+    "metadata": {
+      "unique_colors": 7886,
+      "edge_density": 0.085,
+      "histogram_entropy": "6.07"
+    }
+  },
+  "timestamp": "2025-07-15T16:05:48.148343",
+  "processing_time_seconds": 2.08,
+  "overall_assessment": {
+    "score": 43.7,
+    "level": "Unacceptable",
+    "pass_fail": "False",
+    "issues_summary": [
+      "Poor resolution quality",
+      "Severe glare detected",
+      "No clear document boundary detected",
+      "Physical damage: tears"
+    ],
+    "recommendations": [
+      "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+      "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture.",
+      "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings.",
+      "\u2705 Image sharpness is excellent.",
+      "\ud83d\udcf7 Image is overexposed. Reduce camera exposure or lighting."
+    ]
+  },
+  "detailed_results": {
+    "resolution": {
+      "dimensions": {
+        "width": 282,
+        "height": 500,
+        "megapixels": 0.14
+      },
+      "dpi": {
+        "horizontal": 90.0,
+        "vertical": 59.0,
+        "average": 75.0
+      },
+      "quality": {
+        "score": 0.0,
+        "level": "Poor",
+        "meets_ocr_requirements": false
+      },
+      "aspect_ratio": {
+        "actual": 0.56,
+        "expected": 0.37,
+        "deviation_percent": 53.4
+      },
+      "recommendations": [
+        "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+        "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings."
+      ]
+    },
+    "blur": {
+      "metrics": {
+        "laplacian_variance": 4801.99,
+        "is_blurry": false,
+        "blur_score": 100.0,
+        "blur_level": "Very Sharp"
+      },
+      "motion_blur": {
+        "detected": "False",
+        "score": 11.341007092198582,
+        "direction": "vertical"
+      },
+      "focus_distribution": {
+        "sharp_areas_percent": 71.1,
+        "uniform_sharpness": false
+      },
+      "recommendations": [
+        "\u2705 Image sharpness is excellent."
+      ]
+    },
+    "glare": {
+      "exposure_metrics": {
+        "mean_brightness": 217.7,
+        "overexposed_percent": "18.01",
+        "is_overexposed": "True",
+        "contrast_ratio": 0.21
+      },
+      "glare_analysis": {
+        "glare_score": 48.5,
+        "glare_level": "Severe",
+        "num_glare_spots": 6,
+        "glare_coverage_percent": 1.81,
+        "glare_patterns": {
+          "type": "ambient",
+          "description": "Edge lighting/window glare detected"
+        }
+      },
+      "affected_regions": [
+        {
+          "bbox": [
+            "0",
+            "3",
+            "14",
+            "388"
+          ],
+          "center": [
+            2,
+            155
+          ],
+          "area": "1402",
+          "intensity": 241.23766568483063
+        },
+        {
+          "bbox": [
+            "178",
+            "3",
+            "22",
+            "45"
+          ],
+          "center": [
+            186,
+            23
+          ],
+          "area": "368",
+          "intensity": 245.86767676767676
+        },
+        {
+          "bbox": [
+            "162",
+            "372",
+            "38",
+            "40"
+          ],
+          "center": [
+            178,
+            392
+          ],
+          "area": "441",
+          "intensity": 240.62697368421053
+        },
+        {
+          "bbox": [
+            "26",
+            "440",
+            "13",
+            "20"
+          ],
+          "center": [
+            30,
+            449
+          ],
+          "area": "117",
+          "intensity": 249.40384615384616
+        },
+        {
+          "bbox": [
+            "240",
+            "450",
+            "15",
+            "22"
+          ],
+          "center": [
+            246,
+            462
+          ],
+          "area": "103",
+          "intensity": 246.1787878787879
+        }
+      ],
+      "recommendations": [
+        "\ud83d\udcf7 Image is overexposed. Reduce camera exposure or lighting.",
+        "\ud83e\ude9f Reposition to avoid window/light reflections.",
+        "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture."
+      ]
+    },
+    "completeness": {
+      "boundary_detected": false,
+      "completeness_score": 0,
+      "completeness_level": "Cannot Detect",
+      "issues": [
+        "No clear document boundary detected"
+      ],
+      "recommendations": [
+        "\ud83d\udd04 Ensure entire document is visible and well-lit",
+        "\ud83d\udcf8 Place document on contrasting background"
+      ]
+    },
+    "damage": {
+      "damage_score": 60.0,
+      "damage_level": "Significant Damage",
+      "damage_types": [
+        "tears"
+      ],
+      "stain_analysis": {
+        "count": 0,
+        "coverage_percent": 0.0,
+        "regions": []
+      },
+      "tear_analysis": {
+        "count": 17,
+        "max_length": 917.3259009122849,
+        "regions": [
+          {
+            "bbox": [
+              141,
+              449,
+              60,
+              51
+            ],
+            "length": 528.9482649564743,
+            "irregularity": 0.316,
+            "angle_variance": 26610.6,
+            "severity": "moderate"
+          },
+          {
+            "bbox": [
+              227,
+              402,
+              26,
+              98
+            ],
+            "length": 600.3990556001663,
+            "irregularity": 0.657,
+            "angle_variance": 28236.3,
+            "severity": "severe"
+          },
+          {
+            "bbox": [
+              49,
+              399,
+              31,
+              39
+            ],
+            "length": 250.83556723594666,
+            "irregularity": 0.318,
+            "angle_variance": 27996.1,
+            "severity": "moderate"
+          }
+        ]
+      },
+      "fold_analysis": {
+        "count": 0,
+        "pattern": "none",
+        "lines": []
+      },
+      "recommendations": [
+        "\ud83e\ude79 Severe tears detected. Use document tape on back before scanning."
+      ]
+    }
+  },
+  "score_breakdown": {
+    "resolution": {
+      "score": 0.0,
+      "weight": 0.2,
+      "contribution": 0.0
+    },
+    "blur": {
+      "score": 100.0,
+      "weight": 0.25,
+      "contribution": 25.0
+    },
+    "glare": {
+      "score": 48.5,
+      "weight": 0.2,
+      "contribution": 9.700000000000001
+    },
+    "completeness": {
+      "score": 0,
+      "weight": 0.2,
+      "contribution": 0.0
+    },
+    "damage": {
+      "score": 60.0,
+      "weight": 0.15,
+      "contribution": 9.0
+    }
+  },
+  "quality_passed": "False",
+  "quality_score": 43.7,
+  "quality_level": "Unacceptable",
+  "main_issues": [
+    "Poor resolution quality",
+    "Severe glare detected",
+    "No clear document boundary detected"
+  ],
+  "top_recommendations": [
+    "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+    "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture.",
+    "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings."
+  ]
+}

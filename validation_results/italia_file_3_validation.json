@@ -1,0 +1,126 @@
+{
+  "validation_report": {
+    "timestamp": "2025-07-15T16:55:35.241215",
+    "overall_assessment": {
+      "confidence_score": 0.865,
+      "reliability_level": "HIGH",
+      "is_reliable": true,
+      "recommendation": "AI response is highly reliable and can be trusted for compliance decisions."
+    },
+    "critical_issues_summary": {
+      "total_issues": 8,
+      "issues": [
+        "Failed to identify gross-up requirement for luxury purchase that would be subject to tax implications",
+        "No 'Follow-up Action Identified' categorization for high-value luxury purchase that would require business justification",
+        "Only used 'Fix Identified' category when other categories were applicable",
+        "Recommendations for supplier name and VAT number are not practical or actionable in a retail context",
+        "Missing recommendation regarding supplier address discrepancy",
+        "Missing recommendation addressing the personal nature of the purchase (luxury handbag)",
+        "Missing recommendation regarding the absent tax code (C.F.)",
+        "Missing recommendation about receipt quality standards"
+      ]
+    },
+    "dimensional_analysis_summary": {
+      "factual_grounding": {
+        "confidence": 1.0,
+        "reliability": "high",
+        "issues_count": 0
+      },
+      "knowledge_base_adherence": {
+        "confidence": 0.8,
+        "reliability": "high",
+        "issues_count": 2
+      },
+      "compliance_accuracy": {
+        "confidence": 0.8,
+        "reliability": "high",
+        "issues_count": 2
+      },
+      "issue_categorization": {
+        "confidence": 0.7,
+        "reliability": "medium",
+        "issues_count": 3
+      },
+      "recommendation_validity": {
+        "confidence": 0.5,
+        "reliability": "medium",
+        "issues_count": 5
+      },
+      "hallucination_detection": {
+        "confidence": 1.0,
+        "reliability": "high",
+        "issues_count": 0
+      }
+    }
+  },
+  "detailed_analysis": {
+    "metadata": {
+      "country": "Italy",
+      "receipt_type": "other",
+      "icp": "Global People",
+      "validation_method": "UQLM LLMPanel",
+      "panel_judges": 2,
+      "original_issues_found": 4
+    },
+    "dimension_details": {
+      "factual_grounding": {
+        "confidence_score": 1.0,
+        "reliability_level": "high",
+        "summary": "The AI compliance analysis demonstrates excellent factual grounding. All issues identified (supplier name, VAT number, receipt type, and payment method) accurately reflect the receipt data and compliance requirements. Each knowledge_base_reference directly quotes the relevant rule from the database. The extracted receipt data fields are correctly referenced with their actual values. No hallucinated facts or requirements were introduced. The AI did not misrepresent any information from either the receipt or compliance database.",
+        "issues_found": [],
+        "total_issues": 0
+      },
+      "knowledge_base_adherence": {
+        "confidence_score": 0.8,
+        "reliability_level": "high",
+        "summary": "The AI analysis correctly identified and validated four compliance issues (supplier name, VAT number, receipt type, and payment method) with accurate references to the knowledge base. Each issue was properly categorized as 'Standards & Compliance | Fix Identified' with appropriate recommendations. However, the analysis missed two important validation issues: the supplier address does not match the required address for Global People s.r.l., and there is no validation for the missing tax code which should be '12455930011'. No hallucinations were found, as all referenced knowledge base quotes exist verbatim in the source data.",
+        "issues_found": [
+          "Missing validation for supplier_address field which doesn't match required address for Global People s.r.l.",
+          "Missing validation for tax_code field which should be '12455930011' for Global People s.r.l."
+        ],
+        "total_issues": 2
+      },
+      "compliance_accuracy": {
+        "confidence_score": 0.8,
+        "reliability_level": "high",
+        "summary": "The AI analysis correctly identified 4 legitimate compliance violations (supplier name, VAT number, receipt type, and payment method). However, it missed 2 additional violations: the supplier address does not match the required address for Global People ICP, and the tax code is missing when it should be '12455930011'. All identified violations are accurate and properly referenced to the compliance requirements.",
+        "issues_found": [
+          "Missed supplier address violation (should be 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy' for Global People ICP)",
+          "Missed tax code violation (should be '12455930011' for Global People ICP)"
+        ],
+        "total_issues": 2
+      },
+      "issue_categorization": {
+        "confidence_score": 0.7,
+        "reliability_level": "medium",
+        "summary": "The AI analysis correctly used the 'Fix Identified' categorization for compliance violations related to supplier name, VAT number, receipt type, and payment method. However, it failed to identify any issues as 'Gross-up Identified' or 'Follow-up Action Identified' despite the receipt showing a luxury purchase (Balenciaga bag) for \u20ac1490 that would have tax implications and would require business justification. The analysis missed potential tax implications that should have been flagged for gross-up according to the expense policies.",
+        "issues_found": [
+          "Failed to identify gross-up requirement for luxury purchase that would be subject to tax implications",
+          "No 'Follow-up Action Identified' categorization for high-value luxury purchase that would require business justification",
+          "Only used 'Fix Identified' category when other categories were applicable"
+        ],
+        "total_issues": 3
+      },
+      "recommendation_validity": {
+        "confidence_score": 0.5,
+        "reliability_level": "medium",
+        "summary": "The recommendations provided are only partially actionable and appropriate. While the recommendations for receipt type and payment method are valid, those for supplier name and VAT number don't account for the reality of retail receipts. More importantly, the analysis fails to address fundamental issues such as the questionable business purpose of a luxury handbag purchase and several other compliance issues (supplier address, tax code). The recommendations focus on technical compliance issues rather than addressing the most critical problem: this appears to be a personal purchase being submitted for business reimbursement.",
+        "issues_found": [
+          "Recommendations for supplier name and VAT number are not practical or actionable in a retail context",
+          "Missing recommendation regarding supplier address discrepancy",
+          "Missing recommendation addressing the personal nature of the purchase (luxury handbag)",
+          "Missing recommendation regarding the absent tax code (C.F.)",
+          "Missing recommendation about receipt quality standards"
+        ],
+        "total_issues": 5
+      },
+      "hallucination_detection": {
+        "confidence_score": 1.0,
+        "reliability_level": "high",
+        "summary": "The AI compliance analysis demonstrates excellent adherence to the source data. All reported issues are accurately based on the actual requirements from the source data. The supplier name, VAT number, receipt type, and payment method issues are all legitimate compliance problems based on the rules for Global People ICP in Italy. No hallucinations or invented requirements were detected in the analysis.",
+        "issues_found": [],
+        "total_issues": 0
+      }
+    }
+  }
+}

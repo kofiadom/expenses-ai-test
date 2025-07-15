@@ -1,0 +1,140 @@
+{
+  "validation_report": {
+    "timestamp": "2025-07-15T17:14:51.774472",
+    "overall_assessment": {
+      "confidence_score": 0.48499999999999993,
+      "reliability_level": "VERY_LOW",
+      "is_reliable": false,
+      "recommendation": "AI response has significant reliability issues. Consider regenerating or manual analysis."
+    },
+    "critical_issues_summary": {
+      "total_issues": 10,
+      "issues": [
+        "Applied ICP-specific rules for 'Global PPL CH GmbH' when the context specified 'Global People'",
+        "All three identified issues incorrectly apply ICP-specific requirements to the wrong ICP",
+        "Failed to check meal receipt requirements that would be applicable to this receipt type",
+        "Did not validate if the receipt meets the general requirement of being an actual tax receipt",
+        "Did not analyze whether additional information requirements for meals were met",
+        "Incorrectly applied 'Global PPL CH GmbH' supplier name requirement to a restaurant receipt",
+        "Incorrectly applied supplier address requirement to a restaurant receipt",
+        "Incorrectly flagged company registration number as an issue when this requirement doesn't apply to meal receipts",
+        "Failed to evaluate the receipt against the applicable meal expense rules",
+        "Failed to consider the domestic business travel per diem rates (Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40)"
+      ]
+    },
+    "dimensional_analysis_summary": {
+      "factual_grounding": {
+        "confidence": 1.0,
+        "reliability": "high",
+        "issues_count": 0
+      },
+      "knowledge_base_adherence": {
+        "confidence": 0.2,
+        "reliability": "low",
+        "issues_count": 5
+      },
+      "compliance_accuracy": {
+        "confidence": 0.3,
+        "reliability": "low",
+        "issues_count": 6
+      },
+      "issue_categorization": {
+        "confidence": 0.5,
+        "reliability": "medium",
+        "issues_count": 4
+      },
+      "recommendation_validity": {
+        "confidence": 0.6,
+        "reliability": "medium",
+        "issues_count": 4
+      },
+      "hallucination_detection": {
+        "confidence": 0.3,
+        "reliability": "low",
+        "issues_count": 4
+      }
+    }
+  },
+  "detailed_analysis": {
+    "metadata": {
+      "country": "Switzerland",
+      "receipt_type": "meals",
+      "icp": "Global People",
+      "validation_method": "UQLM LLMPanel",
+      "panel_judges": 2,
+      "original_issues_found": 3
+    },
+    "dimension_details": {
+      "factual_grounding": {
+        "confidence_score": 1.0,
+        "reliability_level": "high",
+        "summary": "The AI compliance analysis is extremely well-grounded in the source data. All three identified issues (missing supplier name, missing supplier address, and incorrect company registration number) accurately reference actual rules in the compliance database. The references to required values (Global PPL CH GmbH for supplier name, Freigutstrasse 2 8002 Z\u00fcrich for address, and CHE-295.369.918 for registration) match exactly what's in the database. No hallucinations or invented requirements were found.",
+        "issues_found": [],
+        "total_issues": 0
+      },
+      "knowledge_base_adherence": {
+        "confidence_score": 0.2,
+        "reliability_level": "low",
+        "summary": "The AI compliance analysis shows critical failures in knowledge base adherence. It incorrectly applied ICP-specific rules meant for 'Global PPL CH GmbH' to a receipt from 'Global People'. All three issues identified are based on this fundamental error. The analysis failed to consider the relevant rules for meal expenses and didn't properly categorize the receipt against appropriate compliance categories like 'Domestic Business Travel' or related meal reimbursement policies. The knowledge base reference quotes are accurate to the source data, but they're irrelevant to this specific receipt context due to the ICP mismatch.",
+        "issues_found": [
+          "Applied ICP-specific rules for 'Global PPL CH GmbH' when the context specified 'Global People'",
+          "All three identified issues incorrectly apply ICP-specific requirements to the wrong ICP",
+          "Failed to check meal receipt requirements that would be applicable to this receipt type",
+          "Did not validate if the receipt meets the general requirement of being an actual tax receipt",
+          "Did not analyze whether additional information requirements for meals were met"
+        ],
+        "total_issues": 5
+      },
+      "compliance_accuracy": {
+        "confidence_score": 0.3,
+        "reliability_level": "low",
+        "summary": "The AI analysis demonstrates significant misunderstanding of when and how to apply compliance rules. It incorrectly flagged issues related to supplier information that only apply when the supplier must be Global PPL CH GmbH, which is not the case for restaurant receipts. The analysis failed to apply the appropriate meal expense rules, such as per diem limits or other policies specific to meals. The AI seems to have applied rules generically without considering the context of the receipt type (meals) and its specific requirements.",
+        "issues_found": [
+          "Incorrectly applied 'Global PPL CH GmbH' supplier name requirement to a restaurant receipt",
+          "Incorrectly applied supplier address requirement to a restaurant receipt",
+          "Incorrectly flagged company registration number as an issue when this requirement doesn't apply to meal receipts",
+          "Failed to evaluate the receipt against the applicable meal expense rules",
+          "Failed to consider the domestic business travel per diem rates (Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40)",
+          "Did not assess whether the receipt should be considered under 'Domestic Business Travel' or 'Domestic Travel Alternative' policies"
+        ],
+        "total_issues": 6
+      },
+      "issue_categorization": {
+        "confidence_score": 0.5,
+        "reliability_level": "medium",
+        "summary": "The AI correctly identified discrepancies between the receipt and requirements, but inappropriately applied general document requirements to a third-party restaurant receipt. It failed to recognize that restaurant receipts would naturally have the restaurant's information, not the employer's. The AI should have categorized issues relating to the meal expense policies, potential gross-up requirements for exceeding per diem rates, and follow-up actions needed to determine the business nature of the meal. The categorization as 'Fix Identified' implies these issues can be simply corrected, which is misleading for a third-party receipt.",
+        "issues_found": [
+          "The categorization as 'Fix Identified' is technically correct for the specific issues, but misses that this is a third-party restaurant receipt that would not normally contain the employer's details",
+          "The AI did not consider the 'Domestic Business Travel' or 'Domestic Travel Alternative' categories which would be more relevant for a meal receipt",
+          "No 'Gross-up Identified' issue was raised despite the meal amount (CHF 367) likely exceeding the standard per diem rates (Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40)",
+          "No 'Follow-up Action Identified' issue was raised regarding the need to clarify if this was a business meal and whether it should be processed under per diem rules"
+        ],
+        "total_issues": 4
+      },
+      "recommendation_validity": {
+        "confidence_score": 0.6,
+        "reliability_level": "medium",
+        "summary": "While the recommendations correctly identify the missing and incorrect information, they fail to provide actionable guidance on how to properly document a restaurant expense. The recommendations incorrectly suggest approaching the restaurant to change their receipts, rather than explaining the internal documentation process required. The recommendations don't acknowledge that this appears to be a standard restaurant receipt that needs additional documentation to meet Global PPL CH GmbH requirements. Better recommendations would explain how to properly document meal expenses while meeting supplier name, address, and registration requirements.",
+        "issues_found": [
+          "Recommendations incorrectly suggest addressing issues with the external supplier (restaurant) when these are internal documentation requirements",
+          "Recommendations don't explain how to properly document a restaurant meal expense while meeting ICP requirements",
+          "No guidance provided on whether this falls under domestic business travel rules and applicable per diem rates",
+          "No actionable steps for how to correctly update the documentation with the required supplier information"
+        ],
+        "total_issues": 4
+      },
+      "hallucination_detection": {
+        "confidence_score": 0.3,
+        "reliability_level": "low",
+        "summary": "The AI analysis contains significant hallucinations where it applied ICP-specific requirements from 'Global PPL CH GmbH' to a receipt for 'Global People' ICP. All three identified compliance issues are incorrect because they reference mandatory fields and specific values that only apply to a different ICP than the one specified in the context. The AI failed to properly filter requirements based on the applicable ICP, resulting in completely erroneous compliance findings.",
+        "issues_found": [
+          "AI incorrectly applied 'Global PPL CH GmbH' specific requirements to 'Global People' ICP",
+          "All three identified issues are hallucinations as they reference requirements not applicable to the given ICP",
+          "AI failed to recognize that supplier name, address and registration requirements are ICP-specific",
+          "AI did not verify if the ICP in context matched the ICP for which requirements were being applied"
+        ],
+        "total_issues": 4
+      }
+    }
+  }
+}

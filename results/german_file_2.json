@@ -1,6 +1,6 @@
 {
   "source_file": "german_file_2.md",
-  "processing_timestamp": "2025-07-15T09:23:23.949481",
+  "processing_timestamp": "2025-07-15T16:17:33.108063",
   "dataset_metadata": {
     "filepath": "expense_files/german_file_2.png",
     "filename": "german_file_2.png",
@@ -12,19 +12,19 @@
     "is_expense": true,
     "expense_type": "meals",
     "language": "German",
-    "language_confidence": 95,
+    "language_confidence": 98,
     "document_location": "Germany",
     "expected_location": "Germany",
     "location_match": true,
     "error_type": null,
     "error_message": null,
-    "classification_confidence": 100,
-    "reasoning": "The document is a restaurant receipt from Germany, listing food items, prices, tax information, and transaction details like total amount and date, which classify it as a meal expense. Language confidently identified as German and matches the expected location, Germany."
+    "classification_confidence": 95,
+    "reasoning": "The document is identified as an expense since it contains vendor information (Pizzeria Pisa), a list of purchased items with prices (Cola Light, Currywurst Pommes), a transaction date, a total amount (Saldo), and tax information (MWST 19%). The document is in German with high confidence, and the location is consistent with the expected location of Germany."
   },
   "extraction_result": {
     "supplier_name": "Pizzeria Pisa",
     "supplier_address": "Cora-Berliner Str.2, 10117 Berlin",
-    "vat_number": null,
+    "vat_number": "34/476/00588",
     "currency": "EUR",
     "total_amount": 9.5,
     "date_of_issue": "2014-10-20",
@@ -42,34 +42,14 @@
         "total_price": 5.9
       }
     ],
-    "net_total": 7.98,
-    "tax_rate": 19.0,
+    "transaction_time": "13:45",
+    "table_number": "120",
+    "net_amount": 7.98,
+    "tax_rate": 19,
     "vat": 1.52,
     "payment_method": "Bar",
-    "transaction_time": "13:45",
-    "server": "Bediener 3",
-    "table_number": "120",
-    "special_notes": "Tip is not included",
-    "country": "Germany",
-    "receipt_type": "Rechnung",
-    "transaction_reference": null,
-    "contact_phone": null,
-    "contact_email": null,
-    "contact_website": null,
-    "name": null,
-    "address": null,
-    "supplier": null,
-    "expense": null,
-    "route": null,
-    "car_details": null,
-    "purpose": null,
-    "odometer_reading": null,
-    "travel_date": null,
-    "a1_certificate": null,
-    "payment_receipt": null,
-    "manager_approval": null,
-    "personal_phone_proof": null,
-    "storage_period": null
+    "operator": "Bediener 3",
+    "special_notes": "Tip is not included"
   },
   "compliance_result": {
     "validation_result": {
@@ -79,27 +59,27 @@
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_name",
-          "description": "The supplier name 'Pizzeria Pisa' does not comply with the mandatory requirement for 'Global People' which requires the supplier name to be 'Global People DE GmbH'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure compliance.",
-          "knowledge_base_reference": "For 'Global People', the supplier name on all invoices must be 'Global People DE GmbH'."
+          "description": "Supplier name does not meet the mandatory requirement for Global People. Expected: Global People DE GmbH, Found: Pizzeria Pisa.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Must be Global People DE GmbH"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_address",
-          "description": "The supplier address 'Cora-Berliner Str.2, 10117 Berlin' does not comply with the required address 'Taunusanlage 8, 60329 Frankfurt, Germany' for 'Global People'.",
-          "recommendation": "It is recommended to correct the supplier address to meet the compliance requirement.",
-          "knowledge_base_reference": "For 'Global People', the supplier address must be 'Taunusanlage 8, 60329 Frankfurt, Germany'."
+          "description": "Supplier address does not meet the mandatory requirement for Global People. Expected: Taunusanlage 8, 60329 Frankfurt, Germany. Found: Cora-Berliner Str.2, 10117 Berlin.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
         },
         {
-          "issue_type": "Standards & Compliance | Gross-up Identified",
-          "field": "total_amount",
-          "description": "The meal expenses are not tax exempt since they are personal meals outside business travel and must be accounted for tax purposes.",
-          "recommendation": "Ensure correct accounting for non-tax exempt meals in tax returns.",
-          "knowledge_base_reference": "Personal meals for 'Global People' are not tax exempt unless part of business travel."
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "VAT number does not match the mandatory requirement for Global People. Expected: DE356366640, Found: 34/476/00588.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "DE356366640"
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt contains compliance violations related to mandatory supplier information and tax implications for meal expenses."
+      "compliance_summary": "The receipt has multiple compliance violations related to incorrect supplier information and VAT number. Additionally, the meal expense is not tax exempt as it is classified as a personal meal outside business travel."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",

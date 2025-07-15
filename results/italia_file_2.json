@@ -1,0 +1,107 @@
+{
+  "source_file": "italia_file_2.md",
+  "processing_timestamp": "2025-07-15T16:52:45.582725",
+  "dataset_metadata": {
+    "filepath": "expense_files/italia_file_2.jpg",
+    "filename ": "italia_file_2.jpg",
+    "country": "Italy",
+    "icp": "Global People",
+    "dataset_file": "italia_file_2.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "Italian",
+    "language_confidence": 95,
+    "document_location": "Italy",
+    "expected_location": "Italy",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 95,
+    "reasoning": "The document is a receipt featuring a coffee and a brioche purchase, indicating it is a typical meal-related expense. The Italian language is used alongside an Italian address and phone number, confirming the location as Italy."
+  },
+  "extraction_result": {
+    "supplier_name": "TORREFAZIONE BAR MALABAR DI TURETTA SERGIO",
+    "supplier_address": "PIAZZA CARLO FELICE 49, TORINO",
+    "vat_number": "03747960759",
+    "currency": "EUR",
+    "total_amount": 1.85,
+    "date_of_issue": "2006-02-28",
+    "line_items": [
+      {
+        "description": "BRIOCHES",
+        "quantity": 1,
+        "unit_price": 0.85,
+        "total_price": 0.85
+      },
+      {
+        "description": "CAFFE'",
+        "quantity": 1,
+        "unit_price": 1.0,
+        "total_price": 1.0
+      }
+    ],
+    "contact_phone": "011/530701",
+    "transaction_time": "11:50",
+    "receipt_type": "SCONTRINO",
+    "transaction_reference": "17 RC 13409544",
+    "number_of_items": 2,
+    "cash_register_number": 1
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 5,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Supplier Name",
+          "description": "The supplier name on the receipt must be 'Global People s.r.l.' for compliance with ICP requirements.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to receive a document with the correct supplier name.",
+          "knowledge_base_reference": "Must be Global People s.r.l."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Supplier Address",
+          "description": "The supplier address must be 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy' for compliance.",
+          "recommendation": "Recommend obtaining a corrected receipt from the supplier matching required address.",
+          "knowledge_base_reference": "Via Venti Settembre 3, Torino (TO) CAP 10121, Italy"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "VAT Number",
+          "description": "VAT Number on receipt does not match mandatory VAT as 'IT12455930011'.",
+          "recommendation": "Request a receipt with the correct VAT number that corresponds with 'Global People s.r.l'.",
+          "knowledge_base_reference": "IT12455930011"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Tax Code",
+          "description": "Tax Code is missing for 'Global People s.r.l.', which is mandatory.",
+          "recommendation": "Contact the supplier to reissue the receipt including the Tax Code: '12455930011'.",
+          "knowledge_base_reference": "12455930011"
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "Entertainment Expense Documentation",
+          "description": "Receipt alone is not enough; client or supplier entertained must be recorded for meal expenses.",
+          "recommendation": "Ensure to document the names and company details of clients entertained alongside the receipt.",
+          "knowledge_base_reference": "Receipt alone is not enough - you must also write down the name and company details of the client/supplier you entertained"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "Multiple mandatory compliance violations detected, including incorrect/missing supplier details, VAT number, and missing documentation for entertainment expenses."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Italy",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 5,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": true
+}
