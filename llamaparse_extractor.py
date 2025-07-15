@@ -1,7 +1,11 @@
 import requests
 import pathlib
 import time
+import json
+from typing import Dict, List, Tuple
 from agno.utils.log import logger
+
+from image_quality_processor import ImageQualityProcessor, SUPPORTED_IMAGE_EXTENSIONS
 
 SUPPORTED_EXTENSIONS = {'.pdf', '.doc', '.docx', '.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif'}
 
@@ -77,8 +81,57 @@ class LlamaIndexAPI:
             logger.error(f"LlamaParse Result Error: {str(e)} for job {job_id}")
             return {"error": str(e)}
 
+def assess_image_quality_before_extraction(file_path: pathlib.Path, quality_processor: ImageQualityProcessor, quality_output_dir: pathlib.Path) -> Dict:
+    """
+    Assess image quality before LlamaParse extraction and save results
+    
+    Args:
+        file_path: Path to the image file
+        quality_processor: ImageQualityProcessor instance
+        quality_output_dir: Directory to save quality assessment results
+        
+    Returns:
+        Quality assessment results dictionary
+    """
+    logger.info(f"🔍 Running quality assessment for {file_path.name}...")
+    
+    try:
+        # Perform quality assessment
+        quality_results = quality_processor.assess_image_quality(str(file_path))
+        
+        # Save quality results to JSON file
+        quality_filename = f"{file_path.stem}_quality.json"
+        quality_file_path = quality_output_dir / quality_filename
+        
+        with open(quality_file_path, 'w') as f:
+            json.dump(quality_results, f, indent=2)
+        
+        if 'error' not in quality_results:
+            score = quality_results['quality_score']
+            level = quality_results['quality_level'] 
+            passed = quality_results['quality_passed']
+            
+            logger.info(f"✅ Quality assessment saved: {quality_filename}")
+            logger.info(f"    📊 Score: {score}/100 ({level})")
+            logger.info(f"    🎯 Status: {'PASS' if passed else 'FAIL'}")
+            
+            if not passed:
+                logger.warning(f"⚠️ Image quality below threshold, but processing will continue")
+        else:
+            logger.error(f"❌ Quality assessment failed: {quality_results.get('error', 'Unknown error')}")
+        
+        return quality_results
+        
+    except Exception as e:
+        logger.error(f"❌ Quality assessment exception for {file_path.name}: {str(e)}")
+        return {
+            'error': f'Quality assessment failed: {str(e)}',
+            'image_path': str(file_path)
+        }
+
 def extract_markdown(file_path: pathlib.Path, api: LlamaIndexAPI, output_dir: pathlib.Path):
-    logger.info(f"Uploading {file_path} to LlamaParse...")
+    """Extract markdown from file using LlamaParse (unchanged from original)"""
+    logger.info(f"🔄 Uploading {file_path.name} to LlamaParse...")
     upload_response = api.upload_file(file_path)
     if 'error' in upload_response:
         logger.error(f"Error uploading {file_path}: {upload_response['error']}")
@@ -113,11 +166,12 @@ def extract_markdown(file_path: pathlib.Path, api: LlamaIndexAPI, output_dir: pa
     output_file = output_dir / (file_path.stem + '.md')
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(markdown)
-    logger.info(f"Successfully saved markdown to {output_file}")
+    logger.info(f"✅ Successfully saved markdown to {output_file}")
 
 def process_expense_files(api_key: str, input_folder: str = "expense_files", output_dir: str = "llamaparse_output") -> list[pathlib.Path]:
     """
-    Process all expense files from the specified directory and return list of generated markdown files.
+    Process all expense files from the specified directory with integrated quality assessment.
+    Quality assessment is performed on image files as a pre-filter before LlamaParse extraction.
 
     Args:
         api_key: LlamaIndex API key
@@ -127,10 +181,16 @@ def process_expense_files(api_key: str, input_folder: str = "expense_files", out
     Returns:
         List of paths to generated markdown files
     """
+    logger.info(f"🚀 ***** Starting expense file processing with quality assessment...")
+    
     api = LlamaIndexAPI(api_key)
     input_path = pathlib.Path(input_folder)
     output_path = pathlib.Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
+    
+    # Create quality assessment output directory
+    quality_output_dir = pathlib.Path("quality_reports")
+    quality_output_dir.mkdir(exist_ok=True)
 
     if not input_path.exists() or not input_path.is_dir():
         logger.error(f"Input folder not found: {input_folder}")
@@ -141,17 +201,69 @@ def process_expense_files(api_key: str, input_folder: str = "expense_files", out
         logger.warning(f"No supported files found in {input_folder}")
         return []
 
-    logger.info(f"Found {len(files)} supported files in {input_folder}. Starting extraction...")
+    # Separate image files from non-image files
+    image_files = []
+    non_image_files = []
+    
+    for file_path in files:
+        if file_path.suffix.lower() in SUPPORTED_IMAGE_EXTENSIONS:
+            image_files.append(file_path)
+        else:
+            non_image_files.append(file_path)
+    
+    logger.info(f"📊 Found {len(files)} supported files: {len(image_files)} images, {len(non_image_files)} documents")
+    
+    # Initialize quality processor for image files
+    quality_processor = None
+    quality_results_summary = []
+    
+    if image_files:
+        logger.info(f"🔍 ***** Step 1a: Quality Assessment for {len(image_files)} image files...")
+        quality_processor = ImageQualityProcessor(document_type='receipt')
+        
+        for i, file_path in enumerate(image_files, 1):
+            logger.info(f"📸 Assessing image quality {i}/{len(image_files)}: {file_path.name}")
+            quality_result = assess_image_quality_before_extraction(file_path, quality_processor, quality_output_dir)
+            quality_results_summary.append({
+                'filename': file_path.name,
+                'quality_result': quality_result
+            })
+        
+        # Log quality assessment summary
+        successful_quality_checks = [r for r in quality_results_summary if 'error' not in r['quality_result']]
+        if successful_quality_checks:
+            average_score = sum(r['quality_result']['quality_score'] for r in successful_quality_checks) / len(successful_quality_checks)
+            passing_count = sum(1 for r in successful_quality_checks if r['quality_result']['quality_passed'])
+            
+            logger.info(f"✅ ***** Quality assessment summary:")
+            logger.info(f"    📊 Images assessed: {len(image_files)}")
+            logger.info(f"    ✅ Successful assessments: {len(successful_quality_checks)}")
+            logger.info(f"    🎯 Average quality score: {average_score:.1f}/100")
+            logger.info(f"    📈 Images passing quality threshold: {passing_count}/{len(successful_quality_checks)}")
+        
+        logger.info(f"💾 Quality reports saved to: {quality_output_dir}/")
+    
+    # Step 2: LlamaParse extraction for all files (images + documents)
+    logger.info(f"🔄 ***** Step 2: LlamaParse extraction for all {len(files)} files...")
     generated_files = []
 
-    for file_path in files:
+    for i, file_path in enumerate(files, 1):
+        file_type = "image" if file_path in image_files else "document"
+        logger.info(f"🔄 Processing {file_type} {i}/{len(files)}: {file_path.name}")
+        
         output_file = output_path / (file_path.stem + '.md')
         extract_markdown(file_path, api, output_path)
         if output_file.exists():
             generated_files.append(output_file)
-            logger.info(f"Successfully processed {file_path.name}")
+            logger.info(f"✅ Successfully processed {file_path.name}")
         else:
-            logger.warning(f"Failed to process {file_path.name}")
+            logger.warning(f"⚠️ Failed to process {file_path.name}")
 
-    logger.info(f"Extraction completed: {len(generated_files)}/{len(files)} files processed successfully")
+    # Final summary
+    logger.info(f"✅ ***** Processing completed:")
+    logger.info(f"    📄 LlamaParse extraction: {len(generated_files)}/{len(files)} files processed successfully")
+    if image_files:
+        logger.info(f"    🔍 Quality assessments: {len(quality_results_summary)} image files assessed")
+        logger.info(f"    💾 Quality reports available in: {quality_output_dir}/")
+    
     return generated_files

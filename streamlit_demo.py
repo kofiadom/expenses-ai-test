@@ -15,6 +15,7 @@ import fitz  # PyMuPDF for PDF preview
 from agno.utils.log import logger
 from expense_processing_workflow import ExpenseProcessingWorkflow
 from damage_detection import ReceiptDamageAnalyzer
+from image_quality_processor import ImageQualityProcessor
 
 def make_json_serializable(obj, _seen=None, _depth=0):
     """Convert objects to JSON-serializable format with recursion protection."""
@@ -140,18 +141,18 @@ def initialize_session_state():
         st.session_state.processing_complete = False
 
 def analyze_uploaded_file_quality(uploaded_file):
-    """Analyze the quality of an uploaded image file."""
+    """Analyze the quality of an uploaded image file using the comprehensive quality assessment system."""
     try:
         # Save uploaded file temporarily for analysis
         with tempfile.NamedTemporaryFile(delete=False, suffix=pathlib.Path(uploaded_file.name).suffix) as tmp_file:
             tmp_file.write(uploaded_file.getvalue())
             tmp_file_path = tmp_file.name
 
-        # Initialize damage analyzer
-        analyzer = ReceiptDamageAnalyzer(debug_mode=False)
+        # Initialize quality processor
+        quality_processor = ImageQualityProcessor(document_type='receipt')
 
-        # Analyze image quality
-        quality_results = analyzer.analyze_receipt_damage(tmp_file_path)
+        # Perform comprehensive quality assessment
+        quality_results = quality_processor.assess_image_quality(tmp_file_path)
 
         # Clean up temporary file
         pathlib.Path(tmp_file_path).unlink()
@@ -162,13 +163,15 @@ def analyze_uploaded_file_quality(uploaded_file):
         logger.error(f"Image quality analysis failed for {uploaded_file.name}: {str(e)}")
         return {
             "error": str(e),
-            "overall_score": 0.0,
-            "ocr_suitable": {"suitable": False, "confidence": "error", "expected_accuracy": "unknown"},
-            "damage_details": {
-                "folds": {"coverage": 0, "severity": "unknown"},
-                "tears": {"coverage": 0, "severity": "unknown"},
-                "stains": {"coverage": 0, "severity": "unknown"},
-                "contrast": {"quality": "unknown"}
+            "quality_score": 0.0,
+            "quality_level": "Error",
+            "quality_passed": False,
+            "overall_assessment": {
+                "score": 0.0,
+                "level": "Error",
+                "pass_fail": False,
+                "issues_summary": [f"Analysis failed: {str(e)}"],
+                "recommendations": ["Please try uploading the image again"]
             }
         }
 
@@ -374,7 +377,7 @@ def load_validation_result(result_file_path):
         return None
 
 def display_image_quality_result(image_quality):
-    """Display image quality analysis results."""
+    """Display comprehensive image quality analysis results."""
     if not image_quality:
         st.info("No image quality analysis available")
         return
@@ -383,74 +386,137 @@ def display_image_quality_result(image_quality):
         st.error(f"Image quality analysis failed: {image_quality['error']}")
         return
 
-    st.subheader("📸 Image Quality Analysis")
+    st.subheader("📸 Comprehensive Quality Analysis")
 
-    # Overall metrics
-    col1, col2, col3 = st.columns(3)
+    # Overall assessment
+    overall = image_quality.get('overall_assessment', {})
+    
+    # Main metrics
+    col1, col2, col3, col4 = st.columns(4)
 
     with col1:
-        overall_score = image_quality.get('overall_score', 0)
-        st.metric("Overall Quality Score", f"{overall_score:.3f}")
+        score = overall.get('score', 0)
+        st.metric("Overall Score", f"{score:.1f}/100")
 
     with col2:
-        ocr_suitable = image_quality.get('ocr_suitable', {})
-        suitable = ocr_suitable.get('suitable', False)
-        confidence = ocr_suitable.get('confidence', 'unknown')
-        st.metric("OCR Suitable", f"{'✅ Yes' if suitable else '❌ No'} ({confidence})")
+        level = overall.get('level', 'Unknown')
+        color = "🟢" if level in ['Excellent', 'Good'] else "🟡" if level == 'Acceptable' else "🔴"
+        st.metric("Quality Level", f"{color} {level}")
 
     with col3:
-        expected_accuracy = ocr_suitable.get('expected_accuracy', 'Unknown')
-        st.metric("Expected OCR Accuracy", expected_accuracy)
+        passed = overall.get('pass_fail', False)
+        st.metric("Quality Status", "✅ PASS" if passed else "❌ FAIL")
 
-    # Damage details
-    damage_details = image_quality.get('damage_details', {})
-    if damage_details:
-        st.subheader("🔍 Damage Analysis Details")
+    with col4:
+        processing_time = image_quality.get('processing_time_seconds', 0)
+        st.metric("Processing Time", f"{processing_time:.1f}s")
 
-        # Create tabs for different damage types
-        tab1, tab2, tab3, tab4 = st.tabs(["📄 Folds", "💥 Tears", "🟤 Stains", "🌟 Contrast"])
+    # Score breakdown
+    score_breakdown = image_quality.get('score_breakdown', {})
+    if score_breakdown:
+        st.subheader("📊 Quality Score Breakdown")
+        
+        # Create a visual score breakdown
+        metrics_data = []
+        for metric, data in score_breakdown.items():
+            metrics_data.append({
+                'Metric': metric.title(),
+                'Score': data.get('score', 0),
+                'Weight': f"{data.get('weight', 0)*100:.0f}%",
+                'Contribution': f"{data.get('contribution', 0):.1f}"
+            })
+        
+        st.dataframe(metrics_data, use_container_width=True)
+
+    # Detailed results in tabs
+    detailed = image_quality.get('detailed_results', {})
+    if detailed:
+        st.subheader("🔍 Detailed Analysis")
+        
+        tab1, tab2, tab3, tab4, tab5 = st.tabs(["📐 Resolution", "🎯 Blur", "💡 Glare", "📏 Completeness", "🩹 Damage"])
 
         with tab1:
-            folds = damage_details.get('folds', {})
-            col1, col2 = st.columns(2)
-            with col1:
-                st.metric("Coverage", f"{folds.get('coverage', 0):.1%}")
-                st.metric("Severity", folds.get('severity', 'unknown').title())
-            with col2:
-                st.metric("Line Count", folds.get('line_count', 0))
-                st.metric("Shadow Score", f"{folds.get('shadow_score', 0):.3f}")
+            resolution = detailed.get('resolution', {})
+            if resolution:
+                col1, col2 = st.columns(2)
+                with col1:
+                    dimensions = resolution.get('dimensions', {})
+                    st.metric("Resolution", f"{dimensions.get('width', 0)}x{dimensions.get('height', 0)}")
+                    st.metric("Megapixels", f"{dimensions.get('megapixels', 0):.1f} MP")
+                with col2:
+                    dpi = resolution.get('dpi', {})
+                    st.metric("Average DPI", f"{dpi.get('average', 0):.0f}")
+                    quality = resolution.get('quality', {})
+                    st.metric("DPI Quality", quality.get('level', 'Unknown'))
 
         with tab2:
-            tears = damage_details.get('tears', {})
-            col1, col2 = st.columns(2)
-            with col1:
-                st.metric("Coverage", f"{tears.get('coverage', 0):.1%}")
-                st.metric("Severity", tears.get('severity', 'unknown').title())
-            with col2:
-                st.metric("Irregular Ratio", f"{tears.get('irregular_ratio', 0):.3f}")
-                st.metric("High Gradient Areas", tears.get('high_gradient_areas', 0))
+            blur = detailed.get('blur', {})
+            if blur:
+                col1, col2 = st.columns(2)
+                with col1:
+                    metrics = blur.get('metrics', {})
+                    st.metric("Blur Score", f"{metrics.get('blur_score', 0):.1f}/100")
+                    st.metric("Blur Level", metrics.get('blur_level', 'Unknown'))
+                with col2:
+                    st.metric("Is Blurry", "❌ Yes" if metrics.get('is_blurry') else "✅ No")
+                    st.metric("Laplacian Variance", f"{metrics.get('laplacian_variance', 0):.1f}")
 
         with tab3:
-            stains = damage_details.get('stains', {})
-            col1, col2 = st.columns(2)
-            with col1:
-                st.metric("Coverage", f"{stains.get('coverage', 0):.1%}")
-                st.metric("Severity", stains.get('severity', 'unknown').title())
-            with col2:
-                st.metric("Texture Score", f"{stains.get('texture_score', 0):.3f}")
-                st.metric("Dark Stain Ratio", f"{stains.get('dark_stain_ratio', 0):.1%}")
+            glare = detailed.get('glare', {})
+            if glare:
+                col1, col2 = st.columns(2)
+                with col1:
+                    glare_analysis = glare.get('glare_analysis', {})
+                    st.metric("Glare Score", f"{glare_analysis.get('glare_score', 0):.1f}/100")
+                    st.metric("Glare Level", glare_analysis.get('glare_level', 'Unknown'))
+                with col2:
+                    st.metric("Glare Spots", glare_analysis.get('num_glare_spots', 0))
+                    st.metric("Coverage", f"{glare_analysis.get('glare_coverage_percent', 0):.1f}%")
 
         with tab4:
-            contrast = damage_details.get('contrast', {})
+            completeness = detailed.get('completeness', {})
+            if completeness:
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.metric("Completeness Score", f"{completeness.get('completeness_score', 0):.1f}/100")
+                    st.metric("Level", completeness.get('completeness_level', 'Unknown'))
+                with col2:
+                    corner_analysis = completeness.get('corner_analysis', {})
+                    st.metric("Visible Corners", f"{corner_analysis.get('visible_corners', 0)}/4")
+                    st.metric("Is Rectangular", "✅ Yes" if corner_analysis.get('is_rectangular') else "❌ No")
+
+        with tab5:
+            damage = detailed.get('damage', {})
+            if damage:
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.metric("Damage Score", f"{damage.get('damage_score', 0):.1f}/100")
+                    st.metric("Damage Level", damage.get('damage_level', 'Unknown'))
+                with col2:
+                    damage_types = damage.get('damage_types', [])
+                    st.metric("Damage Types", ", ".join(damage_types) if damage_types else "None")
+
+    # Issues and recommendations
+    if overall.get('issues_summary'):
+        st.subheader("⚠️ Issues Detected")
+        for issue in overall['issues_summary']:
+            st.warning(f"• {issue}")
+
+    if overall.get('recommendations'):
+        st.subheader("💡 Recommendations")
+        for rec in overall['recommendations']:
+            st.info(f"• {rec}")
+
+    # Image type detection info
+    image_type = image_quality.get('image_type_detection', {})
+    if image_type:
+        with st.expander("📱 Image Type Analysis"):
             col1, col2 = st.columns(2)
             with col1:
-                st.metric("Contrast", f"{contrast.get('contrast', 0):.1f}")
-                st.metric("Dynamic Range", f"{contrast.get('dynamic_range', 0):.1f}")
-                st.metric("Quality", contrast.get('quality', 'unknown').title())
+                st.metric("Is Screenshot", "📱 Yes" if image_type.get('is_digital_screenshot') else "📷 No")
+                st.metric("Image Subtype", image_type.get('image_subtype', 'Unknown'))
             with col2:
-                st.metric("Overexposed Ratio", f"{contrast.get('overexposed_ratio', 0):.1%}")
-                st.metric("Underexposed Ratio", f"{contrast.get('underexposed_ratio', 0):.1%}")
-                st.metric("Entropy", f"{contrast.get('entropy', 0):.2f}")
+                st.metric("Detection Confidence", f"{image_type.get('confidence', 0)*100:.0f}%")
 
 def display_validation_result(validation):
     """Display UQLM validation results in a formatted way."""
