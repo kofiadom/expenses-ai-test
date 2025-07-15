@@ -1,108 +1,160 @@
 {
   "source_file": "italia_file.md",
-  "processing_timestamp": "2025-07-14T16:38:05.361514",
+  "processing_timestamp": "2025-07-15T09:23:24.018342",
+  "dataset_metadata": {
+    "filepath": "expense_files/italia_file.pdf",
+    "filename": "italia_file.pdf",
+    "country": "Italy",
+    "icp": "Global People",
+    "dataset_file": "italia_file.json"
+  },
   "classification_result": {
     "is_expense": true,
     "expense_type": "telecommunications",
     "language": "Italian",
     "language_confidence": 95,
     "document_location": "Italy",
-    "expected_location": "Germany",
-    "location_match": false,
-    "error_type": "File location is not same as project's location",
-    "error_message": "The detected location is Italy which does not match the expected location of Germany.",
+    "expected_location": "Italy",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
     "classification_confidence": 90,
-    "reasoning": "The document contains typical expense elements with telecommunication services, an invoice format, vendor details, transaction amounts, and tax information. The content is in Italian and is consistent with telecommunications expenses provided by a supplier in Italy."
+    "reasoning": "The document presents a telecommunications bill from Telecom Italia with monetary transactions, tax information, and service descriptions typical of an expense document."
   },
   "extraction_result": {
     "supplier_name": "Telecom Italia S.p.A.",
-    "supplier_address": "Piazza degli Affari 2, 20123 Milan, Italy",
-    "vat_number": "4213345/2",
-    "currency": "EUR",
-    "total_amount": 334.19,
+    "supplier_address": "Piazza degli Affari\n2 - 20123 Milan (IT)",
+    "vat_number": null,
+    "tax_code": null,
+    "currency": "\u20ac",
+    "amount": 334.19,
+    "receipt_type": "Fattura Fiscale",
+    "payment_method": null,
     "date_of_issue": "2013-01-11",
-    "invoice_number": "D938548182",
-    "due_date": "2013-02-10",
-    "customer_account_number": "C8375751-2",
-    "cell_number": "0348439841",
     "line_items": [
       {
+        "date": "2012-11-11",
+        "description": "Saldo Portato a Nuovo",
+        "item_number": "CL848676010",
+        "reference": "495843218",
+        "quantity": null,
+        "total": 69.99
+      },
+      {
+        "date": "2012-12-10",
+        "description": "Pagamento",
+        "item_number": "LP53045464",
+        "reference": "493854981",
+        "quantity": null,
+        "total": -69.99
+      },
+      {
+        "date": "2013-01-11",
+        "description": "Fattura",
+        "item_number": null,
+        "reference": null,
+        "quantity": null,
+        "total": 334.19
+      },
+      {
         "description": "Apple iPhone 5 Nero 32GB (SN:C7DG31W/DTWS)",
-        "date": "gennaio",
+        "period": "gennaio",
         "quantity": null,
-        "unit_price": 199.99,
         "vat": 39.99,
-        "total_price": 239.98
+        "total": 239.98
       },
       {
-        "description": "Servizi di Abbonamento (iPhone) Piano 12 Mesi Minuti illim. testi illim. 10 GB",
-        "date": "gennaio",
+        "description": "(iPhone) Piano 12 Mesi Minuti illim. testi illim. 10 GB",
+        "period": "gennaio",
         "quantity": null,
-        "unit_price": 78.0,
         "vat": 15.7,
-        "total_price": 93.7
+        "total": 93.7
       },
       {
-        "description": "HSPA+ Voce Tariffa",
-        "date": "gennaio",
+        "description": "HSPA+ Voice Tariff",
+        "period": "gennaio",
         "quantity": null,
-        "unit_price": 9.0,
         "vat": 1.79,
-        "total_price": 10.79
+        "total": 10.79
       },
       {
         "description": "Extra 5G Data Rooftop",
-        "date": "gennaio",
+        "period": "gennaio",
         "quantity": null,
-        "unit_price": 8.0,
         "vat": 1.71,
-        "total_price": 9.71
+        "total": 9.71
+      },
+      {
+        "description": "Totale Servizi in abbonamento",
+        "period": "gennaio",
+        "quantity": null,
+        "vat": 55.7,
+        "total": 334.19
       }
     ],
-    "sub_total": 278.49,
-    "vat_total": 55.7,
-    "transaction_reference": "P8348194-2",
-    "payment_schedule": "Il tuo conto in banca verr\u00e0 addebitato con l'intero saldo che si riflette su questa dichiarazione sulla 1 Febbraio 2014.",
-    "receipt_type": "Fattura Fiscale"
+    "contact_phone": "+39 02 85954131",
+    "client_account_number": "C8375751-2",
+    "invoice_number": "D938548182",
+    "due_date": "2013-02-10",
+    "bank_debit_date": "2014-02-01",
+    "additional_info": "Il tuo conto in banca verr\u00e0 addebitato con l'intero saldo che si riflette su questa dichiarazione sulla 1 Febbraio 2014.",
+    "company_registration_no": "16454932423001",
+    "additional_vat_number": "4213345/2",
+    "phone_number_on_invoice": "0348439841"
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 3,
+      "issues_count": 5,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_name",
-          "description": "The supplier name 'Telecom Italia S.p.A.' does not match the mandatory requirement 'Global People DE GmbH'.",
+          "field": "Supplier Name",
+          "description": "The supplier name on the receipt is 'Telecom Italia S.p.A.', which does not match the mandatory supplier name 'Global People s.r.l.' for ICP Global People.",
           "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Rule: Must be Global People DE GmbH"
+          "knowledge_base_reference": "Must be Global People s.r.l."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_address",
-          "description": "The supplier address 'Piazza degli Affari 2, 20123 Milan, Italy' does not match the mandatory address 'Taunusanlage 8, 60329 Frankfurt, Germany'.",
+          "field": "Supplier Address",
+          "description": "The supplier address provided does not match the mandatory address 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy' for ICP Global People.",
           "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Rule: Taunusanlage 8, 60329 Frankfurt, Germany"
+          "knowledge_base_reference": "Via Venti Settembre 3, Torino (TO) CAP 10121, Italy"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "vat_number",
-          "description": "The VAT number '4213345/2' does not comply with the mandatory VAT number 'DE356366640' required for the 'Global People' ICP.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Rule: DE356366640"
+          "field": "VAT Number",
+          "description": "The VAT number is missing on the receipt, whereas 'IT12455930011' is a mandatory requirement for ICP Global People.",
+          "recommendation": "It is recommended to obtain the correct VAT number from the supplier or provider.",
+          "knowledge_base_reference": "IT12455930011"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Payment Method",
+          "description": "The payment method is not traceable as it is missing from the receipt. A mandatory requirement is a traceable method such as bank transfers or credit/debit cards.",
+          "recommendation": "It is recommended to ask the supplier to provide a receipt with an appropriate payment method.",
+          "knowledge_base_reference": "Must be traceable: bank transfers, postal transfers, credit/debit cards, prepaid cards, bank/cashier's checks"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Tax Code",
+          "description": "The Italian Tax Code (C.F.) is missing, contrary to requirement for Global People s.r.l. where the code '12455930011' is mandatory.",
+          "recommendation": "It is recommended to obtain the correct tax code from the supplier or provider.",
+          "knowledge_base_reference": "Tax Code: 12455930011"
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt has critical compliance violations concerning mandatory supplier name, address, and VAT number, which do not meet the 'Global People' ICP requirements for telecommunications receipts in Germany."
+      "compliance_summary": "The receipt has multiple compliance issues related to missing mandatory fields essential for tax and business expense documentation according to Italy's rules specific to Global People's policies."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
-      "country": "Germany",
+      "country": "Italy",
       "icp": "Global People",
       "receipt_type": "telecommunications",
-      "issues_count": 3,
+      "issues_count": 5,
       "has_reasoning": true
     }
   },
-  "processing_status": "completed"
+  "processing_status": "completed",
+  "uqlm_validation_available": true
 }

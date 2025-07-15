@@ -1,6 +1,13 @@
 {
   "source_file": "german_file_3.md",
-  "processing_timestamp": "2025-07-14T16:38:05.357498",
+  "processing_timestamp": "2025-07-15T09:23:23.991454",
+  "dataset_metadata": {
+    "filepath": "expense_files/german_file_3.png",
+    "filename": "german_file_3.png",
+    "country": "Germany",
+    "icp": "Global People",
+    "dataset_file": "german_file_3.json"
+  },
   "classification_result": {
     "is_expense": true,
     "expense_type": "meals",
@@ -11,11 +18,10 @@
     "location_match": true,
     "error_type": null,
     "error_message": null,
-    "classification_confidence": 95,
-    "reasoning": "The document is a receipt from a restaurant containing details of food items purchased, prices, and total amount, indicating it's an expense document for meals. The location and language align with the expected criteria, and the text is clear and processable."
+    "classification_confidence": 90,
+    "reasoning": "The document is a restaurant receipt containing vendor information, itemized list of food and drink purchases with prices, and a total cost amount. The location and language identified match the expected values, confirming it as a valid expense document."
   },
   "extraction_result": {
-    "country": "Germany",
     "supplier_name": "THE SUSHI CLUB",
     "supplier_address": "Mohrenstr.42, 10117 Berlin",
     "vat_number": null,
@@ -74,7 +80,7 @@
     ],
     "contact_phone": "+49 30 23 916 036",
     "contact_email": "info@thesushiclub.de",
-    "contact_website": "www.thesushiclub.de",
+    "contact_website": "www.TheSushiClub.de",
     "transaction_time": "23:10:54",
     "receipt_type": "Rechnung",
     "table_number": "24",
@@ -105,27 +111,27 @@
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_name",
-          "description": "Supplier name should be 'Global People DE GmbH' as per the mandatory requirement for 'Global People' ICP.",
+          "description": "Supplier Name does not match the mandatory rule 'Must be Global People DE GmbH'.",
           "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Must be Global People DE GmbH"
-        },
-        {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_address",
-          "description": "Supplier address must be 'Taunusanlage 8, 60329 Frankfurt, Germany' as per compliance requirements for 'Global People'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
+          "knowledge_base_reference": "FileRelatedRequirements: Supplier Name must be 'Global People DE GmbH' for Global People ICP."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "vat_number",
-          "description": "VAT number is mandatory and should be 'DE356366640' for transactions processed by 'Global People'.",
+          "description": "Missing VAT Number, which is mandatory for Global People ICP.",
           "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "DE356366640"
+          "knowledge_base_reference": "FileRelatedRequirements: VAT Number must be DE356366640 for Global People ICP."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "Supplier Address does not match the mandatory rule 'Taunusanlage 8, 60329 Frankfurt, Germany'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "FileRelatedRequirements: Supplier Address must be 'Taunusanlage 8, 60329 Frankfurt, Germany' for Global People ICP."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "Found critical compliance violations including incorrect supplier details and missing VAT number. No gross-up scenarios identified."
+      "compliance_summary": "The receipt has 3 compliance violations related to supplier information that don't meet 'Global People' ICP requirements: incorrect supplier name, address, and missing VAT number. The receipt also constitutes a non-tax-exempt scenario under 'Meals'."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
@@ -136,5 +142,6 @@
       "has_reasoning": true
     }
   },
-  "processing_status": "completed"
+  "processing_status": "completed",
+  "uqlm_validation_available": true
 }

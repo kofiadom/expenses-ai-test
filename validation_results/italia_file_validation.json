@@ -1,0 +1,123 @@
+{
+  "validation_report": {
+    "timestamp": "2025-07-15T09:23:24.023111",
+    "overall_assessment": {
+      "confidence_score": 0.8924999999999998,
+      "reliability_level": "MEDIUM",
+      "is_reliable": true,
+      "recommendation": "AI response is generally reliable but review flagged issues before using."
+    },
+    "critical_issues_summary": {
+      "total_issues": 5,
+      "issues": [
+        "Recommendations suggest 'fixing' a third-party receipt rather than explaining that only Global People receipts are compliant",
+        "All recommendations lack specificity on actual corrective actions",
+        "Recommendations don't explain that telecommunications expenses must be processed through the ICP directly",
+        "Recommendations fail to address the core compliance requirement that receipts must be from Global People s.r.l., not third parties",
+        "No recommendation addresses the proper procedure for handling telecommunications expenses"
+      ]
+    },
+    "dimensional_analysis_summary": {
+      "factual_grounding": {
+        "confidence": 0.95,
+        "reliability": "high",
+        "issues_count": 1
+      },
+      "knowledge_base_adherence": {
+        "confidence": 0.85,
+        "reliability": "high",
+        "issues_count": 2
+      },
+      "compliance_accuracy": {
+        "confidence": 0.85,
+        "reliability": "high",
+        "issues_count": 4
+      },
+      "issue_categorization": {
+        "confidence": 1.0,
+        "reliability": "high",
+        "issues_count": 0
+      },
+      "recommendation_validity": {
+        "confidence": 0.3,
+        "reliability": "low",
+        "issues_count": 5
+      },
+      "hallucination_detection": {
+        "confidence": 1.0,
+        "reliability": "high",
+        "issues_count": 0
+      }
+    }
+  },
+  "detailed_analysis": {
+    "metadata": {
+      "country": "Italy",
+      "receipt_type": "telecommunications",
+      "icp": "Global People",
+      "validation_method": "UQLM LLMPanel",
+      "panel_judges": 2,
+      "original_issues_found": 5
+    },
+    "dimension_details": {
+      "factual_grounding": {
+        "confidence_score": 0.95,
+        "reliability_level": "high",
+        "summary": "The AI analysis demonstrates excellent factual grounding with all major compliance requirements correctly identified and cited. The issues related to supplier name, supplier address, VAT number, payment method and tax code are all valid concerns based on the compliance database. Only one minor formatting issue was found in how the tax code reference was presented, but this doesn't affect the substantive accuracy of the analysis. All extracted receipt data was accurately represented, and no hallucinated requirements were introduced.",
+        "issues_found": [
+          "The knowledge base reference for Tax Code incorrectly includes 'Tax Code:' prefix when the actual rule is simply '12455930011'"
+        ],
+        "total_issues": 1
+      },
+      "knowledge_base_adherence": {
+        "confidence_score": 0.85,
+        "reliability_level": "high",
+        "summary": "The AI analysis generally demonstrates strong adherence to the knowledge base, accurately identifying five key compliance issues with the telecommunications receipt. Four of the five issues have perfect knowledge base references. One reference (Tax Code) contains a minor formatting error, adding 'Tax Code:' prefix not present in the source. The AI may have missed validating receipt quality requirements which are mandatory per the source data. Overall, the validation is substantive and accurate, with only minor issues that don't significantly impact the reliability of the analysis.",
+        "issues_found": [
+          "Knowledge base reference for Tax Code incorrectly includes 'Tax Code:' prefix",
+          "No validation performed for receipt quality requirements"
+        ],
+        "total_issues": 2
+      },
+      "compliance_accuracy": {
+        "confidence_score": 0.85,
+        "reliability_level": "high",
+        "summary": "The AI's compliance analysis correctly identified all major non-compliance issues related to supplier information (name, address), missing VAT number, missing tax code, and payment method. The analysis properly applied the specific requirements for the Global People ICP in Italy. While all identified issues are accurate, the analysis missed some nuanced information in the receipt that might provide additional context, such as the bank debit information and additional VAT/registration numbers present in the receipt.",
+        "issues_found": [
+          "Did not acknowledge the bank debit information that partially addresses payment method requirement",
+          "Did not evaluate the company_registration_no against any requirements",
+          "Did not note the additional_vat_number field that might be relevant to VAT compliance",
+          "Did not check if the receipt quality meets the 'must be scanned, clear and readable' requirement"
+        ],
+        "total_issues": 4
+      },
+      "issue_categorization": {
+        "confidence_score": 1.0,
+        "reliability_level": "high",
+        "summary": "The AI has correctly categorized all five issues as 'Standards & Compliance | Fix Identified'. These categorizations are appropriate because each issue represents a clear compliance violation of mandatory requirements for ICP Global People that requires specific corrective action. The AI did not incorrectly categorize any issues as 'Gross-up Identified' or 'Follow-up Action Identified', which is correct based on the nature of the issues. All categorizations align with the evidence in the source data and accurately reflect the compliance requirements.",
+        "issues_found": [],
+        "total_issues": 0
+      },
+      "recommendation_validity": {
+        "confidence_score": 0.3,
+        "reliability_level": "low",
+        "summary": "The recommendations provided are not appropriately actionable or aligned with the knowledge base. They incorrectly suggest that the user should attempt to get Telecom Italia to modify their receipts to include Global People's information, which is not a realistic or appropriate solution. The proper recommendation should be to explain that telecommunications expenses must be processed through Global People s.r.l. directly, and third-party telecom receipts are not acceptable for reimbursement. The recommendations fail to provide clear guidance on the correct procedure and instead suggest impossible fixes to an inherently non-compliant document type.",
+        "issues_found": [
+          "Recommendations suggest 'fixing' a third-party receipt rather than explaining that only Global People receipts are compliant",
+          "All recommendations lack specificity on actual corrective actions",
+          "Recommendations don't explain that telecommunications expenses must be processed through the ICP directly",
+          "Recommendations fail to address the core compliance requirement that receipts must be from Global People s.r.l., not third parties",
+          "No recommendation addresses the proper procedure for handling telecommunications expenses"
+        ],
+        "total_issues": 5
+      },
+      "hallucination_detection": {
+        "confidence_score": 1.0,
+        "reliability_level": "high",
+        "summary": "The AI compliance analysis is completely free of hallucinations. All five reported issues (supplier name, supplier address, VAT number, payment method, and tax code) accurately reflect real discrepancies between the receipt data and the requirements specified in the source data. The AI correctly referenced the specific requirements for the Global People s.r.l. ICP and accurately compared them with the actual receipt data. No fictional policies, invented rules, or fabricated information was introduced in the analysis.",
+        "issues_found": [],
+        "total_issues": 0
+      }
+    }
+  }
+}
