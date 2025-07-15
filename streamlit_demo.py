@@ -210,11 +210,13 @@ def display_file_preview(uploaded_file):
 
 async def process_uploaded_files(uploaded_files, country, icp, llamaparse_api_key):
     """Process uploaded files through the expense workflow."""
-    
+
     # Create temporary directory for uploaded files
     with tempfile.TemporaryDirectory() as temp_dir:
         temp_path = pathlib.Path(temp_dir)
-        
+        dataset_path = temp_path / "dataset"
+        dataset_path.mkdir(exist_ok=True)
+
         # Save uploaded files to temporary directory
         saved_files = []
         for uploaded_file in uploaded_files:
@@ -223,31 +225,44 @@ async def process_uploaded_files(uploaded_files, country, icp, llamaparse_api_ke
                 f.write(uploaded_file.getbuffer())
             saved_files.append(file_path)
             logger.info(f"Saved uploaded file: {uploaded_file.name}")
-        
+
+            # Create dataset metadata for each file
+            base_name = uploaded_file.name.rsplit('.', 1)[0] if '.' in uploaded_file.name else uploaded_file.name
+            dataset_entry = {
+                "filepath": uploaded_file.name,
+                "country": country,
+                "icp": icp,
+                "receipt_type": "unknown",  # Will be determined by classification
+                "description": f"Uploaded file: {uploaded_file.name}"
+            }
+
+            # Save dataset entry
+            dataset_file = dataset_path / f"{base_name}.json"
+            with open(dataset_file, 'w', encoding='utf-8') as f:
+                json.dump(dataset_entry, f, indent=2, ensure_ascii=False)
+
         # Create workflow
         workflow = ExpenseProcessingWorkflow(
             session_id=f"streamlit-demo-{datetime.now().strftime('%Y%m%d-%H%M%S')}",
             debug_mode=False
         )
-        
+
         # Process files
-        results = []
         progress_placeholder = st.empty()
-        
+
         try:
             async for response in workflow.process_expenses(
-                country=country,
-                icp=icp,
+                dataset_dir=str(dataset_path),
                 llamaparse_api_key=llamaparse_api_key,
                 input_folder=str(temp_path)
             ):
                 progress_placeholder.info(f"🔄 {response.content}")
-            
+
             # Get results from session state
             processing_results = workflow.session_state.get("processing_results", [])
-            
+
             return processing_results, None
-            
+
         except Exception as e:
             logger.error(f"Processing failed: {e}")
             return [], str(e)
