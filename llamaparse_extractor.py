@@ -102,9 +102,11 @@ def assess_image_quality_before_extraction(file_path: pathlib.Path, quality_proc
         # Save quality results to JSON file
         quality_filename = f"{file_path.stem}_quality.json"
         quality_file_path = quality_output_dir / quality_filename
-        
+
         with open(quality_file_path, 'w') as f:
-            json.dump(quality_results, f, indent=2)
+            # Fix JSON serialization for numpy booleans and other non-serializable types
+            serializable_results = json.loads(json.dumps(quality_results, default=str))
+            json.dump(serializable_results, f, indent=2)
         
         if 'error' not in quality_results:
             score = quality_results['quality_score']

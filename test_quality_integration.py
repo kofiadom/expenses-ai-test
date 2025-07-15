@@ -12,16 +12,19 @@ sys.path.append('.')
 from image_quality_processor import ImageQualityProcessor
 from agno.utils.log import logger
 
-def test_quality_assessment():
+def test_quality_assessment(image_path: str = None):
     """Test quality assessment on a sample image file"""
-    
-    # Find a test image in expense_files
-    test_image_path = Path("expense_files/austrian_file.png")
-    
+
+    # Use provided path or default test image
+    if image_path:
+        test_image_path = Path(image_path)
+    else:
+        test_image_path = Path("expense_files/austrian_file.png")
+
     if not test_image_path.exists():
         logger.error(f"Test image not found: {test_image_path}")
         return False
-    
+
     logger.info(f"🧪 ***** Testing quality assessment integration...")
     logger.info(f"Test image: {test_image_path}")
     
@@ -53,10 +56,13 @@ def test_quality_assessment():
             for rec in results['top_recommendations']:
                 logger.info(f"        • {rec}")
         
-        # Save test results to a file
-        output_file = Path("test_quality_results.json")
+        # Save test results to a file (with JSON serialization fix)
+        output_filename = f"{test_image_path.stem}_quality_results.json"
+        output_file = Path(output_filename)
         with open(output_file, 'w') as f:
-            json.dump(results, f, indent=2)
+            # Convert numpy booleans to Python booleans for JSON serialization
+            serializable_results = json.loads(json.dumps(results, default=str))
+            json.dump(serializable_results, f, indent=2)
         logger.info(f"💾 Test results saved to: {output_file}")
         
         return True
@@ -69,12 +75,20 @@ def test_quality_assessment():
 
 if __name__ == "__main__":
     logger.info("🚀 Starting quality assessment integration test...")
-    
-    success = test_quality_assessment()
-    
+
+    # Check if image path provided as command line argument
+    image_path = sys.argv[1] if len(sys.argv) > 1 else None
+
+    if image_path:
+        logger.info(f"📁 Using provided image: {image_path}")
+    else:
+        logger.info("📁 Using default test image")
+
+    success = test_quality_assessment(image_path)
+
     if success:
         logger.info("✅ ***** Integration test PASSED!")
         sys.exit(0)
     else:
         logger.error("❌ ***** Integration test FAILED!")
-        sys.exit(1) 
+        sys.exit(1)

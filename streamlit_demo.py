@@ -6,6 +6,7 @@ Streamlit Demo Interface for Expense Processing System
 import streamlit as st
 import asyncio
 import json
+import os
 import pathlib
 import tempfile
 import time
@@ -14,7 +15,6 @@ from PIL import Image
 import fitz  # PyMuPDF for PDF preview
 from agno.utils.log import logger
 from expense_processing_workflow import ExpenseProcessingWorkflow
-from damage_detection import ReceiptDamageAnalyzer
 from image_quality_processor import ImageQualityProcessor
 
 def make_json_serializable(obj, _seen=None, _depth=0):
@@ -175,6 +175,50 @@ def analyze_uploaded_file_quality(uploaded_file):
             }
         }
 
+def save_quality_results_to_files(quality_results_dict, save_directory="quality_reports"):
+    """
+    Save quality assessment results to individual JSON files in the same directory as main.py
+
+    Args:
+        quality_results_dict: Dictionary of quality results keyed by file identifiers
+        save_directory: Directory to save the files (default: "quality_reports" - same as main.py)
+
+    Returns:
+        List of saved file paths
+    """
+    try:
+        # Create save directory (same as main.py uses)
+        save_path = pathlib.Path(save_directory)
+        save_path.mkdir(exist_ok=True)
+
+        saved_files = []
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        for file_key, quality_result in quality_results_dict.items():
+            # Extract filename from file_key (format: "filename_size")
+            filename = file_key.rsplit('_', 1)[0]  # Remove size suffix
+            safe_filename = "".join(c for c in filename if c.isalnum() or c in (' ', '-', '_', '.')).rstrip()
+
+            # Create output filename (consistent with main.py format)
+            output_filename = f"{safe_filename}_quality_{timestamp}.json"
+            output_path = save_path / output_filename
+
+            # Save quality results with JSON serialization fix
+            with open(output_path, 'w') as f:
+                serializable_results = json.loads(json.dumps(quality_result, default=str))
+                json.dump(serializable_results, f, indent=2)
+
+            saved_files.append(output_path)
+            logger.info(f"💾 Saved quality results: {output_path}")
+
+        return saved_files
+
+    except Exception as e:
+        logger.error(f"❌ Failed to save quality results: {str(e)}")
+        return []
+
+
+
 def display_file_preview(uploaded_file):
     """Display preview of uploaded file (image or PDF)."""
     file_type = uploaded_file.type
@@ -294,44 +338,105 @@ def display_classification_result(classification):
         st.text_area("Classification Reasoning", classification['reasoning'], height=100)
 
 def display_extraction_result(extraction):
-    """Display extraction results in a formatted way."""
+    """Display extraction results in a comprehensive formatted way."""
     if not extraction:
         st.warning("No extraction data available")
         return
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.subheader("Supplier Information")
-        st.write(f"**Name:** {extraction.get('supplier_name', 'N/A')}")
-        st.write(f"**Address:** {extraction.get('supplier_address', 'N/A')}")
-        st.write(f"**VAT Number:** {extraction.get('vat_number', 'N/A')}")
-    
-    with col2:
-        st.subheader("Transaction Details")
-        st.write(f"**Total Amount:** {extraction.get('currency', '')} {extraction.get('total_amount', 'N/A')}")
-        st.write(f"**Date:** {extraction.get('date_of_issue', 'N/A')}")
-        st.write(f"**Currency:** {extraction.get('currency', 'N/A')}")
-    
-    # Line items
-    if extraction.get('line_items'):
-        st.subheader("Line Items")
-        line_items_data = []
-        for item in extraction['line_items']:
-            # Convert quantity to string to avoid Arrow serialization issues
-            quantity = item.get('quantity', 'N/A')
-            if quantity != 'N/A' and quantity is not None:
-                quantity = str(quantity)
-            else:
-                quantity = 'N/A'
 
-            line_items_data.append({
-                "Description": str(item.get('description', 'N/A')),
-                "Quantity": quantity,
-                "Unit Price": f"{extraction.get('currency', '')} {item.get('unit_price', 'N/A')}",
-                "Total": f"{extraction.get('currency', '')} {item.get('total_price', 'N/A')}"
-            })
-        st.dataframe(line_items_data, use_container_width=True)
+    # Main information in tabs for better organization
+    tab1, tab2, tab3, tab4 = st.tabs(["🏢 Supplier", "💰 Transaction", "📋 Line Items", "📄 Additional"])
+
+    with tab1:
+        col1, col2 = st.columns(2)
+        with col1:
+            st.write(f"**Name:** {extraction.get('supplier_name', 'N/A')}")
+            st.write(f"**Address:** {extraction.get('supplier_address', 'N/A')}")
+            st.write(f"**VAT Number:** {extraction.get('vat_number', 'N/A')}")
+            st.write(f"**Tax Code:** {extraction.get('tax_code', 'N/A')}")
+        with col2:
+            st.write(f"**Company Reg:** {extraction.get('company_registration', 'N/A')}")
+            st.write(f"**Cashier:** {extraction.get('cashier', 'N/A')}")
+            st.write(f"**Location:** {extraction.get('location', 'N/A')}")
+            st.write(f"**Register:** {extraction.get('cash_register', 'N/A')}")
+
+    with tab2:
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            total_amount = extraction.get('total_amount') or extraction.get('amount')
+            st.write(f"**Total:** {extraction.get('currency', '')} {total_amount or 'N/A'}")
+            st.write(f"**Currency:** {extraction.get('currency', 'N/A')}")
+            st.write(f"**VAT:** {extraction.get('vat', 'N/A')}")
+        with col2:
+            st.write(f"**Date:** {extraction.get('date_of_issue', 'N/A')}")
+            st.write(f"**Time:** {extraction.get('transaction_time', 'N/A')}")
+            st.write(f"**Travel Date:** {extraction.get('travel_date', 'N/A')}")
+        with col3:
+            st.write(f"**Receipt Type:** {extraction.get('receipt_type', 'N/A')}")
+            st.write(f"**Payment Method:** {extraction.get('payment_method', 'N/A')}")
+            st.write(f"**Order Type:** {extraction.get('order_type', 'N/A')}")
+
+    with tab3:
+        # Line items
+        if extraction.get('line_items'):
+            line_items_data = []
+            for item in extraction['line_items']:
+                # Convert quantity to string to avoid Arrow serialization issues
+                quantity = item.get('quantity', 'N/A')
+                if quantity != 'N/A' and quantity is not None:
+                    quantity = str(quantity)
+                else:
+                    quantity = 'N/A'
+
+                line_items_data.append({
+                    "Description": str(item.get('description', 'N/A')),
+                    "Quantity": quantity,
+                    "Unit Price": f"{extraction.get('currency', '')} {item.get('unit_price', 'N/A')}",
+                    "Total": f"{extraction.get('currency', '')} {item.get('total_price', 'N/A')}",
+                    "Date": str(item.get('date', 'N/A')),
+                    "Item #": str(item.get('item_number', 'N/A')),
+                    "Reference": str(item.get('reference', 'N/A'))
+                })
+            st.dataframe(line_items_data, use_container_width=True, height=300)
+        else:
+            st.info("No line items found")
+
+    with tab4:
+        # Additional fields in organized sections
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.subheader("Personal Info")
+            st.write(f"**Name:** {extraction.get('name', 'N/A')}")
+            st.write(f"**Personal Info:** {extraction.get('personal_information', 'N/A')}")
+            st.write(f"**Order Code:** {extraction.get('order_code', 'N/A')}")
+            st.write(f"**Bon Number:** {extraction.get('bon_number', 'N/A')}")
+
+            st.subheader("Business Travel")
+            st.write(f"**Purpose:** {extraction.get('purpose', 'N/A')}")
+            st.write(f"**Route:** {extraction.get('route', 'N/A')}")
+            st.write(f"**Manager Approval:** {extraction.get('manager_approval', 'N/A')}")
+            st.write(f"**A1 Certificate:** {extraction.get('a1_certificate', 'N/A')}")
+
+        with col2:
+            st.subheader("Vehicle Info")
+            st.write(f"**Car Details:** {extraction.get('car_details', 'N/A')}")
+            st.write(f"**Odometer:** {extraction.get('odometer_reading', 'N/A')}")
+            st.write(f"**Combined Mileage:** {extraction.get('combined_mileage', 'N/A')}")
+
+            st.subheader("Other")
+            st.write(f"**Tax Rate:** {extraction.get('tax_rate', 'N/A')}")
+            st.write(f"**Storage Period:** {extraction.get('storage_period', 'N/A')}")
+            st.write(f"**Phone Proof:** {extraction.get('personal_phone_proof', 'N/A')}")
+            st.write(f"**Payment Receipt:** {extraction.get('payment_receipt', 'N/A')}")
+
+        # Billing address if available
+        billing_address = extraction.get('billing_address')
+        if billing_address and isinstance(billing_address, dict):
+            st.subheader("Billing Address")
+            st.write(f"**Name:** {billing_address.get('name', 'N/A')}")
+            st.write(f"**Address:** {billing_address.get('address', 'N/A')}")
+            st.write(f"**City:** {billing_address.get('city', 'N/A')}, {billing_address.get('postal_code', 'N/A')}")
+            st.write(f"**Country:** {billing_address.get('country', 'N/A')}")
 
 def display_compliance_result(compliance):
     """Display compliance results in a formatted way."""
@@ -401,126 +506,154 @@ def display_image_quality_result(image_quality):
         st.error(f"Image quality analysis failed: {image_quality['error']}")
         return
 
-    st.subheader("📸 Comprehensive Quality Analysis")
+    st.subheader("📸 Quality Analysis")
 
     # Overall assessment
     overall = image_quality.get('overall_assessment', {})
-    
-    # Main metrics
+
+    # Main metrics with smaller text
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
         score = overall.get('score', 0)
-        st.metric("Overall Score", f"{score:.1f}/100")
+        st.metric("Score", f"{score:.1f}/100")
 
     with col2:
         level = overall.get('level', 'Unknown')
         color = "🟢" if level in ['Excellent', 'Good'] else "🟡" if level == 'Acceptable' else "🔴"
-        st.metric("Quality Level", f"{color} {level}")
+        st.metric("Level", f"{color} {level}")
 
     with col3:
         passed = overall.get('pass_fail', False)
-        st.metric("Quality Status", "✅ PASS" if passed else "❌ FAIL")
+        st.metric("Status", "✅ PASS" if passed else "❌ FAIL")
 
     with col4:
         processing_time = image_quality.get('processing_time_seconds', 0)
-        st.metric("Processing Time", f"{processing_time:.1f}s")
+        st.metric("Time", f"{processing_time:.1f}s")
 
     # Score breakdown
     score_breakdown = image_quality.get('score_breakdown', {})
     if score_breakdown:
-        st.subheader("📊 Quality Score Breakdown")
-        
-        # Create a visual score breakdown
+        st.subheader("📊 Score Breakdown")
+
+        # Create a visual score breakdown with smaller text
         metrics_data = []
         for metric, data in score_breakdown.items():
             metrics_data.append({
                 'Metric': metric.title(),
-                'Score': data.get('score', 0),
+                'Score': f"{data.get('score', 0):.1f}",
                 'Weight': f"{data.get('weight', 0)*100:.0f}%",
                 'Contribution': f"{data.get('contribution', 0):.1f}"
             })
-        
-        st.dataframe(metrics_data, use_container_width=True)
+
+        st.dataframe(metrics_data, use_container_width=True, height=200)
 
     # Detailed results in tabs
     detailed = image_quality.get('detailed_results', {})
     if detailed:
-        st.subheader("🔍 Detailed Analysis")
-        
-        tab1, tab2, tab3, tab4, tab5 = st.tabs(["📐 Resolution", "🎯 Blur", "💡 Glare", "📏 Completeness", "🩹 Damage"])
+        st.subheader("🔍 Details")
+
+        tab1, tab2, tab3, tab4, tab5 = st.tabs(["📐 Resolution", "🎯 Blur", "💡 Glare", "📏 Complete", "🩹 Damage"])
 
         with tab1:
             resolution = detailed.get('resolution', {})
             if resolution:
-                col1, col2 = st.columns(2)
+                col1, col2, col3 = st.columns(3)
                 with col1:
                     dimensions = resolution.get('dimensions', {})
-                    st.metric("Resolution", f"{dimensions.get('width', 0)}x{dimensions.get('height', 0)}")
-                    st.metric("Megapixels", f"{dimensions.get('megapixels', 0):.1f} MP")
+                    st.metric("Size", f"{dimensions.get('width', 0)}x{dimensions.get('height', 0)}")
+                    st.metric("MP", f"{dimensions.get('megapixels', 0):.1f}")
                 with col2:
                     dpi = resolution.get('dpi', {})
-                    st.metric("Average DPI", f"{dpi.get('average', 0):.0f}")
+                    st.metric("DPI", f"{dpi.get('average', 0):.0f}")
                     quality = resolution.get('quality', {})
-                    st.metric("DPI Quality", quality.get('level', 'Unknown'))
+                    st.metric("Level", quality.get('level', 'Unknown'))
+                with col3:
+                    st.metric("Score", f"{resolution.get('quality', {}).get('score', 0):.1f}/100")
+                    st.metric("Suitable", "✅ Yes" if resolution.get('quality', {}).get('suitable_for_ocr') else "❌ No")
 
         with tab2:
             blur = detailed.get('blur', {})
             if blur:
-                col1, col2 = st.columns(2)
+                col1, col2, col3 = st.columns(3)
                 with col1:
                     metrics = blur.get('metrics', {})
-                    st.metric("Blur Score", f"{metrics.get('blur_score', 0):.1f}/100")
-                    st.metric("Blur Level", metrics.get('blur_level', 'Unknown'))
+                    st.metric("Score", f"{metrics.get('blur_score', 0):.1f}/100")
+                    st.metric("Level", metrics.get('blur_level', 'Unknown'))
                 with col2:
-                    st.metric("Is Blurry", "❌ Yes" if metrics.get('is_blurry') else "✅ No")
-                    st.metric("Laplacian Variance", f"{metrics.get('laplacian_variance', 0):.1f}")
+                    st.metric("Blurry", "❌ Yes" if metrics.get('is_blurry') else "✅ No")
+                    st.metric("Variance", f"{metrics.get('laplacian_variance', 0):.1f}")
+                with col3:
+                    blur_types = blur.get('blur_types', {})
+                    motion_blur = blur_types.get('motion_blur', {})
+                    st.metric("Motion", "✅ Yes" if motion_blur.get('detected') else "❌ No")
+                    if motion_blur.get('detected'):
+                        st.metric("Direction", motion_blur.get('direction', 'Unknown'))
 
         with tab3:
             glare = detailed.get('glare', {})
             if glare:
-                col1, col2 = st.columns(2)
+                col1, col2, col3 = st.columns(3)
                 with col1:
                     glare_analysis = glare.get('glare_analysis', {})
-                    st.metric("Glare Score", f"{glare_analysis.get('glare_score', 0):.1f}/100")
-                    st.metric("Glare Level", glare_analysis.get('glare_level', 'Unknown'))
+                    st.metric("Score", f"{glare_analysis.get('glare_score', 0):.1f}/100")
+                    st.metric("Level", glare_analysis.get('glare_level', 'Unknown'))
                 with col2:
-                    st.metric("Glare Spots", glare_analysis.get('num_glare_spots', 0))
+                    st.metric("Spots", glare_analysis.get('num_glare_spots', 0))
                     st.metric("Coverage", f"{glare_analysis.get('glare_coverage_percent', 0):.1f}%")
+                with col3:
+                    brightness = glare.get('brightness_analysis', {})
+                    st.metric("Brightness", f"{brightness.get('mean_brightness', 0):.1f}")
+                    st.metric("Contrast", f"{brightness.get('contrast', 0):.1f}")
 
         with tab4:
             completeness = detailed.get('completeness', {})
             if completeness:
-                col1, col2 = st.columns(2)
+                col1, col2, col3 = st.columns(3)
                 with col1:
-                    st.metric("Completeness Score", f"{completeness.get('completeness_score', 0):.1f}/100")
+                    st.metric("Score", f"{completeness.get('completeness_score', 0):.1f}/100")
                     st.metric("Level", completeness.get('completeness_level', 'Unknown'))
                 with col2:
                     corner_analysis = completeness.get('corner_analysis', {})
-                    st.metric("Visible Corners", f"{corner_analysis.get('visible_corners', 0)}/4")
-                    st.metric("Is Rectangular", "✅ Yes" if corner_analysis.get('is_rectangular') else "❌ No")
+                    st.metric("Corners", f"{corner_analysis.get('visible_corners', 0)}/4")
+                    st.metric("Shape", "✅ Rect" if corner_analysis.get('is_rectangular') else "❌ No")
+                with col3:
+                    boundary = completeness.get('boundary_analysis', {})
+                    st.metric("Detected", "✅ Yes" if boundary.get('document_detected') else "❌ No")
+                    st.metric("Cropping", boundary.get('cropping_quality', 'Unknown'))
 
         with tab5:
             damage = detailed.get('damage', {})
             if damage:
-                col1, col2 = st.columns(2)
+                col1, col2, col3 = st.columns(3)
                 with col1:
-                    st.metric("Damage Score", f"{damage.get('damage_score', 0):.1f}/100")
-                    st.metric("Damage Level", damage.get('damage_level', 'Unknown'))
+                    st.metric("Score", f"{damage.get('damage_score', 0):.1f}/100")
+                    st.metric("Level", damage.get('damage_level', 'Unknown'))
                 with col2:
                     damage_types = damage.get('damage_types', [])
-                    st.metric("Damage Types", ", ".join(damage_types) if damage_types else "None")
+                    st.metric("Types", len(damage_types))
+                    if damage_types:
+                        st.caption(", ".join(damage_types))
+                with col3:
+                    stain_analysis = damage.get('stain_analysis', {})
+                    st.metric("Stains", f"{stain_analysis.get('stain_coverage', 0):.1f}%")
+                    tear_analysis = damage.get('tear_analysis', {})
+                    st.metric("Tears", f"{tear_analysis.get('tear_coverage', 0):.1f}%")
 
-    # Issues and recommendations
-    if overall.get('issues_summary'):
-        st.subheader("⚠️ Issues Detected")
-        for issue in overall['issues_summary']:
-            st.warning(f"• {issue}")
+    # Issues and recommendations with smaller text
+    col1, col2 = st.columns(2)
 
-    if overall.get('recommendations'):
-        st.subheader("💡 Recommendations")
-        for rec in overall['recommendations']:
-            st.info(f"• {rec}")
+    with col1:
+        if overall.get('issues_summary'):
+            st.subheader("⚠️ Issues")
+            for issue in overall['issues_summary']:
+                st.warning(f"• {issue}")
+
+    with col2:
+        if overall.get('recommendations'):
+            st.subheader("💡 Tips")
+            for rec in overall['recommendations']:
+                st.info(f"• {rec}")
 
     # Image type detection info
     image_type = image_quality.get('image_type_detection', {})
@@ -724,12 +857,20 @@ def main():
         help="Select your ICP for compliance validation"
     )
     
-    llamaparse_api_key = st.sidebar.text_input(
-        "LlamaIndex API Key",
-        type="password",
-        value="",
-        help="Enter your LlamaIndex API key for document parsing"
-    )
+    # Get LlamaIndex API key from environment or user input
+    env_api_key = os.getenv("LLAMAPARSE_API_KEY", "")
+
+    if env_api_key:
+        st.sidebar.success("✅ LlamaIndex API key loaded from environment")
+        llamaparse_api_key = env_api_key
+    else:
+        st.sidebar.warning("⚠️ LLAMAPARSE_API_KEY not found in environment")
+        llamaparse_api_key = st.sidebar.text_input(
+            "LlamaIndex API Key",
+            type="password",
+            value="",
+            help="Enter your LlamaIndex API key for document parsing (or set LLAMAPARSE_API_KEY environment variable)"
+        )
     
     # Main content
     st.header("📁 Upload Expense Documents")
@@ -771,6 +912,39 @@ def main():
         time.sleep(0.5)  # Brief pause to show completion
         quality_status.empty()
         quality_progress.empty()
+
+        # Add save functionality for quality results
+        if st.session_state.image_quality_results:
+            st.subheader("💾 Save Quality Assessment Results")
+
+            # Show summary of available results
+            num_results = len(st.session_state.image_quality_results)
+            successful_results = [r for r in st.session_state.image_quality_results.values() if 'error' not in r]
+
+            st.info(f"📊 **Available Results:** {num_results} file(s) analyzed, {len(successful_results)} successful assessments")
+
+            # Single save button - saves to quality_reports/ directory (same as main.py)
+            _, col_center, _ = st.columns([1, 1, 1])
+            with col_center:
+                if st.button("💾 Save Quality Results", help="Save quality results to quality_reports/ directory", use_container_width=True):
+                    with st.spinner("Saving quality results..."):
+                        saved_files = save_quality_results_to_files(st.session_state.image_quality_results)
+                        if saved_files:
+                            st.success(f"✅ Saved {len(saved_files)} quality report(s) to quality_reports/ directory")
+                            with st.expander("📄 Saved Files"):
+                                for file_path in saved_files:
+                                    st.text(f"• {file_path.name}")
+                        else:
+                            st.error("❌ Failed to save quality results")
+
+            # Add clear results option
+            st.markdown("---")
+            _, col_clear_center, _ = st.columns([1, 1, 1])
+            with col_clear_center:
+                if st.button("🗑️ Clear Quality Results", help="Clear all quality assessment results from session"):
+                    st.session_state.image_quality_results = {}
+                    st.success("✅ Quality results cleared!")
+                    st.experimental_rerun()
 
         # Display uploaded files with previews and quality results
         if len(uploaded_files) == 1:
