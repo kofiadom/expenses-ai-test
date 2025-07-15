@@ -21,6 +21,7 @@ from llamaparse_extractor import process_expense_files
 from file_classification_agent import classify_file
 from data_extraction_agent import extract_data_from_receipt
 from issue_detection_agent import analyze_compliance_issues
+from dataset_utils import load_dataset_entries, validate_dataset_entry
 
 # Load environment variables
 load_dotenv()
@@ -61,17 +62,15 @@ class ExpenseProcessingWorkflow(Workflow):
 
     async def process_expenses(
         self,
-        country: str,
-        icp: str,
-        llamaparse_api_key: str,
+        dataset_dir: str = "dataset",
+        llamaparse_api_key: str = None,
         input_folder: str = "expense_files"
     ) -> AsyncGenerator[RunResponse, None]:
         """
-        Execute the complete expense processing workflow.
+        Execute the complete expense processing workflow using dataset metadata.
 
         Args:
-            country: Country for compliance rules (e.g., "Germany")
-            icp: ICP name (e.g., "Global People", "goGlobal", "Parakar", "Atlas")
+            dataset_dir: Directory containing dataset JSON files with metadata
             llamaparse_api_key: API key for LlamaParse document extraction
             input_folder: Directory containing expense files
 
@@ -79,7 +78,7 @@ class ExpenseProcessingWorkflow(Workflow):
             RunResponse objects with processing updates and final results
         """
         workflow_start_time = time.time()
-        logger.info(f"🕐 Starting expense processing workflow for {country}/{icp}")
+        logger.info(f"🕐 Starting expense processing workflow using dataset: {dataset_dir}")
         logger.info(f"Input folder: {input_folder}")
         logger.info(f"Debug mode: {self.debug_mode}")
 
@@ -106,24 +105,53 @@ class ExpenseProcessingWorkflow(Workflow):
                 content=f"✅ Successfully extracted {len(markdown_files)} documents"
             )
 
-            # Step 2: Process each document through the pipeline
-            logger.info(f"Starting processing of {len(markdown_files)} documents")
+            # Step 2: Load dataset entries and process each with its metadata
+            dataset_entries = load_dataset_entries(dataset_dir)
+            if not dataset_entries:
+                logger.warning("No dataset entries found")
+                yield RunResponse(
+                    content="❌ No dataset entries found"
+                )
+                self.session_state["processing_results"] = []
+                self.session_state["summary"] = "No dataset entries found to process"
+                return
+
+            logger.info(f"Starting processing of {len(dataset_entries)} dataset entries")
             results = []
-            for i, markdown_file in enumerate(markdown_files, 1):
-                logger.info(f"Processing document {i}/{len(markdown_files)}: {markdown_file.name}")
+            
+            for i, entry in enumerate(dataset_entries, 1):
+                # Convert filepath to markdown filename: "expense_files/austrian_file.png" -> "austrian_file.md"
+                base_name = pathlib.Path(entry['filepath']).stem
+                markdown_file = pathlib.Path(f"llamaparse_output/{base_name}.md")
+                
+                logger.info(f"Processing entry {i}/{len(dataset_entries)}: {entry['filepath']} -> {markdown_file.name}")
                 yield RunResponse(
-                    content=f"🔄 Step 2: Processing document {i}/{len(markdown_files)}: {markdown_file.name}"
+                    content=f"🔄 Step 2: Processing entry {i}/{len(dataset_entries)}: {entry['filepath']} (Country: {entry['country']}, ICP: {entry['icp']})"
                 )
 
-                result = await self._process_single_document(
-                    markdown_file, country, icp
-                )
-                results.append(result)
+                if markdown_file.exists():
+                    result = await self._process_single_document(
+                        markdown_file, entry['country'], entry['icp']
+                    )
+                    result['dataset_metadata'] = entry
+                    results.append(result)
 
-                logger.info(f"Completed processing {markdown_file.name} - Status: {result.get('status', 'unknown')}")
-                yield RunResponse(
-                    content=f"✅ Completed processing {markdown_file.name}"
-                )
+                    logger.info(f"Completed processing {markdown_file.name} - Status: {result.get('status', 'unknown')}")
+                    yield RunResponse(
+                        content=f"✅ Completed processing {markdown_file.name}"
+                    )
+                else:
+                    logger.warning(f"Markdown file not found for {entry['filepath']}: {markdown_file}")
+                    yield RunResponse(
+                        content=f"⚠️ Markdown file not found for {entry['filepath']}"
+                    )
+                    # Add failed result for missing markdown file
+                    results.append({
+                        "file_name": f"{base_name}.md",
+                        "error": f"Markdown file not found: {markdown_file}",
+                        "status": "failed",
+                        "dataset_metadata": entry
+                    })
 
             # Step 3: Save individual results and generate summary
             logger.info("Saving individual results and generating summary")
@@ -445,6 +473,7 @@ class ExpenseProcessingWorkflow(Workflow):
                 individual_result = {
                     "source_file": file_name,
                     "processing_timestamp": datetime.now().isoformat(),
+                    "dataset_metadata": result.get("dataset_metadata", {}),
                     "classification_result": result.get("classification", {}),
                     "extraction_result": result.get("extraction", {}),
                     "compliance_result": result.get("compliance", {}),
