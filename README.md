@@ -5,6 +5,7 @@ A comprehensive AI-powered expense processing system that automates the complete
 ## 🚀 Features
 
 - **Multi-format Document Processing**: Supports PDFs, images (PNG, JPG, TIFF, etc.)
+- **Image Quality Assessment**: Comprehensive quality analysis for image files before processing
 - **Intelligent Classification**: Automatically determines if documents are valid expenses
 - **Structured Data Extraction**: Extracts comprehensive data including line items, totals, and metadata
 - **Compliance Analysis**: Validates against country-specific and ICP-specific policies
@@ -15,11 +16,12 @@ A comprehensive AI-powered expense processing system that automates the complete
 
 The system uses a multi-agent architecture with the following components:
 
-1. **LlamaParse Extractor**: Converts PDFs/images to structured markdown
-2. **File Classification Agent**: Determines expense validity and categorization
-3. **Data Extraction Agent**: Extracts structured data from documents
-4. **Issue Detection Agent**: Analyzes compliance violations and policy issues
-5. **Workflow Orchestrator**: Coordinates all agents with state management
+1. **Image Quality Assessment**: Analyzes image quality (resolution, blur, glare, completeness, damage) before processing
+2. **LlamaParse Extractor**: Converts PDFs/images to structured markdown
+3. **File Classification Agent**: Determines expense validity and categorization
+4. **Data Extraction Agent**: Extracts structured data from documents
+5. **Issue Detection Agent**: Analyzes compliance violations and policy issues
+6. **Workflow Orchestrator**: Coordinates all agents with state management
 
 ## 📋 Requirements
 
@@ -141,6 +143,49 @@ Country-specific compliance data should be in `data/{country}.json` format:
   "ExpenseTypes": [...]
 }
 ```
+
+## 📸 Image Quality Assessment
+
+The system includes comprehensive image quality assessment for all image files before LlamaParse processing:
+
+### Quality Metrics
+- **Resolution Analysis**: DPI calculation and validation against document standards
+- **Blur Detection**: Laplacian variance method with motion blur analysis
+- **Glare Analysis**: Histogram-based overexposure and bright spot detection
+- **Completeness Check**: Edge detection to verify document boundaries and corners
+- **Damage Detection**: Identifies stains, tears, and folds in physical documents
+
+### Quality Scoring
+- **Overall Score**: 0-100 weighted composite score
+- **Pass Threshold**: 70+ considered acceptable for processing
+- **Quality Levels**: Excellent (95+), Good (85+), Acceptable (70+), Poor (<70)
+
+### Output Structure
+Quality results are saved as separate JSON files in `quality_reports/`:
+```json
+{
+  "overall_assessment": {
+    "score": 78.5,
+    "level": "Acceptable", 
+    "pass_fail": true,
+    "issues_summary": ["Slightly blurry", "Missing corner"],
+    "recommendations": ["Ensure camera focus", "Include all corners"]
+  },
+  "score_breakdown": {
+    "resolution": {"score": 85.0, "weight": 0.20},
+    "blur": {"score": 72.0, "weight": 0.25},
+    "glare": {"score": 90.0, "weight": 0.20},
+    "completeness": {"score": 65.0, "weight": 0.20},
+    "damage": {"score": 80.0, "weight": 0.15}
+  }
+}
+```
+
+### Processing Flow
+1. **File Type Detection**: Automatically detects image vs document files
+2. **Quality Assessment**: Runs on image files only (PDFs skip this step)
+3. **Results Storage**: Quality reports saved to `quality_reports/` directory
+4. **Continued Processing**: All files proceed to LlamaParse regardless of quality scores
 
 ## 🚨 Error Handling
 
