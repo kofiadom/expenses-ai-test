@@ -136,6 +136,9 @@ class ExpenseProcessingWorkflow(Workflow):
                     result['dataset_metadata'] = entry
                     results.append(result)
 
+                    # Save individual result immediately after processing
+                    self._save_single_result(result)
+
                     logger.info(f"Completed processing {markdown_file.name} - Status: {result.get('status', 'unknown')}")
                     yield RunResponse(
                         content=f"✅ Completed processing {markdown_file.name}"
@@ -153,17 +156,17 @@ class ExpenseProcessingWorkflow(Workflow):
                         "dataset_metadata": entry
                     })
 
-            # Step 3: Save individual results and generate summary
-            logger.info("Saving individual results and generating summary")
+            # Step 3: Generate summary (individual results already saved incrementally)
+            logger.info("Generating processing summary")
             yield RunResponse(
-                content="🔄 Step 3: Saving results and generating summary..."
+                content="🔄 Step 3: Generating processing summary..."
             )
 
             save_start_time = time.time()
-            self._save_individual_results(results)
+            self._save_individual_results(results)  # Legacy call - does minimal work now
             summary = self._generate_summary(results)
             save_time = time.time() - save_start_time
-            logger.info(f"⏱️ Results saving completed in {save_time:.2f} seconds")
+            logger.info(f"⏱️ Summary generation completed in {save_time:.2f} seconds")
             logger.info(f"Processing summary: {summary}")
 
             # Save results to session state
@@ -457,72 +460,79 @@ class ExpenseProcessingWorkflow(Workflow):
             logger.error(f"Compliance analysis error: {str(e)}")
             return {"error": str(e)}, None
 
-    def _save_individual_results(self, results: List[Dict]) -> None:
-        """Save individual processing results to separate JSON files."""
-        results_dir = pathlib.Path("results")
-        results_dir.mkdir(exist_ok=True)
+    def _save_single_result(self, result: Dict) -> None:
+        """Save a single processing result immediately after processing."""
+        if result.get("status") == "completed":
+            file_name = result.get("file_name", "unknown")
+            # Remove .md extension and add .json
+            base_name = pathlib.Path(file_name).stem
 
-        for result in results:
-            if result.get("status") == "completed":
-                file_name = result.get("file_name", "unknown")
-                # Remove .md extension and add .json
-                base_name = pathlib.Path(file_name).stem
-                output_file = results_dir / f"{base_name}.json"
+            # Create results directory
+            results_dir = pathlib.Path("results")
+            results_dir.mkdir(exist_ok=True)
+            output_file = results_dir / f"{base_name}.json"
 
-                # Create comprehensive result structure (without UQLM validation)
-                individual_result = {
-                    "source_file": file_name,
-                    "processing_timestamp": datetime.now().isoformat(),
-                    "dataset_metadata": result.get("dataset_metadata", {}),
-                    "classification_result": result.get("classification", {}),
-                    "extraction_result": result.get("extraction", {}),
-                    "compliance_result": result.get("compliance", {}),
-                    "processing_status": result.get("status", "unknown"),
-                    "uqlm_validation_available": bool(result.get("validation", {}))
-                }
+            # Create comprehensive result structure (without UQLM validation)
+            individual_result = {
+                "source_file": file_name,
+                "processing_timestamp": datetime.now().isoformat(),
+                "dataset_metadata": result.get("dataset_metadata", {}),
+                "classification_result": result.get("classification", {}),
+                "extraction_result": result.get("extraction", {}),
+                "compliance_result": result.get("compliance", {}),
+                "processing_status": result.get("status", "unknown"),
+                "uqlm_validation_available": bool(result.get("validation", {}))
+            }
 
+            try:
+                # Convert the entire result to JSON-serializable format first
+                serializable_result = self._make_json_serializable(individual_result)
+
+                with open(output_file, 'w', encoding='utf-8') as f:
+                    json.dump(serializable_result, f, indent=2)
+                logger.info(f"💾 Saved individual result: {output_file}")
+
+                # Save detailed validation results if available
+                validation_data = result.get("validation", {})
+                if validation_data:
+                    validation_dir = pathlib.Path("validation_results")
+                    validation_dir.mkdir(exist_ok=True)
+                    validation_file = validation_dir / f"{base_name}_validation.json"
+
+                    # Create a more readable validation report
+                    readable_validation = self._create_readable_validation_report(validation_data)
+
+                    with open(validation_file, 'w', encoding='utf-8') as f:
+                        json.dump(readable_validation, f, indent=2)
+                    logger.info(f"💾 Saved validation result: {validation_file}")
+
+            except Exception as e:
+                logger.error(f"Failed to save result for {file_name}: {e}")
+                # Try to save a simplified version without validation data
                 try:
-                    # Convert the entire result to JSON-serializable format first
-                    serializable_result = self._make_json_serializable(individual_result)
-
+                    simplified_result = {
+                        "source_file": file_name,
+                        "processing_timestamp": datetime.now().isoformat(),
+                        "dataset_metadata": result.get("dataset_metadata", {}),
+                        "classification_result": result.get("classification", {}),
+                        "extraction_result": result.get("extraction", {}),
+                        "compliance_result": result.get("compliance", {}),
+                        "validation_result": {"error": "Validation data could not be serialized"},
+                        "processing_status": result.get("status", "unknown")
+                    }
                     with open(output_file, 'w', encoding='utf-8') as f:
-                        json.dump(serializable_result, f, indent=2)
-                    logger.info(f"Saved individual result: {output_file}")
+                        json.dump(simplified_result, f, indent=2)
+                    logger.info(f"💾 Saved simplified result: {output_file}")
+                except Exception as e2:
+                    logger.error(f"Failed to save even simplified result for {file_name}: {e2}")
+        else:
+            logger.warning(f"Skipping result save for failed processing: {result.get('file_name', 'unknown')}")
 
-                    # Save detailed validation results if available
-                    validation_data = result.get("validation", {})
-                    if validation_data:
-                        validation_dir = pathlib.Path("validation_results")
-                        validation_dir.mkdir(exist_ok=True)
-                        validation_file = validation_dir / f"{base_name}_validation.json"
-
-                        # Create a more readable validation report
-                        readable_validation = self._create_readable_validation_report(validation_data)
-
-                        with open(validation_file, 'w', encoding='utf-8') as f:
-                            json.dump(readable_validation, f, indent=2)
-                        logger.info(f"Saved validation result: {validation_file}")
-
-                except Exception as e:
-                    logger.error(f"Failed to save result for {file_name}: {e}")
-                    # Try to save a simplified version without validation data
-                    try:
-                        simplified_result = {
-                            "source_file": file_name,
-                            "processing_timestamp": datetime.now().isoformat(),
-                            "classification_result": result.get("classification", {}),
-                            "extraction_result": result.get("extraction", {}),
-                            "compliance_result": result.get("compliance", {}),
-                            "validation_result": {"error": "Validation data could not be serialized"},
-                            "processing_status": result.get("status", "unknown")
-                        }
-                        with open(output_file, 'w', encoding='utf-8') as f:
-                            json.dump(simplified_result, f, indent=2)
-                        logger.info(f"Saved simplified result: {output_file}")
-                    except Exception as e2:
-                        logger.error(f"Failed to save even simplified result for {file_name}: {e2}")
-            else:
-                logger.warning(f"Skipping result save for failed processing: {result.get('file_name', 'unknown')}")
+    def _save_individual_results(self, results: List[Dict]) -> None:
+        """Legacy method - individual results are now saved incrementally during processing."""
+        # Results are now saved incrementally via _save_single_result() during processing
+        # This method is kept for compatibility but does minimal work
+        logger.info(f"Individual results already saved incrementally for {len(results)} files")
 
     def _generate_summary(self, results: List[Dict]) -> str:
         """Generate processing summary."""

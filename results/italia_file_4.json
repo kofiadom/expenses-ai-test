@@ -1,0 +1,131 @@
+{
+  "source_file": "italia_file_4.md",
+  "processing_timestamp": "2025-07-15T16:59:02.345790",
+  "dataset_metadata": {
+    "filepath": "expense_files/italia_file_4.jpg",
+    "filename ": "italia_file_4.jpg",
+    "country": "Italy",
+    "icp": "Global People",
+    "dataset_file": "italia_file_4.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "Italian",
+    "language_confidence": 95,
+    "document_location": "Italy",
+    "expected_location": "Italy",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 95,
+    "reasoning": "The document contains information typical of an expense document, such as vendor details, a date, items purchased, prices, and payment information. The items listed, 'Bolognese', 'Lasagna', and 'Minerale', are consistent with food-related expenses, classifying it under 'meals'. The presence of location-relevant information such as 'Roma' and 'P.IVA' confirms the location as Italy, matching the expected location."
+  },
+  "extraction_result": {
+    "supplier_name": "GIAMAICA CAFFE' SRL",
+    "supplier_address": "VIA DEL TRITONE,54, 00187 ROMA",
+    "vat_number": "01845911005",
+    "tax_code": null,
+    "currency": "EUR",
+    "amount": 39.78,
+    "receipt_type": "DOCUMENTO COMMERCIALE",
+    "payment_method": "contante",
+    "line_items": [
+      {
+        "description": "BOLOGNESE",
+        "quantity": 1,
+        "unit_price": 14.0,
+        "total_price": 14.0,
+        "iva": 10.0
+      },
+      {
+        "description": "LASAGNA",
+        "quantity": 1,
+        "unit_price": 14.0,
+        "total_price": 14.0,
+        "iva": 10.0
+      },
+      {
+        "description": "MINERALE CL 75",
+        "quantity": 1,
+        "unit_price": 6.0,
+        "total_price": 6.0,
+        "iva": 10.0
+      }
+    ],
+    "subtotal": 34.0,
+    "service_charge": 5.78,
+    "total_amount": 39.78,
+    "tax_amount": 3.62,
+    "payment_cash": 39.78,
+    "payment_electronic": 0.0,
+    "amount_due": 0.0,
+    "paid_amount": 39.78,
+    "transaction_date": "2019-09-12",
+    "transaction_time": "22:25",
+    "document_number": "0117-0304",
+    "contact_phone": "06/6793583"
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 6,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name (GIAMAICA CAFFE' SRL) does not match the mandatory Global People s.r.l.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider",
+          "knowledge_base_reference": "Must be Global People s.r.l. for ICP Global People"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "The supplier address does not match the mandatory Via Venti Settembre 3, Torino (TO) CAP 10121, Italy",
+          "recommendation": "It is recommended to address this issue with the supplier or provider",
+          "knowledge_base_reference": "Via Venti Settembre 3, Torino (TO) CAP 10121, Italy required for ICP Global People"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "The VAT number (01845911005) does not comply with mandatory IT12455930011 for ICP Global People",
+          "recommendation": "It is recommended to address this issue with the supplier or provider",
+          "knowledge_base_reference": "VAT IT12455930011 is mandatory for ICP Global People"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "payment_method",
+          "description": "The payment method 'contante' is not among the traceable methods: bank transfers, postal transfers, credit/debit cards, prepaid cards, bank/cashier's checks",
+          "recommendation": "It is recommended to switch to a traceable payment method",
+          "knowledge_base_reference": "Mandatory payment method rule: must be traceable"
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "amount",
+          "description": "Expenses qualify as entertainment with meals, which are tax-free up to 75% of the total amount. Gross-up may apply as receipt lacks details of person entertained.",
+          "recommendation": "Ensure to include the name and company details of the client/supplier entertained.",
+          "knowledge_base_reference": "Tax-free up to 75% labeled as 'spese di rappresentanza'"
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "additional_info",
+          "description": "Receipt alone is not enough - proper tax invoice with VAT details is required.",
+          "recommendation": "Provide proper tax invoice with VAT details.",
+          "knowledge_base_reference": "Receipt alone is not enough - tax invoice with VAT details required"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt for meals is invalid due to incorrect supplier details, incorrect VAT number, untraceable payment method, and missing necessary details for entertainment expenses. Additional tax invoice documentation is needed for compliance."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Italy",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 6,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": true
+}

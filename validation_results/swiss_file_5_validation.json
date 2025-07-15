@@ -1,0 +1,138 @@
+{
+  "validation_report": {
+    "timestamp": "2025-07-15T17:17:43.044231",
+    "overall_assessment": {
+      "confidence_score": 0.69,
+      "reliability_level": "MEDIUM",
+      "is_reliable": true,
+      "recommendation": "AI response is generally reliable but review flagged issues before using."
+    },
+    "critical_issues_summary": {
+      "total_issues": 10,
+      "issues": [
+        "The claim about VAT number format being incorrect is not directly supported by the source data provided",
+        "The AI doesn't cite the specific FX rate calculation requirement in its formal issues list despite mentioning it in the summary",
+        "VAT number format issue references knowledge that doesn't exist in the source data",
+        "Failed to recognize ICP mismatch - 'Global People' vs 'Global PPL CH GmbH'",
+        "Did not identify or validate against meal/travel-specific requirements",
+        "Did not properly categorize the expense against the compliance categories provided",
+        "The VAT number format issue is not supported by any explicit requirement in the source data",
+        "Failed to verify if the receipt falls under domestic travel meal per diem guidelines (which would be relevant for meal expenses)",
+        "Did not check if the receipt amount (CHF 54.50) is within allowed per diem rates if this is a business trip meal",
+        "Did not verify if the appropriate travel expense template was used if this is a business travel expense"
+      ]
+    },
+    "dimensional_analysis_summary": {
+      "factual_grounding": {
+        "confidence": 0.8,
+        "reliability": "medium",
+        "issues_count": 2
+      },
+      "knowledge_base_adherence": {
+        "confidence": 0.6,
+        "reliability": "medium",
+        "issues_count": 4
+      },
+      "compliance_accuracy": {
+        "confidence": 0.7,
+        "reliability": "medium",
+        "issues_count": 4
+      },
+      "issue_categorization": {
+        "confidence": 0.7,
+        "reliability": "medium",
+        "issues_count": 3
+      },
+      "recommendation_validity": {
+        "confidence": 0.3,
+        "reliability": "low",
+        "issues_count": 5
+      },
+      "hallucination_detection": {
+        "confidence": 0.75,
+        "reliability": "medium",
+        "issues_count": 2
+      }
+    }
+  },
+  "detailed_analysis": {
+    "metadata": {
+      "country": "Switzerland",
+      "receipt_type": "meals",
+      "icp": "Global People",
+      "validation_method": "UQLM LLMPanel",
+      "panel_judges": 2,
+      "original_issues_found": 4
+    },
+    "dimension_details": {
+      "factual_grounding": {
+        "confidence_score": 0.8,
+        "reliability_level": "medium",
+        "summary": "The AI's analysis is mostly well-grounded in the source data. Three of the four issues identified (supplier name, supplier address, and company registration) are directly supported by specific rules in the compliance database. However, the issue about VAT number format appears to be knowledge the AI is applying without direct evidence in the provided source data. The AI also mentions FX rate calculation in its summary but doesn't list it as a formal issue despite it being marked as mandatory in the source data.",
+        "issues_found": [
+          "The claim about VAT number format being incorrect is not directly supported by the source data provided",
+          "The AI doesn't cite the specific FX rate calculation requirement in its formal issues list despite mentioning it in the summary"
+        ],
+        "total_issues": 2
+      },
+      "knowledge_base_adherence": {
+        "confidence_score": 0.6,
+        "reliability_level": "medium",
+        "summary": "The AI correctly identifies several compliance issues regarding supplier name, address, and company registration, accurately referencing the knowledge base. However, it makes a significant error by claiming VAT number format requirements that don't exist in the provided source data. More critically, it fails to recognize that the cited ICP-specific requirements (Global PPL CH GmbH) may not apply to the specified ICP context (Global People). The analysis also doesn't address meal expense specific requirements or properly categorize the expense against the provided compliance types.",
+        "issues_found": [
+          "VAT number format issue references knowledge that doesn't exist in the source data",
+          "Failed to recognize ICP mismatch - 'Global People' vs 'Global PPL CH GmbH'",
+          "Did not identify or validate against meal/travel-specific requirements",
+          "Did not properly categorize the expense against the compliance categories provided"
+        ],
+        "total_issues": 4
+      },
+      "compliance_accuracy": {
+        "confidence_score": 0.7,
+        "reliability_level": "medium",
+        "summary": "The AI correctly identified three mandatory requirements that were violated (supplier name, supplier address, and company registration). However, it included an unsupported issue about VAT number format not being found in the requirements data. Additionally, it missed contextualizing this meal receipt within potential business travel regulations where per diem rates and reporting templates would apply. The core compliance issues were identified, but the analysis lacked depth in applying the full range of meal expense policies that might be relevant.",
+        "issues_found": [
+          "The VAT number format issue is not supported by any explicit requirement in the source data",
+          "Failed to verify if the receipt falls under domestic travel meal per diem guidelines (which would be relevant for meal expenses)",
+          "Did not check if the receipt amount (CHF 54.50) is within allowed per diem rates if this is a business trip meal",
+          "Did not verify if the appropriate travel expense template was used if this is a business travel expense"
+        ],
+        "total_issues": 4
+      },
+      "issue_categorization": {
+        "confidence_score": 0.7,
+        "reliability_level": "medium",
+        "summary": "The AI analysis correctly categorized four issues as 'Fix Identified' related to supplier name, address, company registration, and VAT number format. However, it missed potential 'Gross-up Identified' issues related to meal expenses potentially exceeding the domestic travel per diem rates (Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40). Additionally, no 'Follow-up Action Identified' issues were included to determine if this was part of a business trip requiring additional documentation. The analysis was accurate for what it covered but incomplete in considering all categorization types.",
+        "issues_found": [
+          "No 'Gross-up Identified' issues were included despite meal expenses potentially exceeding per diem rates",
+          "No consideration of whether this meal receipt is part of a business trip which would have additional requirements",
+          "VAT number issue is reasonable but references a requirement not explicitly stated in the source data"
+        ],
+        "total_issues": 3
+      },
+      "recommendation_validity": {
+        "confidence_score": 0.3,
+        "reliability_level": "low",
+        "summary": "The recommendations provided are not specific, actionable, or appropriate for the context. They apply ICP-specific requirements to a restaurant receipt without considering the meal expense policies that would more likely apply. The recommendations uniformly suggest 'addressing issues with suppliers' which is impractical for a restaurant meal and fails to provide useful guidance for expense submission. No alternative approaches are suggested, such as using per diem rates or properly classifying the expense under domestic business travel.",
+        "issues_found": [
+          "All recommendations use identical generic wording 'It is recommended to address this issue with the supplier or provider'",
+          "Recommendations fail to consider the context that this is a restaurant meal receipt, not an invoice from the ICP entity",
+          "No guidance on whether this could be claimed under per diem rates for business travel",
+          "No practical next steps for how to properly submit this expense",
+          "Recommendations don't acknowledge domestic travel meal allowances that might apply"
+        ],
+        "total_issues": 5
+      },
+      "hallucination_detection": {
+        "confidence_score": 0.75,
+        "reliability_level": "medium",
+        "summary": "The AI validation is mostly accurate, correctly identifying legitimate compliance issues with supplier name, address, and company registration. However, it hallucinated a validation issue regarding the VAT number format by referencing requirements not found in the provided source data. While the VAT number may indeed have format issues, the AI shouldn't claim this based on knowledge not provided in the source data. The rest of the analysis appropriately cited actual compliance requirements from the database.",
+        "issues_found": [
+          "The AI hallucinated a requirement about Swiss VAT number format that is not present in the source data",
+          "The AI referenced a knowledge base entry about Swiss VAT numbers that doesn't exist in the provided source data"
+        ],
+        "total_issues": 2
+      }
+    }
+  }
+}

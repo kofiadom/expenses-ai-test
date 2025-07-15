@@ -1,0 +1,206 @@
+{
+  "image_path": "expense_files\\german_file_7.png",
+  "document_type": "receipt",
+  "image_type_detection": {
+    "is_digital_screenshot": "True",
+    "confidence": 0.83,
+    "image_subtype": "mobile_app_screenshot",
+    "indicators": {
+      "low_color_variety": true,
+      "matches_common_resolution": false,
+      "has_regular_edges": "True",
+      "has_uniform_background": true,
+      "has_many_straight_lines": true,
+      "low_histogram_entropy": "True"
+    },
+    "metadata": {
+      "unique_colors": 19948,
+      "edge_density": 0.016,
+      "histogram_entropy": "2.74"
+    }
+  },
+  "timestamp": "2025-07-15T16:05:30.946415",
+  "processing_time_seconds": 14.18,
+  "overall_assessment": {
+    "score": 77.1,
+    "level": "Acceptable",
+    "pass_fail": "True",
+    "issues_summary": [
+      "Image blur detected (Slightly Blurry)"
+    ],
+    "recommendations": [
+      "\ud83d\udcf1 This is a mobile_app_screenshot - physical document checks have been adjusted.",
+      "\ud83d\udcc8 Image is slightly blurry. Consider recapturing for optimal results.",
+      "\u2705 Resolution quality is excellent for document processing.",
+      "\ud83d\udd04 Image is blurry. Ensure camera is focused and stable during capture.",
+      "\ud83d\udcf8 Motion blur detected (vertical). Use a tripod or scanner for better results."
+    ]
+  },
+  "detailed_results": {
+    "resolution": {
+      "dimensions": {
+        "width": 1700,
+        "height": 2200,
+        "megapixels": 3.74
+      },
+      "dpi": {
+        "horizontal": 544.0,
+        "vertical": 259.0,
+        "average": 401.0
+      },
+      "quality": {
+        "score": 100.0,
+        "level": "Digital Quality",
+        "meets_ocr_requirements": true
+      },
+      "aspect_ratio": {
+        "actual": 0.77,
+        "expected": 0.37,
+        "deviation_percent": 110.2
+      },
+      "recommendations": [
+        "\u2705 Resolution quality is excellent for document processing."
+      ]
+    },
+    "blur": {
+      "metrics": {
+        "laplacian_variance": 106.47,
+        "is_blurry": true,
+        "blur_score": 12.55,
+        "blur_level": "Slightly Blurry"
+      },
+      "motion_blur": {
+        "detected": "True",
+        "score": 1.3181176470588236,
+        "direction": "vertical"
+      },
+      "focus_distribution": {
+        "sharp_areas_percent": 7.0,
+        "uniform_sharpness": true
+      },
+      "recommendations": [
+        "\ud83d\udd04 Image is blurry. Ensure camera is focused and stable during capture.",
+        "\ud83d\udcf8 Motion blur detected (vertical). Use a tripod or scanner for better results.",
+        "\ud83d\udcc8 Image is slightly blurry. Consider recapturing for optimal results."
+      ]
+    },
+    "glare": {
+      "exposure_metrics": {
+        "mean_brightness": 223.6,
+        "overexposed_percent": "71.51",
+        "is_overexposed": "True",
+        "contrast_ratio": 0.28
+      },
+      "glare_analysis": {
+        "glare_score": 95.0,
+        "glare_level": "None (Digital)",
+        "num_glare_spots": 1,
+        "glare_coverage_percent": 71.51,
+        "glare_patterns": {
+          "type": "flash",
+          "description": "Camera flash reflection detected"
+        }
+      },
+      "affected_regions": [
+        {
+          "bbox": [
+            "0",
+            "0",
+            "1700",
+            "2200"
+          ],
+          "center": [
+            936,
+            1212
+          ],
+          "area": "2674320",
+          "intensity": 225.2008526737968
+        }
+      ],
+      "recommendations": [
+        "\u2705 Digital image with clean background."
+      ]
+    },
+    "completeness": {
+      "boundary_detected": true,
+      "completeness_score": 100.0,
+      "completeness_level": "Digital Document",
+      "edge_analysis": {
+        "edge_coverage": 100.0,
+        "has_gaps": false,
+        "num_gaps": 0
+      },
+      "corner_analysis": {
+        "visible_corners": 4,
+        "missing_corners": [],
+        "is_rectangular": true
+      },
+      "issues": [],
+      "boundary_points": [],
+      "recommendations": [
+        "\u2705 Digital screenshot - no physical boundaries to check."
+      ]
+    },
+    "damage": {
+      "damage_score": 100.0,
+      "damage_level": "Digital (No Physical Damage)",
+      "damage_types": [],
+      "stain_analysis": {
+        "count": 0,
+        "coverage_percent": 0.0,
+        "regions": []
+      },
+      "tear_analysis": {
+        "count": 0,
+        "max_length": 0,
+        "regions": []
+      },
+      "fold_analysis": {
+        "count": 0,
+        "pattern": "none",
+        "lines": []
+      },
+      "recommendations": [
+        "\u2705 Digital image - no physical damage possible."
+      ]
+    }
+  },
+  "score_breakdown": {
+    "resolution": {
+      "score": 100.0,
+      "weight": 0.2,
+      "contribution": 20.0
+    },
+    "blur": {
+      "score": 12.55,
+      "weight": 0.25,
+      "contribution": 3.1375
+    },
+    "glare": {
+      "score": 95.0,
+      "weight": 0.2,
+      "contribution": 19.0
+    },
+    "completeness": {
+      "score": 100.0,
+      "weight": 0.2,
+      "contribution": 20.0
+    },
+    "damage": {
+      "score": 100.0,
+      "weight": 0.15,
+      "contribution": 15.0
+    }
+  },
+  "quality_passed": "True",
+  "quality_score": 77.1,
+  "quality_level": "Acceptable",
+  "main_issues": [
+    "Image blur detected (Slightly Blurry)"
+  ],
+  "top_recommendations": [
+    "\ud83d\udcf1 This is a mobile_app_screenshot - physical document checks have been adjusted.",
+    "\ud83d\udcc8 Image is slightly blurry. Consider recapturing for optimal results.",
+    "\u2705 Resolution quality is excellent for document processing."
+  ]
+}

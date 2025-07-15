@@ -1,0 +1,139 @@
+{
+  "validation_report": {
+    "timestamp": "2025-07-15T17:01:57.269086",
+    "overall_assessment": {
+      "confidence_score": 0.6849999999999999,
+      "reliability_level": "MEDIUM",
+      "is_reliable": true,
+      "recommendation": "AI response is generally reliable but review flagged issues before using."
+    },
+    "critical_issues_summary": {
+      "total_issues": 10,
+      "issues": [
+        "Issue 4 misinterprets the 75% tax-free rule for entertainment expenses as a \u20ac75 monetary limit rather than 75% of the total amount",
+        "Failed to identify missing mandatory Tax Code field (should be 12455930011)",
+        "Failed to identify missing mandatory Payment Method field",
+        "Failed to identify missing receipt_type field",
+        "Missing validation for Payment Method (mandatory field is null in receipt)",
+        "Missing validation for Receipt Type (mandatory field is null in receipt)",
+        "Missing validation for Tax Code (mandatory for Global People s.r.l. but not identified)",
+        "Issue #4 about Entertainment Expenses assumes categorization without clear evidence",
+        "Missing Tax Code validation - mandatory for ICP 'Global People s.r.l.'",
+        "No validation of missing Payment Method - mandatory per compliance rules"
+      ]
+    },
+    "dimensional_analysis_summary": {
+      "factual_grounding": {
+        "confidence": 0.7,
+        "reliability": "medium",
+        "issues_count": 4
+      },
+      "knowledge_base_adherence": {
+        "confidence": 0.7,
+        "reliability": "medium",
+        "issues_count": 4
+      },
+      "compliance_accuracy": {
+        "confidence": 0.7,
+        "reliability": "medium",
+        "issues_count": 4
+      },
+      "issue_categorization": {
+        "confidence": 0.7,
+        "reliability": "medium",
+        "issues_count": 3
+      },
+      "recommendation_validity": {
+        "confidence": 0.4,
+        "reliability": "low",
+        "issues_count": 4
+      },
+      "hallucination_detection": {
+        "confidence": 0.7,
+        "reliability": "medium",
+        "issues_count": 2
+      }
+    }
+  },
+  "detailed_analysis": {
+    "metadata": {
+      "country": "Italy",
+      "receipt_type": "meals",
+      "icp": "Global People",
+      "validation_method": "UQLM LLMPanel",
+      "panel_judges": 2,
+      "original_issues_found": 4
+    },
+    "dimension_details": {
+      "factual_grounding": {
+        "confidence_score": 0.7,
+        "reliability_level": "medium",
+        "summary": "The AI correctly identified three compliance issues related to supplier information (name, address, VAT number). However, it misinterpreted the entertainment expense tax rule by confusing a percentage (75%) with a Euro amount (\u20ac75). Additionally, it missed identifying several mandatory fields that are missing from the receipt data, including Tax Code, Payment Method, and receipt_type. The factual validation of supplier information requirements was accurate, but the tax interpretation error and missed missing fields reduce its reliability.",
+        "issues_found": [
+          "Issue 4 misinterprets the 75% tax-free rule for entertainment expenses as a \u20ac75 monetary limit rather than 75% of the total amount",
+          "Failed to identify missing mandatory Tax Code field (should be 12455930011)",
+          "Failed to identify missing mandatory Payment Method field",
+          "Failed to identify missing receipt_type field"
+        ],
+        "total_issues": 4
+      },
+      "knowledge_base_adherence": {
+        "confidence_score": 0.7,
+        "reliability_level": "medium",
+        "summary": "The AI's analysis correctly identified 3 supplier information issues with accurate citations from the knowledge base. However, it failed to identify 3 other mandatory requirements (payment method, receipt type, tax code). Issue #4 about tax implications makes an assumption about expense categorization without clear evidence. All cited knowledge base references were accurate, but the analysis was incomplete in covering all applicable requirements.",
+        "issues_found": [
+          "Missing validation for Payment Method (mandatory field is null in receipt)",
+          "Missing validation for Receipt Type (mandatory field is null in receipt)",
+          "Missing validation for Tax Code (mandatory for Global People s.r.l. but not identified)",
+          "Issue #4 about Entertainment Expenses assumes categorization without clear evidence"
+        ],
+        "total_issues": 4
+      },
+      "compliance_accuracy": {
+        "confidence_score": 0.7,
+        "reliability_level": "medium",
+        "summary": "The AI analysis correctly identified three major supplier information compliance issues and made a reasonable observation about tax implications for the meal expense. However, it missed several important validations including the missing tax code requirement, payment method requirement, and didn't fully assess whether this was a business meal or entertainment expense which affects tax treatment. The AI focused on supplier information problems but didn't comprehensively validate all mandatory fields required by the compliance rules.",
+        "issues_found": [
+          "Missing Tax Code validation - mandatory for ICP 'Global People s.r.l.'",
+          "No validation of missing Payment Method - mandatory per compliance rules",
+          "Incomplete assessment of meal expense classification (business vs. entertainment)",
+          "Missing validation for receipt_type field being null (mandatory field)"
+        ],
+        "total_issues": 4
+      },
+      "issue_categorization": {
+        "confidence_score": 0.7,
+        "reliability_level": "medium",
+        "summary": "The issue categorization is generally accurate for the identified issues. All three 'Fix Identified' issues correctly represent direct compliance violations requiring correction, and the 'Gross-up Identified' issue correctly identifies a potential tax implication. However, the analysis missed several mandatory fields that are null in the receipt data, which should have been flagged as 'Fix Identified' issues: Tax Code, Payment Method, and Receipt Type.",
+        "issues_found": [
+          "Missing 'Fix Identified' issue for Tax Code (mandatory field for Global People s.r.l.)",
+          "Missing 'Fix Identified' issue for Payment Method (mandatory field)",
+          "Missing 'Fix Identified' issue for Receipt Type (mandatory field)"
+        ],
+        "total_issues": 3
+      },
+      "recommendation_validity": {
+        "confidence_score": 0.4,
+        "reliability_level": "low",
+        "summary": "The recommendations show a fundamental misunderstanding of how the expense reimbursement process works for Italy. The first three recommendations incorrectly suggest modifying the restaurant's information rather than understanding that the receipt should have been issued under the ICP's name. The fourth recommendation about checking entertainment expense tax implications is appropriate. Several mandatory fields with missing information (payment method, tax code) weren't addressed in the recommendations. Overall, the recommendations would lead the user down an incorrect path that wouldn't solve the actual compliance issues.",
+        "issues_found": [
+          "First three recommendations incorrectly suggest contacting the restaurant to change their details, when the actual requirement is that expense documentation should show Global People as the supplier/payer",
+          "No recommendation provided for the missing 'Payment Method' which is a mandatory field per the requirements",
+          "No recommendation provided for the missing 'Tax Code' which is mandatory per the requirements",
+          "Recommendations don't address whether additional information about attendees is needed if this is an entertainment expense"
+        ],
+        "total_issues": 4
+      },
+      "hallucination_detection": {
+        "confidence_score": 0.7,
+        "reliability_level": "medium",
+        "summary": "The AI analysis correctly identified mismatches in supplier name, address, and VAT number. However, it hallucinated a specific Euro amount limit (\u20ac75) for entertainment expenses when the source data only specified a percentage (75%). Additionally, the AI failed to identify several missing mandatory fields in the receipt that should have been flagged according to the source data requirements. These omissions and fabrications affect the reliability of the analysis, though the core compliance issues were correctly identified.",
+        "issues_found": [
+          "The AI hallucinated a '\u20ac75 tax-free portion' limit for entertainment expenses, when the source data only mentions '75% tax-free' without specifying a Euro amount",
+          "The AI failed to identify several missing mandatory fields including Tax Code, Payment Method, and Receipt Type that should have been flagged as issues"
+        ],
+        "total_issues": 2
+      }
+    }
+  }
+}

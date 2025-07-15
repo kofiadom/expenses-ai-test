@@ -1,0 +1,130 @@
+{
+  "validation_report": {
+    "timestamp": "2025-07-15T17:11:28.733053",
+    "overall_assessment": {
+      "confidence_score": 0.8325,
+      "reliability_level": "HIGH",
+      "is_reliable": true,
+      "recommendation": "AI response is highly reliable and can be trusted for compliance decisions."
+    },
+    "critical_issues_summary": {
+      "total_issues": 10,
+      "issues": [
+        "Failed to acknowledge the exception for travel receipts where 'Worker's name acceptable when Local Employer name not possible'",
+        "Did not validate that the receipt is an actual tax receipt or invoice as required",
+        "Did not acknowledge that currency and amount are correctly stated and compliant",
+        "Did not classify the expense under the appropriate travel expense category",
+        "Failed to apply the travel receipt exception that allows worker's name instead of supplier name",
+        "Failed to apply the same exception to supplier address requirement",
+        "Didn't identify missing receipt_type field which is necessary for validation",
+        "Didn't verify if the document qualifies as an actual receipt vs booking confirmation",
+        "The supplier name recommendation doesn't acknowledge the travel receipt exception that allows worker's name when employer name isn't possible",
+        "Missing recommendation about receipt type requirement (actual tax receipts/invoices vs booking confirmations)"
+      ]
+    },
+    "dimensional_analysis_summary": {
+      "factual_grounding": {
+        "confidence": 1.0,
+        "reliability": "high",
+        "issues_count": 0
+      },
+      "knowledge_base_adherence": {
+        "confidence": 0.75,
+        "reliability": "medium",
+        "issues_count": 4
+      },
+      "compliance_accuracy": {
+        "confidence": 0.6,
+        "reliability": "medium",
+        "issues_count": 4
+      },
+      "issue_categorization": {
+        "confidence": 1.0,
+        "reliability": "high",
+        "issues_count": 0
+      },
+      "recommendation_validity": {
+        "confidence": 0.7,
+        "reliability": "medium",
+        "issues_count": 5
+      },
+      "hallucination_detection": {
+        "confidence": 0.85,
+        "reliability": "high",
+        "issues_count": 1
+      }
+    }
+  },
+  "detailed_analysis": {
+    "metadata": {
+      "country": "Switzerland",
+      "receipt_type": "travel",
+      "icp": "Global People",
+      "validation_method": "UQLM LLMPanel",
+      "panel_judges": 2,
+      "original_issues_found": 6
+    },
+    "dimension_details": {
+      "factual_grounding": {
+        "confidence_score": 1.0,
+        "reliability_level": "high",
+        "summary": "The AI analysis demonstrates excellent factual grounding with all six identified compliance issues being accurately based on the provided source data. Each issue directly references specific fields and requirements from the compliance database, with no hallucinations or fabricated requirements. The knowledge base references precisely quote the mandatory requirements from the source data, and all recommendations align with these requirements. The AI properly considered the 'travel' receipt type context in its analysis.",
+        "issues_found": [],
+        "total_issues": 0
+      },
+      "knowledge_base_adherence": {
+        "confidence_score": 0.75,
+        "reliability_level": "medium",
+        "summary": "The AI's compliance analysis shows strong adherence to most knowledge base requirements, accurately citing 5 out of 6 references. The main issue is that it failed to apply the exception for travel receipts regarding supplier name, which is directly relevant to this case. Additionally, it missed validating receipt type requirements and didn't acknowledge the compliant elements (currency and amount). The AI correctly identified issues with missing supplier information, address, company registration, business trip reporting requirements, template usage, and personal information handling.",
+        "issues_found": [
+          "Failed to acknowledge the exception for travel receipts where 'Worker's name acceptable when Local Employer name not possible'",
+          "Did not validate that the receipt is an actual tax receipt or invoice as required",
+          "Did not acknowledge that currency and amount are correctly stated and compliant",
+          "Did not classify the expense under the appropriate travel expense category"
+        ],
+        "total_issues": 4
+      },
+      "compliance_accuracy": {
+        "confidence_score": 0.6,
+        "reliability_level": "medium",
+        "summary": "The AI analysis incorrectly identified supplier name and address as compliance issues when the travel receipt rules specifically allow for worker's name when employer name isn't possible. It also missed validating whether the document meets the receipt type requirement and didn't note the missing receipt_type field. The other identified issues (business trip reporting, travel template, and personal information) were correctly identified based on the source data.",
+        "issues_found": [
+          "Failed to apply the travel receipt exception that allows worker's name instead of supplier name",
+          "Failed to apply the same exception to supplier address requirement",
+          "Didn't identify missing receipt_type field which is necessary for validation",
+          "Didn't verify if the document qualifies as an actual receipt vs booking confirmation"
+        ],
+        "total_issues": 4
+      },
+      "issue_categorization": {
+        "confidence_score": 1.0,
+        "reliability_level": "high",
+        "summary": "The AI has correctly categorized all identified issues. The 'Fix Identified' issues properly reflect problems requiring immediate correction (supplier information, company registration, etc.). The 'Follow-up Action Identified' issues appropriately capture items needing additional steps but not immediate corrections (template usage, personal information review). No 'Gross-up Identified' issues were flagged, which appears appropriate given the nature of the expense. The categorization is consistent with the descriptions and recommendations provided, showing strong alignment between the issue types and their actual content.",
+        "issues_found": [],
+        "total_issues": 0
+      },
+      "recommendation_validity": {
+        "confidence_score": 0.7,
+        "reliability_level": "medium",
+        "summary": "The recommendations are mostly actionable and aligned with source data requirements, but there are important gaps. The AI missed the exception for travel receipts allowing worker's name when employer name isn't possible, which makes the supplier name recommendation too strict. It also failed to include recommendations about receipt type requirements and currency exchange rate documentation. While most recommendations are valid, some could be more specific about how to achieve compliance rather than just stating what needs to be done. The existing recommendations do correctly address the need for proper reporting format, separate reports per trip, and personal information handling.",
+        "issues_found": [
+          "The supplier name recommendation doesn't acknowledge the travel receipt exception that allows worker's name when employer name isn't possible",
+          "Missing recommendation about receipt type requirement (actual tax receipts/invoices vs booking confirmations)",
+          "Missing recommendation about currency exchange rate calculations when applicable",
+          "The supplier address recommendation is valid but could be more specific",
+          "Some recommendations are general rather than offering specific steps to achieve compliance"
+        ],
+        "total_issues": 5
+      },
+      "hallucination_detection": {
+        "confidence_score": 0.85,
+        "reliability_level": "high",
+        "summary": "The AI analysis contains no fabricated information or invented requirements. All reported issues accurately reference rules present in the source data. However, the AI missed an important exception relevant to travel receipts that worker's name is acceptable when Local Employer name is not possible. This is an omission rather than a hallucination, but it affects the completeness of the analysis.",
+        "issues_found": [
+          "Failed to acknowledge the exception that worker's name is acceptable on travel receipts when Local Employer name is not possible"
+        ],
+        "total_issues": 1
+      }
+    }
+  }
+}

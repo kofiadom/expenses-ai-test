@@ -1,0 +1,270 @@
+{
+  "image_path": "expense_files\\italia_file_5.jpg",
+  "document_type": "receipt",
+  "image_type_detection": {
+    "is_digital_screenshot": "False",
+    "confidence": 0.0,
+    "image_subtype": "photo_capture",
+    "indicators": {
+      "low_color_variety": false,
+      "matches_common_resolution": false,
+      "has_regular_edges": "False",
+      "has_uniform_background": false,
+      "has_many_straight_lines": false,
+      "low_histogram_entropy": "False"
+    },
+    "metadata": {
+      "unique_colors": 23967,
+      "edge_density": 0.063,
+      "histogram_entropy": "6.82"
+    }
+  },
+  "timestamp": "2025-07-15T16:05:52.102712",
+  "processing_time_seconds": 0.7,
+  "overall_assessment": {
+    "score": "53.1",
+    "level": "Poor",
+    "pass_fail": "False",
+    "issues_summary": [
+      "Poor resolution quality",
+      "No clear document boundary detected",
+      "Physical damage: tears, folds"
+    ],
+    "recommendations": [
+      "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+      "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings.",
+      "\u2705 Image sharpness is excellent.",
+      "\u2705 Lighting and exposure are optimal.",
+      "\ud83d\udd04 Ensure entire document is visible and well-lit"
+    ]
+  },
+  "detailed_results": {
+    "resolution": {
+      "dimensions": {
+        "width": 337,
+        "height": 450,
+        "megapixels": 0.15
+      },
+      "dpi": {
+        "horizontal": 1,
+        "vertical": 1,
+        "average": 1.0
+      },
+      "quality": {
+        "score": 0.0,
+        "level": "Poor",
+        "meets_ocr_requirements": false
+      },
+      "aspect_ratio": {
+        "actual": 0.75,
+        "expected": 0.37,
+        "deviation_percent": 103.7
+      },
+      "recommendations": [
+        "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+        "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings."
+      ]
+    },
+    "blur": {
+      "metrics": {
+        "laplacian_variance": 1976.38,
+        "is_blurry": false,
+        "blur_score": 100.0,
+        "blur_level": "Very Sharp"
+      },
+      "motion_blur": {
+        "detected": "False",
+        "score": 7.31008242664029,
+        "direction": "vertical"
+      },
+      "focus_distribution": {
+        "sharp_areas_percent": 68.8,
+        "uniform_sharpness": false
+      },
+      "recommendations": [
+        "\u2705 Image sharpness is excellent."
+      ]
+    },
+    "glare": {
+      "exposure_metrics": {
+        "mean_brightness": 171.0,
+        "overexposed_percent": "0.05",
+        "is_overexposed": "False",
+        "contrast_ratio": 0.23
+      },
+      "glare_analysis": {
+        "glare_score": "99.9",
+        "glare_level": "None",
+        "num_glare_spots": 0,
+        "glare_coverage_percent": 0.0,
+        "glare_patterns": {
+          "type": "none",
+          "description": "No glare detected"
+        }
+      },
+      "affected_regions": [],
+      "recommendations": [
+        "\u2705 Lighting and exposure are optimal."
+      ]
+    },
+    "completeness": {
+      "boundary_detected": false,
+      "completeness_score": 0,
+      "completeness_level": "Cannot Detect",
+      "issues": [
+        "No clear document boundary detected"
+      ],
+      "recommendations": [
+        "\ud83d\udd04 Ensure entire document is visible and well-lit",
+        "\ud83d\udcf8 Place document on contrasting background"
+      ]
+    },
+    "damage": {
+      "damage_score": 54.0,
+      "damage_level": "Significant Damage",
+      "damage_types": [
+        "tears",
+        "folds"
+      ],
+      "stain_analysis": {
+        "count": 0,
+        "coverage_percent": 0.0,
+        "regions": []
+      },
+      "tear_analysis": {
+        "count": 10,
+        "max_length": 356.37972354888916,
+        "regions": [
+          {
+            "bbox": [
+              163,
+              340,
+              38,
+              15
+            ],
+            "length": 239.06601524353027,
+            "irregularity": 0.399,
+            "angle_variance": 27271.5,
+            "severity": "moderate"
+          },
+          {
+            "bbox": [
+              131,
+              340,
+              25,
+              23
+            ],
+            "length": 220.02438509464264,
+            "irregularity": 0.344,
+            "angle_variance": 27735.8,
+            "severity": "moderate"
+          },
+          {
+            "bbox": [
+              113,
+              339,
+              20,
+              15
+            ],
+            "length": 151.1248903274536,
+            "irregularity": 0.358,
+            "angle_variance": 26504.0,
+            "severity": "moderate"
+          }
+        ]
+      },
+      "fold_analysis": {
+        "count": 3,
+        "pattern": "irregular",
+        "lines": [
+          {
+            "start": [
+              "318",
+              "24"
+            ],
+            "end": [
+              "335",
+              "259"
+            ],
+            "length": 235.61409125941512,
+            "angle": 85.9,
+            "gradient_strength": 47.6,
+            "type": "vertical_fold"
+          },
+          {
+            "start": [
+              "3",
+              "269"
+            ],
+            "end": [
+              "18",
+              "67"
+            ],
+            "length": 202.5561650505854,
+            "angle": -85.8,
+            "gradient_strength": 57.5,
+            "type": "vertical_fold"
+          },
+          {
+            "start": [
+              "202",
+              "27"
+            ],
+            "end": [
+              "307",
+              "16"
+            ],
+            "length": 105.57461816175325,
+            "angle": -6.0,
+            "gradient_strength": 56.8,
+            "type": "horizontal_fold"
+          }
+        ]
+      },
+      "recommendations": [
+        "\ud83d\udcce Minor tears detected. Handle document carefully.",
+        "\ud83d\uddde\ufe0f Folds detected. Iron or press document flat if possible."
+      ]
+    }
+  },
+  "score_breakdown": {
+    "resolution": {
+      "score": 0.0,
+      "weight": 0.2,
+      "contribution": 0.0
+    },
+    "blur": {
+      "score": 100.0,
+      "weight": 0.25,
+      "contribution": 25.0
+    },
+    "glare": {
+      "score": "99.9",
+      "weight": 0.2,
+      "contribution": "19.980001"
+    },
+    "completeness": {
+      "score": 0,
+      "weight": 0.2,
+      "contribution": 0.0
+    },
+    "damage": {
+      "score": 54.0,
+      "weight": 0.15,
+      "contribution": 8.1
+    }
+  },
+  "quality_passed": "False",
+  "quality_score": "53.1",
+  "quality_level": "Poor",
+  "main_issues": [
+    "Poor resolution quality",
+    "No clear document boundary detected",
+    "Physical damage: tears, folds"
+  ],
+  "top_recommendations": [
+    "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+    "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings.",
+    "\u2705 Image sharpness is excellent."
+  ]
+}

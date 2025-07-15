@@ -1,0 +1,200 @@
+{
+  "image_path": "expense_files\\german_file_6.png",
+  "document_type": "receipt",
+  "image_type_detection": {
+    "is_digital_screenshot": "True",
+    "confidence": 0.67,
+    "image_subtype": "digital_document",
+    "indicators": {
+      "low_color_variety": true,
+      "matches_common_resolution": false,
+      "has_regular_edges": "True",
+      "has_uniform_background": true,
+      "has_many_straight_lines": false,
+      "low_histogram_entropy": "True"
+    },
+    "metadata": {
+      "unique_colors": 37731,
+      "edge_density": 0.013,
+      "histogram_entropy": "2.22"
+    }
+  },
+  "timestamp": "2025-07-15T16:05:16.729854",
+  "processing_time_seconds": 15.98,
+  "overall_assessment": {
+    "score": 86.5,
+    "level": "Good",
+    "pass_fail": "True",
+    "issues_summary": [],
+    "recommendations": [
+      "\ud83d\udcf1 This is a digital_document - physical document checks have been adjusted.",
+      "\u2705 Resolution quality is excellent for document processing.",
+      "\ud83d\udcf8 Motion blur detected (vertical). Use a tripod or scanner for better results.",
+      "\u2705 Digital image with clean background.",
+      "\u2705 Digital screenshot - no physical boundaries to check."
+    ]
+  },
+  "detailed_results": {
+    "resolution": {
+      "dimensions": {
+        "width": 1654,
+        "height": 2339,
+        "megapixels": 3.87
+      },
+      "dpi": {
+        "horizontal": 529.0,
+        "vertical": 275.0,
+        "average": 402.0
+      },
+      "quality": {
+        "score": 100.0,
+        "level": "Digital Quality",
+        "meets_ocr_requirements": true
+      },
+      "aspect_ratio": {
+        "actual": 0.71,
+        "expected": 0.37,
+        "deviation_percent": 92.3
+      },
+      "recommendations": [
+        "\u2705 Resolution quality is excellent for document processing."
+      ]
+    },
+    "blur": {
+      "metrics": {
+        "laplacian_variance": 275.78,
+        "is_blurry": false,
+        "blur_score": 50.17,
+        "blur_level": "Sharp"
+      },
+      "motion_blur": {
+        "detected": "True",
+        "score": 2.6157808321438742,
+        "direction": "vertical"
+      },
+      "focus_distribution": {
+        "sharp_areas_percent": 16.1,
+        "uniform_sharpness": true
+      },
+      "recommendations": [
+        "\ud83d\udcf8 Motion blur detected (vertical). Use a tripod or scanner for better results."
+      ]
+    },
+    "glare": {
+      "exposure_metrics": {
+        "mean_brightness": 243.3,
+        "overexposed_percent": "75.1",
+        "is_overexposed": "True",
+        "contrast_ratio": 0.11
+      },
+      "glare_analysis": {
+        "glare_score": 95.0,
+        "glare_level": "None (Digital)",
+        "num_glare_spots": 1,
+        "glare_coverage_percent": 74.93,
+        "glare_patterns": {
+          "type": "flash",
+          "description": "Camera flash reflection detected"
+        }
+      },
+      "affected_regions": [
+        {
+          "bbox": [
+            "0",
+            "0",
+            "1654",
+            "2339"
+          ],
+          "center": [
+            927,
+            1243
+          ],
+          "area": "2898906",
+          "intensity": 244.68574401880113
+        }
+      ],
+      "recommendations": [
+        "\u2705 Digital image with clean background."
+      ]
+    },
+    "completeness": {
+      "boundary_detected": true,
+      "completeness_score": 100.0,
+      "completeness_level": "Digital Document",
+      "edge_analysis": {
+        "edge_coverage": 100.0,
+        "has_gaps": false,
+        "num_gaps": 0
+      },
+      "corner_analysis": {
+        "visible_corners": 4,
+        "missing_corners": [],
+        "is_rectangular": true
+      },
+      "issues": [],
+      "boundary_points": [],
+      "recommendations": [
+        "\u2705 Digital screenshot - no physical boundaries to check."
+      ]
+    },
+    "damage": {
+      "damage_score": 100.0,
+      "damage_level": "Digital (No Physical Damage)",
+      "damage_types": [],
+      "stain_analysis": {
+        "count": 0,
+        "coverage_percent": 0.0,
+        "regions": []
+      },
+      "tear_analysis": {
+        "count": 0,
+        "max_length": 0,
+        "regions": []
+      },
+      "fold_analysis": {
+        "count": 0,
+        "pattern": "none",
+        "lines": []
+      },
+      "recommendations": [
+        "\u2705 Digital image - no physical damage possible."
+      ]
+    }
+  },
+  "score_breakdown": {
+    "resolution": {
+      "score": 100.0,
+      "weight": 0.2,
+      "contribution": 20.0
+    },
+    "blur": {
+      "score": 50.17,
+      "weight": 0.25,
+      "contribution": 12.5425
+    },
+    "glare": {
+      "score": 95.0,
+      "weight": 0.2,
+      "contribution": 19.0
+    },
+    "completeness": {
+      "score": 100.0,
+      "weight": 0.2,
+      "contribution": 20.0
+    },
+    "damage": {
+      "score": 100.0,
+      "weight": 0.15,
+      "contribution": 15.0
+    }
+  },
+  "quality_passed": "True",
+  "quality_score": 86.5,
+  "quality_level": "Good",
+  "main_issues": [],
+  "top_recommendations": [
+    "\ud83d\udcf1 This is a digital_document - physical document checks have been adjusted.",
+    "\u2705 Resolution quality is excellent for document processing.",
+    "\ud83d\udcf8 Motion blur detected (vertical). Use a tripod or scanner for better results."
+  ]
+}

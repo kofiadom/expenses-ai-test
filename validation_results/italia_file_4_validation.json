@@ -1,0 +1,133 @@
+{
+  "validation_report": {
+    "timestamp": "2025-07-15T16:59:02.404929",
+    "overall_assessment": {
+      "confidence_score": 0.605,
+      "reliability_level": "LOW",
+      "is_reliable": false,
+      "recommendation": "AI response has reliability concerns. Manual review required before use."
+    },
+    "critical_issues_summary": {
+      "total_issues": 10,
+      "issues": [
+        "Validation failed: UQLM panel validation failed for factual_grounding: confidence_score not found in the string",
+        "AI incorrectly assumed this was an entertainment expense without evidence",
+        "AI referenced requirement for 'proper tax invoice with VAT details' without clearly establishing expense category",
+        "AI failed to validate document quality against 'scanned (not photos), clear and readable' requirement",
+        "AI did not determine if expense was part of business travel, which would affect applicable rules",
+        "AI did not properly distinguish between business expense and entertainment expense categories",
+        "Recommendations for supplier details issues are too vague and not actionable enough",
+        "Entertainment expense classification is assumed without clear evidence",
+        "Missing recommendation addressing the tax code requirement",
+        "Recommendations don't clearly explain the fundamental issue that the receipt should be in the name of the employer rather than the restaurant"
+      ]
+    },
+    "dimensional_analysis_summary": {
+      "factual_grounding": {
+        "confidence": 0.0,
+        "reliability": "low",
+        "issues_count": 1
+      },
+      "knowledge_base_adherence": {
+        "confidence": 0.7,
+        "reliability": "medium",
+        "issues_count": 5
+      },
+      "compliance_accuracy": {
+        "confidence": 0.85,
+        "reliability": "high",
+        "issues_count": 2
+      },
+      "issue_categorization": {
+        "confidence": 1.0,
+        "reliability": "high",
+        "issues_count": 0
+      },
+      "recommendation_validity": {
+        "confidence": 0.65,
+        "reliability": "medium",
+        "issues_count": 5
+      },
+      "hallucination_detection": {
+        "confidence": 0.85,
+        "reliability": "high",
+        "issues_count": 3
+      }
+    }
+  },
+  "detailed_analysis": {
+    "metadata": {
+      "country": "Italy",
+      "receipt_type": "meals",
+      "icp": "Global People",
+      "validation_method": "UQLM LLMPanel",
+      "panel_judges": 2,
+      "original_issues_found": 6
+    },
+    "dimension_details": {
+      "factual_grounding": {
+        "confidence_score": 0.0,
+        "reliability_level": "low",
+        "summary": "Error in factual_grounding validation",
+        "issues_found": [
+          "Validation failed: UQLM panel validation failed for factual_grounding: confidence_score not found in the string"
+        ],
+        "total_issues": 1
+      },
+      "knowledge_base_adherence": {
+        "confidence_score": 0.7,
+        "reliability_level": "medium",
+        "summary": "The AI correctly identified issues related to supplier details, VAT number, and payment method based on the ICP-specific rules. However, it made an unsupported assumption that this was an entertainment expense ('spese di rappresentanza') without evidence that the meal was offered to a client/supplier. The AI also failed to properly categorize the expense type before applying additional documentation requirements. Several validation checks were missing, including document quality assessment and determination if the expense was part of business travel. While core compliance issues were identified correctly, the AI made assumptions and omitted contextual considerations that affect the proper application of rules.",
+        "issues_found": [
+          "AI incorrectly assumed this was an entertainment expense without evidence",
+          "AI referenced requirement for 'proper tax invoice with VAT details' without clearly establishing expense category",
+          "AI failed to validate document quality against 'scanned (not photos), clear and readable' requirement",
+          "AI did not determine if expense was part of business travel, which would affect applicable rules",
+          "AI did not properly distinguish between business expense and entertainment expense categories"
+        ],
+        "total_issues": 5
+      },
+      "compliance_accuracy": {
+        "confidence_score": 0.85,
+        "reliability_level": "high",
+        "summary": "The AI correctly identified most compliance issues including incorrect supplier name, address, VAT number, and payment method. It appropriately noted that the receipt alone is insufficient and a proper tax invoice with VAT details is required. However, it made an unjustified assumption that this was an entertainment expense without clear evidence, and it failed to identify the missing mandatory Tax Code field required for Global People ICP. Overall, the compliance analysis was mostly accurate with these two notable exceptions.",
+        "issues_found": [
+          "The AI assumed the receipt was for entertainment expenses without clear evidence",
+          "The AI failed to identify the missing mandatory Tax Code field (should be 12455930011 for Global People)"
+        ],
+        "total_issues": 2
+      },
+      "issue_categorization": {
+        "confidence_score": 1.0,
+        "reliability_level": "high",
+        "summary": "The AI has accurately categorized all six issues according to the three defined categories. The four 'Fix Identified' issues correctly flag non-compliant supplier information and payment method. The 'Gross-up Identified' issue properly identifies tax implications for entertainment expenses. The 'Follow-up Action Identified' issue correctly notes the need for additional documentation. All categorizations are appropriate and consistent with the source data requirements.",
+        "issues_found": [],
+        "total_issues": 0
+      },
+      "recommendation_validity": {
+        "confidence_score": 0.65,
+        "reliability_level": "medium",
+        "summary": "The recommendations lack sufficient specificity and actionability. While they correctly identify the compliance issues, they do not provide clear guidance on how to resolve them, particularly for the supplier details issues. The recommendations should clearly state that the receipt needs to be reissued in the name of Global People s.r.l. with the correct address, VAT number, and tax code as specified in the requirements. The assumption that this is an entertainment expense should be clarified or presented as a possibility requiring verification. Overall, while the recommendations identify valid issues, they need to be more specific and actionable to be truly helpful for compliance purposes.",
+        "issues_found": [
+          "Recommendations for supplier details issues are too vague and not actionable enough",
+          "Entertainment expense classification is assumed without clear evidence",
+          "Missing recommendation addressing the tax code requirement",
+          "Recommendations don't clearly explain the fundamental issue that the receipt should be in the name of the employer rather than the restaurant",
+          "No specific guidance on how to obtain a compliant receipt with all required fields"
+        ],
+        "total_issues": 5
+      },
+      "hallucination_detection": {
+        "confidence_score": 0.85,
+        "reliability_level": "high",
+        "summary": "The AI analysis is mostly accurate, with all rules and requirements cited being present in the source data. However, there are issues with making assumptions about the expense type (entertainment) without evidence, and applying certain additional documentation requirements without clear justification for why this particular expense falls into those categories. The core compliance issues with supplier information and payment method are accurately identified.",
+        "issues_found": [
+          "Assumption that the expense is for entertainment without supporting evidence in the receipt data",
+          "Application of the 'Business Expenses' category requiring tax invoice without clear justification",
+          "No explanation of why the receipt is categorized as it is, leading to potentially inappropriate rule application"
+        ],
+        "total_issues": 3
+      }
+    }
+  }
+}
