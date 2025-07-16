@@ -22,6 +22,7 @@ from file_classification_agent import classify_file
 from data_extraction_agent import extract_data_from_receipt
 from issue_detection_agent import analyze_compliance_issues
 from dataset_utils import load_dataset_entries, validate_dataset_entry
+from citation_generator import generate_citations, get_citation_stats
 
 # Load environment variables
 load_dotenv()
@@ -223,8 +224,11 @@ class ExpenseProcessingWorkflow(Workflow):
             agents_start_time = time.time()
             logger.info("🕐 Starting concurrent classification and extraction")
 
+            # Get filename from markdown_file for citation generation
+            filename = markdown_file.stem
+            
             classification_task = self._classify_document(markdown_content, country)
-            extraction_task = self._extract_data(markdown_content, country)
+            extraction_task = self._extract_data(markdown_content, country, filename)
 
             classification_result, extraction_result = await asyncio.gather(
                 classification_task, extraction_task, return_exceptions=True
@@ -345,8 +349,8 @@ class ExpenseProcessingWorkflow(Workflow):
             logger.error(f"Classification error: {str(e)}")
             return {"error": str(e)}
 
-    async def _extract_data(self, markdown_content: str, country: str) -> Dict:
-        """Extract data using data extraction agent."""
+    async def _extract_data(self, markdown_content: str, country: str, filename: str = None) -> Dict:
+        """Extract data using data extraction agent with integrated citation generation."""
         try:
             compliance_file = pathlib.Path(f"data/{country.lower()}.json")
             if compliance_file.exists():
@@ -361,6 +365,7 @@ class ExpenseProcessingWorkflow(Workflow):
             start_time = time.time()
             logger.debug(f"🕐 Sending markdown to data extraction agent - Length: {len(markdown_content)}")
 
+            # Step 1: Normal extraction
             result = extract_data_from_receipt(compliance_json, markdown_content)
 
             extraction_time = time.time() - start_time
@@ -386,7 +391,26 @@ class ExpenseProcessingWorkflow(Workflow):
                 parsed_result = result
 
             logger.debug(f"Extraction result keys: {list(parsed_result.keys()) if isinstance(parsed_result, dict) else 'Not a dict'}")
+            
+            # Step 2: Citation generation (if filename provided)
+            if filename and isinstance(parsed_result, dict) and "error" not in parsed_result:
+                try:
+                    citations = generate_citations(
+                        structured_output=parsed_result,
+                        extraction_requirements=compliance_json,
+                        markdown_content=markdown_content,
+                        filename=filename
+                    )
+                    
+                    # Log citation statistics
+                    citation_stats = get_citation_stats(citations)
+                    logger.info(f"Citations for {filename}: {citation_stats.get('fields_with_field_citations', 0)}/{citation_stats.get('total_fields', 0)} field citations, {citation_stats.get('fields_with_value_citations', 0)}/{citation_stats.get('total_fields', 0)} value citations")
+                    
+                except Exception as e:
+                    logger.error(f"Citation generation failed for {filename}: {e}")
+            
             return parsed_result
+            
         except json.JSONDecodeError as e:
             logger.error(f"JSON parsing error in data extraction: {str(e)}")
             logger.error(f"Raw content: {getattr(result, 'content', 'No content attribute') if 'result' in locals() else 'No result'}")
