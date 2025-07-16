@@ -1,0 +1,72 @@
+{
+  "image_path": "expense_files\\german_file_4.png",
+  "assessment_method": "LLM",
+  "model_used": "claude-3-7-sonnet-20250219",
+  "timestamp": "2025-07-16T00:22:31.780763",
+  "blur_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.1,
+    "description": "The receipt exhibits clear, sharp text with well-defined edges and minimal blur.",
+    "recommendation": "No action required as text clarity is sufficient for OCR processing."
+  },
+  "contrast_assessment": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.9,
+    "description": "The receipt shows excellent contrast between the dark text and white background throughout the document.",
+    "recommendation": "No contrast adjustment needed for effective data extraction."
+  },
+  "glare_identification": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.05,
+    "description": "The receipt shows minimal glare with very slight reflections that do not impact text readability.",
+    "recommendation": "No action required as existing minor reflections don't affect data extraction."
+  },
+  "water_stains": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.98,
+    "quantitative_measure": 0.0,
+    "description": "No water stains, discoloration, or water damage evident on the receipt.",
+    "recommendation": "No action required as document is free from water damage."
+  },
+  "tears_or_folds": {
+    "detected": true,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.2,
+    "description": "The receipt has a visible curl along its length but no tears or significant folds that impact text legibility.",
+    "recommendation": "No action required as the natural curl of thermal paper doesn't impact data extraction."
+  },
+  "cut_off_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "All receipt edges are visible with no content appearing to be cut off.",
+    "recommendation": "No action required as all content is visible within the frame."
+  },
+  "missing_sections": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "The receipt appears complete with all standard sections including header, line items, and total.",
+    "recommendation": "No action required as receipt contains all expected components."
+  },
+  "obstructions": {
+    "detected": true,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.15,
+    "description": "Fingers visible holding the receipt at the left edge but not obscuring any important textual content.",
+    "recommendation": "No action required as the fingers don't obstruct any relevant receipt information."
+  },
+  "overall_quality_score": 9,
+  "suitable_for_extraction": true
+}

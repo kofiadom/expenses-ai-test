@@ -1,0 +1,72 @@
+{
+  "image_path": "expense_files\\german_file_3.png",
+  "assessment_method": "LLM",
+  "model_used": "claude-3-7-sonnet-20250219",
+  "timestamp": "2025-07-16T00:22:11.268122",
+  "blur_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.05,
+    "description": "The receipt image is well-focused with clear, readable text and sharp edges throughout the document.",
+    "recommendation": "No action required as the image quality is suitable for text recognition."
+  },
+  "contrast_assessment": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.9,
+    "description": "The black text is highly legible against the white receipt paper, providing excellent contrast for automated reading.",
+    "recommendation": "No adjustment needed as contrast is optimal for data extraction."
+  },
+  "glare_identification": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.0,
+    "description": "No noticeable glare or reflections appear on the receipt surface that would interfere with text recognition.",
+    "recommendation": "Current lighting conditions are appropriate for document scanning."
+  },
+  "water_stains": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No water damage, stains, or discoloration visible on the receipt that would affect text readability.",
+    "recommendation": "Continue to keep receipts dry and protected from liquids."
+  },
+  "tears_or_folds": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.02,
+    "description": "The receipt appears mostly flat with minimal creasing that does not impact text legibility.",
+    "recommendation": "Continue handling receipts carefully to prevent damage."
+  },
+  "cut_off_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "All edges of the receipt are visible within the frame with no content appearing to be cut off.",
+    "recommendation": "Current framing technique is appropriate for document capture."
+  },
+  "missing_sections": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "The receipt appears complete with header information, line items, totals, and footer details all visible.",
+    "recommendation": "Continue capturing the full receipt in a single frame."
+  },
+  "obstructions": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No fingers, shadows, or other objects are obstructing the view of the receipt content.",
+    "recommendation": "Current capture technique works well for avoiding obstructions."
+  },
+  "overall_quality_score": 10,
+  "suitable_for_extraction": true
+}

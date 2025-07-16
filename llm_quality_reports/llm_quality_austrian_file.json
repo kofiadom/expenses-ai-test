@@ -1,0 +1,72 @@
+{
+  "image_path": "expense_files\\austrian_file.png",
+  "assessment_method": "LLM",
+  "model_used": "claude-3-7-sonnet-20250219",
+  "timestamp": "2025-07-16T00:21:28.158775",
+  "blur_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.05,
+    "description": "The image shows clear, sharp text throughout the invoice with well-defined edges and high legibility.",
+    "recommendation": "No action needed as text clarity is excellent for OCR processing."
+  },
+  "contrast_assessment": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.98,
+    "quantitative_measure": 0.95,
+    "description": "The invoice displays excellent black text on white background with strong contrast ratio throughout the document.",
+    "recommendation": "Maintain this level of contrast in future document captures."
+  },
+  "glare_identification": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No visible glare, reflections, or overexposed areas are present on the document surface.",
+    "recommendation": "Continue using even, diffused lighting when capturing documents."
+  },
+  "water_stains": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.99,
+    "quantitative_measure": 0.0,
+    "description": "No water damage, staining, or discoloration is present on the invoice.",
+    "recommendation": "Continue protecting documents from liquids and moisture."
+  },
+  "tears_or_folds": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "The invoice appears flat with no visible creases, folds, tears or physical damage.",
+    "recommendation": "Continue handling and storing documents carefully to avoid physical damage."
+  },
+  "cut_off_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "All edges of the document are fully visible with no content cut off from the frame.",
+    "recommendation": "Maintain this complete framing approach when capturing documents."
+  },
+  "missing_sections": {
+    "detected": true,
+    "severity_level": "medium",
+    "confidence_score": 0.8,
+    "quantitative_measure": 0.3,
+    "description": "The invoice references a 'next page for payment details' which is not included in the image.",
+    "recommendation": "Capture all pages of multi-page documents to ensure complete information extraction."
+  },
+  "obstructions": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.99,
+    "quantitative_measure": 0.0,
+    "description": "No fingers, shadows, or other obstructions are visible on the document surface.",
+    "recommendation": "Maintain this clean capture approach free of obstructions."
+  },
+  "overall_quality_score": 9,
+  "suitable_for_extraction": true
+}

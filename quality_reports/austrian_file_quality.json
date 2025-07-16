@@ -19,8 +19,8 @@
       "histogram_entropy": "0.87"
     }
   },
-  "timestamp": "2025-07-15T16:04:00.397804",
-  "processing_time_seconds": 15.94,
+  "timestamp": "2025-07-16T00:19:56.426083",
+  "processing_time_seconds": 6.18,
   "overall_assessment": {
     "score": 91.5,
     "level": "Good",
@@ -244,6 +244,7 @@
       "contribution": 15.0
     }
   },
+  "assessment_method": "opencv",
   "quality_passed": "True",
   "quality_score": 91.5,
   "quality_level": "Good",

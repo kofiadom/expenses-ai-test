@@ -16,6 +16,7 @@ import fitz  # PyMuPDF for PDF preview
 from agno.utils.log import logger
 from expense_processing_workflow import ExpenseProcessingWorkflow
 from image_quality_processor import ImageQualityProcessor
+from llm_image_quality_assessor import LLMImageQualityAssessor
 
 def make_json_serializable(obj, _seen=None, _depth=0):
     """Convert objects to JSON-serializable format with recursion protection."""
@@ -141,23 +142,48 @@ def initialize_session_state():
         st.session_state.processing_complete = False
 
 def analyze_uploaded_file_quality(uploaded_file):
-    """Analyze the quality of an uploaded image file using the comprehensive quality assessment system."""
+    """Analyze the quality of an uploaded image file using both OpenCV and LLM assessment systems."""
     try:
         # Save uploaded file temporarily for analysis
         with tempfile.NamedTemporaryFile(delete=False, suffix=pathlib.Path(uploaded_file.name).suffix) as tmp_file:
             tmp_file.write(uploaded_file.getvalue())
             tmp_file_path = tmp_file.name
 
-        # Initialize quality processor
-        quality_processor = ImageQualityProcessor(document_type='receipt')
+        # Initialize quality processors
+        opencv_processor = ImageQualityProcessor(document_type='receipt')
+        llm_assessor = LLMImageQualityAssessor()
 
-        # Perform comprehensive quality assessment
-        quality_results = quality_processor.assess_image_quality(tmp_file_path)
+        # Perform OpenCV quality assessment
+        opencv_results = opencv_processor.assess_image_quality(tmp_file_path)
+
+        # Perform LLM quality assessment
+        try:
+            llm_assessment = llm_assessor.assess_image_quality_sync(tmp_file_path)
+            llm_results = llm_assessor.format_assessment_for_workflow(llm_assessment, tmp_file_path)
+        except Exception as llm_error:
+            logger.warning(f"LLM quality assessment failed for {uploaded_file.name}: {str(llm_error)}")
+            llm_results = {
+                "error": f"LLM assessment failed: {str(llm_error)}",
+                "assessment_method": "LLM",
+                "overall_quality_score": 0,
+                "suitable_for_extraction": False
+            }
+
+        # Return both results
+        combined_results = {
+            "opencv_assessment": opencv_results,
+            "llm_assessment": llm_results,
+            # Keep original format for backward compatibility
+            "quality_score": opencv_results.get("quality_score", 0),
+            "quality_level": opencv_results.get("quality_level", "Unknown"),
+            "quality_passed": opencv_results.get("quality_passed", False),
+            "overall_assessment": opencv_results.get("overall_assessment", {})
+        }
 
         # Clean up temporary file
         pathlib.Path(tmp_file_path).unlink()
 
-        return quality_results
+        return combined_results
 
     except Exception as e:
         logger.error(f"Image quality analysis failed for {uploaded_file.name}: {str(e)}")
@@ -497,7 +523,7 @@ def load_validation_result(result_file_path):
         return None
 
 def display_image_quality_result(image_quality):
-    """Display comprehensive image quality analysis results."""
+    """Display comprehensive image quality analysis results including both OpenCV and LLM assessments."""
     if not image_quality:
         st.info("No image quality analysis available")
         return
@@ -506,12 +532,42 @@ def display_image_quality_result(image_quality):
         st.error(f"Image quality analysis failed: {image_quality['error']}")
         return
 
-    st.subheader("📸 Quality Analysis")
+    # Check if we have both assessments
+    has_opencv = "opencv_assessment" in image_quality
+    has_llm = "llm_assessment" in image_quality
 
-    # Overall assessment
-    overall = image_quality.get('overall_assessment', {})
+    if has_opencv and has_llm:
+        # Display both assessments separately
+        st.subheader("📸 Quality Analysis")
 
-    # Main metrics with smaller text
+        # OpenCV Assessment (your original format)
+        st.write("**🔧 OpenCV Assessment**")
+        opencv_data = image_quality["opencv_assessment"]
+        display_opencv_quality_section(opencv_data)
+
+        st.write("---")  # Separator
+
+        # LLM Assessment (separate section)
+        st.write("**🤖 LLM Assessment**")
+        llm_data = image_quality["llm_assessment"]
+        display_llm_quality_section(llm_data)
+
+    else:
+        # Fallback to original display for backward compatibility
+        st.subheader("📸 Quality Analysis")
+        display_opencv_quality_section(image_quality)
+
+
+def display_opencv_quality_section(opencv_data):
+    """Display OpenCV quality assessment in your original format."""
+    if "error" in opencv_data:
+        st.error(f"OpenCV assessment failed: {opencv_data['error']}")
+        return
+
+    # Overall assessment (your original format)
+    overall = opencv_data.get('overall_assessment', {})
+
+    # Main metrics with smaller text (your original format)
     col1, col2, col3, col4 = st.columns(4)
 
     with col1:
@@ -528,11 +584,11 @@ def display_image_quality_result(image_quality):
         st.metric("Status", "✅ PASS" if passed else "❌ FAIL")
 
     with col4:
-        processing_time = image_quality.get('processing_time_seconds', 0)
+        processing_time = opencv_data.get('processing_time_seconds', 0)
         st.metric("Time", f"{processing_time:.1f}s")
 
-    # Score breakdown
-    score_breakdown = image_quality.get('score_breakdown', {})
+    # Score breakdown (your original format)
+    score_breakdown = opencv_data.get('score_breakdown', {})
     if score_breakdown:
         st.subheader("📊 Score Breakdown")
 
@@ -548,8 +604,8 @@ def display_image_quality_result(image_quality):
 
         st.dataframe(metrics_data, use_container_width=True, height=200)
 
-    # Detailed results in tabs
-    detailed = image_quality.get('detailed_results', {})
+    # Detailed results in tabs (your original format)
+    detailed = opencv_data.get('detailed_results', {})
     if detailed:
         st.subheader("🔍 Details")
 
@@ -655,8 +711,8 @@ def display_image_quality_result(image_quality):
             for rec in overall['recommendations']:
                 st.info(f"• {rec}")
 
-    # Image type detection info
-    image_type = image_quality.get('image_type_detection', {})
+    # Image type detection info (your original format)
+    image_type = opencv_data.get('image_type_detection', {})
     if image_type:
         with st.expander("📱 Image Type Analysis"):
             col1, col2 = st.columns(2)
@@ -665,6 +721,296 @@ def display_image_quality_result(image_quality):
                 st.metric("Image Subtype", image_type.get('image_subtype', 'Unknown'))
             with col2:
                 st.metric("Detection Confidence", f"{image_type.get('confidence', 0)*100:.0f}%")
+
+
+def display_llm_quality_section(llm_data):
+    """Display LLM quality assessment results."""
+    if "error" in llm_data:
+        st.error(f"LLM assessment failed: {llm_data['error']}")
+        return
+
+    # Overall LLM assessment
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        score = llm_data.get('overall_quality_score', 0)
+        st.metric("Score", f"{score}/10")
+
+    with col2:
+        suitable = llm_data.get('suitable_for_extraction', False)
+        st.metric("Suitable for Extraction", "✅ Yes" if suitable else "❌ No")
+
+    with col3:
+        method = llm_data.get('assessment_method', 'LLM')
+        model = llm_data.get('model_used', 'Unknown')
+        st.metric("Method", f"🤖 {method}")
+        st.caption(f"Model: {model}")
+
+    # Quality issues breakdown
+    st.subheader("🔍 Quality Issues Analysis")
+
+    quality_issues = [
+        ('blur_detection', '🌫️ Blur Detection'),
+        ('contrast_assessment', '🌗 Contrast Assessment'),
+        ('glare_identification', '💡 Glare Identification'),
+        ('water_stains', '💧 Water Stains'),
+        ('tears_or_folds', '📄 Tears/Folds'),
+        ('cut_off_detection', '✂️ Cut-off Detection'),
+        ('missing_sections', '🔍 Missing Sections'),
+        ('obstructions', '🚫 Obstructions')
+    ]
+
+    # Create a table of quality issues
+    issues_data = []
+    for issue_key, issue_name in quality_issues:
+        if issue_key in llm_data:
+            issue_data = llm_data[issue_key]
+            if isinstance(issue_data, dict):
+                issues_data.append({
+                    'Issue': issue_name,
+                    'Detected': '✅ Yes' if issue_data.get('detected', False) else '❌ No',
+                    'Severity': issue_data.get('severity_level', 'N/A').title(),
+                    'Confidence': f"{issue_data.get('confidence_score', 0):.2f}",
+                    'Measure': f"{issue_data.get('quantitative_measure', 0):.2f}",
+                    'Description': issue_data.get('description', 'N/A')[:50] + '...' if len(issue_data.get('description', '')) > 50 else issue_data.get('description', 'N/A')
+                })
+
+    if issues_data:
+        st.dataframe(issues_data, use_container_width=True, height=300)
+
+        # Show detailed recommendations for detected issues
+        detected_issues = [item for item in issues_data if item['Detected'] == '✅ Yes']
+        if detected_issues:
+            st.subheader("💡 LLM Recommendations")
+            for issue_key, issue_name in quality_issues:
+                if issue_key in llm_data:
+                    issue_data = llm_data[issue_key]
+                    if isinstance(issue_data, dict) and issue_data.get('detected', False):
+                        recommendation = issue_data.get('recommendation', 'No recommendation available')
+                        st.write(f"**{issue_name}:** {recommendation}")
+
+    # Display UQLM validation results if available
+    if 'uqlm_validation' in llm_data:
+        st.write("---")  # Separator
+        st.subheader("🎯 UQLM Validation Results")
+        display_llm_quality_validation(llm_data['uqlm_validation'])
+
+
+def display_llm_quality_validation(validation_data):
+    """Display UQLM validation results for LLM quality assessment."""
+    if not validation_data:
+        st.info("No UQLM validation data available")
+        return
+
+    # Overall validation summary
+    summary = validation_data.get('validation_summary', {})
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        confidence = summary.get('overall_confidence', 0)
+        st.metric("Validation Confidence", f"{confidence:.2f}")
+
+    with col2:
+        reliability = summary.get('reliability_level', 'Unknown')
+        color = "🟢" if reliability == "HIGH" else "🟡" if reliability == "MEDIUM" else "🔴"
+        st.metric("Reliability", f"{color} {reliability}")
+
+    with col3:
+        is_reliable = summary.get('is_reliable', False)
+        st.metric("Is Reliable", "✅ Yes" if is_reliable else "❌ No")
+
+    with col4:
+        validated_dims = summary.get('validated_dimensions_count', 0)
+        st.metric("Dimensions Validated", validated_dims)
+
+    # Recommendation
+    recommendation = summary.get('recommendation', 'No recommendation available')
+    if recommendation:
+        st.info(f"**💡 Recommendation:** {recommendation}")
+
+    # Critical issues
+    critical_issues = summary.get('critical_issues', [])
+    if critical_issues:
+        st.subheader("⚠️ Validation Issues")
+        for issue in critical_issues:
+            st.warning(f"• {issue}")
+
+    # Dimensional analysis
+    dimensional = validation_data.get('dimensional_analysis', {})
+    if dimensional:
+        st.subheader("📊 Dimensional Analysis")
+
+        dim_data = []
+        for dim_name, dim_result in dimensional.items():
+            if hasattr(dim_result, 'confidence_score'):  # Handle dataclass objects
+                dim_data.append({
+                    'Dimension': dim_name.replace('_', ' ').title(),
+                    'Confidence': f"{dim_result.confidence_score:.2f}",
+                    'Reliability': dim_result.reliability_level.title(),
+                    'Issues': len(dim_result.issues),
+                    'Summary': dim_result.summary[:50] + '...' if len(dim_result.summary) > 50 else dim_result.summary
+                })
+            elif isinstance(dim_result, dict):  # Handle dict objects
+                dim_data.append({
+                    'Dimension': dim_name.replace('_', ' ').title(),
+                    'Confidence': f"{dim_result.get('confidence_score', 0):.2f}",
+                    'Reliability': dim_result.get('reliability_level', 'Unknown').title(),
+                    'Issues': len(dim_result.get('issues', [])),
+                    'Summary': dim_result.get('summary', 'N/A')[:50] + '...' if len(dim_result.get('summary', '')) > 50 else dim_result.get('summary', 'N/A')
+                })
+
+        if dim_data:
+            st.dataframe(dim_data, use_container_width=True, height=250)
+
+    # Display judge assessments if available
+    if 'judge_assessments' in validation_data:
+        st.write("---")  # Separator
+        st.subheader("🤖 Judge LLM Assessments")
+        display_judge_assessments(validation_data['judge_assessments'])
+
+    # Display judge consensus if available
+    if 'judge_consensus' in validation_data:
+        st.write("---")  # Separator
+        st.subheader("📊 Judge Consensus Analysis")
+        display_judge_consensus(validation_data['judge_consensus'])
+
+
+def display_judge_assessments(judge_assessments):
+    """Display independent quality assessments from judge LLMs."""
+    if not judge_assessments:
+        st.info("No judge assessments available")
+        return
+
+    # Create tabs for each judge
+    judge_names = list(judge_assessments.keys())
+    if len(judge_names) == 1:
+        # Single judge - no tabs needed
+        judge_name = judge_names[0]
+        st.write(f"**{judge_name.replace('_', ' ').title()} Assessment:**")
+        display_single_judge_assessment(judge_assessments[judge_name])
+    else:
+        # Multiple judges - use tabs
+        tabs = st.tabs([judge_name.replace('_', ' ').title() for judge_name in judge_names])
+
+        for tab, judge_name in zip(tabs, judge_names):
+            with tab:
+                display_single_judge_assessment(judge_assessments[judge_name])
+
+
+def display_single_judge_assessment(assessment):
+    """Display a single judge's quality assessment."""
+    if "error" in assessment:
+        st.error(f"Judge assessment failed: {assessment['error']}")
+        return
+
+    # Overall metrics
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        score = assessment.get('overall_quality_score', 0)
+        st.metric("Quality Score", f"{score}/10")
+
+    with col2:
+        suitable = assessment.get('suitable_for_extraction', False)
+        st.metric("Suitable for Extraction", "✅ Yes" if suitable else "❌ No")
+
+    with col3:
+        judge_name = assessment.get('judge_name', 'Unknown')
+        st.metric("Judge", judge_name.replace('_', ' ').title())
+
+    # Quality issues summary
+    quality_issues = [
+        ('blur_detection', '🌫️ Blur'),
+        ('contrast_assessment', '🌗 Contrast'),
+        ('glare_identification', '💡 Glare'),
+        ('water_stains', '💧 Water Stains'),
+        ('tears_or_folds', '📄 Tears/Folds'),
+        ('cut_off_detection', '✂️ Cut-off'),
+        ('missing_sections', '🔍 Missing Sections'),
+        ('obstructions', '🚫 Obstructions')
+    ]
+
+    # Create summary table
+    issues_data = []
+    for issue_key, issue_name in quality_issues:
+        if issue_key in assessment and isinstance(assessment[issue_key], dict):
+            issue_data = assessment[issue_key]
+            issues_data.append({
+                'Issue': issue_name,
+                'Detected': '✅ Yes' if issue_data.get('detected', False) else '❌ No',
+                'Severity': issue_data.get('severity_level', 'N/A').title(),
+                'Confidence': f"{issue_data.get('confidence_score', 0):.2f}",
+                'Measure': f"{issue_data.get('quantitative_measure', 0):.2f}"
+            })
+
+    if issues_data:
+        st.dataframe(issues_data, use_container_width=True, height=300)
+
+
+def display_judge_consensus(consensus):
+    """Display consensus analysis from multiple judge assessments."""
+    if not consensus or "error" in consensus:
+        st.info("No consensus data available")
+        return
+
+    # Overall consensus metrics
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        judge_count = consensus.get('judge_count', 0)
+        st.metric("Judge Count", judge_count)
+
+    with col2:
+        score_consensus = consensus.get('score_consensus', {})
+        avg_score = score_consensus.get('average_score', 0)
+        st.metric("Average Score", f"{avg_score:.1f}/10")
+
+    with col3:
+        score_agreement = score_consensus.get('score_agreement', 'unknown')
+        color = "🟢" if score_agreement == "high" else "🟡" if score_agreement == "medium" else "🔴"
+        st.metric("Score Agreement", f"{color} {score_agreement.title()}")
+
+    with col4:
+        overall_agreement = consensus.get('overall_agreement', 'unknown')
+        color = "🟢" if overall_agreement == "high" else "🟡" if overall_agreement == "medium" else "🔴"
+        st.metric("Overall Agreement", f"{color} {overall_agreement.title()}")
+
+    # Suitability consensus
+    suitability = consensus.get('suitability_consensus', {})
+    suitable_pct = suitability.get('suitable_percentage', 0)
+    unanimous = suitability.get('unanimous', False)
+
+    st.write(f"**Extraction Suitability:** {suitable_pct:.0f}% of judges agree it's suitable")
+    if unanimous:
+        st.success("✅ Unanimous agreement on suitability")
+    else:
+        st.warning("⚠️ Judges disagree on extraction suitability")
+
+    # Issue-level consensus
+    issue_consensus = consensus.get('issue_level_consensus', {})
+    if issue_consensus:
+        st.subheader("📋 Issue-Level Consensus")
+
+        consensus_data = []
+        for issue_key, issue_data in issue_consensus.items():
+            issue_name = issue_key.replace('_', ' ').title()
+            detection_consensus = issue_data.get('detection_consensus', 0)
+            severity_agreement = issue_data.get('severity_agreement', False)
+            most_common_severity = issue_data.get('most_common_severity', 'N/A')
+            avg_confidence = issue_data.get('avg_confidence', 0)
+
+            consensus_data.append({
+                'Issue': issue_name,
+                'Detection Agreement': f"{detection_consensus*100:.0f}%",
+                'Severity Agreement': "✅ Yes" if severity_agreement else "❌ No",
+                'Common Severity': most_common_severity.title(),
+                'Avg Confidence': f"{avg_confidence:.2f}"
+            })
+
+        if consensus_data:
+            st.dataframe(consensus_data, use_container_width=True, height=300)
+
 
 def display_validation_result(validation):
     """Display UQLM validation results in a formatted way."""
