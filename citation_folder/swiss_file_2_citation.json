@@ -1,0 +1,266 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "# Bebbis Restaurant",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "The heading in the markdown text which indicates the supplier name.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Bebbis Restaurant",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Appears as a header indicating the supplier.",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Dorfstrasse 130\n3818 Grindelwald",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Listed below the supplier name in the markdown text.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Dorfstrasse 130\n3818 Grindelwald",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Address is directly shown after the supplier heading.",
+        "match_type": "exact"
+      }
+    },
+    "company_registration": {
+      "field_citation": {
+        "source_text": "MWST-Nr:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "This indicates the company registration number on invoices.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "CHE-105.722.791",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Listed after 'MWST-Nr:' signifying the registration number.",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Summe :",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Sum amount on the receipt indicates use of currency.",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Fr.",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Fr. is used alongside totals indicating CHF currency.",
+        "match_type": "exact"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "Summe :",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Label for total amount on receipt.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "92.80 Fr.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "The total amount is clearly indicated in final totals.",
+        "match_type": "fuzzy"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "Rg.:",
+        "confidence": 0.7,
+        "source_location": "markdown",
+        "context": "Typically used to denote invoice numbers in documentation.",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "invoice",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "The context of 'Rg.' implies an invoice due to transaction format.",
+        "match_type": "contextual"
+      }
+    },
+    "vat_number": {
+      "field_citation": {
+        "source_text": "MWST-Nr:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "The label for the VAT business identification number.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "CHE-105.722.791",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "This value follows the VAT number label.",
+        "match_type": "exact"
+      }
+    },
+    "vat_rate": {
+      "field_citation": {
+        "source_text": "ENTHALTENE MWST 7.7% :",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Label indicating the VAT rate on receipt.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "7.7%",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "The VAT percentage used in calculation.",
+        "match_type": "exact"
+      }
+    },
+    "vat_amount": {
+      "field_citation": {
+        "source_text": "ENTHALTENE MWST 7.7% :",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Label indicating the VAT amount derived at 7.7% rate.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "6.63 Fr.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Calculated and displayed in relation to VAT rate.",
+        "match_type": "fuzzy"
+      }
+    },
+    "transaction_date": {
+      "field_citation": {
+        "source_text": "04.04.2023",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Date on the receipt providing transaction date.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "04.04.2023",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Listed as the transaction date on receipt.",
+        "match_type": "exact"
+      }
+    },
+    "transaction_time": {
+      "field_citation": {
+        "source_text": "17:11",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Time on the receipt providing transaction time.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "17:11",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "The exact time the transaction was recorded.",
+        "match_type": "exact"
+      }
+    },
+    "contact_phone": {
+      "field_citation": {
+        "source_text": "TEL:",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Field label for contact telephone number.",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "+41 33 525 08 25",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Phone number provided directly under contact details.",
+        "match_type": "exact"
+      }
+    },
+    "contact_email": {
+      "field_citation": {
+        "source_text": "admin@bebbis.com",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Email address provided in contact details.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "admin@bebbis.com",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Directly visible as the contact email.",
+        "match_type": "exact"
+      }
+    },
+    "contact_website": {
+      "field_citation": {
+        "source_text": "www.bebbis.com",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Listed as business website in contact details.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "www.bebbis.com",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Direct contact website provided.",
+        "match_type": "exact"
+      }
+    },
+    "table_number": {
+      "field_citation": {
+        "source_text": "Tisch:",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Indicates the table number for the transaction.",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "14",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Provided as part of table information in transaction.",
+        "match_type": "exact"
+      }
+    },
+    "transaction_reference": {
+      "field_citation": {
+        "source_text": "Rg.:",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Field indicating the transaction reference",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "54",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "The reference number for the transaction listed post receipt header.",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 17,
+    "fields_with_field_citations": 17,
+    "fields_with_value_citations": 17,
+    "average_confidence": 0.87
+  }
+}

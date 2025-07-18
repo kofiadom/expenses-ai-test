@@ -1,0 +1,313 @@
+{
+  "source_file": "netta_austria_1.md",
+  "processing_timestamp": "2025-07-16T23:04:28.406834",
+  "dataset_metadata": {
+    "filepath": "expense_files/netta_austria_1.png",
+    "filename": "netta_austria_1.png",
+    "country": "Austria",
+    "icp": "Global People",
+    "dataset_file": "netta_austria_1.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "accommodation",
+    "language": "German",
+    "language_confidence": 95,
+    "document_location": "Germany",
+    "expected_location": "Austria",
+    "location_match": false,
+    "error_type": "File location is not same as project's location",
+    "error_message": "The document location, Germany, does not match the expected location, Austria.",
+    "classification_confidence": 95,
+    "reasoning": "The document contains at least 5 schema fields: supplier, transactionAmount, transactionDate, invoiceReceiptNumber, and taxInformation. It matches the criteria for an expense, specifically in the accommodation category due to the presence of a hotel and room charge.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionAmount",
+        "transactionDate",
+        "invoiceReceiptNumber",
+        "taxInformation"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "icpRequirements",
+        "paymentMethod",
+        "itemDescriptionLineItems"
+      ],
+      "total_fields_found": 5,
+      "expense_identification_reasoning": "The document qualifies as an expense since it contains the supplier information (Hotel M\u00fcnchen GmbH), transaction amount (40.00 EUR), transaction date (10.04.2024), invoice/receipt number (BelegNr: 900000702), and tax information with rates (19% and 7%)."
+    }
+  },
+  "extraction_result": {
+    "supplier_name": "Hotel M\u00fcnchen GmbH",
+    "supplier_address": "Dachauer Str. 15A, 80335 Munich",
+    "vat_number": "DE311053702",
+    "currency": "EUR",
+    "amount": 40.0,
+    "receipt_type": "Invoice",
+    "receipt_quality": null,
+    "personal_information": null,
+    "business_trip_reporting": null,
+    "travel_template": null,
+    "manager_approval": null,
+    "route_map": null,
+    "kilometer_record": null,
+    "car_details": null,
+    "parking_documentation": null,
+    "date_of_issue": "2024-04-10",
+    "transaction_time": "09:53:06",
+    "transaction_reference": "900000702",
+    "payment_method": "Bar",
+    "line_items": [
+      {
+        "description": "US Netzadapter",
+        "quantity": 1,
+        "unit_price": 10.0,
+        "total_price": 10.0,
+        "tax_rate": 19
+      },
+      {
+        "description": "High-Speed WLAN",
+        "quantity": 1,
+        "unit_price": 10.0,
+        "total_price": 10.0,
+        "tax_rate": 19
+      },
+      {
+        "description": "Einzelzimmer",
+        "quantity": 1,
+        "unit_price": 20.0,
+        "total_price": 20.0,
+        "tax_rate": 7
+      }
+    ],
+    "subtotal": 35.5,
+    "tax_total": 4.5,
+    "total_amount": 40.0,
+    "tax_details": [
+      {
+        "tax_rate": 19,
+        "net_amount": 16.81,
+        "tax_amount": 3.19,
+        "gross_amount": 20.0
+      },
+      {
+        "tax_rate": 7,
+        "net_amount": 18.69,
+        "tax_amount": 1.31,
+        "gross_amount": 20.0
+      }
+    ],
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "Supplier Name",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "\"field_type\": \"Supplier Name\", \"description\": \"Name of the supplier/vendor on invoice\"",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Hotel M\u00fcnchen GmbH",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Hotel M\u00fcnchen GmbH\nDachauer Str. 15A",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "Supplier Address",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "\"field_type\": \"Supplier Address\", \"description\": \"Address of the supplier on invoice\"",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Dachauer Str. 15A, 80335 Munich",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Dachauer Str. 15A\n80335 Munich",
+            "match_type": "fuzzy"
+          }
+        },
+        "vat_number": {
+          "field_citation": {
+            "source_text": "VAT Number",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "\"field_type\": \"VAT Number\", \"description\": \"VAT identification number\"",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "DE311053702",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "USt.-ID.: DE311053702",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "Currency",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "\"field_type\": \"Currency\", \"description\": \"Receipt currency\"",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "EUR",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Gesamt 40.00 EUR",
+            "match_type": "exact"
+          }
+        },
+        "amount": {
+          "field_citation": {
+            "source_text": "Amount",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "\"field_type\": \"Amount\", \"description\": \"Expense amount\"",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "40.00",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Gesamt 40.00 EUR",
+            "match_type": "fuzzy"
+          }
+        },
+        "receipt_type": {
+          "field_citation": {
+            "source_text": "Receipt Type",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "\"field_type\": \"Receipt Type\", \"description\": \"Type of supporting document\"",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Invoice",
+            "confidence": 0.7,
+            "source_location": "markdown",
+            "context": "Actual invoices, not booking confirmations",
+            "match_type": "contextual"
+          }
+        },
+        "date_of_issue": {
+          "field_citation": {
+            "source_text": "Datum",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Datum: 10.04.2024 09:53:06",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "10.04.2024",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Datum: 10.04.2024 09:53:06",
+            "match_type": "exact"
+          }
+        },
+        "transaction_time": {
+          "field_citation": {
+            "source_text": "Datum",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Datum: 10.04.2024 09:53:06",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "09:53:06",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Datum: 10.04.2024 09:53:06",
+            "match_type": "exact"
+          }
+        },
+        "transaction_reference": {
+          "field_citation": {
+            "source_text": "BelegNr",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "BelegNr: 900000702",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "900000702",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "BelegNr: 900000702",
+            "match_type": "exact"
+          }
+        },
+        "payment_method": {
+          "field_citation": {
+            "source_text": "Payment Method",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "\"field_type\": \"Bar\", \"description\": \"Cash or bank transfer detailing\"",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "Bar",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Bar 40.00",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 11,
+        "fields_with_field_citations": 11,
+        "fields_with_value_citations": 11,
+        "average_confidence": 0.91
+      }
+    }
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 3,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name 'Hotel M\u00fcnchen GmbH' does not match the mandatory ICP-specific requirement for Global People IT-Services GmbH.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Must be Global People IT-Services GmbH"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "The supplier address 'Dachauer Str. 15A, 80335 Munich' does not match the mandatory ICP-specific address 'K\u00e4rntner Ring 12, A-1010 Vienna, Austria'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "K\u00e4rntner Ring 12, A-1010 Vienna, Austria"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "The VAT number provided 'DE311053702' does not match the required Austrian format 'ATU77112189' for the ICP-specific requirement.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "ATU77112189"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt is non-compliant with the ICP-specific requirements for supplier name, address, and VAT number, all of which are mandatory fields. Corrective actions are required to achieve compliance."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Austria",
+      "icp": "Global People",
+      "receipt_type": "accommodation",
+      "issues_count": 3,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": false
+}

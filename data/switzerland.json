@@ -1,242 +1,243 @@
 {
-  "title": "Switzerland Expense Reimbursement Database Tables",
-  "file_related_requirements": [
-    {
-      "field_type": "Supplier Name",
-      "description": "Name of the supplier/vendor on invoice",
-      "receipt_type": "All",
-      "icp_specific": "Yes",
-      "icp_name": "Global PPL CH GmbH",
-      "mandatory_optional": "Mandatory",
-      "rule": "Must be Global PPL CH GmbH"
-    },
-    {
-      "field_type": "Supplier Address",
-      "description": "Address of the supplier on invoice",
-      "receipt_type": "All",
-      "icp_specific": "Yes",
-      "icp_name": "Global PPL CH GmbH",
-      "mandatory_optional": "Mandatory",
-      "rule": "Freigutstrasse 2 8002 Zürich, Switzerland"
-    },
-    {
-      "field_type": "Company Registration",
-      "description": "Swiss company registration number",
-      "receipt_type": "All",
-      "icp_specific": "Yes",
-      "icp_name": "Global PPL CH GmbH",
-      "mandatory_optional": "Mandatory",
-      "rule": "CHE-295.369.918"
-    },
-    {
-      "field_type": "Supplier Name",
-      "description": "Exception for flights/bookings",
-      "receipt_type": "Travel",
-      "icp_specific": "Yes",
-      "icp_name": "Global PPL CH GmbH",
-      "mandatory_optional": "Optional",
-      "rule": "Worker's name acceptable when Local Employer name not possible"
-    },
-    {
-      "field_type": "Currency",
-      "description": "Receipt currency and exchange rate",
-      "receipt_type": "All",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "mandatory_optional": "Mandatory",
-      "rule": "Local currency with FX rate calculation"
-    },
-    {
-      "field_type": "Amount",
-      "description": "Expense amount",
-      "receipt_type": "All",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "mandatory_optional": "Mandatory",
-      "rule": "Must be clearly stated on receipt"
-    },
-    {
-      "field_type": "Receipt Type",
-      "description": "Type of supporting document",
-      "receipt_type": "All",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "mandatory_optional": "Mandatory",
-      "rule": "Must be actual tax receipts or invoices, not booking confirmations"
-    },
-    {
-      "field_type": "Personal Information",
-      "description": "Privacy requirement for receipts",
-      "receipt_type": "All",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "mandatory_optional": "Mandatory",
-      "rule": "Any personal information not required for reimbursement must be removed"
-    },
-    {
-      "field_type": "Business Trip Reporting",
-      "description": "Separate reports requirement",
-      "receipt_type": "Travel",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "mandatory_optional": "Mandatory",
-      "rule": "Submit separate report per each business trip"
-    },
-    {
-      "field_type": "Travel Template",
-      "description": "Specific reporting template",
-      "receipt_type": "Travel",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "mandatory_optional": "Mandatory",
-      "rule": "Must use Travel Expense Report Template Switzerland CHF.xlsx"
-    },
-    {
-      "field_type": "Manager Approval",
-      "description": "Direct manager approval",
-      "receipt_type": "Training",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "mandatory_optional": "Mandatory",
-      "rule": "Required for training expenses"
-    },
-    {
-      "field_type": "Route Map",
-      "description": "Travel route documentation",
-      "receipt_type": "Mileage",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "mandatory_optional": "Mandatory",
-      "rule": "Map with relevant route (Google Maps sufficient)"
-    },
-    {
-      "field_type": "Car Details",
-      "description": "Vehicle information",
-      "receipt_type": "Mileage",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "mandatory_optional": "Mandatory",
-      "rule": "Car details and destination required"
-    },
-    {
-      "field_type": "Logbook",
-      "description": "Vehicle usage documentation",
-      "receipt_type": "Mileage",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "mandatory_optional": "Mandatory",
-      "rule": "Logbook required for each used car"
-    },
-    {
-      "field_type": "Combined Mileage",
-      "description": "Multiple vehicle tracking",
-      "receipt_type": "Mileage",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "mandatory_optional": "Mandatory",
-      "rule": "Combined mileage total if using more than one vehicle per year"
-    }
-  ],
-  "compliance_and_policies": [
-    {
-      "type": "Business Expenses (Non-Travel)",
-      "description": "General business expenses for job completion",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "gross_up_limit": "No limit specified",
-      "gross_up_rule": "Usually tax exempt, grossed up if not tax free",
-      "additional_info_required": "Yes",
-      "additional_info_description": "Receipt alone is not enough - you must provide sufficient proof like tax receipts or invoices"
-    },
-    {
-      "type": "Office Equipment",
-      "description": "Laptops, office supplies, etc.",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "gross_up_limit": "No limit specified",
-      "gross_up_rule": "Tax-free with sufficient proof",
-      "additional_info_required": "Yes",
-      "additional_info_description": "Receipt alone is not enough - you must provide sufficient proof (receipts, invoices) and ensure Local Employer name on invoice"
-    },
-    {
-      "type": "Small Business Expenses",
-      "description": "Small business expenses during trips",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "gross_up_limit": "CHF 20 maximum",
-      "gross_up_rule": "Tax-free up to CHF 20",
-      "additional_info_required": "No",
-      "additional_info_description": "Receipt is enough - no additional information needed"
-    },
-    {
-      "type": "Training",
-      "description": "Training expenses",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "gross_up_limit": "No limit specified",
-      "gross_up_rule": "Tax exempt with manager approval",
-      "additional_info_required": "Yes",
-      "additional_info_description": "Receipt alone is not enough - you must get approval from your direct manager"
-    },
-    {
-      "type": "Mileage",
-      "description": "Private vehicles, cars, vans, motorbikes, bicycles",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "gross_up_limit": "Official rates apply",
-      "gross_up_rule": "Based on official Swiss mileage rates",
-      "additional_info_required": "Yes",
-      "additional_info_description": "Receipt is not applicable - you must provide map with route (Google Maps sufficient), car details, destination, and logbook for each car used"
-    },
-    {
-      "type": "Combined Vehicle Mileage",
-      "description": "Multiple vehicles used in one year",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "gross_up_limit": "Combined calculation",
-      "gross_up_rule": "All mileage calculated based on combined total",
-      "additional_info_required": "Yes",
-      "additional_info_description": "Receipt is not applicable - you must track combined mileage total for all vehicles used"
-    },
-    {
-      "type": "Domestic Business Travel",
-      "description": "Domestic business trips",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "gross_up_limit": "Set per diem rates",
-      "gross_up_rule": "Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40",
-      "additional_info_required": "No",
-      "additional_info_description": "Receipt is enough - per diem covers meals, additional costs reimbursed against receipts"
-    },
-    {
-      "type": "Domestic Travel Alternative",
-      "description": "Alternative to per diem for domestic travel",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "gross_up_limit": "No limit specified",
-      "gross_up_rule": "Can reimburse meals against receipts instead of per diem",
-      "additional_info_required": "Yes",
-      "additional_info_description": "Receipt alone is not enough - you must provide receipts for meals if not using per diem method"
-    },
-    {
-      "type": "International Business Travel",
-      "description": "International business trips",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "gross_up_limit": "Set per diem rates",
-      "gross_up_rule": "Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40",
-      "additional_info_required": "Yes",
-      "additional_info_description": "Receipt alone is not enough - overnight expenses (hotels, transport) must be reimbursed against receipts"
-    },
-    {
-      "type": "International Travel Enhanced",
-      "description": "International travel with increased per diem",
-      "icp_specific": "No",
-      "icp_name": "All ICPs",
-      "gross_up_limit": "Excess amount taxable",
-      "gross_up_rule": "Portion exceeding set rate is taxable",
-      "additional_info_required": "Yes",
-      "additional_info_description": "Receipt alone is not enough - you must provide receipts for any amount above the set per diem rate"
-    }
-  ]
+  "switzerlandExpenseReimbursementDatabaseTables": {
+    "fileRelatedRequirements": [
+      {
+        "fieldType": "Customer Name on Invoice",
+        "description": "Local Employer name as customer on supplier invoice",
+        "receiptType": "All",
+        "icpSpecific": true,
+        "icpName": "Global PPL CH GmbH",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Must show Global PPL CH GmbH as customer"
+      },
+      {
+        "fieldType": "Customer Address on Invoice",
+        "description": "Local Employer address as customer on supplier invoice",
+        "receiptType": "All",
+        "icpSpecific": true,
+        "icpName": "Global PPL CH GmbH",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Must show Freigutstrasse 2 8002 Zürich, Switzerland"
+      },
+      {
+        "fieldType": "Customer Registration on Invoice",
+        "description": "Local Employer registration as customer on supplier invoice",
+        "receiptType": "All",
+        "icpSpecific": true,
+        "icpName": "Global PPL CH GmbH",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Must show CHE-295.369.918"
+      },
+      {
+        "fieldType": "Customer Name Exception",
+        "description": "Exception for flights/bookings where Local Employer name not possible",
+        "receiptType": "Travel",
+        "icpSpecific": true,
+        "icpName": "Global PPL CH GmbH",
+        "mandatoryOptional": "Optional",
+        "rule": "Worker's name acceptable when Local Employer name not possible"
+      },
+      {
+        "fieldType": "Currency",
+        "description": "Receipt currency and exchange rate",
+        "receiptType": "All",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Local currency with FX rate calculation"
+      },
+      {
+        "fieldType": "Amount",
+        "description": "Expense amount",
+        "receiptType": "All",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Must be clearly stated on receipt"
+      },
+      {
+        "fieldType": "Receipt Type",
+        "description": "Type of supporting document",
+        "receiptType": "All",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Must be actual tax receipts or invoices, not booking confirmations"
+      },
+      {
+        "fieldType": "Personal Information",
+        "description": "Privacy requirement for receipts",
+        "receiptType": "All",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Any personal information not required for reimbursement must be removed"
+      },
+      {
+        "fieldType": "Business Trip Reporting",
+        "description": "Separate reports requirement",
+        "receiptType": "Travel",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Submit separate report per each business trip"
+      },
+      {
+        "fieldType": "Travel Template",
+        "description": "Specific reporting template",
+        "receiptType": "Travel",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Must use Travel Expense Report Template Switzerland CHF.xlsx"
+      },
+      {
+        "fieldType": "Manager Approval",
+        "description": "Direct manager approval",
+        "receiptType": "Training",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Required for training expenses"
+      },
+      {
+        "fieldType": "Route Map",
+        "description": "Travel route documentation",
+        "receiptType": "Mileage",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Map with relevant route (Google Maps sufficient)"
+      },
+      {
+        "fieldType": "Car Details",
+        "description": "Vehicle information",
+        "receiptType": "Mileage",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Car details and destination required"
+      },
+      {
+        "fieldType": "Logbook",
+        "description": "Vehicle usage documentation",
+        "receiptType": "Mileage",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Logbook required for each used car"
+      },
+      {
+        "fieldType": "Combined Mileage",
+        "description": "Multiple vehicle tracking",
+        "receiptType": "Mileage",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "mandatoryOptional": "Mandatory",
+        "rule": "Combined mileage total if using more than one vehicle per year"
+      }
+    ],
+    "complianceAndPolicies": [
+      {
+        "type": "Business Expenses (Non-Travel)",
+        "description": "General business expenses for job completion",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "grossUpLimit": "No limit specified",
+        "grossUpRule": "Usually tax exempt, grossed up if not tax free",
+        "additionalInfoRequired": true,
+        "additionalInfoDescription": "Receipt alone is not enough - you must provide sufficient proof like tax receipts or invoices"
+      },
+      {
+        "type": "Office Equipment",
+        "description": "Laptops, office supplies, etc.",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "grossUpLimit": "No limit specified",
+        "grossUpRule": "Tax-free with sufficient proof",
+        "additionalInfoRequired": true,
+        "additionalInfoDescription": "Receipt alone is not enough - you must provide sufficient proof (receipts, invoices) and ensure Local Employer name on invoice"
+      },
+      {
+        "type": "Small Business Expenses",
+        "description": "Small business expenses during trips",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "grossUpLimit": "CHF 20 maximum",
+        "grossUpRule": "Tax-free up to CHF 20",
+        "additionalInfoRequired": false,
+        "additionalInfoDescription": "Receipt is enough - no additional information needed"
+      },
+      {
+        "type": "Training",
+        "description": "Training expenses",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "grossUpLimit": "No limit specified",
+        "grossUpRule": "Tax exempt with manager approval",
+        "additionalInfoRequired": true,
+        "additionalInfoDescription": "Receipt alone is not enough - you must get approval from your direct manager"
+      },
+      {
+        "type": "Mileage",
+        "description": "Private vehicles, cars, vans, motorbikes, bicycles",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "grossUpLimit": "Official rates apply",
+        "grossUpRule": "Based on official Swiss mileage rates",
+        "additionalInfoRequired": true,
+        "additionalInfoDescription": "Receipt is not applicable - you must provide map with route (Google Maps sufficient), car details, destination, and logbook for each car used"
+      },
+      {
+        "type": "Combined Vehicle Mileage",
+        "description": "Multiple vehicles used in one year",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "grossUpLimit": "Combined",
+        "grossUpRule": "All mileage calculated based on combined total",
+        "additionalInfoRequired": true,
+        "additionalInfoDescription": "Receipt is not applicable - you must track combined mileage total for all vehicles used"
+      },
+      {
+        "type": "Domestic Business Travel",
+        "description": "Domestic business trips",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "grossUpLimit": "Set per diem rates",
+        "grossUpRule": "Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40",
+        "additionalInfoRequired": false,
+        "additionalInfoDescription": "Receipt is enough - per diem covers meals, additional costs reimbursed against receipts"
+      },
+      {
+        "type": "Domestic Travel Alternative",
+        "description": "Alternative to per diem for domestic travel",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "grossUpLimit": "No limit specified",
+        "grossUpRule": "Can reimburse meals against receipts instead of per diem",
+        "additionalInfoRequired": true,
+        "additionalInfoDescription": "Receipt alone is not enough - you must provide receipts for meals if not using per diem method"
+      },
+      {
+        "type": "International Business Travel",
+        "description": "International business trips",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "grossUpLimit": "Set per diem rates",
+        "grossUpRule": "Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40",
+        "additionalInfoRequired": true,
+        "additionalInfoDescription": "Receipt alone is not enough - overnight expenses (hotels, transport) must be reimbursed against receipts"
+      },
+      {
+        "type": "International Travel Enhanced",
+        "description": "International travel with increased per diem",
+        "icpSpecific": false,
+        "icpName": "All ICPs",
+        "grossUpLimit": "Excess amount taxable",
+        "grossUpRule": "Portion exceeding set rate is taxable",
+        "additionalInfoRequired": true,
+        "additionalInfoDescription": "Receipt alone is not enough - you must provide receipts for any amount above the set per diem rate"
+      }
+    ]
+  }
 }

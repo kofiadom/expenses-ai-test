@@ -1,0 +1,218 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "FOTOGRAFIE - SARAH MARCHSREITER",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "FOTOGRAFIE - SARAH MARCHSREITER",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "FOTOGRAFIE - SARAH MARCHSREITER",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "FOTOGRAFIE - SARAH MARCHSREITER",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Preis",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "| Beschreibung | Anzahl | Preis |",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "860€",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| **Summe** | | | **860€** |",
+        "match_type": "fuzzy"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "Summe",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| **Summe** | | | **860€** |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "860€",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| **Summe** | | | **860€** |",
+        "match_type": "fuzzy"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "28. APRIL 2030",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "RECHNUNG NR. 12345\n28. APRIL 2030",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "28. APRIL 2030",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "RECHNUNG NR. 12345\n28. APRIL 2030",
+        "match_type": "fuzzy"
+      }
+    },
+    "transaction_reference": {
+      "field_citation": {
+        "source_text": "RECHNUNG NR.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "RECHNUNG AN: RECHNUNG NR. 12345",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "12345",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "RECHNUNG AN: RECHNUNG NR. 12345",
+        "match_type": "exact"
+      }
+    },
+    "tax_rate": {
+      "field_citation": {
+        "source_text": "Steuer (0 %)",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| Steuer (0 %) | | | 0 € |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "0 %",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| Steuer (0 %) | | | 0 € |",
+        "match_type": "fuzzy"
+      }
+    },
+    "vat": {
+      "field_citation": {
+        "source_text": "Steuer (0 %)",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "| Steuer (0 %) | | | 0 € |",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "0 €",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| Steuer (0 %) | | | 0 € |",
+        "match_type": "exact"
+      }
+    },
+    "contact_name": {
+      "field_citation": {
+        "source_text": "RECHNUNG AN:",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "RECHNUNG AN: VINCENT VOGELSTETTER",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "VINCENT VOGELSTETTER",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "RECHNUNG AN: VINCENT VOGELSTETTER",
+        "match_type": "exact"
+      }
+    },
+    "contact_address": {
+      "field_citation": {
+        "source_text": "RECHNUNG AN:",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "RECHNUNG AN: JEDE STRASSE 123, 12345 JEDE STADT",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "JEDE STRASSE 123, 12345 JEDE STADT",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "RECHNUNG AN: JEDE STRASSE 123, 12345 JEDE STADT",
+        "match_type": "exact"
+      }
+    },
+    "payment_recipient": {
+      "field_citation": {
+        "source_text": "EMPFÄNGER:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "ZAHLUNGSINFORMATIONEN: EMPFÄNGER: SARAH MARCHSREITER",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "SARAH MARCHSREITER",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "ZAHLUNGSINFORMATIONEN: EMPFÄNGER: SARAH MARCHSREITER",
+        "match_type": "exact"
+      }
+    },
+    "account_number": {
+      "field_citation": {
+        "source_text": "KONTONUMMER:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "ZAHLUNGSINFORMATIONEN: KONTONUMMER: 0123 4567 8901",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "0123 4567 8901",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "ZAHLUNGSINFORMATIONEN: KONTONUMMER: 0123 4567 8901",
+        "match_type": "exact"
+      }
+    },
+    "subtotal": {
+      "field_citation": {
+        "source_text": "Zwischensumme",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "| Zwischensumme | | | 860€ |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "860€",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| Zwischensumme | | | 860€ |",
+        "match_type": "fuzzy"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "RECHNUNG",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "# RECHNUNG",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "RECHNUNG",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "# RECHNUNG",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 13,
+    "fields_with_field_citations": 13,
+    "fields_with_value_citations": 13,
+    "average_confidence": 0.905
+  }
+}

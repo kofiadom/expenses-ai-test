@@ -1,0 +1,72 @@
+{
+  "image_path": "expense_files\\netta_italy_1.png",
+  "assessment_method": "LLM",
+  "model_used": "claude-3-7-sonnet-20250219",
+  "timestamp": "2025-07-16T22:32:45.017448",
+  "blur_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.1,
+    "description": "The receipt shows clear, well-defined text with good sharpness and minimal blur.",
+    "recommendation": "No action needed as text clarity is sufficient for OCR processing."
+  },
+  "contrast_assessment": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.85,
+    "description": "The receipt exhibits excellent black text contrast against the white background.",
+    "recommendation": "No contrast enhancement needed for this receipt."
+  },
+  "glare_identification": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.05,
+    "description": "Minimal glare is present and does not interfere with text readability.",
+    "recommendation": "No action needed regarding glare issues."
+  },
+  "water_stains": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No water stains or related damage are visible on the receipt.",
+    "recommendation": "No remediation needed for water damage."
+  },
+  "tears_or_folds": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.0,
+    "description": "The receipt appears flat with no visible tears, creases or significant folds.",
+    "recommendation": "No action needed regarding physical damage."
+  },
+  "cut_off_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.85,
+    "quantitative_measure": 0.0,
+    "description": "All edges of the receipt are visible with no cut-off content.",
+    "recommendation": "No need to recapture the receipt as all content is visible."
+  },
+  "missing_sections": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.0,
+    "description": "The receipt appears complete with header, line items, subtotal, service charge and total.",
+    "recommendation": "No need to check for missing content as the receipt structure is intact."
+  },
+  "obstructions": {
+    "detected": true,
+    "severity_level": "low",
+    "confidence_score": 0.85,
+    "quantitative_measure": 0.05,
+    "description": "A small red object is visible at the top edge of the image but does not obstruct any receipt content.",
+    "recommendation": "No action needed as the minor obstruction doesn't affect content readability."
+  },
+  "overall_quality_score": 9,
+  "suitable_for_extraction": true
+}

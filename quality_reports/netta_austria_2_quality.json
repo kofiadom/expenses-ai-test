@@ -1,0 +1,263 @@
+{
+  "image_path": "expense_files\\netta_austria_2.png",
+  "document_type": "receipt",
+  "image_type_detection": {
+    "is_digital_screenshot": "True",
+    "confidence": 0.67,
+    "image_subtype": "mobile_app_screenshot",
+    "indicators": {
+      "low_color_variety": true,
+      "matches_common_resolution": false,
+      "has_regular_edges": "False",
+      "has_uniform_background": true,
+      "has_many_straight_lines": true,
+      "low_histogram_entropy": "True"
+    },
+    "metadata": {
+      "unique_colors": 51746,
+      "edge_density": 0.062,
+      "histogram_entropy": "3.48"
+    }
+  },
+  "timestamp": "2025-07-16T22:26:30.244510",
+  "processing_time_seconds": 2.93,
+  "overall_assessment": {
+    "score": 80.0,
+    "level": "Acceptable",
+    "pass_fail": true,
+    "issues_summary": [
+      "Severe glare detected"
+    ],
+    "recommendations": [
+      "\ud83d\udcf1 This is a mobile_app_screenshot - physical document checks have been adjusted.",
+      "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture.",
+      "\ud83d\udcc8 Consider rescanning at 300 DPI or higher for better OCR accuracy.",
+      "\u2705 Image sharpness is excellent.",
+      "\ud83d\udcf7 Image is overexposed. Reduce camera exposure or lighting."
+    ]
+  },
+  "detailed_results": {
+    "resolution": {
+      "dimensions": {
+        "width": 1133,
+        "height": 1600,
+        "megapixels": 1.81
+      },
+      "dpi": {
+        "horizontal": 363.0,
+        "vertical": 188.0,
+        "average": 275.0
+      },
+      "quality": {
+        "score": 100.0,
+        "level": "Digital Quality",
+        "meets_ocr_requirements": false
+      },
+      "aspect_ratio": {
+        "actual": 0.71,
+        "expected": 0.37,
+        "deviation_percent": 92.6
+      },
+      "recommendations": [
+        "\ud83d\udcc8 Consider rescanning at 300 DPI or higher for better OCR accuracy."
+      ]
+    },
+    "blur": {
+      "metrics": {
+        "laplacian_variance": 2579.78,
+        "is_blurry": false,
+        "blur_score": 100.0,
+        "blur_level": "Very Sharp"
+      },
+      "motion_blur": {
+        "detected": "False",
+        "score": 9.790716019417475,
+        "direction": "horizontal"
+      },
+      "focus_distribution": {
+        "sharp_areas_percent": 60.3,
+        "uniform_sharpness": false
+      },
+      "recommendations": [
+        "\u2705 Image sharpness is excellent."
+      ]
+    },
+    "glare": {
+      "exposure_metrics": {
+        "mean_brightness": 230.9,
+        "overexposed_percent": "68.88",
+        "is_overexposed": "True",
+        "contrast_ratio": 0.23
+      },
+      "glare_analysis": {
+        "glare_score": 0,
+        "glare_level": "Severe",
+        "num_glare_spots": 14,
+        "glare_coverage_percent": 66.82,
+        "glare_patterns": {
+          "type": "ambient",
+          "description": "Edge lighting/window glare detected"
+        }
+      },
+      "affected_regions": [
+        {
+          "bbox": [
+            "0",
+            "0",
+            "1133",
+            "1600"
+          ],
+          "center": [
+            591,
+            652
+          ],
+          "area": "426060",
+          "intensity": 235.49437775816418
+        },
+        {
+          "bbox": [
+            "110",
+            "76",
+            "24",
+            "30"
+          ],
+          "center": [
+            121,
+            95
+          ],
+          "area": "327",
+          "intensity": 201.4736111111111
+        },
+        {
+          "bbox": [
+            "670",
+            "124",
+            "13",
+            "20"
+          ],
+          "center": [
+            676,
+            133
+          ],
+          "area": "226",
+          "intensity": 246.33076923076922
+        },
+        {
+          "bbox": [
+            "844",
+            "124",
+            "13",
+            "18"
+          ],
+          "center": [
+            850,
+            132
+          ],
+          "area": "206",
+          "intensity": 248.7948717948718
+        },
+        {
+          "bbox": [
+            "323",
+            "162",
+            "47",
+            "11"
+          ],
+          "center": [
+            344,
+            167
+          ],
+          "area": "401",
+          "intensity": 248.43907156673114
+        }
+      ],
+      "recommendations": [
+        "\ud83d\udcf7 Image is overexposed. Reduce camera exposure or lighting.",
+        "\ud83e\ude9f Reposition to avoid window/light reflections.",
+        "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture."
+      ]
+    },
+    "completeness": {
+      "boundary_detected": true,
+      "completeness_score": 100.0,
+      "completeness_level": "Digital Document",
+      "edge_analysis": {
+        "edge_coverage": 100.0,
+        "has_gaps": false,
+        "num_gaps": 0
+      },
+      "corner_analysis": {
+        "visible_corners": 4,
+        "missing_corners": [],
+        "is_rectangular": true
+      },
+      "issues": [],
+      "boundary_points": [],
+      "recommendations": [
+        "\u2705 Digital screenshot - no physical boundaries to check."
+      ]
+    },
+    "damage": {
+      "damage_score": 100.0,
+      "damage_level": "Digital (No Physical Damage)",
+      "damage_types": [],
+      "stain_analysis": {
+        "count": 0,
+        "coverage_percent": 0.0,
+        "regions": []
+      },
+      "tear_analysis": {
+        "count": 0,
+        "max_length": 0,
+        "regions": []
+      },
+      "fold_analysis": {
+        "count": 0,
+        "pattern": "none",
+        "lines": []
+      },
+      "recommendations": [
+        "\u2705 Digital image - no physical damage possible."
+      ]
+    }
+  },
+  "score_breakdown": {
+    "resolution": {
+      "score": 100.0,
+      "weight": 0.2,
+      "contribution": 20.0
+    },
+    "blur": {
+      "score": 100.0,
+      "weight": 0.25,
+      "contribution": 25.0
+    },
+    "glare": {
+      "score": 0,
+      "weight": 0.2,
+      "contribution": 0.0
+    },
+    "completeness": {
+      "score": 100.0,
+      "weight": 0.2,
+      "contribution": 20.0
+    },
+    "damage": {
+      "score": 100.0,
+      "weight": 0.15,
+      "contribution": 15.0
+    }
+  },
+  "assessment_method": "opencv",
+  "quality_passed": true,
+  "quality_score": 80.0,
+  "quality_level": "Acceptable",
+  "main_issues": [
+    "Severe glare detected"
+  ],
+  "top_recommendations": [
+    "\ud83d\udcf1 This is a mobile_app_screenshot - physical document checks have been adjusted.",
+    "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture.",
+    "\ud83d\udcc8 Consider rescanning at 300 DPI or higher for better OCR accuracy."
+  ]
+}

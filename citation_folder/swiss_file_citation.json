@@ -1,0 +1,282 @@
+{
+  "citations": {
+    "company_registration": {
+      "field_citation": {
+        "source_text": "UID:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "UID: CHE-217.086.005 MWST",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "CHE-217.086.005",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "UID: CHE-217.086.005 MWST",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Rechnungsbetrag",
+        "confidence": 0.7,
+        "source_location": "markdown",
+        "context": "Rechnungsbetrag 298.90 CHF",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "CHF",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Rechnungsbetrag 298.90 CHF",
+        "match_type": "exact"
+      }
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "Rechnungsbetrag",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Rechnungsbetrag 298.90 CHF",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "298.90",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Rechnungsbetrag 298.90 CHF",
+        "match_type": "exact"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "# RECHNUNG",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "# RECHNUNG",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Rechnung",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "# RECHNUNG",
+        "match_type": "exact"
+      }
+    },
+    "transaction_date": {
+      "field_citation": {
+        "source_text": "ausgeführt am:",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "ausgeführt am: 14.01.2018 12:20",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "14.01.2018",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "ausgeführt am: 14.01.2018 12:20",
+        "match_type": "exact"
+      }
+    },
+    "transaction_time": {
+      "field_citation": {
+        "source_text": "ausgeführt am:",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "ausgeführt am: 14.01.2018 12:20",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "12:20",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "ausgeführt am: 14.01.2018 12:20",
+        "match_type": "exact"
+      }
+    },
+    "cashier": {
+      "field_citation": {
+        "source_text": "Kassier:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Kassier: Petri Bretscher",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Petri Bretscher",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Kassier: Petri Bretscher",
+        "match_type": "exact"
+      }
+    },
+    "location": {
+      "field_citation": {
+        "source_text": "Standort:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Standort: FH33",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "FH33",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Standort: FH33",
+        "match_type": "exact"
+      }
+    },
+    "cash_register": {
+      "field_citation": {
+        "source_text": "Kasse/Lade:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Kasse/Lade: 73/32",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "73/32",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Kasse/Lade: 73/32",
+        "match_type": "exact"
+      }
+    },
+    "customer_number": {
+      "field_citation": {
+        "source_text": "Kunden-Nr.:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Kunden-Nr.: 51870716",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "51870716",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Kunden-Nr.: 51870716",
+        "match_type": "exact"
+      }
+    },
+    "customer_name": {
+      "field_citation": {
+        "source_text": "Pateri Walden",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Kunden-Nr.: 51870716\nPateri Walden",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Pateri Walden",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Kunden-Nr.: 51870716\nPateri Walden",
+        "match_type": "exact"
+      }
+    },
+    "customer_address": {
+      "field_citation": {
+        "source_text": "Adresse:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Adresse: Untere Paulistr. 33\nCH-8821 Schindellegi",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Untere Paulistr. 33, CH-8821 Schindellegi",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Adresse: Untere Paulistr. 33\nCH-8821 Schindellegi",
+        "match_type": "exact"
+      }
+    },
+    "vat_included": {
+      "field_citation": {
+        "source_text": "Im Betrag enthaltene MWSt:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Im Betrag enthaltene MWSt:\n1 Norm. Ware (8%) 14.73 Netto",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "14.73",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Im Betrag enthaltene MWSt:\n1 Norm. Ware (8%) 14.73 Netto",
+        "match_type": "exact"
+      }
+    },
+    "vat_rate": {
+      "field_citation": {
+        "source_text": "1 Norm. Ware (8%)",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Im Betrag enthaltene MWSt:\n1 Norm. Ware (8%) 14.73 Netto",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "8%",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Im Betrag enthaltene MWSt:\n1 Norm. Ware (8%) 14.73 Netto",
+        "match_type": "exact"
+      }
+    },
+    "payment_method": {
+      "field_citation": {
+        "source_text": "Bezahlt:\nBargeld",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Bezahlt:\nBargeld CHF 200.00",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Bargeld",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Bezahlt:\nBargeld CHF 200.00",
+        "match_type": "exact"
+      }
+    },
+    "amount_paid": {
+      "field_citation": {
+        "source_text": "Bezahlt:\nBargeld",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Bezahlt:\nBargeld CHF 200.00",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "200.00",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Bezahlt:\nBargeld CHF 200.00",
+        "match_type": "exact"
+      }
+    },
+    "change_returned": {
+      "field_citation": {
+        "source_text": "zurück\nBargeld",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "zurück\nBargeld CHF -1.10",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "1.1",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "zurück\nBargeld CHF -1.10",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 18,
+    "fields_with_field_citations": 18,
+    "fields_with_value_citations": 18,
+    "average_confidence": 0.9
+  }
+}

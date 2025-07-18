@@ -2,82 +2,82 @@
   "italyExpenseReimbursementDatabaseTables": {
     "fileRelatedRequirements": [
       {
-        "fieldType": "Supplier Name",
-        "description": "Name of the supplier/vendor on invoice",
+        "fieldType": "Customer Name on Invoice",
+        "description": "Local Employer name as customer on supplier invoice",
         "receiptType": "All",
-        "icpSpecific": "Yes",
+        "icpSpecific": true,
         "icpName": "Global People s.r.l.",
         "mandatoryOptional": "Mandatory",
-        "rule": "Must be Global People s.r.l."
+        "rule": "Must show Global People s.r.l. as customer"
       },
       {
-        "fieldType": "Supplier Name",
-        "description": "Name of the supplier/vendor on invoice",
+        "fieldType": "Customer Name on Invoice",
+        "description": "Local Employer name as customer on supplier invoice",
         "receiptType": "All",
-        "icpSpecific": "Yes",
+        "icpSpecific": true,
         "icpName": "GoGlobal Consulting S.r.l",
         "mandatoryOptional": "Mandatory",
-        "rule": "Must be GoGlobal Consulting S.r.l"
+        "rule": "Must show GoGlobal Consulting S.r.l as customer"
       },
       {
-        "fieldType": "Supplier Name",
-        "description": "Exception for flights/hotels",
+        "fieldType": "Customer Name Exception",
+        "description": "Exception for flights/hotels where Local Employer name not possible",
         "receiptType": "Travel",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Optional",
         "rule": "Worker's name acceptable when Local Employer name not possible, end client should not be mentioned"
       },
       {
-        "fieldType": "Supplier Address",
-        "description": "Address of the supplier on invoice",
+        "fieldType": "Customer Address on Invoice",
+        "description": "Local Employer address as customer on supplier invoice",
         "receiptType": "All",
-        "icpSpecific": "Yes",
+        "icpSpecific": true,
         "icpName": "Global People s.r.l.",
         "mandatoryOptional": "Mandatory",
-        "rule": "Via Venti Settembre 3, Torino (TO) CAP 10121, Italy"
+        "rule": "Must show Via Venti Settembre 3, Torino (TO) CAP 10121, Italy"
       },
       {
-        "fieldType": "Supplier Address",
-        "description": "Address of the supplier on invoice",
+        "fieldType": "Customer Address on Invoice",
+        "description": "Local Employer address as customer on supplier invoice",
         "receiptType": "All",
-        "icpSpecific": "Yes",
+        "icpSpecific": true,
         "icpName": "GoGlobal Consulting S.r.l",
         "mandatoryOptional": "Mandatory",
-        "rule": "Via Uberto Visconti Di Modrone 38, 20122 Milano, Italia"
+        "rule": "Must show Via Uberto Visconti Di Modrone 38, 20122 Milano, Italia"
       },
       {
-        "fieldType": "VAT Number",
-        "description": "VAT identification number",
+        "fieldType": "Customer VAT Number on Invoice",
+        "description": "Local Employer VAT number as customer on supplier invoice",
         "receiptType": "All",
-        "icpSpecific": "Yes",
+        "icpSpecific": true,
         "icpName": "Global People s.r.l.",
         "mandatoryOptional": "Mandatory",
-        "rule": "IT12455930011"
+        "rule": "Must show IT12455930011"
       },
       {
-        "fieldType": "VAT Number",
-        "description": "VAT identification number",
+        "fieldType": "Customer VAT Number on Invoice",
+        "description": "Local Employer VAT number as customer on supplier invoice",
         "receiptType": "All",
-        "icpSpecific": "Yes",
+        "icpSpecific": true,
         "icpName": "GoGlobal Consulting S.r.l",
         "mandatoryOptional": "Mandatory",
-        "rule": "P.IVA 12205930964"
+        "rule": "Must show P.IVA 12205930964"
       },
       {
-        "fieldType": "Tax Code",
-        "description": "Italian tax code (C.F.)",
+        "fieldType": "Customer Tax Code on Invoice",
+        "description": "Local Employer tax code as customer on supplier invoice",
         "receiptType": "All",
-        "icpSpecific": "Yes",
+        "icpSpecific": true,
         "icpName": "Global People s.r.l.",
         "mandatoryOptional": "Mandatory",
-        "rule": "12455930011"
+        "rule": "Must show 12455930011"
       },
       {
-        "fieldType": "Tax Code",
-        "description": "Italian tax code (C.F.)",
+        "fieldType": "Customer Tax Code on Invoice",
+        "description": "Local Employer tax code as customer on supplier invoice",
         "receiptType": "All",
-        "icpSpecific": "Yes",
+        "icpSpecific": true,
         "icpName": "GoGlobal Consulting S.r.l",
         "mandatoryOptional": "Optional",
         "rule": "Not specified in document"
@@ -86,7 +86,7 @@
         "fieldType": "Currency",
         "description": "Receipt currency",
         "receiptType": "All",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Same currency with clear exchange rate"
@@ -95,7 +95,7 @@
         "fieldType": "Amount",
         "description": "Expense amount",
         "receiptType": "All",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Must be clearly stated on receipt"
@@ -104,7 +104,7 @@
         "fieldType": "Receipt Type",
         "description": "Type of supporting document",
         "receiptType": "All",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Must be actual tax receipts or invoices, not booking confirmations"
@@ -113,7 +113,7 @@
         "fieldType": "Receipt Quality",
         "description": "Document quality standard",
         "receiptType": "All",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Must be scanned (not photos), clear and readable"
@@ -122,7 +122,7 @@
         "fieldType": "Payment Method",
         "description": "Method of payment used",
         "receiptType": "All",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Must be traceable: bank transfers, postal transfers, credit/debit cards, prepaid cards, bank/cashier's checks"
@@ -131,7 +131,7 @@
         "fieldType": "Vehicle Make/Model",
         "description": "Car details for mileage claims",
         "receiptType": "Mileage",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Type of car, petrol/electric/hybrid, model"
@@ -140,7 +140,7 @@
         "fieldType": "Vehicle Fuel Type",
         "description": "Fuel type for mileage claims",
         "receiptType": "Mileage",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Petrol, diesel, electric, hybrid"
@@ -149,7 +149,7 @@
         "fieldType": "Distance Traveled",
         "description": "Kilometers for mileage claims",
         "receiptType": "Mileage",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Starting point, arrival point, and total kilometers"
@@ -158,7 +158,7 @@
         "fieldType": "Route Documentation",
         "description": "Proof of distance traveled",
         "receiptType": "Mileage",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Screenshot from tracking app (Google Maps) or similar"
@@ -167,7 +167,7 @@
         "fieldType": "Car Registration",
         "description": "Vehicle ownership proof",
         "receiptType": "Mileage",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Scan of car passport (libretto di circolazione)"
@@ -176,7 +176,7 @@
         "fieldType": "Personal Information",
         "description": "Privacy requirement for receipts",
         "receiptType": "All",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Any personal information not required for reimbursement must be removed"
@@ -185,7 +185,7 @@
         "fieldType": "Business Trip Reporting",
         "description": "Separate reports requirement",
         "receiptType": "Travel",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Submit separate report for each business trip"
@@ -194,7 +194,7 @@
         "fieldType": "Per Diem Method",
         "description": "Method consistency rule",
         "receiptType": "Travel",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "mandatoryOptional": "Mandatory",
         "rule": "Cannot mix per diem method with actual expenses - must agree on one method per business trip"
@@ -203,232 +203,232 @@
     "complianceAndPolicies": [
       {
         "type": "Business Expenses (Non-Travel)",
-        "description": "General business expenses for job",
-        "icpSpecific": "No",
+        "description": "General business expenses for job completion",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "No limit specified",
-        "grossUpRule": "All approved expenses paid as NET",
-        "additionalInfoRequired": "Yes",
+        "grossUpRule": "All approved expenses paid as NET to employee and grossed up",
+        "additionalInfoRequired": true,
         "additionalInfoDescription": "Receipt alone is not enough - you must provide a proper tax invoice with VAT details"
       },
       {
         "type": "Entertainment Expenses",
         "description": "Meals offered to client/supplier",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "75% tax-free",
         "grossUpRule": "Tax-free up to 75% of total amount, labeled as \"spese di rappresentanza\"",
-        "additionalInfoRequired": "Yes",
+        "additionalInfoRequired": true,
         "additionalInfoDescription": "Receipt alone is not enough - you must also write down the name and company details of the client/supplier you entertained"
       },
       {
         "type": "Employee Engagement",
         "description": "Employee engagement activities",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "No limit specified",
         "grossUpRule": "Grossed up if not tax-free",
-        "additionalInfoRequired": "No",
+        "additionalInfoRequired": false,
         "additionalInfoDescription": "Receipt is enough - no additional information needed"
       },
       {
         "type": "Training and Development",
         "description": "Training and development expenses",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "No limit specified",
         "grossUpRule": "Grossed up if not tax-free",
-        "additionalInfoRequired": "No",
+        "additionalInfoRequired": false,
         "additionalInfoDescription": "Receipt is enough - no additional information needed"
       },
       {
         "type": "Car Rental",
         "description": "Vehicle rental for business",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "15 days limit",
         "grossUpRule": "Tax-free up to 15 days, subject to tax beyond 15 days",
-        "additionalInfoRequired": "No",
+        "additionalInfoRequired": false,
         "additionalInfoDescription": "Receipt is enough - no additional information needed"
       },
       {
         "type": "Mileage",
         "description": "Private vehicle use for work",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "15,000 km annually",
         "grossUpRule": "Non-taxable up to 15,000 km, excess subject to tax",
-        "additionalInfoRequired": "Yes",
+        "additionalInfoRequired": true,
         "additionalInfoDescription": "Receipt is not applicable - you must provide: 1) Scan of car registration document 2) Car details (make/model/fuel type) 3) Google Maps screenshot showing route and distance"
       },
       {
         "type": "Vehicle Expenses",
         "description": "Fuel, parking, tolls",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "20% tax-exempt",
         "grossUpRule": "Tax-exempt up to 20% of costs (rental cars only)",
-        "additionalInfoRequired": "No",
+        "additionalInfoRequired": false,
         "additionalInfoDescription": "Receipt is enough - no additional information needed"
       },
       {
         "type": "Transportation",
         "description": "Public transportation",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "No limit",
         "grossUpRule": "100% tax-exempt with proper documentation",
-        "additionalInfoRequired": "Yes",
+        "additionalInfoRequired": true,
         "additionalInfoDescription": "Receipt alone is not enough - you must provide the actual ticket or transportation document (not just payment receipt)"
       },
       {
         "type": "Parking Fees",
         "description": "Parking during business travel",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "No limit",
         "grossUpRule": "Excluded from per diem, reimbursed against receipts",
-        "additionalInfoRequired": "No",
+        "additionalInfoRequired": false,
         "additionalInfoDescription": "Receipt is enough - no additional information needed"
       },
       {
         "type": "Fuel Expenses",
         "description": "Fuel costs",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "Taxable",
         "grossUpRule": "Fuel expenses are taxed",
-        "additionalInfoRequired": "No",
+        "additionalInfoRequired": false,
         "additionalInfoDescription": "Receipt is enough - no additional information needed"
       },
       {
         "type": "Domestic Business Travel",
         "description": "Travel 60km+ outside municipal area",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "Per diem rates apply",
         "grossUpRule": "€46.48/day (no provisions), €30.99/day (meals OR hotel provided), €15.49/day (both provided)",
-        "additionalInfoRequired": "Yes",
+        "additionalInfoRequired": true,
         "additionalInfoDescription": "Hotel receipt alone is not enough - you must ALWAYS provide receipts for ALL trip expenses when per diem is used"
       },
       {
         "type": "Municipal Area Travel",
         "description": "Travel within municipal area",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "75% tax exemption",
         "grossUpRule": "75% tax exemption on per diem rate",
-        "additionalInfoRequired": "Yes",
+        "additionalInfoRequired": true,
         "additionalInfoDescription": "Receipt alone is not enough - you must provide receipts for all expenses within your city area"
       },
       {
         "type": "Domestic Business Travel (NCBA Commercio)",
         "description": "Business trips with no overnight stay",
-        "icpSpecific": "Yes",
+        "icpSpecific": true,
         "icpName": "NCBA Commercio",
         "grossUpLimit": "Per diem reduced by 1/3",
         "grossUpRule": "Per diem reduced by 1/3 for day trips",
-        "additionalInfoRequired": "Yes",
+        "additionalInfoRequired": true,
         "additionalInfoDescription": "Receipt alone is not enough - you must provide receipts for ALL trip expenses (meals, transportation)"
       },
       {
         "type": "Domestic Business Travel (Others)",
         "description": "Business trips with no overnight stay",
-        "icpSpecific": "Yes",
+        "icpSpecific": true,
         "icpName": "All other NCBAs",
         "grossUpLimit": "Standard per diem",
         "grossUpRule": "Standard per diem rates apply",
-        "additionalInfoRequired": "Yes",
+        "additionalInfoRequired": true,
         "additionalInfoDescription": "Receipt alone is not enough - you must provide receipts for ALL trip expenses (meals, transportation)"
       },
       {
         "type": "International Business Travel",
         "description": "International business trips",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "Per diem rates apply",
-        "grossUpRule": "€77.46/day (no provisions), €51.65/day (meals OR hotel provided), €25.82/day",
-        "additionalInfoRequired": "Yes",
-        "additionalInfoDescription": "Hotel receipt alone is not enough - you must ALWAYS provide receipts for ALL trip expenses"
+        "grossUpRule": "€77.46/day (no provisions), €51.65/day (meals OR hotel provided), €25.82/day (both provided)",
+        "additionalInfoRequired": true,
+        "additionalInfoDescription": "Hotel receipt alone is not enough - you must ALWAYS provide receipts for ALL trip expenses when per diem is used"
       },
       {
         "type": "International Long-term Travel",
         "description": "International trips over 1 month",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "10% reduction",
         "grossUpRule": "Allowance reduced by 10% for missions over 1 month",
-        "additionalInfoRequired": "Yes",
+        "additionalInfoRequired": true,
         "additionalInfoDescription": "Hotel receipt alone is not enough - you must ALWAYS provide receipts for ALL trip expenses when per diem is used"
       },
       {
         "type": "International Business Travel (NCBA Commercio)",
         "description": "International trips with no overnight stay",
-        "icpSpecific": "Yes",
+        "icpSpecific": true,
         "icpName": "NCBA Commercio",
         "grossUpLimit": "Per diem reduced by 1/3",
         "grossUpRule": "Per diem reduced by 1/3 for day trips",
-        "additionalInfoRequired": "Yes",
+        "additionalInfoRequired": true,
         "additionalInfoDescription": "Receipt alone is not enough - you must provide receipts for ALL trip expenses (meals, transportation)"
       },
       {
         "type": "International Business Travel (Others)",
         "description": "International trips with no overnight stay",
-        "icpSpecific": "Yes",
+        "icpSpecific": true,
         "icpName": "All other NCBAs",
         "grossUpLimit": "Standard per diem",
         "grossUpRule": "Standard per diem rates apply",
-        "additionalInfoRequired": "Yes",
+        "additionalInfoRequired": true,
         "additionalInfoDescription": "Receipt alone is not enough - you must provide receipts for ALL trip expenses (meals, transportation)"
       },
       {
         "type": "Car Rental (Domestic Travel)",
         "description": "Car rental during domestic business travel",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "15 days limit",
         "grossUpRule": "Tax-free up to 15 days, subject to tax beyond 15 days",
-        "additionalInfoRequired": "No",
+        "additionalInfoRequired": false,
         "additionalInfoDescription": "Receipt is enough - no additional information needed"
       },
       {
         "type": "Car Rental (International Travel)",
         "description": "Car rental during international business travel",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "15 days limit",
         "grossUpRule": "Tax-free up to 15 days, subject to tax beyond 15 days",
-        "additionalInfoRequired": "No",
+        "additionalInfoRequired": false,
         "additionalInfoDescription": "Receipt is enough - no additional information needed"
       },
       {
         "type": "Items Outside Per Diem",
         "description": "International travel expenses not covered by per diem",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "No limit specified",
         "grossUpRule": "Not subject to any set maximum to be considered tax free",
-        "additionalInfoRequired": "Yes",
+        "additionalInfoRequired": true,
         "additionalInfoDescription": "Receipt alone is not enough - you must provide supporting documents such as receipts"
       },
       {
         "type": "Toll Charges",
         "description": "Highway tolls and road charges",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "20% tax-exempt",
         "grossUpRule": "Tax-exempt up to 20% of costs (rental cars only, not assigned to specific employee)",
-        "additionalInfoRequired": "No",
+        "additionalInfoRequired": false,
         "additionalInfoDescription": "Receipt is enough - no additional information needed"
       },
       {
         "type": "Company Car Expenses",
         "description": "Expenses for company-assigned vehicles",
-        "icpSpecific": "No",
+        "icpSpecific": false,
         "icpName": "All ICPs",
         "grossUpLimit": "Not applicable",
         "grossUpRule": "Transportation expenses rules do not apply to company cars",
-        "additionalInfoRequired": "No",
+        "additionalInfoRequired": false,
         "additionalInfoDescription": "Receipt is enough - no additional information needed"
       }
     ]

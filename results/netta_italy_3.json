@@ -1,0 +1,443 @@
+{
+  "source_file": "netta_italy_3.md",
+  "processing_timestamp": "2025-07-16T23:13:49.583817",
+  "dataset_metadata": {
+    "filepath": "expense_files/netta_italy_3.png",
+    "filename": "netta_italy_3.png",
+    "country": "Italy",
+    "icp": "Global People",
+    "dataset_file": "netta_italy_3.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "English",
+    "language_confidence": 95,
+    "document_location": "Canada",
+    "expected_location": "Italy",
+    "location_match": false,
+    "error_type": "File location is not same as project's location",
+    "error_message": "Document location (Canada) does not match the expected location (Italy).",
+    "classification_confidence": 90,
+    "reasoning": "The document is identifiable as an expense document due to the presence of multiple schema fields such as supplier, consumerRecipient, transactionAmount, transactionDate, invoiceReceiptNumber, and taxInformation. The content describes a purchase including itemized line items and payment details, making it a meal-related expense.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "consumerRecipient",
+        "transactionAmount",
+        "transactionDate",
+        "invoiceReceiptNumber",
+        "taxInformation",
+        "itemDescriptionLineItems"
+      ],
+      "fields_missing": [
+        "paymentMethod",
+        "icpRequirements"
+      ],
+      "total_fields_found": 7,
+      "expense_identification_reasoning": "The document contains details which match 7 out of the 8 schema fields, indicating it is an expense document. It includes supplier (Yukon Packing), consumerRecipient (Alfred Griner Packer), transactionAmount (total $152.25), transactionDate (29/01/2019), invoiceReceiptNumber (CA-001), taxInformation (GST 5%), and detailed itemDescriptionLineItems. PaymentMethod details are not explicitly stated, but payment due by cheque suggests the payable method. Given the nature of the items (food), it is classified under meals."
+    }
+  },
+  "extraction_result": {
+    "supplier_name": "Yukon Packing",
+    "supplier_address": "443 Maple Avenue, Ontario, NT R4M 3H7",
+    "vat_number": null,
+    "tax_code": null,
+    "currency": "CAD",
+    "amount": 152.25,
+    "receipt_type": "Invoice",
+    "payment_method": "Cheque",
+    "vehicle_make_model": null,
+    "vehicle_fuel_type": null,
+    "distance_traveled": null,
+    "route_documentation": null,
+    "car_registration": null,
+    "personal_information": null,
+    "business_trip_reporting": null,
+    "per_diem_method": null,
+    "invoice_number": "CA-001",
+    "invoice_date": "2019-01-29",
+    "purchase_order_number": "15/01/2019",
+    "due_date": "2019-04-28",
+    "line_items": [
+      {
+        "description": "Smoked chinook salmon filet",
+        "quantity": 1,
+        "unit_price": 100.0,
+        "total_price": 100.0
+      },
+      {
+        "description": "Maple bacon doughnuts",
+        "quantity": 2,
+        "unit_price": 15.0,
+        "total_price": 30.0
+      },
+      {
+        "description": "Poutine curds",
+        "quantity": 3,
+        "unit_price": 5.0,
+        "total_price": 15.0
+      }
+    ],
+    "subtotal": 145.0,
+    "tax_rate": 5.0,
+    "tax_amount": 7.25,
+    "total_amount": 152.25,
+    "bill_to": {
+      "name": "Alfred Griner Packer",
+      "address": "765 Poker Bear Ave, Vancouver, AU T4"
+    },
+    "ship_to": {
+      "name": "Alfred Griner Packer",
+      "address": "185 Red River Ave, Burnaby, NT 281"
+    },
+    "terms_and_conditions": "Payment is due within 15 days",
+    "currency_symbol": "$",
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "Supplier Name",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "requirements for supplier/vendor on invoice",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Yukon Packing",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Yukon Packing\n443 Maple Avenue\nOntario, NT R4M 3H7",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "Supplier Address",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "requirements for supplier address on invoice",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "443 Maple Avenue, Ontario, NT R4M 3H7",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Yukon Packing\n443 Maple Avenue\nOntario, NT R4M 3H7",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "Currency",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Receipt currency",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "CAD",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "TOTAL** |                             |            | **$152.25**",
+            "match_type": "contextual"
+          }
+        },
+        "amount": {
+          "field_citation": {
+            "source_text": "Amount",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Expense amount requirement",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "152.25",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "TOTAL** |                             |            | **$152.25**",
+            "match_type": "fuzzy"
+          }
+        },
+        "receipt_type": {
+          "field_citation": {
+            "source_text": "Receipt Type",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Type of supporting document requirement",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Invoice",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "# INVOICE",
+            "match_type": "exact"
+          }
+        },
+        "payment_method": {
+          "field_citation": {
+            "source_text": "Payment Method",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Method of payment used requirement",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Cheque",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Please make cheques payable to: Yukon Packing",
+            "match_type": "exact"
+          }
+        },
+        "invoice_number": {
+          "field_citation": {
+            "source_text": "INVOICE #",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "markdown table header",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "CA-001",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "INVOICE # CA-001\nINVOICE DATE",
+            "match_type": "exact"
+          }
+        },
+        "invoice_date": {
+          "field_citation": {
+            "source_text": "INVOICE DATE",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "markdown table header",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "29/01/2019",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "INVOICE DATE 29/01/2019\nP.O.",
+            "match_type": "fuzzy"
+          }
+        },
+        "purchase_order_number": {
+          "field_citation": {
+            "source_text": "P.O.#",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "markdown table header",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "15/01/2019",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "P.O.# 15/01/2019\nDUE DATE",
+            "match_type": "exact"
+          }
+        },
+        "due_date": {
+          "field_citation": {
+            "source_text": "DUE DATE",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "markdown table header",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "28/04/2019",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "DUE DATE 28/04/2019",
+            "match_type": "exact"
+          }
+        },
+        "line_items": {
+          "field_citation": {
+            "source_text": "DESCRIPTION",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "markdown table header for line items",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Smoked chinook salmon filet",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "DESCRIPTION Smoked chinook salmon filet",
+            "match_type": "exact"
+          }
+        },
+        "subtotal": {
+          "field_citation": {
+            "source_text": "Subtotal",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "markdown total breakdown",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "145.00",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Subtotal | | | 145.00",
+            "match_type": "exact"
+          }
+        },
+        "tax_rate": {
+          "field_citation": {
+            "source_text": "GST",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "GST 5.0%",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "5.0",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "GST 5.0%",
+            "match_type": "exact"
+          }
+        },
+        "tax_amount": {
+          "field_citation": {
+            "source_text": "GST",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "GST 5.0% total breakdown",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "7.25",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "GST 5.0% | | | 7.25",
+            "match_type": "exact"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "TOTAL",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "markdown total breakdown",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "$152.25",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "TOTAL** | | | **$152.25**",
+            "match_type": "fuzzy"
+          }
+        },
+        "bill_to": {
+          "field_citation": {
+            "source_text": "BILL TO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "markdown table header for billing details",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Alfred Griner Packer",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "BILL TO Alfred Griner Packer",
+            "match_type": "exact"
+          }
+        },
+        "ship_to": {
+          "field_citation": {
+            "source_text": "SHIP TO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "markdown table header for shipping details",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Alfred Griner Packer",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "SHIP TO Alfred Griner Packer",
+            "match_type": "exact"
+          }
+        },
+        "terms_and_conditions": {
+          "field_citation": {
+            "source_text": "TERMS & CONDITIONS",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Markdown section title",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Payment is due within 15 days",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "TERMS & CONDITIONS\nPayment is due within 15 days",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 21,
+        "fields_with_field_citations": 19,
+        "fields_with_value_citations": 19,
+        "average_confidence": 0.93
+      }
+    }
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 4,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name 'Yukon Packing' does not match the mandatory requirement for Global People s.r.l. on the receipt.",
+          "recommendation": "It is recommended to address this issue with the supplier to ensure the name on the receipt matches the required Global People s.r.l.",
+          "knowledge_base_reference": "Must be Global People s.r.l. for the supplier name on invoices."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "The supplier address '443 Maple Avenue, Ontario, NT R4M 3H7' does not match the mandatory requirement for Global People s.r.l.",
+          "recommendation": "It is recommended to correct the supplier address to 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy'.",
+          "knowledge_base_reference": "Address must be: Via Venti Settembre 3, Torino (TO) CAP 10121, Italy."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "Missing mandatory VAT identification number for Global People s.r.l.",
+          "recommendation": "Ensure that the receipt includes the VAT number 'IT12455930011' as required.",
+          "knowledge_base_reference": "VAT Number is mandatory and must be IT12455930011."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "currency",
+          "description": "The currency 'CAD' does not match the required local currency.",
+          "recommendation": "Receipts should reflect the local currency and include a clear exchange rate if transacted in foreign currency.",
+          "knowledge_base_reference": "Receipt currency must be same currency with clear exchange rate indicated if not in local currency."
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt has several compliance violations: incorrect supplier name and address, missing VAT number, and currency discrepancies. These issues are critical and need addressing to meet Italy's and Global People's compliance requirements."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Italy",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 4,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": false
+}

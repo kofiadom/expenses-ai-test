@@ -1,0 +1,202 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Verkauft von:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Verkauft von: SCM PC-Card GmbH",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "SCM PC-Card GmbH",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Verkauft von: SCM PC-Card GmbH",
+        "match_type": "exact"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "Endbetrag inkl. USt.:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Endbetrag inkl. USt.: EUR 34,51",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "EUR 34,51",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Endbetrag inkl. USt.: EUR 34,51",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "EUR",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Zwischensumme: EUR 29,00",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "EUR",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Endbetrag inkl. USt.: EUR 34,51",
+        "match_type": "contextual"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "Aufgegeben am",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Aufgegeben am 9. August 2019",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "9. August 2019",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Aufgegeben am 9. August 2019",
+        "match_type": "fuzzy"
+      }
+    },
+    "order_number": {
+      "field_citation": {
+        "source_text": "Bestellnummer",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Bestellnummer #304-3645210-0482704",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "304-3645210-0482704",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Bestellnummer #304-3645210-0482704",
+        "match_type": "exact"
+      }
+    },
+    "delivery_date": {
+      "field_citation": {
+        "source_text": "Zustellung:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Zustellung:<br/>Samstag, 10 August",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "10 August",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Zustellung:<br/>Samstag, 10 August",
+        "match_type": "fuzzy"
+      }
+    },
+    "shipping_method": {
+      "field_citation": {
+        "source_text": "Versandart:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Versandart:<br/>prime Premiumversand",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "prime Premiumversand",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Versandart:<br/>prime Premiumversand",
+        "match_type": "exact"
+      }
+    },
+    "shipping_address": {
+      "field_citation": {
+        "source_text": "Die Bestellung geht an:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Die Bestellung geht an:<br/>Anda Pfleger<br/>Budapester Str. 21<br/>München, 81669<br/>Deutschland",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Anda Pfleger, Budapester Str. 21, München, 81669, Deutschland",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Anda Pfleger<br/>Budapester Str. 21<br/>München, 81669<br/>Deutschland",
+        "match_type": "fuzzy"
+      }
+    },
+    "shipping_option": {
+      "field_citation": {
+        "source_text": "Gewählte Versandoption:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Gewählte Versandoption:<br/>Artikel versenden, sobald sie verfügbar sind.",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Artikel versenden, sobald sie verfügbar sind",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Gewählte Versandoption:<br/>Artikel versenden, sobald sie verfügbar sind.",
+        "match_type": "exact"
+      }
+    },
+    "subtotal": {
+      "field_citation": {
+        "source_text": "Zwischensumme:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Zwischensumme: EUR 29,00",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "EUR 29,00",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Zwischensumme: EUR 29,00",
+        "match_type": "exact"
+      }
+    },
+    "vat": {
+      "field_citation": {
+        "source_text": "Umsatzsteuer:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Umsatzsteuer: EUR 5,51",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "EUR 5,51",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Umsatzsteuer: EUR 5,51",
+        "match_type": "exact"
+      }
+    },
+    "end_amount_incl_vat": {
+      "field_citation": {
+        "source_text": "Endbetrag inkl. USt.:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Endbetrag inkl. USt.: EUR 34,51",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "EUR 34,51",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Endbetrag inkl. USt.: EUR 34,51",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 13,
+    "fields_with_field_citations": 11,
+    "fields_with_value_citations": 11,
+    "average_confidence": 0.9115384615384615
+  }
+}

@@ -1,0 +1,396 @@
+{
+  "source_file": "german_file_677.md",
+  "processing_timestamp": "2025-07-17T18:19:05.959157",
+  "dataset_metadata": {
+    "filepath": "german_file_677.png",
+    "country": "Germany",
+    "icp": "Global People",
+    "receipt_type": "unknown",
+    "description": "Uploaded file: german_file_677.png",
+    "dataset_file": "german_file_677.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "German",
+    "language_confidence": 95,
+    "document_location": "Germany",
+    "expected_location": "Germany",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 90,
+    "reasoning": "The document is a restaurant receipt containing a transaction amount, transaction date, supplier information, itemized line items, and evidence of payment. These characteristics classify it as an expense document related to meals.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionAmount",
+        "transactionDate",
+        "itemDescriptionLineItems"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "icpRequirements",
+        "invoiceReceiptNumber",
+        "taxInformation",
+        "paymentMethod"
+      ],
+      "total_fields_found": 4,
+      "expense_identification_reasoning": "The document contains 4 fields: supplier, transactionAmount, transactionDate, and itemDescriptionLineItems. As these fields capture critical transaction details including proof of payment, it qualifies as an expense document. Although it only meets the minimum field requirements for classification, the comprehensive itemization supports its classification as an expense."
+    }
+  },
+  "extraction_result": {
+    "customer_name_on_invoice": null,
+    "customer_name_exception": null,
+    "customer_address_on_invoice": null,
+    "customer_vat_number_on_invoice": null,
+    "currency": "EUR",
+    "amount": 64.4,
+    "receipt_type": "Rechnung",
+    "receipt_quality": null,
+    "invoice_serial_number": null,
+    "invoice_date": "2019-02-05",
+    "service_date": null,
+    "net_amount": null,
+    "tax_rate": null,
+    "vat_amount": null,
+    "worker_name": null,
+    "worker_address": null,
+    "supplier_tax_id": null,
+    "expense_description": null,
+    "route_details": null,
+    "car_details": null,
+    "purpose": null,
+    "odometer_reading": null,
+    "travel_date": null,
+    "a1_certificate": null,
+    "personal_phone_proof": null,
+    "storage_period": null,
+    "supplier_name": "THE SUSHI CLUB",
+    "supplier_address": "Mohrenstr.42, 10117 Berlin",
+    "contact_phone": "+49 30 23 916 036",
+    "contact_email": "info@thesushiclub.de",
+    "contact_website": "www.TheSushiClub.de",
+    "transaction_time": "23:10:54",
+    "table_number": "24",
+    "transaction_reference": "L0001 FR\u00dcH",
+    "special_notes": "TIP IS NOT INCLUDED",
+    "line_items": [
+      {
+        "description": "Miso Soup",
+        "quantity": 1,
+        "unit_price": 3.9,
+        "total_price": 3.9
+      },
+      {
+        "description": "Rock Shrimps",
+        "quantity": 1,
+        "unit_price": 11.5,
+        "total_price": 11.5
+      },
+      {
+        "description": "Tuna Tataki",
+        "quantity": 1,
+        "unit_price": 12.0,
+        "total_price": 12.0
+      },
+      {
+        "description": "Sake Tataki",
+        "quantity": 1,
+        "unit_price": 10.0,
+        "total_price": 10.0
+      },
+      {
+        "description": "Cola Light",
+        "quantity": 2,
+        "unit_price": 3.0,
+        "total_price": 6.0
+      },
+      {
+        "description": "Dessert",
+        "quantity": 1,
+        "unit_price": 4.5,
+        "total_price": 4.5
+      },
+      {
+        "description": "K\u00fcche Divers",
+        "quantity": 1,
+        "unit_price": 12.0,
+        "total_price": 12.0
+      },
+      {
+        "description": "Ice & Sorbet",
+        "quantity": 1,
+        "unit_price": 4.5,
+        "total_price": 4.5
+      }
+    ],
+    "total_amount": 64.4,
+    "citations": {
+      "citations": {
+        "currency": {
+          "field_citation": {
+            "source_text": "Currency",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "FieldType: Currency, Description: Receipt currency",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "\u20ac",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "1 Miso Soup \u20ac 3,90",
+            "match_type": "fuzzy"
+          }
+        },
+        "amount": {
+          "field_citation": {
+            "source_text": "Amount",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "FieldType: Amount, Description: Expense amount",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "\u20ac 64,40",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Total \u20ac 64,40",
+            "match_type": "exact"
+          }
+        },
+        "receipt_type": {
+          "field_citation": {
+            "source_text": "Receipt Type",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "FieldType: Receipt Type, Description: Type of supporting document",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Rechnung",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "** Rechnung **",
+            "match_type": "exact"
+          }
+        },
+        "invoice_date": {
+          "field_citation": {
+            "source_text": "Invoice Date",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "FieldType: Invoice Date, Description: Date of invoice",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "5-2-2019",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Dienstag  5-2-2019 23:10:54",
+            "match_type": "fuzzy"
+          }
+        },
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "Supplier Name:",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "THE SUSHI CLUB",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "THE SUSHI CLUB",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "THE SUSHI CLUB",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "Supplier Address:",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "Mohrenstr.42, 10117 Berlin",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Mohrenstr.42, 10117 Berlin",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Mohrenstr.42 10117 Berlin",
+            "match_type": "exact"
+          }
+        },
+        "contact_phone": {
+          "field_citation": {
+            "source_text": "Contact Phone:",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "+49 30 23 916 036",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "+49 30 23 916 036",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "+49 30 23 916 036",
+            "match_type": "exact"
+          }
+        },
+        "contact_email": {
+          "field_citation": {
+            "source_text": "Contact Email:",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "info@thesushiclub.de",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "info@thesushiclub.de",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "info@thesushiclub.de",
+            "match_type": "exact"
+          }
+        },
+        "contact_website": {
+          "field_citation": {
+            "source_text": "Contact Website:",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "www.TheSushiClub.de",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "www.TheSushiClub.de",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "www.TheSushiClub.de",
+            "match_type": "exact"
+          }
+        },
+        "transaction_time": {
+          "field_citation": {
+            "source_text": "Transaction Time:",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "23:10:54",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "23:10:54",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "23:10:54",
+            "match_type": "exact"
+          }
+        },
+        "table_number": {
+          "field_citation": {
+            "source_text": "Tisch #",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Tisch # 24",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "24",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Tisch # 24",
+            "match_type": "exact"
+          }
+        },
+        "transaction_reference": {
+          "field_citation": {
+            "source_text": "Transaction Reference:",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "L0001 FR\u00dcH",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "L0001 FR\u00dcH",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "L0001 FR\u00dcH",
+            "match_type": "exact"
+          }
+        },
+        "special_notes": {
+          "field_citation": {
+            "source_text": "Special Notes:",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "TIP IS NOT INCLUDED",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "TIP IS NOT INCLUDED",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "TIP IS NOT INCLUDED",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 14,
+        "fields_with_field_citations": 14,
+        "fields_with_value_citations": 14,
+        "average_confidence": 0.9225
+      }
+    }
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 4,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_name_on_invoice",
+          "description": "Missing mandatory customer name on the invoice.",
+          "recommendation": "It is recommended to address this issue with the supplier to include 'Global People DE GmbH' as the customer.",
+          "knowledge_base_reference": "Must show Global People DE GmbH as customer"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_address_on_invoice",
+          "description": "Missing mandatory customer address on the invoice.",
+          "recommendation": "It is recommended to address this issue with the supplier to include 'Taunusanlage 8, 60329 Frankfurt, Germany' as the customer address.",
+          "knowledge_base_reference": "Must show Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_vat_number_on_invoice",
+          "description": "Missing mandatory customer VAT number on the invoice.",
+          "recommendation": "It is recommended to address this issue with the supplier to include the VAT number 'DE356366640'.",
+          "knowledge_base_reference": "Must show DE356366640"
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "meals",
+          "description": "Meal expenses are not tax exempt and will be grossed up.",
+          "recommendation": "As meals are not tax exempt for Global People, the expense will need to be grossed-up according to the provided policies.",
+          "knowledge_base_reference": "Not tax exempt (outside business travel)"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt is invalid due to missing mandatory customer name, address, and VAT number. The meal expense is not tax-exempt, leading to gross-up requirements."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 4,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": false
+}

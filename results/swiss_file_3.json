@@ -1,6 +1,6 @@
 {
   "source_file": "swiss_file_3.md",
-  "processing_timestamp": "2025-07-15T17:11:28.692755",
+  "processing_timestamp": "2025-07-16T23:18:03.904820",
   "dataset_metadata": {
     "filepath": "expense_files/swiss_file_3.pdf",
     "filename ": "swiss_file_3.pdf",
@@ -9,17 +9,33 @@
     "dataset_file": "swiss_file_3.json"
   },
   "classification_result": {
-    "is_expense": true,
-    "expense_type": "travel",
+    "is_expense": false,
+    "expense_type": null,
     "language": "English",
     "language_confidence": 95,
     "document_location": "Switzerland",
     "expected_location": "Switzerland",
     "location_match": true,
-    "error_type": null,
-    "error_message": null,
+    "error_type": "File identified not as an expense",
+    "error_message": "The document contains a purchase order and does not provide evidence of completed payment or a transaction receipt.",
     "classification_confidence": 90,
-    "reasoning": "The document contains a purchase receipt for a Swiss Half Fare Card, indicating a travel expense. It includes vendor information, monetary amounts, product details, and transaction context related to transportation services. The language is predominantly English with high confidence, and the detected country matches the expected location."
+    "reasoning": "The document text primarily describes a Swiss Half Fare Card with conditions and details about usage, without clear indication of an expense completion such as payment confirmation or an itemized receipt.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionAmount",
+        "taxInformation",
+        "invoiceReceiptNumber"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "paymentMethod",
+        "transactionDate",
+        "itemDescriptionLineItems"
+      ],
+      "total_fields_found": 4,
+      "expense_identification_reasoning": "The document mentions 'Swiss Half Fare Card' and a 'CHF 120.00' amount, along with a VAT detail, aligning with the supplier and transaction amount fields. However, it lacks a consumer recipient section, payment method, transaction date, and detailed itemization that confirms an expense transaction."
+    }
   },
   "extraction_result": {
     "supplier_name": null,
@@ -36,85 +52,292 @@
     "car_details": null,
     "logbook": null,
     "combined_mileage": null,
-    "line_items": [
-      {
-        "description": "Swiss Half Fare Card",
-        "order_no": "25302067899",
-        "unit_price": 120.0,
-        "vat_rate": 7.7,
-        "vat_included": true
-      }
-    ],
+    "validity_period": "2022 - 2023",
+    "holder_name": "GONUGUNTLA HAREESH KUMAR",
+    "birth_date": "1995-06-11",
+    "discount": "Up to 50% discount on 1st and 2nd class tickets",
+    "order_number": "25302067899",
+    "article_number": "11528",
+    "vat_rate": 7.7,
     "ticket_id": "329584805708",
-    "reference_no": "67676084D / 13121548 19099",
-    "validity": "2022 - 2023",
-    "traveler_name": "GONUGUNTLA HAREESH KUMAR",
-    "date_of_birth": "1995-06-11",
-    "discount_details": "Up to 50% discount on 1st and 2nd class tickets within one month.",
+    "reference_number": "67676084D / 13121548 19099",
     "website": "www.MySwitzerland.com/swisshalffarecard",
-    "conditions_url": "www.MySwitzerland.com/swisstravelguide",
-    "article_no": "11528"
+    "tariff_note": "The current tariff of Swiss transport companies, in particular the common ancillary tariff regulations for direct service and regional transport networks (TGDG) as well as the tariffs of the regional transport and fare networks, apply to the use of E-Tickets.",
+    "refund_note": "For refunds, TGDG or the conditions of the relevant transport company or operator apply. Refunds of e-tickets in the context of international journeys are made in accordance with international terms and conditions.",
+    "citations": {
+      "citations": {
+        "currency": {
+          "field_citation": {
+            "source_text": "Currency",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "\"field_type\": \"Currency\", \"description\": \"Receipt currency and exchange rate\"",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "CHF",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "B2P\tCHF 120.00",
+            "match_type": "exact"
+          }
+        },
+        "amount": {
+          "field_citation": {
+            "source_text": "Expense amount",
+            "confidence": 0.8,
+            "source_location": "requirements",
+            "context": "\"field_type\": \"Amount\", \"description\": \"Expense amount\"",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "CHF 120.00",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "B2P\tCHF 120.00",
+            "match_type": "exact"
+          }
+        },
+        "validity_period": {
+          "field_citation": {
+            "source_text": "Valid",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Valid: 2022 - 2023",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "2022 - 2023",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Valid: 2022 - 2023",
+            "match_type": "exact"
+          }
+        },
+        "holder_name": {
+          "field_citation": {
+            "source_text": "Swiss Half Fare Card",
+            "confidence": 0.7,
+            "source_location": "markdown",
+            "context": "Swiss Half Fare Card\n| GONUGUNTLA HAREESH KUMAR",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "GONUGUNTLA HAREESH KUMAR",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Swiss Half Fare Card\n| GONUGUNTLA HAREESH KUMAR",
+            "match_type": "exact"
+          }
+        },
+        "birth_date": {
+          "field_citation": {
+            "source_text": "Valid",
+            "confidence": 0.7,
+            "source_location": "markdown",
+            "context": "Valid: 2022 - 2023 | 11.06.1995",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "11.06.1995",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Valid: 2022 - 2023 | 11.06.1995",
+            "match_type": "fuzzy"
+          }
+        },
+        "discount": {
+          "field_citation": {
+            "source_text": "Up to 50% discount",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Up to 50% discount on 1st and 2nd class tickets within one month.",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Up to 50% discount on 1st and 2nd class tickets",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Up to 50% discount on 1st and 2nd class tickets within one month.",
+            "match_type": "exact"
+          }
+        },
+        "order_number": {
+          "field_citation": {
+            "source_text": "Order no.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "(1/2-ABO)\nOrder no.: 25302067899",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "25302067899",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "(1/2-ABO)\nOrder no.: 25302067899",
+            "match_type": "exact"
+          }
+        },
+        "article_number": {
+          "field_citation": {
+            "source_text": "Article no.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Article no.: 11528\nincl. 7.7% VAT/SBB",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "11528",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Article no.: 11528\nincl. 7.7% VAT/SBB",
+            "match_type": "exact"
+          }
+        },
+        "vat_rate": {
+          "field_citation": {
+            "source_text": "incl. 7.7% VAT",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Article no.: 11528\nincl. 7.7% VAT/SBB",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "7.7",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "incl. 7.7% VAT/SBB",
+            "match_type": "fuzzy"
+          }
+        },
+        "ticket_id": {
+          "field_citation": {
+            "source_text": "Ticket-ID",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| ! | Ticket-ID 329584805708 |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "329584805708",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| ! | Ticket-ID 329584805708 |",
+            "match_type": "exact"
+          }
+        },
+        "reference_number": {
+          "field_citation": {
+            "source_text": "Reference no.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Reference no.: 67676084D / 13121548 19099",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "67676084D / 13121548 19099",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Reference no.: 67676084D / 13121548 19099",
+            "match_type": "exact"
+          }
+        },
+        "website": {
+          "field_citation": {
+            "source_text": "www.MySwitzerland.com/swisshalffarecard",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "See conditions on www.MySwitzerland.com/swisshalffarecard.",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "www.MySwitzerland.com/swisshalffarecard",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "See conditions on www.MySwitzerland.com/swisshalffarecard.",
+            "match_type": "exact"
+          }
+        },
+        "tariff_note": {
+          "field_citation": {
+            "source_text": "The current tariff",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "The current tariff of Swiss transport companies, in particular the common ancillary tariff regulations for direct service and regional transport networks (TGDG) as well as the tariffs of the regional transport and fare networks, apply to the use of E-Tickets.",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "The current tariff of Swiss transport companies, in particular the common ancillary tariff regulations for direct service and regional transport networks (TGDG) as well as the tariffs of the regional transport and fare networks, apply to the use of E-Tickets.",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "The current tariff of Swiss transport companies, in particular the common ancillary tariff regulations for direct service and regional transport networks (TGDG) as well as the tariffs of the regional transport and fare networks, apply to the use of E-Tickets.",
+            "match_type": "exact"
+          }
+        },
+        "refund_note": {
+          "field_citation": {
+            "source_text": "For refunds, TGDG or the conditions",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "For refunds, TGDG or the conditions of the relevant transport company or operator apply. Refunds of e-tickets in the context of international journeys are made in according with international terms and conditions.",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "For refunds, TGDG or the conditions of the relevant transport company or operator apply. Refunds of e-tickets in the context of international journeys are made in accordance with international terms and conditions.",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "For refunds, TGDG or the conditions of the relevant transport company or operator apply. Refunds of e-tickets in the context of international journeys are made in according with international terms and conditions.",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 14,
+        "fields_with_field_citations": 13,
+        "fields_with_value_citations": 13,
+        "average_confidence": 0.92
+      }
+    }
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 6,
+      "issues_count": 3,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_name",
-          "description": "Missing mandatory supplier information.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider to obtain proper supplier details.",
-          "knowledge_base_reference": "Supplier Name is mandatory and must be Global PPL CH GmbH for compliance."
+          "description": "Mandatory supplier name is missing for ICP Global PPL CH GmbH.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to include 'Global PPL CH GmbH' as the supplier name.",
+          "knowledge_base_reference": "Name of the supplier/vendor on invoice must be 'Global PPL CH GmbH' for all receipt types."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_address",
-          "description": "Mandatory supplier address information is missing.",
-          "recommendation": "It is recommended to obtain and include the supplier's address to conform to compliance standards.",
-          "knowledge_base_reference": "Supplier Address is mandatory and must be listed as Freigutstrasse 2 8002 Z\u00fcrich, Switzerland."
+          "description": "Mandatory supplier address is missing for ICP 'Global PPL CH GmbH'.",
+          "recommendation": "It is recommended to address this issue to include the address 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland'.",
+          "knowledge_base_reference": "Address of the supplier on invoice must be 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland' for all receipt types."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "company_registration",
-          "description": "Missing company registration number.",
-          "recommendation": "Obtain and include the correct Swiss company registration CHE-295.369.918.",
-          "knowledge_base_reference": "Company Registration is mandatory and should match CHE-295.369.918."
-        },
-        {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "business_trip_reporting",
-          "description": "Each business trip should be reported separately.",
-          "recommendation": "Ensure separate reports are submitted for each travel according to company policy.",
-          "knowledge_base_reference": "Separate report per business trip is a mandatory requirement."
-        },
-        {
-          "issue_type": "Standards & Compliance | Follow-up Action Identified",
-          "field": "travel_template",
-          "description": "Use of required Travel Expense Report Template Switzerland CHF.xlsx is missing.",
-          "recommendation": "Complete travel expense reports using the specified template.",
-          "knowledge_base_reference": "Mandatory use of Travel Expense Report Template Switzerland CHF.xlsx."
-        },
-        {
-          "issue_type": "Standards & Compliance | Follow-up Action Identified",
-          "field": "personal_information",
-          "description": "Receipts may need personal data scrutinizing/removal for compliance with privacy.",
-          "recommendation": "Ensure personal information not needed for reimbursement is adequately removed.",
-          "knowledge_base_reference": "Personal Information not required must be removed to meet privacy standards."
+          "description": "Mandatory company registration number is missing for ICP 'Global PPL CH GmbH'.",
+          "recommendation": "It is recommended to address this issue to include the company registration number 'CHE-295.369.918'.",
+          "knowledge_base_reference": "Swiss company registration number must be 'CHE-295.369.918' for all receipt types."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "Overall, the receipt validation revealed significant compliance issues, primarily due to missing critical supplier details, company registration, and business travel-specific documentation."
+      "compliance_summary": "The receipt has several missing mandatory fields according to the compliance requirements for Switzerland under ICP 'Global People'. Necessary fields such as supplier name, address, and company registration need to be included to comply."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
       "country": "Switzerland",
       "icp": "Global People",
-      "receipt_type": "travel",
-      "issues_count": 6,
+      "receipt_type": "All",
+      "issues_count": 3,
       "has_reasoning": true
     }
   },
   "processing_status": "completed",
-  "uqlm_validation_available": true
+  "uqlm_validation_available": false
 }

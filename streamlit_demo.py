@@ -17,6 +17,7 @@ from agno.utils.log import logger
 from expense_processing_workflow import ExpenseProcessingWorkflow
 from image_quality_processor import ImageQualityProcessor
 from llm_image_quality_assessor import LLMImageQualityAssessor
+from standalone_validation_runner import StandaloneValidationRunner
 
 def make_json_serializable(obj, _seen=None, _depth=0):
     """Convert objects to JSON-serializable format with recursion protection."""
@@ -244,6 +245,28 @@ def save_quality_results_to_files(quality_results_dict, save_directory="quality_
         return []
 
 
+async def run_standalone_validation():
+    """Run standalone LLM-as-judge validation on existing results."""
+    try:
+        # Initialize validation runner
+        runner = StandaloneValidationRunner(
+            results_dir="results",
+            quality_dir="llm_quality_reports",
+            validation_output_dir="streamlit_validation_results"
+        )
+
+        # Run validation
+        summary = await runner.run_validation(
+            validate_compliance=True,
+            validate_quality=True
+        )
+
+        return summary, None
+
+    except Exception as e:
+        logger.error(f"Standalone validation failed: {str(e)}")
+        return None, str(e)
+
 
 def display_file_preview(uploaded_file):
     """Display preview of uploaded file (image or PDF)."""
@@ -289,6 +312,28 @@ async def process_uploaded_files(uploaded_files, country, icp, llamaparse_api_ke
         temp_path = pathlib.Path(temp_dir)
         dataset_path = temp_path / "dataset"
         dataset_path.mkdir(exist_ok=True)
+
+        # Save existing LLM quality results to avoid re-running assessments
+        if hasattr(st.session_state, 'image_quality_results') and st.session_state.image_quality_results:
+            llm_quality_dir = temp_path / "llm_quality_reports"
+            llm_quality_dir.mkdir(exist_ok=True)
+
+            for uploaded_file in uploaded_files:
+                if uploaded_file.type.startswith('image/'):
+                    file_key = f"{uploaded_file.name}_{uploaded_file.size}"
+                    quality_result = st.session_state.image_quality_results.get(file_key, {})
+
+                    # Extract LLM assessment if available
+                    llm_assessment = quality_result.get('llm_assessment')
+                    if llm_assessment and 'error' not in llm_assessment:
+                        # Save LLM quality result in the format expected by workflow
+                        base_name = pathlib.Path(uploaded_file.name).stem
+                        llm_quality_file = llm_quality_dir / f"llm_quality_{base_name}.json"
+
+                        with open(llm_quality_file, 'w', encoding='utf-8') as f:
+                            json.dump(llm_assessment, f, indent=2, ensure_ascii=False)
+
+                        logger.info(f"💾 Reusing LLM quality assessment for {uploaded_file.name}")
 
         # Save uploaded files to temporary directory
         saved_files = []
@@ -350,7 +395,8 @@ def display_classification_result(classification):
     
     with col1:
         st.metric("Is Expense", "✅ Yes" if classification.get('is_expense') else "❌ No")
-        st.metric("Expense Type", classification.get('expense_type', 'N/A').title())
+        expense_type = classification.get('expense_type') or 'N/A'
+        st.metric("Expense Type", expense_type.title() if expense_type != 'N/A' else 'N/A')
     
     with col2:
         st.metric("Language", classification.get('language', 'N/A'))
@@ -362,6 +408,41 @@ def display_classification_result(classification):
     
     if classification.get('reasoning'):
         st.text_area("Classification Reasoning", classification['reasoning'], height=100)
+
+    # Display schema field analysis if available
+    schema_analysis = classification.get('schema_field_analysis')
+    if schema_analysis:
+        st.subheader("🔍 Schema Field Analysis")
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+            fields_found = schema_analysis.get('fields_found', [])
+            st.metric("Fields Found", f"{len(fields_found)}/8")
+            if fields_found:
+                st.write("**✅ Found:**")
+                for field in fields_found:
+                    st.write(f"• {field}")
+
+        with col2:
+            fields_missing = schema_analysis.get('fields_missing', [])
+            if fields_missing:
+                st.write("**❌ Missing:**")
+                for field in fields_missing[:5]:  # Show max 5 to save space
+                    st.write(f"• {field}")
+                if len(fields_missing) > 5:
+                    st.write(f"• ... and {len(fields_missing) - 5} more")
+
+        with col3:
+            total_found = schema_analysis.get('total_fields_found', 0)
+            threshold_met = total_found >= 5  # Based on updated threshold
+            st.metric("Threshold Met", "✅ Yes" if threshold_met else "❌ No")
+            st.caption(f"Requires 5+ fields for expense")
+
+        # Schema-based reasoning
+        schema_reasoning = schema_analysis.get('expense_identification_reasoning')
+        if schema_reasoning:
+            st.text_area("Schema-Based Reasoning", schema_reasoning, height=80)
 
 def display_extraction_result(extraction):
     """Display extraction results in a comprehensive formatted way."""
@@ -464,6 +545,83 @@ def display_extraction_result(extraction):
             st.write(f"**City:** {billing_address.get('city', 'N/A')}, {billing_address.get('postal_code', 'N/A')}")
             st.write(f"**Country:** {billing_address.get('country', 'N/A')}")
 
+def display_citation_result(citations):
+    """Display citation results in a formatted way."""
+    if not citations:
+        st.info("No citation data available")
+        return
+
+    if "error" in citations.get("metadata", {}):
+        st.error(f"Citation generation failed: {citations['metadata']['error']}")
+        return
+
+    # Display citation metadata
+    metadata = citations.get("metadata", {})
+    if metadata:
+        st.subheader("📊 Citation Summary")
+        col1, col2, col3, col4 = st.columns(4)
+
+        with col1:
+            st.metric("Total Fields", metadata.get("total_fields_analyzed", 0))
+
+        with col2:
+            st.metric("Field Citations", metadata.get("fields_with_field_citations", 0))
+
+        with col3:
+            st.metric("Value Citations", metadata.get("fields_with_value_citations", 0))
+
+        with col4:
+            avg_confidence = metadata.get("average_confidence", 0)
+            st.metric("Avg Confidence", f"{avg_confidence:.2f}")
+
+    # Display individual citations
+    citation_data = citations.get("citations", {})
+    if citation_data:
+        st.subheader("🔍 Field Citations")
+
+        for field_name, field_citations in citation_data.items():
+            with st.expander(f"📝 {field_name.replace('_', ' ').title()}", expanded=False):
+
+                # Field citation
+                field_citation = field_citations.get("field_citation", {})
+                if field_citation:
+                    st.write("**🏷️ Field Citation:**")
+                    col1, col2 = st.columns([3, 1])
+
+                    with col1:
+                        st.write(f"**Found:** `{field_citation.get('source_text', 'N/A')}`")
+                        st.write(f"**Context:** {field_citation.get('context', 'N/A')}")
+                        st.write(f"**Location:** {field_citation.get('source_location', 'N/A')}")
+
+                    with col2:
+                        confidence = field_citation.get('confidence', 0)
+                        match_type = field_citation.get('match_type', 'unknown')
+                        st.metric("Confidence", f"{confidence:.2f}")
+                        st.write(f"**Type:** {match_type}")
+
+                # Value citation
+                value_citation = field_citations.get("value_citation", {})
+                if value_citation:
+                    st.write("**💰 Value Citation:**")
+                    col1, col2 = st.columns([3, 1])
+
+                    with col1:
+                        st.write(f"**Found:** `{value_citation.get('source_text', 'N/A')}`")
+                        st.write(f"**Context:** {value_citation.get('context', 'N/A')}")
+                        st.write(f"**Location:** {value_citation.get('source_location', 'N/A')}")
+
+                    with col2:
+                        confidence = value_citation.get('confidence', 0)
+                        match_type = value_citation.get('match_type', 'unknown')
+                        st.metric("Confidence", f"{confidence:.2f}")
+                        st.write(f"**Type:** {match_type}")
+
+                if not field_citation and not value_citation:
+                    st.info("No citations found for this field")
+    else:
+        st.info("No field citations available")
+
+
 def display_compliance_result(compliance):
     """Display compliance results in a formatted way."""
     if not compliance or 'validation_result' not in compliance:
@@ -522,8 +680,8 @@ def load_validation_result(result_file_path):
         st.error(f"Error loading validation results: {e}")
         return None
 
-def display_image_quality_result(image_quality):
-    """Display comprehensive image quality analysis results including both OpenCV and LLM assessments."""
+def display_image_quality_result(image_quality, uploaded_file=None):
+    """Display comprehensive image quality analysis results with image at top and assessments side by side."""
     if not image_quality:
         st.info("No image quality analysis available")
         return
@@ -532,30 +690,52 @@ def display_image_quality_result(image_quality):
         st.error(f"Image quality analysis failed: {image_quality['error']}")
         return
 
+    # Display image at the top if available
+    if uploaded_file and uploaded_file.type.startswith('image/'):
+        st.write("**📷 Image Preview:**")
+        try:
+            image = Image.open(uploaded_file)
+            # Resize image for display (max width 600px)
+            max_width = 600
+            if image.width > max_width:
+                ratio = max_width / image.width
+                new_height = int(image.height * ratio)
+                image = image.resize((max_width, new_height))
+            st.image(image, caption=uploaded_file.name, use_column_width=False)
+        except Exception as e:
+            st.error(f"Could not display image: {str(e)}")
+
     # Check if we have both assessments
     has_opencv = "opencv_assessment" in image_quality
     has_llm = "llm_assessment" in image_quality
 
     if has_opencv and has_llm:
-        # Display both assessments separately
-        st.subheader("📸 Quality Analysis")
+        # Display both assessments side by side
+        st.write("**📸 Quality Analysis:**")
 
-        # OpenCV Assessment (your original format)
-        st.write("**🔧 OpenCV Assessment**")
-        opencv_data = image_quality["opencv_assessment"]
-        display_opencv_quality_section(opencv_data)
+        col1, col2 = st.columns(2)
 
-        st.write("---")  # Separator
+        with col1:
+            st.write("**🔧 OpenCV Assessment**")
+            opencv_data = image_quality["opencv_assessment"]
+            display_opencv_quality_section(opencv_data)
 
-        # LLM Assessment (separate section)
-        st.write("**🤖 LLM Assessment**")
-        llm_data = image_quality["llm_assessment"]
-        display_llm_quality_section(llm_data)
+        with col2:
+            st.write("**🤖 LLM Assessment**")
+            llm_data = image_quality["llm_assessment"]
+            display_llm_quality_section(llm_data)
 
     else:
         # Fallback to original display for backward compatibility
-        st.subheader("📸 Quality Analysis")
-        display_opencv_quality_section(image_quality)
+        st.write("**📸 Quality Analysis:**")
+        if has_opencv:
+            opencv_data = image_quality["opencv_assessment"]
+            display_opencv_quality_section(opencv_data)
+        elif has_llm:
+            llm_data = image_quality["llm_assessment"]
+            display_llm_quality_section(llm_data)
+        else:
+            display_opencv_quality_section(image_quality)
 
 
 def display_opencv_quality_section(opencv_data):
@@ -1294,23 +1474,18 @@ def main():
 
         # Display uploaded files with previews and quality results
         if len(uploaded_files) == 1:
-            # Single file - show full preview and quality
-            st.subheader("📋 File Preview & Quality Analysis")
+            # Single file - show quality analysis (image preview is now included in quality display)
+            st.subheader("📋 File Analysis")
 
-            col1, col2 = st.columns([1, 1])
-
-            with col1:
+            if uploaded_files[0].type.startswith('image/'):
+                file_key = f"{uploaded_files[0].name}_{uploaded_files[0].size}"
+                quality_result = st.session_state.image_quality_results.get(file_key, {})
+                display_image_quality_result(quality_result, uploaded_files[0])
+            else:
+                # For non-image files, show file preview
                 st.write("**File Preview:**")
                 display_file_preview(uploaded_files[0])
-
-            with col2:
-                if uploaded_files[0].type.startswith('image/'):
-                    st.write("**Image Quality:**")
-                    file_key = f"{uploaded_files[0].name}_{uploaded_files[0].size}"
-                    quality_result = st.session_state.image_quality_results.get(file_key, {})
-                    display_image_quality_result(quality_result)
-                else:
-                    st.info("Image quality analysis only available for image files")
+                st.info("Image quality analysis only available for image files")
         else:
             # Multiple files - show in tabs or expanders
             st.subheader("📋 File Previews & Quality Analysis")
@@ -1333,7 +1508,7 @@ def main():
                                 st.write("**Image Quality:**")
                                 file_key = f"{file.name}_{file.size}"
                                 quality_result = st.session_state.image_quality_results.get(file_key, {})
-                                display_image_quality_result(quality_result)
+                                display_image_quality_result(quality_result, file)
                             else:
                                 st.info("Image quality analysis only available for image files")
             else:
@@ -1351,7 +1526,7 @@ def main():
                                 st.write("**Image Quality:**")
                                 file_key = f"{file.name}_{file.size}"
                                 quality_result = st.session_state.image_quality_results.get(file_key, {})
-                                display_image_quality_result(quality_result)
+                                display_image_quality_result(quality_result, file)
                             else:
                                 st.info("Image quality analysis only available for image files")
         
@@ -1391,8 +1566,14 @@ def main():
             with st.expander(f"📄 {file_name}", expanded=True):
                 if result.get('status') == 'completed':
                     
+                    # Check if citations are available
+                    has_citations = result.get('extraction', {}).get('citations') is not None
+
                     # Tabs for different result types
-                    tab1, tab2, tab3, tab4, tab5 = st.tabs(["🏷️ Classification", "📋 Extraction", "⚖️ Compliance", "🎯 UQLM Validation", "📄 Raw JSON"])
+                    if has_citations:
+                        tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["🏷️ Classification", "📋 Extraction", "📝 Citations", "⚖️ Compliance", "🎯 UQLM Validation", "📄 Raw JSON"])
+                    else:
+                        tab1, tab2, tab3, tab4, tab5 = st.tabs(["🏷️ Classification", "📋 Extraction", "⚖️ Compliance", "🎯 UQLM Validation", "📄 Raw JSON"])
 
                     with tab1:
                         display_classification_result(result.get('classification'))
@@ -1400,16 +1581,31 @@ def main():
                     with tab2:
                         display_extraction_result(result.get('extraction'))
 
-                    with tab3:
-                        display_compliance_result(result.get('compliance'))
+                    if has_citations:
+                        with tab3:
+                            display_citation_result(result.get('extraction', {}).get('citations'))
 
-                    with tab4:
-                        # Load validation results from separate file
-                        validation_data = load_validation_result(file_name)
-                        display_validation_result(validation_data)
+                        with tab4:
+                            display_compliance_result(result.get('compliance'))
 
-                    with tab5:
-                        st.json(result)
+                        with tab5:
+                            # Load validation results from separate file
+                            validation_data = load_validation_result(file_name)
+                            display_validation_result(validation_data)
+
+                        with tab6:
+                            st.json(result)
+                    else:
+                        with tab3:
+                            display_compliance_result(result.get('compliance'))
+
+                        with tab4:
+                            # Load validation results from separate file
+                            validation_data = load_validation_result(file_name)
+                            display_validation_result(validation_data)
+
+                        with tab5:
+                            st.json(result)
                         
                         # Download button for JSON
                         try:
@@ -1428,7 +1624,81 @@ def main():
                         )
                 else:
                     st.error(f"❌ Processing failed for {file_name}: {result.get('error', 'Unknown error')}")
-    
+
+        # Add standalone validation section
+        st.markdown("---")
+        st.header("🎯 LLM-as-Judge Validation")
+        st.info("Run additional validation on the processing results using the separated validation system.")
+
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col2:
+            if st.button("🚀 Run Standalone Validation", type="secondary", use_container_width=True):
+                with st.spinner("Running LLM-as-judge validation..."):
+                    # Run async validation
+                    loop = asyncio.new_event_loop()
+                    asyncio.set_event_loop(loop)
+
+                    try:
+                        validation_summary, validation_error = loop.run_until_complete(
+                            run_standalone_validation()
+                        )
+
+                        if validation_error:
+                            st.error(f"❌ Validation failed: {validation_error}")
+                        else:
+                            st.session_state.validation_results = validation_summary
+                            st.success("✅ Standalone validation completed successfully!")
+
+                    finally:
+                        loop.close()
+
+        # Display validation results if available
+        if hasattr(st.session_state, 'validation_results') and st.session_state.validation_results:
+            st.subheader("📋 Validation Summary")
+
+            validation_summary = st.session_state.validation_results
+
+            # Summary metrics
+            col1, col2, col3 = st.columns(3)
+
+            with col1:
+                total_files = validation_summary.get('total_files_processed', 0)
+                st.metric("Files Processed", total_files)
+
+            with col2:
+                total_time = validation_summary.get('total_validation_time', 0)
+                st.metric("Validation Time", f"{total_time:.1f}s")
+
+            with col3:
+                compliance_count = len(validation_summary.get('compliance_validation', {}).get('results', []))
+                quality_count = len(validation_summary.get('quality_validation', {}).get('results', []))
+                st.metric("Validations", f"{compliance_count + quality_count}")
+
+            # Detailed results
+            if validation_summary.get('compliance_validation', {}).get('enabled'):
+                st.write("**🔍 Compliance Validation Results:**")
+                compliance_results = validation_summary['compliance_validation']['results']
+
+                for result in compliance_results:
+                    if result.get('status') == 'completed':
+                        confidence = result.get('confidence_score', 0)
+                        reliability = result.get('reliability_level', 'unknown')
+                        st.success(f"✅ {result['source_file']}: {confidence:.2f} confidence ({reliability} reliability)")
+                    else:
+                        st.error(f"❌ {result['source_file']}: {result.get('error', 'Unknown error')}")
+
+            if validation_summary.get('quality_validation', {}).get('enabled'):
+                st.write("**🤖 Quality Validation Results:**")
+                quality_results = validation_summary['quality_validation']['results']
+
+                for result in quality_results:
+                    if result.get('status') == 'completed':
+                        confidence = result.get('confidence_score', 0)
+                        reliability = result.get('reliability_level', 'unknown')
+                        st.success(f"✅ {result['source_file']}: {confidence:.2f} confidence ({reliability} reliability)")
+                    else:
+                        st.error(f"❌ {result['source_file']}: {result.get('error', 'Unknown error')}")
+
     # Footer
     st.markdown("---")
     st.markdown("""

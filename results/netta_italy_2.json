@@ -1,0 +1,308 @@
+{
+  "source_file": "netta_italy_2.md",
+  "processing_timestamp": "2025-07-16T23:12:15.760675",
+  "dataset_metadata": {
+    "filepath": "expense_files/netta_italy_2.png",
+    "filename": "netta_italy_2.png",
+    "country": "Italy",
+    "icp": "Global People",
+    "dataset_file": "netta_italy_2.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "Italian",
+    "language_confidence": 90,
+    "document_location": "Italy",
+    "expected_location": "Italy",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 95,
+    "reasoning": "The document represents a meal expense given it includes a supplier, consumer, transaction amount, transaction date, and receipt number. The language appears to be Italian with high confidence, and the location matches the expected location.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionAmount",
+        "transactionDate",
+        "invoiceReceiptNumber",
+        "itemDescriptionLineItems"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "icpRequirements",
+        "taxInformation",
+        "paymentMethod"
+      ],
+      "total_fields_found": 5,
+      "expense_identification_reasoning": "The document includes a supplier (TRATTORIA-PIZZERIA LA PREFERITA S.A.S.), transaction amount ('TOTALE EURO 28,70'), transaction date (21/08/14), invoice/receipt number ('N\u00b0 RG 96102058'), and item description/line items. These fields meet the requirement for classification as an expense."
+    }
+  },
+  "extraction_result": {
+    "supplier_name": "TRATTORIA-PIZZERIA LA PREFERITA S.A.S. DI CUSCO PASQUALE & C.",
+    "supplier_address": "PIAZZA DOGANA 11 C2 LIDO",
+    "vat_number": "01797930797",
+    "currency": "EUR",
+    "amount": 28.7,
+    "receipt_type": "Unknown",
+    "payment_method": "CONTANTI",
+    "date_of_issue": "2023-08-21",
+    "transaction_time": "21:56",
+    "transaction_reference": "N\u00b0 RG 96102058",
+    "line_items": [
+      {
+        "description": "COPERTO/ANTIPASTO",
+        "quantity": 3,
+        "unit_price": 1.3,
+        "total_price": 3.9
+      },
+      {
+        "description": "CONTORNI/BEVANDE",
+        "quantity": 2,
+        "unit_price": 2.0,
+        "total_price": 4.0
+      },
+      {
+        "description": "PIZZERIA",
+        "quantity": 3,
+        "unit_price": 3.5,
+        "total_price": 10.5
+      },
+      {
+        "description": "VARIE",
+        "quantity": 1,
+        "unit_price": 2.0,
+        "total_price": 2.0
+      },
+      {
+        "description": "CONTORNI/BEVANDE",
+        "quantity": 1,
+        "unit_price": 1.5,
+        "total_price": 1.5
+      },
+      {
+        "description": "CONTORNI/BEVANDE",
+        "quantity": 2,
+        "unit_price": 3.0,
+        "total_price": 6.0
+      },
+      {
+        "description": "VARIE",
+        "quantity": 1,
+        "unit_price": 0.8,
+        "total_price": 0.8
+      }
+    ],
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "TRATTORIA-PIZZERIA LA PREFERITA S.A.S.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "TRATTORIA-PIZZERIA\nLA PREFERITA S.A.S.\nDI CUSCO PASQUALE & C.",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "TRATTORIA-PIZZERIA LA PREFERITA S.A.S.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "TRATTORIA-PIZZERIA\nLA PREFERITA S.A.S.\nDI CUSCO PASQUALE & C.",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "PIAZZA DOGANA 11 C2 LIDO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "PIAZZA DOGANA 11 C2 LIDO",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "PIAZZA DOGANA 11 C2 LIDO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "PIAZZA DOGANA 11 C2 LIDO",
+            "match_type": "exact"
+          }
+        },
+        "vat_number": {
+          "field_citation": {
+            "source_text": "P.IVA",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "P.IVA 01797930797",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "01797930797",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "P.IVA 01797930797",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "EURO",
+            "confidence": 0.7,
+            "source_location": "markdown",
+            "context": "Operatore 1 EURO",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "EURO",
+            "confidence": 0.7,
+            "source_location": "markdown",
+            "context": "Operatore 1 EURO",
+            "match_type": "exact"
+          }
+        },
+        "amount": {
+          "field_citation": {
+            "source_text": "TOTALE EURO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "TOTALE EURO 28,70",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "28,70",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "SUBTOTALE 28,70\nTOTALE EURO 28,70\nCONTANTI 28,70",
+            "match_type": "exact"
+          }
+        },
+        "receipt_type": {
+          "field_citation": {
+            "source_text": "Receipt Type:",
+            "confidence": 0.5,
+            "source_location": "requirements",
+            "context": "Must be actual tax receipts or invoices, not booking confirmations.",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "Unknown",
+            "confidence": 0.2,
+            "source_location": "requirements",
+            "context": "Receipt Type is not clearly marked in the source.",
+            "match_type": "fuzzy"
+          }
+        },
+        "payment_method": {
+          "field_citation": {
+            "source_text": "CONTANTI",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "CONTANTI 28,70",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "CONTANTI",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "CONTANTI 28,70",
+            "match_type": "exact"
+          }
+        },
+        "date_of_issue": {
+          "field_citation": {
+            "source_text": "Date:",
+            "confidence": 0.6,
+            "source_location": "requirements",
+            "context": "Part of the required receipt details.",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "21/08/14",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "21/08/14 21:56",
+            "match_type": "fuzzy"
+          }
+        },
+        "transaction_time": {
+          "field_citation": {
+            "source_text": "Time:",
+            "confidence": 0.6,
+            "source_location": "requirements",
+            "context": "Part of the required receipt details.",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "21:56",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "21/08/14 21:56",
+            "match_type": "exact"
+          }
+        },
+        "transaction_reference": {
+          "field_citation": {
+            "source_text": "N\u00b0 RG",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "N\u00b0 RG 96102058",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "96102058",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "N\u00b0 RG 96102058",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 10,
+        "fields_with_field_citations": 10,
+        "fields_with_value_citations": 10,
+        "average_confidence": 0.82
+      }
+    }
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 3,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The receipt's supplier name does not match the mandatory name 'Global People s.r.l.' required for ICP Global People.",
+          "recommendation": "It is recommended to address this issue with the supplier.",
+          "knowledge_base_reference": "Supplier Name is mandatory and must be 'Global People s.r.l.' for receipts under Global People s.r.l. in Italy."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "The VAT number on the receipt '01797930797' does not match the required 'IT12455930011' for ICP Global People.",
+          "recommendation": "Contact the supplier to provide an acceptable VAT number.",
+          "knowledge_base_reference": "VAT Number must be 'IT12455930011' for receipts under Global People s.r.l. in Italy."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "payment_method",
+          "description": "The payment method 'CONTANTI' is not allowed since all payments must be traceable using methods like bank transfers or credit cards.",
+          "recommendation": "Ensure payment method aligns with compliance.",
+          "knowledge_base_reference": "Payment Method must be traceable: bank transfers, postal transfers, credit/debit cards are required."
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt has several compliance issues, including incorrect supplier name and address, incorrect VAT number, and unacceptable payment method. Additional actions are needed to meet the compliance requirements for Global People s.r.l. in Italy."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Italy",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 3,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": false
+}

@@ -1,0 +1,418 @@
+{
+  "source_file": "netta_germany_1.md",
+  "processing_timestamp": "2025-07-16T23:07:17.291786",
+  "dataset_metadata": {
+    "filepath": "expense_files/netta_germany_1.png",
+    "filename": "netta_germany_1.png",
+    "country": "Germany",
+    "icp": "Global People",
+    "dataset_file": "netta_germany_1.json"
+  },
+  "classification_result": {
+    "is_expense": false,
+    "expense_type": null,
+    "language": "English",
+    "language_confidence": 95,
+    "document_location": "USA",
+    "expected_location": "Germany",
+    "location_match": false,
+    "error_type": "File identified not as an expense",
+    "error_message": "The document lacks evidence of payment completed. No amount has been paid as per the document details.",
+    "classification_confidence": 85,
+    "reasoning": "The document contains supplier, consumer recipient, transaction amount, transaction date, and item description fields. However, it shows a balance due rather than evidence of payment completion.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "consumerRecipient",
+        "transactionAmount",
+        "transactionDate",
+        "itemDescriptionLineItems",
+        "invoiceReceiptNumber",
+        "taxInformation"
+      ],
+      "fields_missing": [
+        "paymentMethod"
+      ],
+      "total_fields_found": 7,
+      "expense_identification_reasoning": "The document contains information for 7 fields, indicating an expense. However, because the payment has not been completed (the amount paid is USD 0.00, indicating the balance due), it does not qualify as a true expense under this categorization."
+    }
+  },
+  "extraction_result": {
+    "supplier_name": "Saldo Apps",
+    "supplier_address": "First str. 28-32, Chicago USA",
+    "vat_number": null,
+    "currency": "USD",
+    "tax_rate": null,
+    "vat": null,
+    "name": null,
+    "address": null,
+    "supplier": null,
+    "expense": null,
+    "route": null,
+    "car_details": null,
+    "purpose": null,
+    "odometer_reading": null,
+    "travel_date": null,
+    "a1_certificate": null,
+    "payment_receipt": null,
+    "manager_approval": null,
+    "personal_phone_proof": null,
+    "storage_period": null,
+    "invoice_number": "001",
+    "invoice_date": "2021-07-13",
+    "due_date": "2022-02-28",
+    "bill_to": {
+      "name": "Shepard corp.",
+      "email": "shepard@mail.com",
+      "phone": "0026697967",
+      "address": "North str. 32, Chicago USA"
+    },
+    "contact_email": "web@saldoapps.com",
+    "contact_phone": "5026697967",
+    "contact_website": "saldoapps.com",
+    "payment_instruction": {
+      "paypal_email": "web@saldoapps.com",
+      "make_checks_payable_to": "John Smith",
+      "bank_transfer_aba": "066120864"
+    },
+    "line_items": [
+      {
+        "description": "Prototype - Prototype-based programming is a style of object-oriented programming",
+        "rate": 50.0,
+        "quantity": 24,
+        "tax_percent": 10,
+        "discount_percent": 5,
+        "amount": 2200.0
+      },
+      {
+        "description": "Design",
+        "rate": 50.0,
+        "quantity": 120,
+        "tax_percent": 10,
+        "discount_percent": 5,
+        "amount": 6000.0
+      }
+    ],
+    "subtotal": 8200.0,
+    "discount": 0.0,
+    "shipping_cost": 0.0,
+    "sales_tax": 460.0,
+    "total_amount": 8660.0,
+    "amount_paid": 0.0,
+    "balance_due": 8660.0,
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "From",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "## From\nSaldo Apps",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Saldo Apps",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "## From\nSaldo Apps",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "From",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "## From\nSaldo Apps\nFirst str. 28-32, Chicago USA",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "First str. 28-32, Chicago USA",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "First str. 28-32, Chicago USA",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "RATE, USD",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "| DESCRIPTION | RATE, USD | QTY | TAX, % | DISC, % | AMOUNT, USD |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "USD",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Subtotal: | USD 8,200.00\nDiscount (20%): | USD 0.00\nShipping Cost: | USD 0.00\nSales Tax: | USD 460.00\nTotal: | USD 8,660.00",
+            "match_type": "exact"
+          }
+        },
+        "invoice_number": {
+          "field_citation": {
+            "source_text": "Invoice no.:",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| Invoice no.: | 001 |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "001",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| Invoice no.: | 001 |",
+            "match_type": "exact"
+          }
+        },
+        "invoice_date": {
+          "field_citation": {
+            "source_text": "Invoice date:",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| Invoice date: | Jul 13th, 2021 |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Jul 13th, 2021",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Invoice date: | Jul 13th, 2021 |",
+            "match_type": "exact"
+          }
+        },
+        "due_date": {
+          "field_citation": {
+            "source_text": "Due:",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| Due: | Feb 28th, 2022 |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Feb 28th, 2022",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Due: | Feb 28th, 2022 |",
+            "match_type": "exact"
+          }
+        },
+        "contact_email": {
+          "field_citation": {
+            "source_text": "contact",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "web@saldoapps.com",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "web@saldoapps.com",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "web@saldoapps.com",
+            "match_type": "exact"
+          }
+        },
+        "contact_phone": {
+          "field_citation": {
+            "source_text": "contact",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "5026697967",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "5026697967",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "5026697967",
+            "match_type": "exact"
+          }
+        },
+        "contact_website": {
+          "field_citation": {
+            "source_text": "contact",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "saldoapps.com",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "saldoapps.com",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "saldoapps.com",
+            "match_type": "exact"
+          }
+        },
+        "subtotal": {
+          "field_citation": {
+            "source_text": "Subtotal:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Subtotal: | USD 8,200.00 |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "USD 8,200.00",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| Subtotal: | USD 8,200.00 |",
+            "match_type": "exact"
+          }
+        },
+        "discount": {
+          "field_citation": {
+            "source_text": "Discount (20%):",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Discount (20%): | USD 0.00 |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "USD 0.00",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| Discount (20%): | USD 0.00 |",
+            "match_type": "exact"
+          }
+        },
+        "shipping_cost": {
+          "field_citation": {
+            "source_text": "Shipping Cost:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Shipping Cost: | USD 0.00 |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "USD 0.00",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| Shipping Cost: | USD 0.00 |",
+            "match_type": "exact"
+          }
+        },
+        "sales_tax": {
+          "field_citation": {
+            "source_text": "Sales Tax:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Sales Tax: | USD 460.00 |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "USD 460.00",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| Sales Tax: | USD 460.00 |",
+            "match_type": "exact"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "Total:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Total: | USD 8,660.00 |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "USD 8,660.00",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| Total: | USD 8,660.00 |",
+            "match_type": "exact"
+          }
+        },
+        "amount_paid": {
+          "field_citation": {
+            "source_text": "Amount paid:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Amount paid: | USD 0.00 |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "USD 0.00",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| Amount paid: | USD 0.00 |",
+            "match_type": "exact"
+          }
+        },
+        "balance_due": {
+          "field_citation": {
+            "source_text": "Balance Due:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Balance Due: | USD 8,660.00 |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "USD 8,660.00",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| Balance Due: | USD 8,660.00 |",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 5,
+        "fields_with_field_citations": 5,
+        "fields_with_value_citations": 5,
+        "average_confidence": 0.933
+      }
+    }
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 4,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name 'Saldo Apps' does not match the required 'Global People DE GmbH'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "FileRelatedRequirements: Supplier Name must be Global People DE GmbH"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "The supplier address 'First str. 28-32, Chicago USA' does not match 'Taunusanlage 8, 60329 Frankfurt, Germany'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "FileRelatedRequirements: Supplier Address must be Taunusanlage 8, 60329 Frankfurt, Germany."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "Missing mandatory VAT identification number 'DE356366640'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "FileRelatedRequirements: VAT Number is mandatory and must be DE356366640."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "currency",
+          "description": "The invoice currency 'USD' does not match the required local currency 'EUR'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "FileRelatedRequirements: Currency must be in local currency."
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt has compliance issues primarily involving the supplier details not matching the requirements for a Global People contract in Germany. The VAT Number is missing, and the currency of the transaction does not align with local regulations."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "All",
+      "issues_count": 4,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": false
+}

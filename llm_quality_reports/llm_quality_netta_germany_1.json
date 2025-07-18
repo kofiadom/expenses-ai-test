@@ -1,0 +1,72 @@
+{
+  "image_path": "expense_files\\netta_germany_1.png",
+  "assessment_method": "LLM",
+  "model_used": "claude-3-7-sonnet-20250219",
+  "timestamp": "2025-07-16T22:31:48.089792",
+  "blur_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.05,
+    "description": "The invoice image is sharp with clear text and well-defined edges throughout.",
+    "recommendation": "No action needed as the image has excellent sharpness suitable for OCR processing."
+  },
+  "contrast_assessment": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.9,
+    "description": "The invoice displays excellent contrast with blue text on white background making all content clearly legible.",
+    "recommendation": "No action needed as contrast is optimal for OCR processing."
+  },
+  "glare_identification": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No glare, reflections, or overexposed areas are present in the invoice image.",
+    "recommendation": "No action needed as the image is free from glare effects."
+  },
+  "water_stains": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.98,
+    "quantitative_measure": 0.0,
+    "description": "No water stains, discoloration, or liquid damage is visible on the invoice document.",
+    "recommendation": "No action needed as the document is free from water damage."
+  },
+  "tears_or_folds": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "The invoice appears to be free from tears, creases, folds, or wrinkles that would affect readability.",
+    "recommendation": "No action needed as the document shows no signs of physical damage."
+  },
+  "cut_off_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.0,
+    "description": "All edges of the invoice are clearly visible with no content appearing to be cut off from the frame.",
+    "recommendation": "No action needed as the entire document is properly captured in the image."
+  },
+  "missing_sections": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.0,
+    "description": "The invoice appears complete with all standard sections present including header, line items, totals, and payment information.",
+    "recommendation": "No action needed as all expected invoice sections are present and complete."
+  },
+  "obstructions": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.98,
+    "quantitative_measure": 0.0,
+    "description": "No fingers, shadows, or other objects are obstructing any part of the invoice content.",
+    "recommendation": "No action needed as the document is free from obstructions."
+  },
+  "overall_quality_score": 10,
+  "suitable_for_extraction": true
+}

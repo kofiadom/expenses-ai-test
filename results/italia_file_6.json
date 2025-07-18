@@ -1,6 +1,6 @@
 {
   "source_file": "italia_file_6.md",
-  "processing_timestamp": "2025-07-15T17:02:38.087200",
+  "processing_timestamp": "2025-07-16T23:03:18.062509",
   "dataset_metadata": {
     "filepath": "expense_files/italia_file_6.jpg",
     "filename ": "italia_file_6.jpg",
@@ -12,14 +12,31 @@
     "is_expense": true,
     "expense_type": "meals",
     "language": "Italian",
-    "language_confidence": 95,
+    "language_confidence": 98,
     "document_location": "Italy",
     "expected_location": "Italy",
     "location_match": true,
     "error_type": null,
     "error_message": null,
-    "classification_confidence": 100,
-    "reasoning": "The document contains typical expense elements such as a vendor address in Italy, itemized purchase list, monetary amounts and tax details. The language is identified as Italian with high confidence, and the location matches the expected location. The expense type is classified under 'meals' as it involves the purchase of beverages at a bar."
+    "classification_confidence": 95,
+    "reasoning": "The document is a restaurant receipt indicating completed payment for food and beverage items. The expense type classification is 'meals' due to the purchase of bottled beer/sider and reference to a bar. Location consistency is confirmed as both document and expected location are Italy.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionAmount",
+        "transactionDate",
+        "paymentMethod",
+        "itemDescriptionLineItems"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "icpRequirements",
+        "invoiceReceiptNumber",
+        "taxInformation"
+      ],
+      "total_fields_found": 5,
+      "expense_identification_reasoning": "Supplier identified as GIAMAICA CAFFE' SRL. Transaction amount (42.12\u20ac) clearly indicated as well as payment method (cash). A detailed item description includes 'BIRRA IN BOTTIGLIA/SIDRO'. At least five fields are met, qualifying the document as an expense."
+    }
   },
   "extraction_result": {
     "supplier_name": "GIAMAICA CAFFE' SRL",
@@ -27,11 +44,10 @@
     "vat_number": "01845911005",
     "currency": "EUR",
     "amount": 42.12,
-    "receipt_type": "DOCUMENTO COMMERCIALE di vendita o prestazione",
-    "payment_method": "contante",
+    "receipt_type": "DOCUMENTO COMMERCIALE",
     "line_items": [
       {
-        "description": "4 x BIRRA IN BOTTIGLIA/SIDRO",
+        "description": "BIRRA IN BOTTIGLIA/SIDRO",
         "quantity": 4,
         "unit_price": 9.0,
         "total_price": 36.0
@@ -39,18 +55,206 @@
     ],
     "subtotal": 36.0,
     "service_charge": 6.12,
-    "total_amount": 42.12,
-    "tax": 3.83,
-    "tax_rate": 10.0,
+    "total_including_vat": 42.12,
+    "vat": 3.83,
+    "payment_method": "contante",
     "contact_phone": "06/6793585",
-    "payment_cash": 42.12,
+    "tax_rate": 10.0,
     "payment_electronic": 0.0,
-    "amount_due": 42.12,
+    "non_collected": 0.0,
+    "change": 0.0,
     "amount_paid": 42.12,
-    "change": 0.0
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "GIAMAICA CAFFE' SRL",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "# BAR ACCADEMIA\nGIAMAICA CAFFE' SRL",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "GIAMAICA CAFFE' SRL",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "# BAR ACCADEMIA\nGIAMAICA CAFFE' SRL",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "VIA DEL TRITONE,54",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "VIA DEL TRITONE,54, 00187 ROMA",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+            "match_type": "fuzzy"
+          }
+        },
+        "vat_number": {
+          "field_citation": {
+            "source_text": "P.IVA 01845911005",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "00187 ROMA\nP.IVA 01845911005",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "01845911005",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "00187 ROMA\nP.IVA 01845911005",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "Prezzo(\u20ac)",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "| DESCRIZIONE                           | IVA    | Prezzo(\u20ac) |",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "\u20ac",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "| DESCRIZIONE                           | IVA    | Prezzo(\u20ac) |",
+            "match_type": "contextual"
+          }
+        },
+        "amount": {
+          "field_citation": {
+            "source_text": "TOTALE COMPLESSIVO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| TOTALE COMPLESSIVO                    |        | 42,12     |",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "42,12",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| TOTALE COMPLESSIVO                    |        | 42,12     |",
+            "match_type": "exact"
+          }
+        },
+        "receipt_type": {
+          "field_citation": {
+            "source_text": "DOCUMENTO COMMERCIALE",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "## DOCUMENTO COMMERCIALE\ndi vendita o prestazione",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "DOCUMENTO COMMERCIALE",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "## DOCUMENTO COMMERCIALE\ndi vendita o prestazione",
+            "match_type": "exact"
+          }
+        },
+        "payment_method": {
+          "field_citation": {
+            "source_text": "Pagamento contante",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Pagamento contante                    |        | 42,12     |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "contante",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Pagamento contante                    |        | 42,12     |",
+            "match_type": "exact"
+          }
+        },
+        "contact_phone": {
+          "field_citation": {
+            "source_text": "TEL. 06/6793585",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "00187 ROMA\nP.IVA 01845911005\nTEL. 06/6793585",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "06/6793585",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "00187 ROMA\nP.IVA 01845911005\nTEL. 06/6793585",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 8,
+        "fields_with_field_citations": 8,
+        "fields_with_value_citations": 8,
+        "average_confidence": 0.89
+      }
+    }
   },
   "compliance_result": {
-    "error": "Invalid JSON response from compliance analysis agent: Expecting value: line 1 column 1 (char 0)"
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 5,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name 'GIAMAICA CAFFE' SRL' does not match the mandatory requirement of 'Global People s.r.l.' for ICP 'Global People'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Must be Global People s.r.l."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "The supplier address 'VIA DEL TRITONE,54, 00187 ROMA' does not match the mandatory requirement of 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy' for ICP 'Global People'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Via Venti Settembre 3, Torino (TO) CAP 10121, Italy"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "The VAT number '01845911005' does not match the mandatory requirement of 'IT12455930011' for ICP 'Global People'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "IT12455930011"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "payment_method",
+          "description": "The payment method 'contante' (cash) is not traceable and does not comply with the requirement for traceable payment methods such as bank transfers or card payments.",
+          "recommendation": "Ensure all payments are traceable using bank transfers or card payments.",
+          "knowledge_base_reference": "Must be traceable: bank transfers, postal transfers, credit/debit cards, prepaid cards, bank/cashier's checks"
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "documentation",
+          "description": "Additional documentation is required as receipt alone is not enough for compliance. A proper tax invoice with VAT details is needed for meals.",
+          "recommendation": "Provide a proper tax invoice with VAT details.",
+          "knowledge_base_reference": "Receipt alone is not enough - you must provide a proper tax invoice with VAT details"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt is non-compliant due to mismatches in supplier details, VAT number, payment method, and missing required documentation."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Italy",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 5,
+      "has_reasoning": true
+    }
   },
   "processing_status": "completed",
   "uqlm_validation_available": false

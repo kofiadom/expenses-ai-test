@@ -1,0 +1,250 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Hotel Restaurant Nordpol",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Hotel Restaurant Nordpol\nWerftstraße 5\n23774 Heiligenhafen\nTe. 04362/2075",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Hotel Restaurant Nordpol",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Hotel Restaurant Nordpol\nWerftstraße 5\n23774 Heiligenhafen\nTe. 04362/2075",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Werftstraße 5, 23774 Heiligenhafen",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Hotel Restaurant Nordpol\nWerftstraße 5\n23774 Heiligenhafen\nTe. 04362/2075",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Werftstraße 5, 23774 Heiligenhafen",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Hotel Restaurant Nordpol\nWerftstraße 5\n23774 Heiligenhafen\nTe. 04362/2075",
+        "match_type": "exact"
+      }
+    },
+    "vat_number": {
+      "field_citation": {
+        "source_text": "USt-IdNr.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "USt-IdNr.: DE51Z770000150923\nSteuernummer: 25284507",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "DE51Z770000150923",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "USt-IdNr.: DE51Z770000150923\nSteuernummer: 25284507",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "BETRAG EUR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Betrag MwSt. 19,00%: 8,32\nBETRAG EUR: 52,10\nZahlungsart: BAR",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "EUR",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Betrag MwSt. 19,00%: 8,32\nBETRAG EUR: 52,10\nZahlungsart: BAR",
+        "match_type": "contextual"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "BETRAG",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Nettobetrag: 43,78\nBetrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32\nBETRAG EUR: 52,10",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "52,10",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Betrag MwSt. 19,00%: 8,32\nBETRAG EUR: 52,10\nZahlungsart: BAR",
+        "match_type": "exact"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "Datum:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "27.08.2019",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660",
+        "match_type": "fuzzy"
+      }
+    },
+    "transaction_time": {
+      "field_citation": {
+        "source_text": "Uhrzeit:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "16:50",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660",
+        "match_type": "exact"
+      }
+    },
+    "receipt_number": {
+      "field_citation": {
+        "source_text": "Belegnummer:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "34660",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660",
+        "match_type": "exact"
+      }
+    },
+    "payment_method": {
+      "field_citation": {
+        "source_text": "Zahlungsart:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660\nZahlungsart: BAR",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "BAR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660\nZahlungsart: BAR",
+        "match_type": "exact"
+      }
+    },
+    "table_number": {
+      "field_citation": {
+        "source_text": "Tisch Nr.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Rechnung für Tisch Nr. 43",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "43",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Rechnung für Tisch Nr. 43",
+        "match_type": "exact"
+      }
+    },
+    "sales_tax_7_percent": {
+      "field_citation": {
+        "source_text": "MwSt. 7,00%",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Betrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "0,00",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Betrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32",
+        "match_type": "exact"
+      }
+    },
+    "sales_tax_19_percent": {
+      "field_citation": {
+        "source_text": "MwSt. 19,00%",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Betrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "8,32",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Betrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32",
+        "match_type": "exact"
+      }
+    },
+    "net_amount": {
+      "field_citation": {
+        "source_text": "Nettobetrag:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Nettobetrag: 43,78\nBetrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "43,78",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Nettobetrag: 43,78\nBetrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32",
+        "match_type": "exact"
+      }
+    },
+    "thank_you_note": {
+      "field_citation": {
+        "source_text": "Vielen Dank für Ihren Besuch!",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Betrag MwSt. 19,00%: 8,32\nBETRAG EUR: 52,10\nZahlungsart: BAR\n\nVielen Dank für Ihren Besuch!",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Vielen Dank für Ihren Besuch!",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Betrag MwSt. 19,00%: 8,32\nBETRAG EUR: 52,10\nZahlungsart: BAR\n\nVielen Dank für Ihren Besuch!",
+        "match_type": "exact"
+      }
+    },
+    "masked_service_person": {
+      "field_citation": {
+        "source_text": "Es bediente Sie:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "USt-IdNr.: DE51Z770000150923\nSteuernummer: 25284507\nEs bediente Sie: kellner1",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "kellner1",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "USt-IdNr.: DE51Z770000150923\nSteuernummer: 25284507\nEs bediente Sie: kellner1",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 15,
+    "fields_with_field_citations": 15,
+    "fields_with_value_citations": 15,
+    "average_confidence": 0.9
+  }
+}

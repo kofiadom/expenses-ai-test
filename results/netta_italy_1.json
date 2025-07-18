@@ -1,0 +1,285 @@
+{
+  "source_file": "netta_italy_1.md",
+  "processing_timestamp": "2025-07-16T23:11:04.247213",
+  "dataset_metadata": {
+    "filepath": "expense_files/netta_italy_1.png",
+    "filename": "netta_italy_1.png",
+    "country": "Italy",
+    "icp": "Global People",
+    "dataset_file": "netta_italy_1.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "Italian",
+    "language_confidence": 95,
+    "document_location": "Italy",
+    "expected_location": "Italy",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 90,
+    "reasoning": "The document clearly contains expense details consistent with a restaurant receipt in Italian. It lists items consumed along with prices and a total amount indicative of a completed transaction.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionAmount",
+        "transactionDate",
+        "itemDescriptionLineItems"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "icpRequirements",
+        "invoiceReceiptNumber",
+        "taxInformation",
+        "paymentMethod"
+      ],
+      "total_fields_found": 4,
+      "expense_identification_reasoning": "The document includes key fields such as the supplier name (GIAMAICA CAFFE' SRL), transaction amount (TOTALE EURO 23,40), transaction date (19-10-16), and item description/line items (BRIOCHE MARMELLATA, CAFFE, CAPPUCCINO) necessary to classify it as an expense. However, it lacks consumer recipient details, invoice number, explicit tax information, and payment method. The presence of 4 fields is sufficient for expense classification under the schema guidelines."
+    }
+  },
+  "extraction_result": {
+    "supplier_name": "GIAMAICA CAFFE' SRL",
+    "supplier_address": "Via del Tritone, 54 00187 Roma",
+    "vat_number": "01845911005",
+    "currency": "EUR",
+    "total_amount": 23.4,
+    "date_of_issue": "2019-10-19",
+    "receipt_type": null,
+    "payment_method": null,
+    "line_items": [
+      {
+        "description": "BRIOCHE MARMELLATA",
+        "quantity": 1,
+        "unit_price": 3.0,
+        "total_price": 3.0
+      },
+      {
+        "description": "CAFFE",
+        "quantity": 3,
+        "unit_price": 4.0,
+        "total_price": 12.0
+      },
+      {
+        "description": "CAPPUCCINO",
+        "quantity": 1,
+        "unit_price": 5.0,
+        "total_price": 5.0
+      }
+    ],
+    "subtotal": 20.0,
+    "service_charge": 3.4,
+    "transaction_time": "09:00",
+    "table_number": "7",
+    "transaction_reference": "F EM 99027342",
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "GIAMAICA CAFFE' SRL",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "# BAR ACCADEMIA\nGIAMAICA CAFFE' SRL",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "GIAMAICA CAFFE' SRL",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "# BAR ACCADEMIA\nGIAMAICA CAFFE' SRL",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "Via del Tritone, 54 00187 Roma",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "GIAMAICA CAFFE' SRL\nVia del Tritone, 54 00187 Roma",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Via del Tritone, 54 00187 Roma",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "GIAMAICA CAFFE' SRL\nVia del Tritone, 54 00187 Roma",
+            "match_type": "exact"
+          }
+        },
+        "vat_number": {
+          "field_citation": {
+            "source_text": "P.I. 01845911005",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Via del Tritone, 54 00187 Roma\nP.I. 01845911005",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "01845911005",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Via del Tritone, 54 00187 Roma\nP.I. 01845911005",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "EURO",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "| BRIOCHE MARMELLATA |  EURO |\n| ------------------ | ----: |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "EURO",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "| BRIOCHE MARMELLATA |  EURO |\n| ------------------ | ----: |",
+            "match_type": "exact"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "TOTALE EURO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Servizio           |  3,40 |\n| TOTALE EURO        | 23,40 |",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "23,40",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Servizio           |  3,40 |\n| TOTALE EURO        | 23,40 |",
+            "match_type": "fuzzy"
+          }
+        },
+        "date_of_issue": {
+          "field_citation": {
+            "source_text": "19-10-16",
+            "confidence": 0.7,
+            "source_location": "markdown",
+            "context": "19-10-16  09:00                SF.    16",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "19-10-16",
+            "confidence": 0.7,
+            "source_location": "markdown",
+            "context": "19-10-16  09:00                SF.    16",
+            "match_type": "fuzzy"
+          }
+        },
+        "transaction_time": {
+          "field_citation": {
+            "source_text": "09:00",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "19-10-16  09:00                SF.    16",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "09:00",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "19-10-16  09:00                SF.    16",
+            "match_type": "exact"
+          }
+        },
+        "table_number": {
+          "field_citation": {
+            "source_text": "Tavolo: 7",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Tavolo: 7",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "7",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Tavolo: 7",
+            "match_type": "exact"
+          }
+        },
+        "transaction_reference": {
+          "field_citation": {
+            "source_text": "/F EM 99027342",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "19-10-16  09:00                SF.    16\n         /F EM 99027342",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "F EM 99027342",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "19-10-16  09:00                SF.    16\n         /F EM 99027342",
+            "match_type": "fuzzy"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 10,
+        "fields_with_field_citations": 9,
+        "fields_with_value_citations": 9,
+        "average_confidence": 0.86
+      }
+    }
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 5,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name is 'GIAMAICA CAFFE' SRL', which does not match the mandatory 'Global People s.r.l.'",
+          "recommendation": "Ensure the supplier name on the receipt is listed as 'Global People s.r.l.'",
+          "knowledge_base_reference": "Supplier Name must be 'Global People s.r.l.' according to compliance rules."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "The supplier address is 'Via del Tritone, 54 00187 Roma', which does not match the mandatory 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy'.",
+          "recommendation": "Correct the supplier address to 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy'.",
+          "knowledge_base_reference": "Supplier address must be 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy' for compliance."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "The VAT number '01845911005' does not match the mandatory 'IT12455930011'.",
+          "recommendation": "Update the VAT number to 'IT12455930011' on the receipt.",
+          "knowledge_base_reference": "VAT Number must be 'IT12455930011' according to compliance rules."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "payment_method",
+          "description": "The payment method is missing, and it is mandatory for traceability.",
+          "recommendation": "Include a traceable payment method, such as a credit/debit card or bank transfer, on the receipt.",
+          "knowledge_base_reference": "Payment method must be traceable according to compliance rules."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "receipt_type",
+          "description": "The receipt type is not specified. It must be confirmed as a valid tax invoice.",
+          "recommendation": "Ensure the document is a proper tax invoice, not a booking confirmation.",
+          "knowledge_base_reference": "Receipt must be a tax invoice or valid receipt according to compliance rules."
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt has multiple mandatory compliance violations, including supplier name and address mismatches, incorrect VAT number, missing payment method, and undocumented receipt type."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Italy",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 5,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": false
+}

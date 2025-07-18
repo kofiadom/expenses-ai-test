@@ -1,0 +1,234 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Supplier Name",
+        "confidence": 0.8,
+        "source_location": "requirements",
+        "context": "Name of the supplier/vendor on invoice",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Telecom Italia S.p.A.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Telecom Italia S.p.A.\nPiazza degli Affari\n2 - 20123 Milan (IT)",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Supplier Address",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Address of the supplier on invoice",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Piazza degli Affari 2 - 20123 Milan (IT)",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Telecom Italia S.p.A.\nPiazza degli Affari\n2 - 20123 Milan (IT)",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Currency",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Receipt currency",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Totale Servizi in abbonamento\n| gennaio | €278.49  |",
+        "match_type": "exact"
+      }
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "Amount",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Expense amount",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€334.19",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Fattura totale €334.19",
+        "match_type": "exact"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "Receipt Type",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Type of supporting document",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Fattura Fiscale",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "# Fattura Fiscale",
+        "match_type": "exact"
+      }
+    },
+    "country": {
+      "field_citation": {
+        "source_text": "Italy",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Telecom Italia S.p.A.\nPiazza degli Affari\n2 - 20123 Milan (IT)",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Italy",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Piazza degli Affari\n2 - 20123 Milan (IT)",
+        "match_type": "contextual"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "Data",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Numero di conto / cliente: C8375751-2\nData: 11/01/2013",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "11/01/2013",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Numero di conto / cliente: C8375751-2\nData: 11/01/2013",
+        "match_type": "exact"
+      }
+    },
+    "customer_number": {
+      "field_citation": {
+        "source_text": "Numero di conto / cliente",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Numero di conto / cliente: C8375751-2",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "C8375751-2",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Numero di conto / cliente: C8375751-2",
+        "match_type": "exact"
+      }
+    },
+    "invoice_number": {
+      "field_citation": {
+        "source_text": "Numero di Fattura",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Numero di Fattura: D938548182",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "D938548182",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Numero di Fattura: D938548182",
+        "match_type": "exact"
+      }
+    },
+    "due_date": {
+      "field_citation": {
+        "source_text": "Scadenza",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Scadenza: 10/02/2013",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "10/02/2013",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Scadenza: 10/02/2013",
+        "match_type": "exact"
+      }
+    },
+    "total_invoice_amount": {
+      "field_citation": {
+        "source_text": "Totale Fattura",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Fattura totale €334.19",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "€334.19",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Fattura totale €334.19",
+        "match_type": "exact"
+      }
+    },
+    "invoice_total_with_vat": {
+      "field_citation": {
+        "source_text": "Totale con IVA",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Totale parziale\n| €278.49  | €55.70    | €334.19",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "€334.19",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Fattura totale €334.19",
+        "match_type": "exact"
+      }
+    },
+    "bank_debit_date": {
+      "field_citation": {
+        "source_text": "Il tuo conto in banca verrà addebitato",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Il tuo conto in banca verrà addebitato con l'intero saldo che si riflette su questa dichiarazione sulla 1 Febbraio 2014.",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "1 Febbraio 2014",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Il tuo conto in banca verrà addebitato con l'intero saldo che si riflette su questa dichiarazione sulla 1 Febbraio 2014.",
+        "match_type": "exact"
+      }
+    },
+    "contact_phone": {
+      "field_citation": {
+        "source_text": "Ph:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Ph: +39 02 85954131",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "+39 02 85954131",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Ph: +39 02 85954131",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 14,
+    "fields_with_field_citations": 13,
+    "fields_with_value_citations": 14,
+    "average_confidence": 0.888
+  }
+}

@@ -3,9 +3,23 @@ from agno.models.openai import OpenAIChat
 from agno.models.anthropic import Claude
 from textwrap import dedent
 from dotenv import load_dotenv
+import json
+import os
 
 # Load environment variables
 load_dotenv()
+
+# Load expense file schema
+def load_expense_schema():
+    """Load the expense file schema for field-based classification."""
+    schema_path = "expense_file_schema.json"
+    if os.path.exists(schema_path):
+        with open(schema_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    else:
+        raise FileNotFoundError(f"Expense schema file not found: {schema_path}")
+
+EXPENSE_SCHEMA = load_expense_schema()
 
 
 
@@ -24,28 +38,24 @@ Task: Analyze the provided text to determine:
 
 CLASSIFICATION CRITERIA:
 
-STEP 1: EXPENSE IDENTIFICATION
+STEP 1: EXPENSE IDENTIFICATION (SCHEMA-BASED)
 First determine: Is this file an expense? (Y/N)
-An expense document typically contains:
-- Vendor/supplier information (business name, address)
-- Monetary amounts or prices (costs, totals, subtotals)
-- Date of transaction or service
-- Products or services purchased/consumed
-- Payment-related information (payment methods, receipts)
-- Tax information (VAT, sales tax, tax rates)
-- Receipt/invoice identifiers (receipt numbers, invoice IDs)
-- Business transaction context
 
-NON-EXPENSE DOCUMENTS include:
-- Personal correspondence, emails, letters
-- Marketing materials, advertisements, brochures
-- Technical documentation, manuals, guides
-- Legal documents, contracts (unless for services)
-- Medical records, prescriptions
-- Educational materials, textbooks
-- News articles, blog posts
-- Social media content
-- Random text, corrupted files
+Use the provided EXPENSE FILE SCHEMA to identify expense documents based on field presence.
+
+Look for each schema field in the document. If you find 5 or more fields, it's an expense document.
+
+REQUIRED FOR EXPENSE CLASSIFICATION:
+- Evidence of payment completed (not just booking/reservation)
+- Actual amounts charged/paid
+- Payment confirmation or receipt of transaction
+
+NOT EXPENSES (even if business-related):
+- Booking confirmations without payment proof
+- Reservation details without charges shown
+- Quotes, estimates, or pending invoices
+- Payment details on next page (incomplete documents)
+
 
 EXPENSE TYPE CLUSTERS (classify only if is_expense = true):
 - flights: airline tickets, boarding passes, flight bookings, airport services
@@ -116,7 +126,13 @@ Return a JSON object with the following structure:
   "error_type": null or "error_category",
   "error_message": null or "detailed_error_description",
   "classification_confidence": 0-100,
-  "reasoning": "brief explanation of classification decision"
+  "reasoning": "brief explanation of classification decision",
+  "schema_field_analysis": {
+    "fields_found": ["list of schema fields identified in document"],
+    "fields_missing": ["list of schema fields not found in document"],
+    "total_fields_found": number,
+    "expense_identification_reasoning": "detailed explanation citing exact fields found/missing for expense determination"
+  }
 }
 
 CRITICAL REQUIREMENTS:
@@ -132,22 +148,40 @@ CRITICAL REQUIREMENTS:
 
 def classify_file(receipt_text: str, expected_country: str = None) -> str:
     """
-    Classify a file to determine if it's an expense document and categorize it.
+    Classify a file to determine if it's an expense document and categorize it using schema-based field analysis.
 
     Args:
         receipt_text: The raw text content to analyze
         expected_country: The expected country/location for validation (optional)
 
     Returns:
-        JSON string with classification results
+        JSON string with classification results including schema field analysis
     """
-    # Format the prompt with the actual data
-    formatted_prompt = f"""DOCUMENT TEXT TO ANALYZE:
+    # Create schema field descriptions for the prompt
+    schema_fields_description = ""
+    for field_name, field_info in EXPENSE_SCHEMA.get("properties", {}).items():
+        title = field_info.get("title", field_name)
+        description = field_info.get("description", "")
+        schema_fields_description += f"\n**{field_name}** ({title}):\n{description}\n"
+
+    # Format the prompt with the actual data and schema
+    formatted_prompt = f"""EXPENSE FILE SCHEMA FIELDS:
+{schema_fields_description}
+
+DOCUMENT TEXT TO ANALYZE:
 {receipt_text}
 
 EXPECTED LOCATION: {expected_country if expected_country else "Not specified"}
 
-Analyze the above text following the workflow and provide classification results in the specified JSON format."""
+ANALYSIS INSTRUCTIONS:
+1. Carefully examine the document text for each of the 8 schema fields listed above
+2. For each field, determine if it is PRESENT or ABSENT in the document
+3. Use the field descriptions and recognition patterns to guide your analysis
+4. Count the total number of fields found
+5. Apply the expense identification logic (3-4+ fields = expense)
+6. Provide detailed reasoning citing the exact fields found/missing
+
+Analyze the above text following the schema-based workflow and provide classification results in the specified JSON format."""
 
     # Get the response from the agent
     response = file_classification_agent.run(formatted_prompt)

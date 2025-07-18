@@ -1,0 +1,218 @@
+{
+  "citations": {
+    "currency": {
+      "field_citation": {
+        "source_text": "Currency",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "FieldType: Currency, Description: Receipt currency",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "1 Miso Soup € 3,90",
+        "match_type": "fuzzy"
+      }
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "Amount",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "FieldType: Amount, Description: Expense amount",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€ 64,40",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Total € 64,40",
+        "match_type": "exact"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "Receipt Type",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "FieldType: Receipt Type, Description: Type of supporting document",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Rechnung",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "** Rechnung **",
+        "match_type": "exact"
+      }
+    },
+    "invoice_date": {
+      "field_citation": {
+        "source_text": "Invoice Date",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "FieldType: Invoice Date, Description: Date of invoice",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "5-2-2019",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Dienstag  5-2-2019 23:10:54",
+        "match_type": "fuzzy"
+      }
+    },
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Supplier Name:",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "THE SUSHI CLUB",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "THE SUSHI CLUB",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "THE SUSHI CLUB",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Supplier Address:",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "Mohrenstr.42, 10117 Berlin",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Mohrenstr.42, 10117 Berlin",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Mohrenstr.42 10117 Berlin",
+        "match_type": "exact"
+      }
+    },
+    "contact_phone": {
+      "field_citation": {
+        "source_text": "Contact Phone:",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "+49 30 23 916 036",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "+49 30 23 916 036",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "+49 30 23 916 036",
+        "match_type": "exact"
+      }
+    },
+    "contact_email": {
+      "field_citation": {
+        "source_text": "Contact Email:",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "info@thesushiclub.de",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "info@thesushiclub.de",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "info@thesushiclub.de",
+        "match_type": "exact"
+      }
+    },
+    "contact_website": {
+      "field_citation": {
+        "source_text": "Contact Website:",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "www.TheSushiClub.de",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "www.TheSushiClub.de",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "www.TheSushiClub.de",
+        "match_type": "exact"
+      }
+    },
+    "transaction_time": {
+      "field_citation": {
+        "source_text": "Transaction Time:",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "23:10:54",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "23:10:54",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "23:10:54",
+        "match_type": "exact"
+      }
+    },
+    "table_number": {
+      "field_citation": {
+        "source_text": "Tisch #",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Tisch # 24",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "24",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Tisch # 24",
+        "match_type": "exact"
+      }
+    },
+    "transaction_reference": {
+      "field_citation": {
+        "source_text": "Transaction Reference:",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "L0001 FRÜH",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "L0001 FRÜH",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "L0001 FRÜH",
+        "match_type": "exact"
+      }
+    },
+    "special_notes": {
+      "field_citation": {
+        "source_text": "Special Notes:",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "TIP IS NOT INCLUDED",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "TIP IS NOT INCLUDED",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "TIP IS NOT INCLUDED",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 14,
+    "fields_with_field_citations": 14,
+    "fields_with_value_citations": 14,
+    "average_confidence": 0.9225
+  }
+}

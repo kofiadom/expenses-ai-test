@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Expense Management System Taxonomy",
+  "description": "Taxonomy of main data fields that will appear on an expense file (or invoice, receipt).",
+  "type": "object",
+  "required": [
+    "supplier",
+    "consumerRecipient",
+    "transactionAmount",
+    "transactionDate",
+    "invoiceReceiptNumber",
+    "itemDescriptionLineItems"
+  ],
+  "properties": {
+    "supplier": {
+      "type": "object",
+      "title": "Supplier (Service Provider)",
+      "description": "Definition: Entity that provides goods, services, or products in exchange for payment.\n\nHow to Recognize on Files:\nReliability: Most Likely, Location/Method: Payment recipient name somewhere, Description: Business identifier (name, logo, or tax ID) must appear.\nReliability: MOST LIKELY, Location/Method: Company name at top of document, Description: Header section with business logo or letterhead.\nReliability: MOST LIKELY, Location/Method: \"Bill From\" or \"Sold By\" sections, Description: Dedicated supplier information areas.\nReliability: MOST LIKELY, Location/Method: Merchant name on credit card statements, Description: Transaction details from payment processor.\nReliability: POSSIBLE, Location/Method: Footer information, Description: Contact details or business registration.\nReliability: POSSIBLE, Location/Method: Payment details section, Description: Banking or remittance information.\n\nCommon File Labels/Synonyms: Vendor, Merchant, Seller, Provider, Company, \"From:\", \"Billed By:\", \"Sold By:\", \"Service Provider:\", Business Name, Organization, Entity, Contractor, or direct company names without labels (e.g., \"Apple Inc.\", \"Delta Airlines\", \"Starbucks\")"
+    },
+    "consumerRecipient": {
+      "type": "object",
+      "title": "Consumer (Recipient)",
+      "description": "Definition: Person, department, or entity that receives goods/services and is responsible for the expense.\n\nHow to Recognize on Files:\nReliability: Most Likely, Location/Method: Some form of customer/buyer identification, Description: Must be identifiable somewhere on document.\nReliability: MOST LIKELY, Location/Method: \"Bill To\" or \"Customer\" information, Description: Dedicated customer details section.\nReliability: MOST LIKELY, Location/Method: Employee name on receipts, Description: Individual identification on transaction.\nReliability: MOST LIKELY, Location/Method: Cardholder name on statements, Description: Payment method owner information.\nReliability: POSSIBLE, Location/Method: \"Purchased By\" or \"Ordered By\" sections, Description: Alternative customer identification.\nReliability: POSSIBLE, Location/Method: Department codes or cost centers, Description: Organizational unit identification.\n\nCommon File Labels/Synonyms: Customer, Client, Buyer, Purchaser, Employee, \"Bill To:\", \"Customer:\", \"Ordered By:\", \"Cardholder:\", Department, Cost Center, Team, Individual, or direct names without labels (e.g., \"John Smith\", \"Marketing Department\", \"ABC Corp\")"
+    },
+    "icpRequirements": {
+      "type": "object",
+      "title": "ICP (Independent Contractor Program) Requirements",
+      "description": "Definition: ICP is the local employer for EOR (Employer of Record) employees. Critical Rule: If the local ICP REQUIRES that their details be listed on the expense files, then all required consumer details on the expense record must be the ICP details (not the individual employee details).\n\nHow to Recognize ICP Requirements on Files:\nReliability: Most Likely, Location/Method: ICP company name as \"Bill To\" or \"Customer\", Description: Local employer entity listed as consumer.\nReliability: Most Likely, Location/Method: ICP business registration details as consumer, Description: Official business entity information.\nReliability: MOST LIKELY, Location/Method: ICP address/contact info in consumer section, Description: Local company billing address.\nReliability: MOST LIKELY, Location/Method: Corporate billing address in consumer section, Description: Business entity rather than individual.\nReliability: POSSIBLE, Location/Method: Mixed billing scenarios, Description: Regional variations in ICP requirements."
+    },
+    "transactionAmount": {
+      "type": "object",
+      "title": "Transaction Amount",
+      "description": "Definition: The monetary value of the expense.\n\nHow to Recognize on Files:\nReliability: Most Likely, Location/Method: Total amount somewhere on document, Description: Must include currency denomination.\nReliability: MOST LIKELY, Location/Method: \"Total:\", \"Amount Due:\", \"Grand Total:\", Description: Standard amount labels.\nReliability: MOST LIKELY, Location/Method: Bottom right of invoice/receipt, Description: Common amount placement.\nReliability: MOST LIKELY, Location/Method: Summary section, Description: Calculation breakdown area.\nReliability: POSSIBLE, Location/Method: Line item totals only, Description: Multiple amounts without clear total.\n\nCommon File Labels/Synonyms: Total, Amount, Sum, Due, Balance, Grand Total, \"Total:\", \"Amount Due:\", \"Payment:\", \"Charge:\", or direct amounts without labels (e.g., \"$125.50\", \"€89.99\", \"¥15,000\")"
+    },
+    "transactionDate": {
+      "type": "object",
+      "title": "Transaction Date",
+      "description": "Definition: When the expense occurred or was processed.\n\nHow to Recognize on Files:\nReliability: Most Likely, Location/Method: Some form of date on document, Description: Must be present somewhere.\nReliability: MOST LIKELY, Location/Method: Invoice date at document header, Description: Standard date placement.\nReliability: MOST LIKELY, Location/Method: Transaction date on receipts, Description: Point of sale timestamp.\nReliability: MOST LIKELY, Location/Method: \"Date:\" field near top of document, Description: Labeled date field.\nReliability: POSSIBLE, Location/Method: Due date (not transaction date), Description: Payment deadline, not transaction date.\nReliability: POSSIBLE, Location/Method: Multiple dates (order, ship, invoice), Description: Various process dates.\n\nCommon File Labels/Synonyms: Date, Invoice Date, Transaction Date, Purchase Date, \"Date:\", \"Invoice Date:\", \"Transaction:\", \"Purchased:\", or direct dates without labels (e.g., \"2025-07-16\", \"July 16, 2025\", \"16/07/2025\")"
+    },
+    "invoiceReceiptNumber": {
+      "type": "object",
+      "title": "Invoice/Receipt Number",
+      "description": "Definition: Unique identifier for the transaction.\n\nHow to Recognize on Files:\nReliability: Most Likely, Location/Method: Alphanumeric identifier on document, Description: Usually present somewhere.\nReliability: MOST LIKELY, Location/Method: \"Invoice #:\", \"Receipt #:\" near header, Description: Standard numbering labels.\nReliability: MOST LIKELY, Location/Method: Document number in top section, Description: Header identification.\nReliability: MOST LIKELY, Location/Method: Reference number, Description: Transaction reference.\nReliability: POSSIBLE, Location/Method: Order number (different from invoice), Description: Pre-invoice numbering.\nReliability: POSSIBLE, Location/Method: Confirmation codes, Description: Alternative identifiers.\n\nCommon File Labels/Synonyms: Invoice Number, Receipt Number, Reference, Order Number, \"Invoice #:\", \"Receipt #:\", \"Ref:\", \"Order #:\", or direct numbers without labels (e.g., \"INV-2025-001\", \"12345\", \"RCP789\")"
+    },
+    "taxInformation": {
+      "type": "object",
+      "title": "Tax Information",
+      "description": "Definition: Tax amounts and rates applied to the expense.\n\nHow to Recognize on Files:\nReliability: Most Likely, Location/Method: Tax amount if legally required, Description: Jurisdiction-dependent requirement.\nReliability: Most Likely, Location/Method: Tax registration number for businesses, Description: Legal business identifier.\nReliability: MOST LIKELY, Location/Method: \"Tax:\", \"VAT:\", \"Sales Tax:\" in summary, Description: Standard tax labels.\nReliability: MOST LIKELY, Location/Method: Separate line items for tax, Description: Itemized tax breakdown.\nReliability: POSSIBLE, Location/Method: Tax-inclusive pricing only, Description: Total amount includes tax.\nReliability: POSSIBLE, Location/Method: Multiple tax types, Description: Various tax categories.\n\nCommon File Labels/Synonyms: Tax, VAT, Sales Tax, GST, HST, \"Tax:\", \"VAT:\", \"Sales Tax:\", \"Tax Rate:\", or direct tax amounts without labels (e.g., \"$12.50 tax\", \"20% VAT\", \"HST: $5.25\")"
+    },
+    "paymentMethod": {
+      "type": "object",
+      "title": "Payment Method",
+      "description": "Definition: How the expense was paid.\n\nHow to Recognize on Files:\nReliability: MOST LIKELY, Location/Method: Credit card type and last 4 digits, Description: Card payment details.\nReliability: MOST LIKELY, Location/Method: \"Cash,\" \"Card,\" \"Check\" indicators, Description: Payment type labels.\nReliability: MOST LIKELY, Location/Method: Payment method in summary section, Description: Payment information area.\nReliability: POSSIBLE, Location/Method: Bank transfer details, Description: Electronic payment info.\nReliability: POSSIBLE, Location/Method: Digital payment indicators (PayPal, etc.), Description: Online payment methods.\n\nCommon File Labels/Synonyms: Payment Method, Card Type, Paid By, \"Payment:\", \"Card:\", \"Method:\", \"Paid:\", or direct payment indicators without labels (e.g., \"VISA ****1234\", \"Cash\", \"American Express\")"
+    },
+    "itemDescriptionLineItems": {
+      "type": "object",
+      "title": "Item Description/Line Items",
+      "description": "Definition: Detailed breakdown of goods or services purchased.\n\nHow to Recognize on Files:\nReliability: Most Likely, Location/Method: Some description of what was purchased, Description: Must be present in some form.\nReliability: MOST LIKELY, Location/Method: Itemized list in document body, Description: Detailed product/service breakdown.\nReliability: MOST LIKELY, Location/Method: Product/service descriptions, Description: Clear item identification.\nReliability: MOST LIKELY, Location/Method: Quantity and unit price details, Description: Pricing breakdown.\nReliability: POSSIBLE, Location/Method: Summary descriptions only, Description: General category information.\nReliability: POSSIBLE, Location/Method: Category codes instead of descriptions, Description: Abbreviated item references.\n\nCommon File Labels/Synonyms: Description, Item, Product, Service, Details, \"Description:\", \"Item:\", \"Product:\", \"Service:\", or direct product names without labels (e.g., \"iPhone 17\", \"Office Chair\", \"Consulting Services\")"
+    }
+  }
+}

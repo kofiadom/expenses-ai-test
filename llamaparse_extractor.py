@@ -2,15 +2,15 @@ import requests
 import pathlib
 import time
 import json
-from typing import Dict, List, Tuple
+from typing import Dict
 from agno.utils.log import logger
 
 from image_quality_processor import ImageQualityProcessor, SUPPORTED_IMAGE_EXTENSIONS
 from llm_image_quality_assessor import LLMImageQualityAssessor
-from llm_quality_validator import ImageQualityUQLMValidator
-from langchain_anthropic import ChatAnthropic
-import asyncio
-import os
+# Validation functionality moved to standalone_validation_runner.py
+# from llm_quality_validator import ImageQualityUQLMValidator
+# from langchain_anthropic import ChatAnthropic
+# import os
 
 SUPPORTED_EXTENSIONS = {'.pdf', '.doc', '.docx', '.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif'}
 
@@ -137,19 +137,20 @@ def assess_image_quality_before_extraction(file_path: pathlib.Path, quality_proc
         }
 
 
-def assess_image_quality_llm_separate(file_path: pathlib.Path, llm_quality_output_dir: pathlib.Path,
-                                     enable_validation: bool = True, opencv_assessment: Dict = None) -> Dict:
+async def assess_image_quality_llm_separate(file_path: pathlib.Path, llm_quality_output_dir: pathlib.Path,
+                                     opencv_assessment: Dict = None) -> Dict:
     """
-    Perform separate LLM-based image quality assessment with optional UQLM validation and save results
+    Perform separate LLM-based image quality assessment and save results
+
+    Note: Validation functionality moved to standalone_validation_runner.py
 
     Args:
         file_path: Path to the image file
         llm_quality_output_dir: Directory to save LLM quality assessment results
-        enable_validation: Whether to perform UQLM validation of the LLM assessment
-        opencv_assessment: Optional OpenCV assessment for validation comparison
+        opencv_assessment: Optional OpenCV assessment for comparison
 
     Returns:
-        LLM quality assessment results dictionary (with validation if enabled)
+        LLM quality assessment results dictionary
     """
     try:
         logger.info(f"🤖 Starting LLM quality assessment for: {file_path.name}")
@@ -187,45 +188,8 @@ def assess_image_quality_llm_separate(file_path: pathlib.Path, llm_quality_outpu
         if detected_issues:
             logger.info(f"    🔍 Detected Issues: {', '.join(detected_issues[:3])}")
 
-        # Perform UQLM validation if enabled
-        validation_result = None
-        if enable_validation:
-            try:
-                logger.info(f"🎯 Starting UQLM validation for LLM quality assessment: {file_path.name}")
-                validation_start_time = time.time()
-
-                # Initialize validator with primary LLM
-                primary_llm = ChatAnthropic(model="claude-3-7-sonnet-20250219",
-                                          api_key=os.getenv("ANTHROPIC_API_KEY"))
-                validator = ImageQualityUQLMValidator(primary_llm, logger)
-
-                # Run validation asynchronously
-                validation_result = asyncio.run(validator.validate_quality_assessment(
-                    llm_assessment=llm_result,
-                    image_path=str(file_path),
-                    opencv_assessment=opencv_assessment
-                ))
-
-                # Save validation results to separate directory
-                validation_dir = pathlib.Path("llm_quality_validation_results")
-                validation_dir.mkdir(parents=True, exist_ok=True)
-                validation_filename = f"llm_quality_validation_{file_path.stem}.json"
-                validation_path = validation_dir / validation_filename
-
-                with open(validation_path, 'w', encoding='utf-8') as f:
-                    json.dump(validation_result, f, indent=2, ensure_ascii=False)
-
-                validation_time = time.time() - validation_start_time
-                logger.info(f"✅ UQLM validation saved to: {validation_path} (Time: {validation_time:.2f}s)")
-                logger.info(f"    🎯 Validation Confidence: {validation_result['validation_summary']['overall_confidence']:.2f}")
-                logger.info(f"    📊 Reliability Level: {validation_result['validation_summary']['reliability_level']}")
-
-                # Add validation summary to the result
-                llm_result['uqlm_validation'] = validation_result
-
-            except Exception as validation_error:
-                logger.warning(f"⚠️ UQLM validation failed for {file_path.name}: {str(validation_error)}")
-                logger.info("📋 Continuing without validation results")
+        # Validation functionality moved to standalone_validation_runner.py
+        # Run standalone validation separately after the main workflow completes
 
         return llm_result
 
@@ -277,7 +241,7 @@ def extract_markdown(file_path: pathlib.Path, api: LlamaIndexAPI, output_dir: pa
         f.write(markdown)
     logger.info(f"✅ Successfully saved markdown to {output_file}")
 
-def process_expense_files(api_key: str, input_folder: str = "expense_files", output_dir: str = "llamaparse_output") -> list[pathlib.Path]:
+async def process_expense_files(api_key: str, input_folder: str = "expense_files", output_dir: str = "llamaparse_output") -> list[pathlib.Path]:
     """
     Process all expense files from the specified directory with integrated quality assessment.
     Quality assessment is performed on image files as a pre-filter before LlamaParse extraction.
@@ -350,6 +314,25 @@ def process_expense_files(api_key: str, input_folder: str = "expense_files", out
         for i, file_path in enumerate(image_files, 1):
             logger.info(f"🤖 Assessing LLM image quality {i}/{len(image_files)}: {file_path.name}")
 
+            # Check if LLM quality result already exists (e.g., from Streamlit upload)
+            existing_llm_file = llm_quality_output_dir / f"llm_quality_{file_path.stem}.json"
+
+            if existing_llm_file.exists():
+                logger.info(f"💾 Found existing LLM quality assessment for {file_path.name}, reusing...")
+                try:
+                    with open(existing_llm_file, 'r', encoding='utf-8') as f:
+                        llm_quality_result = json.load(f)
+
+                    llm_quality_results_summary.append({
+                        'filename': file_path.name,
+                        'llm_quality_result': llm_quality_result
+                    })
+                    continue
+
+                except Exception as e:
+                    logger.warning(f"⚠️ Failed to load existing LLM quality result for {file_path.name}: {str(e)}")
+                    logger.info("🔄 Running fresh LLM assessment...")
+
             # Find corresponding OpenCV assessment for validation comparison
             opencv_assessment = None
             for quality_summary in quality_results_summary:
@@ -357,11 +340,10 @@ def process_expense_files(api_key: str, input_folder: str = "expense_files", out
                     opencv_assessment = quality_summary['quality_result']
                     break
 
-            # Perform LLM assessment with UQLM validation
-            llm_quality_result = assess_image_quality_llm_separate(
+            # Perform LLM assessment (validation moved to standalone runner)
+            llm_quality_result = await assess_image_quality_llm_separate(
                 file_path,
                 llm_quality_output_dir,
-                enable_validation=True,  # Enable UQLM validation
                 opencv_assessment=opencv_assessment
             )
             llm_quality_results_summary.append({
@@ -384,8 +366,8 @@ def process_expense_files(api_key: str, input_folder: str = "expense_files", out
         # Log LLM quality assessment summary
         successful_llm_checks = [r for r in llm_quality_results_summary if 'error' not in r['llm_quality_result']]
         if successful_llm_checks:
-                llm_average_score = sum(r['llm_quality_result']['quality_score'] for r in successful_llm_checks) / len(successful_llm_checks)
-                llm_passing_count = sum(1 for r in successful_llm_checks if r['llm_quality_result']['quality_passed'])
+                llm_average_score = sum(r['llm_quality_result']['overall_quality_score'] for r in successful_llm_checks) / len(successful_llm_checks)
+                llm_passing_count = sum(1 for r in successful_llm_checks if r['llm_quality_result']['suitable_for_extraction'])
 
         logger.info(f"🤖 ***** LLM Quality Assessment Summary:")
         logger.info(f"    � Images assessed: {len(image_files)}")

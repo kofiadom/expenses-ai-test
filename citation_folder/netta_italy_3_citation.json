@@ -1,0 +1,298 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Supplier Name",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "requirements for supplier/vendor on invoice",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Yukon Packing",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Yukon Packing\n443 Maple Avenue\nOntario, NT R4M 3H7",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Supplier Address",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "requirements for supplier address on invoice",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "443 Maple Avenue, Ontario, NT R4M 3H7",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Yukon Packing\n443 Maple Avenue\nOntario, NT R4M 3H7",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Currency",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Receipt currency",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "CAD",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "TOTAL** |                             |            | **$152.25**",
+        "match_type": "contextual"
+      }
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "Amount",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Expense amount requirement",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "152.25",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "TOTAL** |                             |            | **$152.25**",
+        "match_type": "fuzzy"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "Receipt Type",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Type of supporting document requirement",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Invoice",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "# INVOICE",
+        "match_type": "exact"
+      }
+    },
+    "payment_method": {
+      "field_citation": {
+        "source_text": "Payment Method",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Method of payment used requirement",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Cheque",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Please make cheques payable to: Yukon Packing",
+        "match_type": "exact"
+      }
+    },
+    "invoice_number": {
+      "field_citation": {
+        "source_text": "INVOICE #",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "markdown table header",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "CA-001",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "INVOICE # CA-001\nINVOICE DATE",
+        "match_type": "exact"
+      }
+    },
+    "invoice_date": {
+      "field_citation": {
+        "source_text": "INVOICE DATE",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "markdown table header",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "29/01/2019",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "INVOICE DATE 29/01/2019\nP.O.",
+        "match_type": "fuzzy"
+      }
+    },
+    "purchase_order_number": {
+      "field_citation": {
+        "source_text": "P.O.#",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "markdown table header",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "15/01/2019",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "P.O.# 15/01/2019\nDUE DATE",
+        "match_type": "exact"
+      }
+    },
+    "due_date": {
+      "field_citation": {
+        "source_text": "DUE DATE",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "markdown table header",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "28/04/2019",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "DUE DATE 28/04/2019",
+        "match_type": "exact"
+      }
+    },
+    "line_items": {
+      "field_citation": {
+        "source_text": "DESCRIPTION",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "markdown table header for line items",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Smoked chinook salmon filet",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "DESCRIPTION Smoked chinook salmon filet",
+        "match_type": "exact"
+      }
+    },
+    "subtotal": {
+      "field_citation": {
+        "source_text": "Subtotal",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "markdown total breakdown",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "145.00",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Subtotal | | | 145.00",
+        "match_type": "exact"
+      }
+    },
+    "tax_rate": {
+      "field_citation": {
+        "source_text": "GST",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "GST 5.0%",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "5.0",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "GST 5.0%",
+        "match_type": "exact"
+      }
+    },
+    "tax_amount": {
+      "field_citation": {
+        "source_text": "GST",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "GST 5.0% total breakdown",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "7.25",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "GST 5.0% | | | 7.25",
+        "match_type": "exact"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "TOTAL",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "markdown total breakdown",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "$152.25",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "TOTAL** | | | **$152.25**",
+        "match_type": "fuzzy"
+      }
+    },
+    "bill_to": {
+      "field_citation": {
+        "source_text": "BILL TO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "markdown table header for billing details",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Alfred Griner Packer",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "BILL TO Alfred Griner Packer",
+        "match_type": "exact"
+      }
+    },
+    "ship_to": {
+      "field_citation": {
+        "source_text": "SHIP TO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "markdown table header for shipping details",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Alfred Griner Packer",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "SHIP TO Alfred Griner Packer",
+        "match_type": "exact"
+      }
+    },
+    "terms_and_conditions": {
+      "field_citation": {
+        "source_text": "TERMS & CONDITIONS",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Markdown section title",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Payment is due within 15 days",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "TERMS & CONDITIONS\nPayment is due within 15 days",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 21,
+    "fields_with_field_citations": 19,
+    "fields_with_value_citations": 19,
+    "average_confidence": 0.93
+  }
+}

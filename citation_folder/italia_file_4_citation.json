@@ -1,0 +1,170 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "GIAMAICA CAFFE' SRL",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "GIAMAICA CAFFE' SRL",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "VIA DEL TRITONE,54\n00187 ROMA",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "VIA DEL TRITONE,54 00187 ROMA",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+        "match_type": "fuzzy"
+      }
+    },
+    "vat_number": {
+      "field_citation": {
+        "source_text": "P.IVA",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "00187 ROMA\nP.IVA 01845911005",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "01845911005",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "P.IVA 01845911005\nTEL. 06/6793583",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Prezzo(€)",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "| DESCRIZIONE | IVA | Prezzo(€) |",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "€",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "| DESCRIZIONE | IVA | Prezzo(€) |",
+        "match_type": "contextual"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "TOTALE COMPLESSIVO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| TOTALE COMPLESSIVO | | 39,78 |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "39,78",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| TOTALE COMPLESSIVO | | 39,78 |",
+        "match_type": "exact"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "DATE",
+        "confidence": 0.7,
+        "source_location": "contextual",
+        "context": "12-09-2019 22:25",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "12-09-2019",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "12-09-2019 22:25\nDOCUMENTO N. 0117-0304",
+        "match_type": "exact"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "DOCUMENTO COMMERCIALE",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "DOCUMENTO COMMERCIALE\ndi vendita o prestazione",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "DOCUMENTO COMMERCIALE",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "DOCUMENTO COMMERCIALE\ndi vendita o prestazione",
+        "match_type": "exact"
+      }
+    },
+    "payment_method": {
+      "field_citation": {
+        "source_text": "Pagamento contante",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Pagamento contante | | 39,78 |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Contante",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Pagamento contante | | 39,78 |",
+        "match_type": "contextual"
+      }
+    },
+    "contact_phone": {
+      "field_citation": {
+        "source_text": "TEL.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "P.IVA 01845911005\nTEL. 06/6793583",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "06/6793583",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "TEL. 06/6793583",
+        "match_type": "exact"
+      }
+    },
+    "document_number": {
+      "field_citation": {
+        "source_text": "DOCUMENTO N.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "12-09-2019 22:25\nDOCUMENTO N. 0117-0304",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "0117-0304",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "DOCUMENTO N. 0117-0304",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 12,
+    "fields_with_field_citations": 10,
+    "fields_with_value_citations": 10,
+    "average_confidence": 0.885
+  }
+}

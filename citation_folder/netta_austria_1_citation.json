@@ -1,0 +1,170 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Supplier Name",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "\"field_type\": \"Supplier Name\", \"description\": \"Name of the supplier/vendor on invoice\"",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Hotel München GmbH",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Hotel München GmbH\nDachauer Str. 15A",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Supplier Address",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "\"field_type\": \"Supplier Address\", \"description\": \"Address of the supplier on invoice\"",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Dachauer Str. 15A, 80335 Munich",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Dachauer Str. 15A\n80335 Munich",
+        "match_type": "fuzzy"
+      }
+    },
+    "vat_number": {
+      "field_citation": {
+        "source_text": "VAT Number",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "\"field_type\": \"VAT Number\", \"description\": \"VAT identification number\"",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "DE311053702",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "USt.-ID.: DE311053702",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Currency",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "\"field_type\": \"Currency\", \"description\": \"Receipt currency\"",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "EUR",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Gesamt 40.00 EUR",
+        "match_type": "exact"
+      }
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "Amount",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "\"field_type\": \"Amount\", \"description\": \"Expense amount\"",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "40.00",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Gesamt 40.00 EUR",
+        "match_type": "fuzzy"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "Receipt Type",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "\"field_type\": \"Receipt Type\", \"description\": \"Type of supporting document\"",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Invoice",
+        "confidence": 0.7,
+        "source_location": "markdown",
+        "context": "Actual invoices, not booking confirmations",
+        "match_type": "contextual"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "Datum",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Datum: 10.04.2024 09:53:06",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "10.04.2024",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Datum: 10.04.2024 09:53:06",
+        "match_type": "exact"
+      }
+    },
+    "transaction_time": {
+      "field_citation": {
+        "source_text": "Datum",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Datum: 10.04.2024 09:53:06",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "09:53:06",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Datum: 10.04.2024 09:53:06",
+        "match_type": "exact"
+      }
+    },
+    "transaction_reference": {
+      "field_citation": {
+        "source_text": "BelegNr",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "BelegNr: 900000702",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "900000702",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "BelegNr: 900000702",
+        "match_type": "exact"
+      }
+    },
+    "payment_method": {
+      "field_citation": {
+        "source_text": "Payment Method",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "\"field_type\": \"Bar\", \"description\": \"Cash or bank transfer detailing\"",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "Bar",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Bar 40.00",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 11,
+    "fields_with_field_citations": 11,
+    "fields_with_value_citations": 11,
+    "average_confidence": 0.91
+  }
+}

@@ -23,7 +23,6 @@ Billing address / Rechnungsadresse: Michal Forisek
 | OS568                                                                                    | 08 Sep 13 | Zurich      | Vienna Intl | 7:45 AM         | 9:10 AM        | Y (OK)      | 1 PC      |
 | operated by: TYROLEAN AIRWAYS<br/>Nicht gültig vor 08 Sep 13 Nicht gültig nach 08 Sep 13 |           |             |             |                 |                |             |           |
 
-
 Please see next page for payment details / Zahlungsinformation siehe nächste Seite
 
 Austrian Airlines AG, Member of IATA, registered office: Vienna, Office Park 2, A-1300 Vienna-Airport, Commercial Court Vienna, register no. 111000k, DVR 0091740, VAT No. ATU15447707

@@ -39,6 +39,17 @@ class QualityValidationResult:
     raw_response: str
     reliability_level: str  # 'high', 'medium', 'low'
 
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert QualityValidationResult to dictionary for JSON serialization"""
+        return {
+            "dimension": self.dimension.value,
+            "confidence_score": self.confidence_score,
+            "issues": self.issues,
+            "summary": self.summary,
+            "raw_response": self.raw_response,
+            "reliability_level": self.reliability_level
+        }
+
 
 class ImageQualityUQLMValidator:
     """
@@ -158,11 +169,11 @@ class ImageQualityUQLMValidator:
                 dimension_result = await self._validate_dimension_with_panel(
                     validation_prompt, dimension
                 )
-                validation_results[dimension.value] = dimension_result
+                validation_results[dimension.value] = dimension_result.to_dict()
 
             except Exception as e:
                 self.logger.error(f"❌ Error validating {dimension.value}: {str(e)}")
-                validation_results[dimension.value] = self._create_error_result(dimension, str(e))
+                validation_results[dimension.value] = self._create_error_result(dimension, str(e)).to_dict()
 
         # Step 3: Format comprehensive results including judge assessments
         formatted_res = self._format_validation_results(validation_results, llm_assessment, image_path, judge_assessments)
@@ -545,20 +556,20 @@ Provide only the JSON response, no additional text."""
         }
 
         weighted_confidence = sum(
-            result.confidence_score * weights.get(dim_key, 0.1)
+            result["confidence_score"] * weights.get(dim_key, 0.1)
             for dim_key, result in validation_results.items()
         ) / sum(weights.values())
 
         # Count high-reliability vs low-reliability dimensions
         low_reliability_count = sum(
             1 for result in validation_results.values()
-            if result.reliability_level == "low"
+            if result["reliability_level"] == "low"
         )
 
         # Collect all critical issues
         all_issues = []
         for result in validation_results.values():
-            all_issues.extend(result.issues)
+            all_issues.extend(result["issues"])
 
         # Determine overall reliability
         if weighted_confidence >= 0.8 and low_reliability_count == 0:

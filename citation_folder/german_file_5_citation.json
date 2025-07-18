@@ -1,0 +1,234 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Trachtenheim",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Trachtenheim\nRömerstr.2\n87700 Memmingen\nTel. 08331/3726",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Trachtenheim",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Trachtenheim\nRömerstr.2\n87700 Memmingen\nTel. 08331/3726",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Römerstr.2, 87700 Memmingen",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Trachtenheim\nRömerstr.2\n87700 Memmingen\nTel. 08331/3726",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Römerstr.2, 87700 Memmingen",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Trachtenheim\nRömerstr.2\n87700 Memmingen\nTel. 08331/3726",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "EUR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Summe EUR                                59,70",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "EUR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| 2 Stk Cola 0,4l                 | EUR | 6,80 A  |",
+        "match_type": "exact"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "Summe EUR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Summe EUR                                59,70",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "59,70",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Summe EUR                                59,70",
+        "match_type": "exact"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "Datum",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Datum    20.04.2023 21:05",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "20.04.2023",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Datum    20.04.2023 21:05",
+        "match_type": "fuzzy"
+      }
+    },
+    "transaction_time": {
+      "field_citation": {
+        "source_text": "Datum",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Datum    20.04.2023 21:05",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "21:05",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Datum    20.04.2023 21:05",
+        "match_type": "fuzzy"
+      }
+    },
+    "transaction_reference": {
+      "field_citation": {
+        "source_text": "Beleg",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Beleg    50",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Beleg 50",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Beleg    50",
+        "match_type": "exact"
+      }
+    },
+    "payment_method": {
+      "field_citation": {
+        "source_text": "Gegeben BAR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Gegeben BAR                              59,70",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "BAR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Gegeben BAR                              59,70",
+        "match_type": "exact"
+      }
+    },
+    "vat_a_inclusive_amount": {
+      "field_citation": {
+        "source_text": "inkl. 19% MwSt.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "A inkl. 19% MwSt. auf 11,93              2,27",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "11,93",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "A inkl. 19% MwSt. auf 11,93              2,27",
+        "match_type": "exact"
+      }
+    },
+    "vat_a_amount": {
+      "field_citation": {
+        "source_text": "A inkl. 19% MwSt.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "A inkl. 19% MwSt. auf 11,93              2,27",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "2,27",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "A inkl. 19% MwSt. auf 11,93              2,27",
+        "match_type": "exact"
+      }
+    },
+    "vat_a_rate": {
+      "field_citation": {
+        "source_text": "19% MwSt.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "A inkl. 19% MwSt. auf 11,93              2,27",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "19.0",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "A inkl. 19% MwSt. auf 11,93              2,27",
+        "match_type": "fuzzy"
+      }
+    },
+    "vat_b_inclusive_amount": {
+      "field_citation": {
+        "source_text": "inkl. 7% MwSt.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "B inkl. 7% MwSt. auf 42,52               2,98",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "42,52",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "B inkl. 7% MwSt. auf 42,52               2,98",
+        "match_type": "exact"
+      }
+    },
+    "vat_b_amount": {
+      "field_citation": {
+        "source_text": "B inkl. 7% MwSt.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "B inkl. 7% MwSt. auf 42,52               2,98",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "2,98",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "B inkl. 7% MwSt. auf 42,52               2,98",
+        "match_type": "exact"
+      }
+    },
+    "vat_b_rate": {
+      "field_citation": {
+        "source_text": "7% MwSt.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "B inkl. 7% MwSt. auf 42,52               2,98",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "7.0",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "B inkl. 7% MwSt. auf 42,52               2,98",
+        "match_type": "fuzzy"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 17,
+    "fields_with_field_citations": 12,
+    "fields_with_value_citations": 12,
+    "average_confidence": 0.88
+  }
+}

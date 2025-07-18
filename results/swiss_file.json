@@ -1,6 +1,6 @@
 {
   "source_file": "swiss_file.md",
-  "processing_timestamp": "2025-07-15T17:05:40.531599",
+  "processing_timestamp": "2025-07-16T23:15:12.520536",
   "dataset_metadata": {
     "filepath": "expense_files/swiss_file.pdf",
     "filename": "swiss_file.pdf",
@@ -10,7 +10,7 @@
   },
   "classification_result": {
     "is_expense": true,
-    "expense_type": "telecommunications",
+    "expense_type": "office_supplies",
     "language": "German",
     "language_confidence": 95,
     "document_location": "Switzerland",
@@ -19,7 +19,22 @@
     "error_type": null,
     "error_message": null,
     "classification_confidence": 90,
-    "reasoning": "The document is an expense document. It contains detailed purchase information, including items and their prices. The products related to telecommunications (Apple iPhone and related services) led to classification under the telecommunications expense type. The document language is German, consistent with currency details and context indicating Switzerland, matching the expected location."
+    "reasoning": "The document contains a completed transaction with evidence of payment and multiple fields matching the expense schema. The purchase includes a phone and accessories, classifying it under office supplies.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "consumerRecipient",
+        "transactionAmount",
+        "transactionDate",
+        "invoiceReceiptNumber",
+        "taxInformation",
+        "paymentMethod",
+        "itemDescriptionLineItems"
+      ],
+      "fields_missing": [],
+      "total_fields_found": 8,
+      "expense_identification_reasoning": "The document shows a completed purchase with all required fields: supplier ('Petri Walden'), consumer recipient ('Pateri Walden'), transaction amount (298.90 CHF), transaction date ('14.01.2018'), invoice/receipt number ('Bon: 01524'), tax information (MWSt: 8%), payment method ('Bargeld'), and item description (multiple electronic items listed). All relevant fields were present and allowed for classification as an expense for office supplies."
+    }
   },
   "extraction_result": {
     "supplier_name": null,
@@ -36,93 +51,374 @@
     "car_details": null,
     "logbook": null,
     "combined_mileage": null,
-    "date_of_issue": "2018-01-14",
+    "transaction_date": "2018-01-14",
     "transaction_time": "12:20",
     "cashier": "Petri Bretscher",
     "location": "FH33",
-    "cash_register_id": "73/32",
-    "transaction_reference": "01524",
+    "cash_register": "73/32",
     "customer_number": "51870716",
     "customer_name": "Pateri Walden",
-    "customer_address": "Untere Paulistr. 33, CH - 8821 Schindellegi",
+    "customer_address": "Untere Paulistr. 33, CH-8821 Schindellegi",
+    "vat_included": 14.73,
+    "vat_rate": "8%",
+    "payment_method": "Bargeld",
+    "amount_paid": 200.0,
+    "change_returned": 1.1,
     "line_items": [
       {
-        "description": "Apple iPhone X 4G+ Space Gray 256GB",
-        "serial_number": "353047092304454",
-        "warranty_until": "2018-01-14",
+        "description": "Apple iPhone X 4G+ Space Gray 256GB - Garantie bis: 14.01.2018",
         "quantity": 1.0,
         "unit_price": 979.0,
-        "total_price": 979.0,
-        "tax_rate": 8.0
+        "total_price": 979.0
       },
       {
-        "description": "Retention NATEL Infinity 2 G 24 24",
+        "description": "Retention NATEL Infinity - 2 G 24 24",
         "quantity": 1.0,
         "unit_price": -740.0,
-        "total_price": -740.0,
-        "tax_rate": 8.0
+        "total_price": -740.0
       },
       {
-        "description": "XQISIT Flex Case iPhone X clear",
-        "warranty_until": "2018-01-14",
+        "description": "XQISIT Flex Case iPhone X clear - Garantie bis: 14.01.2018",
         "quantity": 1.0,
         "unit_price": 19.9,
-        "total_price": 19.9,
-        "tax_rate": 8.0
+        "total_price": 19.9
       },
       {
         "description": "ACTIVATION POSTPAID",
         "quantity": 1.0,
         "unit_price": 40.0,
-        "total_price": 40.0,
-        "tax_rate": 8.0
+        "total_price": 40.0
       }
     ],
-    "total_vat_amount": 14.73,
-    "payment_method": "Bargeld",
-    "amount_paid": 200.0,
-    "change_given": 1.1,
-    "terms_and_conditions": "Im \u00fcbrigen gelten die Allgemeinen Gesch\u00e4ftsbedingungen."
+    "citations": {
+      "citations": {
+        "company_registration": {
+          "field_citation": {
+            "source_text": "UID:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "UID: CHE-217.086.005 MWST",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "CHE-217.086.005",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "UID: CHE-217.086.005 MWST",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "Rechnungsbetrag",
+            "confidence": 0.7,
+            "source_location": "markdown",
+            "context": "Rechnungsbetrag 298.90 CHF",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "CHF",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Rechnungsbetrag 298.90 CHF",
+            "match_type": "exact"
+          }
+        },
+        "amount": {
+          "field_citation": {
+            "source_text": "Rechnungsbetrag",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Rechnungsbetrag 298.90 CHF",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "298.90",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Rechnungsbetrag 298.90 CHF",
+            "match_type": "exact"
+          }
+        },
+        "receipt_type": {
+          "field_citation": {
+            "source_text": "# RECHNUNG",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "# RECHNUNG",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Rechnung",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "# RECHNUNG",
+            "match_type": "exact"
+          }
+        },
+        "transaction_date": {
+          "field_citation": {
+            "source_text": "ausgef\u00fchrt am:",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "ausgef\u00fchrt am: 14.01.2018 12:20",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "14.01.2018",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "ausgef\u00fchrt am: 14.01.2018 12:20",
+            "match_type": "exact"
+          }
+        },
+        "transaction_time": {
+          "field_citation": {
+            "source_text": "ausgef\u00fchrt am:",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "ausgef\u00fchrt am: 14.01.2018 12:20",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "12:20",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "ausgef\u00fchrt am: 14.01.2018 12:20",
+            "match_type": "exact"
+          }
+        },
+        "cashier": {
+          "field_citation": {
+            "source_text": "Kassier:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Kassier: Petri Bretscher",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Petri Bretscher",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Kassier: Petri Bretscher",
+            "match_type": "exact"
+          }
+        },
+        "location": {
+          "field_citation": {
+            "source_text": "Standort:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Standort: FH33",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "FH33",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Standort: FH33",
+            "match_type": "exact"
+          }
+        },
+        "cash_register": {
+          "field_citation": {
+            "source_text": "Kasse/Lade:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Kasse/Lade: 73/32",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "73/32",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Kasse/Lade: 73/32",
+            "match_type": "exact"
+          }
+        },
+        "customer_number": {
+          "field_citation": {
+            "source_text": "Kunden-Nr.:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Kunden-Nr.: 51870716",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "51870716",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Kunden-Nr.: 51870716",
+            "match_type": "exact"
+          }
+        },
+        "customer_name": {
+          "field_citation": {
+            "source_text": "Pateri Walden",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Kunden-Nr.: 51870716\nPateri Walden",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Pateri Walden",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Kunden-Nr.: 51870716\nPateri Walden",
+            "match_type": "exact"
+          }
+        },
+        "customer_address": {
+          "field_citation": {
+            "source_text": "Adresse:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Adresse: Untere Paulistr. 33\nCH-8821 Schindellegi",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Untere Paulistr. 33, CH-8821 Schindellegi",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Adresse: Untere Paulistr. 33\nCH-8821 Schindellegi",
+            "match_type": "exact"
+          }
+        },
+        "vat_included": {
+          "field_citation": {
+            "source_text": "Im Betrag enthaltene MWSt:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Im Betrag enthaltene MWSt:\n1 Norm. Ware (8%) 14.73 Netto",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "14.73",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Im Betrag enthaltene MWSt:\n1 Norm. Ware (8%) 14.73 Netto",
+            "match_type": "exact"
+          }
+        },
+        "vat_rate": {
+          "field_citation": {
+            "source_text": "1 Norm. Ware (8%)",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Im Betrag enthaltene MWSt:\n1 Norm. Ware (8%) 14.73 Netto",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "8%",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Im Betrag enthaltene MWSt:\n1 Norm. Ware (8%) 14.73 Netto",
+            "match_type": "exact"
+          }
+        },
+        "payment_method": {
+          "field_citation": {
+            "source_text": "Bezahlt:\nBargeld",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Bezahlt:\nBargeld CHF 200.00",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Bargeld",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Bezahlt:\nBargeld CHF 200.00",
+            "match_type": "exact"
+          }
+        },
+        "amount_paid": {
+          "field_citation": {
+            "source_text": "Bezahlt:\nBargeld",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Bezahlt:\nBargeld CHF 200.00",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "200.00",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Bezahlt:\nBargeld CHF 200.00",
+            "match_type": "exact"
+          }
+        },
+        "change_returned": {
+          "field_citation": {
+            "source_text": "zur\u00fcck\nBargeld",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "zur\u00fcck\nBargeld CHF -1.10",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "1.1",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "zur\u00fcck\nBargeld CHF -1.10",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 18,
+        "fields_with_field_citations": 18,
+        "fields_with_value_citations": 18,
+        "average_confidence": 0.9
+      }
+    }
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 3,
+      "issues_count": 4,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_name",
-          "description": "The Supplier Name is missing. It is mandatory for all receipts and must be 'Global PPL CH GmbH'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "File related requirements specify Supplier Name must be 'Global PPL CH GmbH'."
+          "description": "The supplier name is missing. It must be 'Global PPL CH GmbH' as per mandatory requirement for office supplies receipts.",
+          "recommendation": "It is recommended to address this issue with the supplier to provide the correct supplier name as 'Global PPL CH GmbH'.",
+          "knowledge_base_reference": "Must be Global PPL CH GmbH"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_address",
-          "description": "The Supplier Address is missing. It is mandatory for all receipts and must be 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "File related requirements specify Supplier Address must be 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland'."
+          "description": "The supplier address is missing. It must be 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland' as per mandatory requirement.",
+          "recommendation": "It is recommended to address this issue with the supplier to provide the complete supplier address as 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland'.",
+          "knowledge_base_reference": "Freigutstrasse 2 8002 Z\u00fcrich, Switzerland"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "company_registration",
-          "description": "The Company Registration number is incorrect. It must be 'CHE-295.369.918'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Company Registration requirements specify number must be 'CHE-295.369.918'."
+          "description": "The company registration number is incorrect. Expected 'CHE-295.369.918', but found 'CHE-217.086.005'.",
+          "recommendation": "It is recommended to address this issue with the supplier to provide the correct company registration number as 'CHE-295.369.918'.",
+          "knowledge_base_reference": "CHE-295.369.918"
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "supplier_name",
+          "description": "Office Equipment expenses require that the Local Employer name ('Global PPL CH GmbH') appears on the invoice.",
+          "recommendation": "Please ensure that the invoice reflects the Local Employer name 'Global PPL CH GmbH'.",
+          "knowledge_base_reference": "Receipt alone is not enough - you must provide sufficient proof (receipts, invoices) and ensure Local Employer name on invoice"
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "This receipt has three compliance violations related to missing or incorrect mandatory fields for Swiss telecommunications expenses under the 'Global People' ICP. Immediate fixes are required for supplier name, address, and company registration number."
+      "compliance_summary": "The receipt contains multiple compliance violations including missing Supplier Name and Address, incorrect Company Registration number, and additional documentation requirement to include the Local Employer name. Immediate corrections and action with the supplier are recommended."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
       "country": "Switzerland",
       "icp": "Global People",
-      "receipt_type": "telecommunications",
-      "issues_count": 3,
+      "receipt_type": "office_supplies",
+      "issues_count": 4,
       "has_reasoning": true
     }
   },
   "processing_status": "completed",
-  "uqlm_validation_available": true
+  "uqlm_validation_available": false
 }

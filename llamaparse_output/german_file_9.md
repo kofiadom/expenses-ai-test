@@ -7,7 +7,6 @@ VINCENT VOGELSTETTER
 JEDE STRASSE 123
 12345 JEDE STADT
 
-
                         FOTOGRAFIE - SARAH MARCHSREITER
 
 | Beschreibung                        | Anzahl | Preis | Summe    |
@@ -18,7 +17,6 @@ JEDE STRASSE 123
 | Zwischensumme                       |        |       | 860€     |
 | Steuer (0 %)                        |        |       | 0 €      |
 | **Summe**                           |        |       | **860€** |
-
 
 ZAHLUNGSINFORMATIONEN:
 EMPFÄNGER: SARAH MARCHSREITER

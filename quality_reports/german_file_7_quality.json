@@ -19,8 +19,8 @@
       "histogram_entropy": "2.74"
     }
   },
-  "timestamp": "2025-07-16T00:20:32.668880",
-  "processing_time_seconds": 5.94,
+  "timestamp": "2025-07-16T22:26:16.523261",
+  "processing_time_seconds": 6.07,
   "overall_assessment": {
     "score": 77.1,
     "level": "Acceptable",

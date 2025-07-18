@@ -1,6 +1,6 @@
 {
   "source_file": "german_file_9.md",
-  "processing_timestamp": "2025-07-15T16:36:46.230279",
+  "processing_timestamp": "2025-07-16T22:55:44.735782",
   "dataset_metadata": {
     "filepath": "expense_files/german_file_9.pdf",
     "filename ": "german_file_9.pdf",
@@ -18,11 +18,28 @@
     "location_match": true,
     "error_type": null,
     "error_message": null,
-    "classification_confidence": 100,
-    "reasoning": "The document is a typical invoice containing the recipient, invoice number, date, itemized services with prices, and payment information. It reflects a business expense related to photography services, thus categorized as professional services. The language is German with high confidence. The document location matches the expected location of Germany."
+    "classification_confidence": 95,
+    "reasoning": "The document is identified as an expense document because it contains key fields: supplier, consumerRecipient, transactionAmount, transactionDate, invoiceReceiptNumber, and itemDescriptionLineItems. The services listed are photography services, which fit under 'professional_services'.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "consumerRecipient",
+        "transactionAmount",
+        "transactionDate",
+        "invoiceReceiptNumber",
+        "itemDescriptionLineItems"
+      ],
+      "fields_missing": [
+        "icpRequirements",
+        "taxInformation",
+        "paymentMethod"
+      ],
+      "total_fields_found": 6,
+      "expense_identification_reasoning": "The document contains the following fields: \n- Supplier information (EMPF\u00c4NGER: SARAH MARCHSREITER), indicating the service provider. \n- Consumer (recipient) is identified as VINCENT VOGELSTETTER. \n- Transaction date (28. APRIL 2030) is clearly listed at the top. \n- Transaction amount is given as the sum of '860\u20ac'. \n- Invoice/receipt number is labeled as 'RECHNUNG NR. 12345'. \n- Detailed descriptions of services are provided in the itemized list, indicating itemDescriptionLineItems. These elements confirm the document as an expense."
+    }
   },
   "extraction_result": {
-    "supplier_name": "Fotografie - Sarah Marchsreiter",
+    "supplier_name": "SARAH MARCHSREITER",
     "supplier_address": null,
     "vat_number": null,
     "currency": "EUR",
@@ -48,62 +65,273 @@
         "total_price": 175.0
       }
     ],
-    "contact_email": null,
-    "transaction_reference": "Rechnung Nr. 12345",
-    "tax_rate": 0.0,
-    "vat": 0.0,
-    "name": "Vincent Vogelstetter",
-    "address": "Jede Strasse 123, 12345 Jede Stadt",
-    "transaction_type": "Rechnung",
-    "bank_account_number": "0123 4567 8901",
-    "recipient": "Sarah Marchsreiter"
+    "transaction_reference": "12345",
+    "tax_rate": 0,
+    "vat": 0,
+    "contact_name": "Vincent Vogelstetter",
+    "contact_address": "Jede Strasse 123, 12345 Jede Stadt",
+    "payment_recipient": "SARAH MARCHSREITER",
+    "account_number": "0123 4567 8901",
+    "subtotal": 860.0,
+    "receipt_type": "Rechnung",
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "FOTOGRAFIE - SARAH MARCHSREITER",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "FOTOGRAFIE - SARAH MARCHSREITER",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "FOTOGRAFIE - SARAH MARCHSREITER",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "FOTOGRAFIE - SARAH MARCHSREITER",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "Preis",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "| Beschreibung | Anzahl | Preis |",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "860\u20ac",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| **Summe** | | | **860\u20ac** |",
+            "match_type": "fuzzy"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "Summe",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| **Summe** | | | **860\u20ac** |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "860\u20ac",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| **Summe** | | | **860\u20ac** |",
+            "match_type": "fuzzy"
+          }
+        },
+        "date_of_issue": {
+          "field_citation": {
+            "source_text": "28. APRIL 2030",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "RECHNUNG NR. 12345\n28. APRIL 2030",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "28. APRIL 2030",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "RECHNUNG NR. 12345\n28. APRIL 2030",
+            "match_type": "fuzzy"
+          }
+        },
+        "transaction_reference": {
+          "field_citation": {
+            "source_text": "RECHNUNG NR.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "RECHNUNG AN: RECHNUNG NR. 12345",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "12345",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "RECHNUNG AN: RECHNUNG NR. 12345",
+            "match_type": "exact"
+          }
+        },
+        "tax_rate": {
+          "field_citation": {
+            "source_text": "Steuer (0 %)",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Steuer (0 %) | | | 0 \u20ac |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "0 %",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Steuer (0 %) | | | 0 \u20ac |",
+            "match_type": "fuzzy"
+          }
+        },
+        "vat": {
+          "field_citation": {
+            "source_text": "Steuer (0 %)",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "| Steuer (0 %) | | | 0 \u20ac |",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "0 \u20ac",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Steuer (0 %) | | | 0 \u20ac |",
+            "match_type": "exact"
+          }
+        },
+        "contact_name": {
+          "field_citation": {
+            "source_text": "RECHNUNG AN:",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "RECHNUNG AN: VINCENT VOGELSTETTER",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "VINCENT VOGELSTETTER",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "RECHNUNG AN: VINCENT VOGELSTETTER",
+            "match_type": "exact"
+          }
+        },
+        "contact_address": {
+          "field_citation": {
+            "source_text": "RECHNUNG AN:",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "RECHNUNG AN: JEDE STRASSE 123, 12345 JEDE STADT",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "JEDE STRASSE 123, 12345 JEDE STADT",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "RECHNUNG AN: JEDE STRASSE 123, 12345 JEDE STADT",
+            "match_type": "exact"
+          }
+        },
+        "payment_recipient": {
+          "field_citation": {
+            "source_text": "EMPF\u00c4NGER:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "ZAHLUNGSINFORMATIONEN: EMPF\u00c4NGER: SARAH MARCHSREITER",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "SARAH MARCHSREITER",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "ZAHLUNGSINFORMATIONEN: EMPF\u00c4NGER: SARAH MARCHSREITER",
+            "match_type": "exact"
+          }
+        },
+        "account_number": {
+          "field_citation": {
+            "source_text": "KONTONUMMER:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "ZAHLUNGSINFORMATIONEN: KONTONUMMER: 0123 4567 8901",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "0123 4567 8901",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "ZAHLUNGSINFORMATIONEN: KONTONUMMER: 0123 4567 8901",
+            "match_type": "exact"
+          }
+        },
+        "subtotal": {
+          "field_citation": {
+            "source_text": "Zwischensumme",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "| Zwischensumme | | | 860\u20ac |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "860\u20ac",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| Zwischensumme | | | 860\u20ac |",
+            "match_type": "fuzzy"
+          }
+        },
+        "receipt_type": {
+          "field_citation": {
+            "source_text": "RECHNUNG",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "# RECHNUNG",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "RECHNUNG",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "# RECHNUNG",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 13,
+        "fields_with_field_citations": 13,
+        "fields_with_value_citations": 13,
+        "average_confidence": 0.905
+      }
+    }
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 4,
+      "issues_count": 3,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_name",
-          "description": "Supplier name does not match requirement ('Global People DE GmbH').",
+          "description": "Supplier name does not match the required 'Global People DE GmbH'.",
           "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Must be Global People DE GmbH."
+          "knowledge_base_reference": "The supplier's name must be 'Global People DE GmbH' according to ICP-specific requirements for Global People."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_address",
-          "description": "The supplier address is missing, which is mandatory.",
-          "recommendation": "It is recommended to procure and validate supplier details.",
-          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany."
+          "description": "Missing mandatory supplier address.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "The supplier's address must be 'Taunusanlage 8, 60329 Frankfurt, Germany' according to ICP-specific requirements for Global People."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "vat_number",
-          "description": "The VAT number is missing, leading to potential compliance issues.",
-          "recommendation": "Ensure VAT registration and detail inclusion in invoices.",
-          "knowledge_base_reference": "DE356366640."
-        },
-        {
-          "issue_type": "Standards & Compliance | Gross-up Identified",
-          "field": "vat",
-          "description": "Missing VAT details on high-value receipts raise tax implications.",
-          "recommendation": "Recommend aligning with tax reporting and gross-up expectations.",
-          "knowledge_base_reference": "General tax liability obligations for German transactions for non-exempt entities."
+          "description": "Missing required VAT identification number.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "The required VAT number for Global People is DE356366640."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "Overall, the receipt is non-compliant with the specified ICP standards related to mandatory information fields such as supplier name, address, and VAT requirements. In addition, tax implications need to be addressed due to missing VAT information on high-value invoices."
+      "compliance_summary": "Overall compliance assessment indicates mandatory information is missing or incorrect, including the supplier name, address, and VAT number, which do not comply with ICP-specific rules for Global People in Germany."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
       "country": "Germany",
       "icp": "Global People",
       "receipt_type": "professional_services",
-      "issues_count": 4,
+      "issues_count": 3,
       "has_reasoning": true
     }
   },
   "processing_status": "completed",
-  "uqlm_validation_available": true
+  "uqlm_validation_available": false
 }

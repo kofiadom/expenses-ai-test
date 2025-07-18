@@ -1,0 +1,72 @@
+{
+  "image_path": "expense_files\\italia_file_2.jpg",
+  "assessment_method": "LLM",
+  "model_used": "claude-3-7-sonnet-20250219",
+  "timestamp": "2025-07-16T22:30:09.812950",
+  "blur_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.1,
+    "description": "The receipt text is clearly legible with well-defined characters and minimal blur.",
+    "recommendation": "No action needed as text sharpness is sufficient for OCR processing."
+  },
+  "contrast_assessment": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.85,
+    "description": "The receipt exhibits good contrast between dark text and light background.",
+    "recommendation": "No enhancement needed as current contrast level is suitable for text extraction."
+  },
+  "glare_identification": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No significant glare or reflections are visible on the receipt.",
+    "recommendation": "No action required as image is free from glare issues."
+  },
+  "water_stains": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.0,
+    "description": "No visible water damage or staining affecting the receipt content.",
+    "recommendation": "No remediation needed as document is free from water damage."
+  },
+  "tears_or_folds": {
+    "detected": true,
+    "severity_level": "low",
+    "confidence_score": 0.85,
+    "quantitative_measure": 0.2,
+    "description": "Minor crease lines visible on the receipt but not significantly affecting text legibility.",
+    "recommendation": "No action needed as existing creases don't impair OCR accuracy."
+  },
+  "cut_off_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "The receipt appears to be fully captured within the image frame with all edges visible.",
+    "recommendation": "No recapture needed as all receipt content is included in the image."
+  },
+  "missing_sections": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.0,
+    "description": "All standard receipt sections are present including merchant info, items, prices, and totals.",
+    "recommendation": "No action needed as receipt structure is complete and intact."
+  },
+  "obstructions": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No fingers, shadows or other obstructions blocking the receipt content.",
+    "recommendation": "No recapture needed as image is free from obstructions."
+  },
+  "overall_quality_score": 9,
+  "suitable_for_extraction": true
+}

@@ -1,6 +1,6 @@
 {
   "source_file": "german_file_7.md",
-  "processing_timestamp": "2025-07-15T16:31:07.718257",
+  "processing_timestamp": "2025-07-16T22:53:22.730135",
   "dataset_metadata": {
     "filepath": "expense_files/german_file_7.png",
     "filename ": "german_file_7.png",
@@ -19,15 +19,32 @@
     "error_type": null,
     "error_message": null,
     "classification_confidence": 90,
-    "reasoning": "The document contains a list of items sold (e.g., beverages, milk, pastries), prices, total amount, tax information, and payment details, characteristic of a receipt from a grocery store. The language is identified as German with high confidence. The transaction location matches the expected location."
+    "reasoning": "The document contains sufficient fields to be classified as an expense document and fits the criteria for a meal-related expense.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionAmount",
+        "transactionDate",
+        "itemDescriptionLineItems",
+        "taxInformation",
+        "paymentMethod"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "invoiceReceiptNumber",
+        "icpRequirements"
+      ],
+      "total_fields_found": 6,
+      "expense_identification_reasoning": "The document includes the supplier ('Berlin, Gerichtstrasse 2-3'), transaction amount ('19,06 Euro'), tax information (VAT amounts and rates present), item description/line items (listed products and their prices), and payment method (cash). While the consumer details are missing, the presence of 6 important fields satisfies the expense classification requirement."
+    }
   },
   "extraction_result": {
     "supplier_name": null,
     "supplier_address": "BERLIN, GERICHTSTRASSE 2-3",
     "vat_number": null,
     "currency": "EUR",
-    "tax_rate": 7.0,
-    "vat": 0.86,
+    "tax_rate": 19.0,
+    "vat": 1.34,
     "name": null,
     "address": null,
     "supplier": null,
@@ -43,7 +60,6 @@
     "personal_phone_proof": null,
     "storage_period": null,
     "total_amount": 19.06,
-    "date_of_issue": null,
     "line_items": [
       {
         "description": "ORANGENSAFT, GEK\u00dcHLT",
@@ -112,65 +128,237 @@
         "total_price": 1.5
       }
     ],
-    "payment_method": "Cash",
-    "change_due": 30.94,
-    "number_of_items": 16,
-    "taxes": [
-      {
-        "tax_code": "C",
-        "rate": 7.0,
-        "net": 12.24,
-        "tax_amount": 0.86,
-        "gross": 13.1
+    "transaction_reference": null,
+    "date_of_issue": null,
+    "transaction_time": null,
+    "contact_phone": null,
+    "contact_email": null,
+    "contact_website": null,
+    "receipt_type": null,
+    "table_number": null,
+    "special_notes": null,
+    "cash_given": 50.0,
+    "change_returned": 30.94,
+    "item_count": 16,
+    "net_total": 14.74,
+    "gross_total": 19.06,
+    "citations": {
+      "citations": {
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "Supplier Address",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "FieldType: Supplier Address, Description: Address of the supplier on invoice",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "BERLIN, GERICHTSTRASSE 2-3",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "BERLIN, GERICHTSTRASSE 2-3\n\nUnsere \u00d6ffnungszeiten",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "Currency",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "FieldType: Currency, Description: Receipt currency",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "EUR",
+            "confidence": 0.8,
+            "source_location": "contextual",
+            "context": "context: inferred from monetary values on the receipt, e.g., ZE ZAHLEN EURO 19,06",
+            "match_type": "contextual"
+          }
+        },
+        "tax_rate": {
+          "field_citation": {
+            "source_text": "MWST",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| MWST     | Netto | MWST-BETRAG | BRUTTO |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "19,00%",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| D 19,00% | 2,50  | 0,48        | 2,98   |",
+            "match_type": "exact"
+          }
+        },
+        "vat": {
+          "field_citation": {
+            "source_text": "MWST-BETRAG",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| MWST-BETRAG | BRUTTO |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "0,48",
+            "confidence": 0.85,
+            "source_location": "markdown",
+            "context": "| D 19,00% | 2,50  | 0,48        | 2,98   |",
+            "match_type": "exact"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "ZU ZAHLEN EURO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| ZU ZAHLEN EURO            | 19,06  |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "19,06",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| ZU ZAHLEN EURO            | 19,06  |",
+            "match_type": "exact"
+          }
+        },
+        "cash_given": {
+          "field_citation": {
+            "source_text": "BARGELD",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| BARGELD                   | 50,00  |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "50,00",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| BARGELD                   | 50,00  |",
+            "match_type": "exact"
+          }
+        },
+        "change_returned": {
+          "field_citation": {
+            "source_text": "ZUR\u00dcCK",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| ZUR\u00dcCK                    | 30,94  |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "30,94",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| ZUR\u00dcCK                    | 30,94  |",
+            "match_type": "exact"
+          }
+        },
+        "item_count": {
+          "field_citation": {
+            "source_text": "ANZAHL ARTIKEL",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "ANZAHL ARTIKEL                16",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "16",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "ANZAHL ARTIKEL                16",
+            "match_type": "exact"
+          }
+        },
+        "net_total": {
+          "field_citation": {
+            "source_text": "ZWISCHENSUMME",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| ZWISCHENSUMME             | 19,06  |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "14,74",
+            "confidence": 0.7,
+            "source_location": "contextual",
+            "context": "Inferred from tax calculations",
+            "match_type": "contextual"
+          }
+        },
+        "gross_total": {
+          "field_citation": {
+            "source_text": "BRUTTO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| BRUTTO |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "19,06",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "| ZU ZAHLEN EURO            | 19,06  |",
+            "match_type": "exact"
+          }
+        }
       },
-      {
-        "tax_code": "D",
-        "rate": 19.0,
-        "net": 2.5,
-        "tax_amount": 0.48,
-        "gross": 2.98
+      "metadata": {
+        "total_fields_analyzed": 10,
+        "fields_with_field_citations": 10,
+        "fields_with_value_citations": 10,
+        "average_confidence": 0.9
       }
-    ]
+    }
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 3,
+      "issues_count": 4,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_name",
-          "description": "The supplier name is missing, but it is a mandatory field for compliance with Global People rules. It should be 'Global People DE GmbH'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
-          "knowledge_base_reference": "FileRelatedRequirements - Supplier Name: Must be Global People DE GmbH for ICP 'Global People'."
+          "description": "Missing mandatory supplier name on the receipt. Must be 'Global People DE GmbH'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Must be Global People DE GmbH"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_address",
-          "description": "The supplier address does not match the required address 'Taunusanlage 8, 60329 Frankfurt, Germany' as per Global People compliance.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
-          "knowledge_base_reference": "FileRelatedRequirements - Supplier Address: Must be 'Taunusanlage 8, 60329 Frankfurt, Germany' for ICP 'Global People'."
+          "description": "Receipt supplier address 'BERLIN, GERICHTSTRASSE 2-3' does not match the required 'Taunusanlage 8, 60329 Frankfurt, Germany'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "vat_number",
-          "description": "The VAT number is missing and is a mandatory field for compliance with Global People's requirements.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
-          "knowledge_base_reference": "FileRelatedRequirements - VAT Number: DE356366640 is mandatory for ICP 'Global People'."
+          "description": "Missing required VAT identification number. Must be 'DE356366640'.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "knowledge_base_reference": "DE356366640"
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "expense_type",
+          "description": "Meal expenses are not tax exempt and will be grossed up when outside business travel.",
+          "recommendation": "Meals are not tax exempt (outside business travel). Apply gross-up procedures if reimbursement is processed.",
+          "knowledge_base_reference": "Not tax exempt (outside business travel)"
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt is not compliant due to missing mandatory supplier information such as name and VAT number, as well as incorrect supplier address, which is required under Global People Germany ICP-specific requirements."
+      "compliance_summary": "Receipt validation failed due to missing mandatory fields: Supplier Name, Supplier Address, and VAT Number, none of which meet the precise information requirements for Global People. Additionally, meal expenses recorded are tax liable unless during business travel."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
       "country": "Germany",
       "icp": "Global People",
       "receipt_type": "meals",
-      "issues_count": 3,
+      "issues_count": 4,
       "has_reasoning": true
     }
   },
   "processing_status": "completed",
-  "uqlm_validation_available": true
+  "uqlm_validation_available": false
 }

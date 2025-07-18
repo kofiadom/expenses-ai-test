@@ -1,0 +1,138 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "GIAMAICA CAFFE' SRL",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "# BAR ACCADEMIA\nGIAMAICA CAFFE' SRL",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "GIAMAICA CAFFE' SRL",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "# BAR ACCADEMIA\nGIAMAICA CAFFE' SRL",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "VIA DEL TRITONE,54",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "VIA DEL TRITONE,54, 00187 ROMA",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+        "match_type": "fuzzy"
+      }
+    },
+    "vat_number": {
+      "field_citation": {
+        "source_text": "P.IVA 01845911005",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "00187 ROMA\nP.IVA 01845911005",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "01845911005",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "00187 ROMA\nP.IVA 01845911005",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Prezzo(€)",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "| DESCRIZIONE                           | IVA    | Prezzo(€) |",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "€",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "| DESCRIZIONE                           | IVA    | Prezzo(€) |",
+        "match_type": "contextual"
+      }
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "TOTALE COMPLESSIVO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| TOTALE COMPLESSIVO                    |        | 42,12     |",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "42,12",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| TOTALE COMPLESSIVO                    |        | 42,12     |",
+        "match_type": "exact"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "DOCUMENTO COMMERCIALE",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "## DOCUMENTO COMMERCIALE\ndi vendita o prestazione",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "DOCUMENTO COMMERCIALE",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "## DOCUMENTO COMMERCIALE\ndi vendita o prestazione",
+        "match_type": "exact"
+      }
+    },
+    "payment_method": {
+      "field_citation": {
+        "source_text": "Pagamento contante",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| Pagamento contante                    |        | 42,12     |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "contante",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| Pagamento contante                    |        | 42,12     |",
+        "match_type": "exact"
+      }
+    },
+    "contact_phone": {
+      "field_citation": {
+        "source_text": "TEL. 06/6793585",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "00187 ROMA\nP.IVA 01845911005\nTEL. 06/6793585",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "06/6793585",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "00187 ROMA\nP.IVA 01845911005\nTEL. 06/6793585",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 8,
+    "fields_with_field_citations": 8,
+    "fields_with_value_citations": 8,
+    "average_confidence": 0.89
+  }
+}

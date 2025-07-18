@@ -1,0 +1,72 @@
+{
+  "image_path": "C:\\Users\\Kofi Adom\\AppData\\Local\\Temp\\tmpwf5pgs5p\\german_file_899.png",
+  "assessment_method": "LLM",
+  "model_used": "claude-3-7-sonnet-20250219",
+  "timestamp": "2025-07-17T18:23:04.404002",
+  "blur_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.1,
+    "description": "Receipt shows clear, well-defined text with minimal blur across all printed content.",
+    "recommendation": "No action needed as text clarity is sufficient for OCR processing."
+  },
+  "contrast_assessment": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.85,
+    "description": "Black text on white thermal paper provides strong contrast for easy readability.",
+    "recommendation": "Maintain current imaging conditions for future document captures."
+  },
+  "glare_identification": {
+    "detected": true,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.15,
+    "description": "Minor glare present in the upper portion from what appears to be a glass ashtray, but does not obscure any receipt text.",
+    "recommendation": "Avoid placing reflective objects near receipts when photographing."
+  },
+  "water_stains": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No water stains or liquid damage visible on the receipt.",
+    "recommendation": "Continue keeping receipts dry and protected from liquids."
+  },
+  "tears_or_folds": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.05,
+    "description": "Receipt appears flat with no significant creases, tears, or folds affecting text readability.",
+    "recommendation": "Maintain current handling practices to avoid physical damage."
+  },
+  "cut_off_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.0,
+    "description": "The entire receipt is visible within the frame with no cut-off edges.",
+    "recommendation": "Continue capturing full receipt within image frame."
+  },
+  "missing_sections": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "Receipt appears complete with header, line items, totals, tax information, and footer text all visible.",
+    "recommendation": "Maintain current capture methodology to include all receipt sections."
+  },
+  "obstructions": {
+    "detected": true,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.05,
+    "description": "Glass ashtray partially overlaps the top left corner but does not obscure any textual content.",
+    "recommendation": "Remove all objects from receipt before photographing to avoid potential obstructions."
+  },
+  "overall_quality_score": 9,
+  "suitable_for_extraction": true
+}

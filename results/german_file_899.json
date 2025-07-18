@@ -1,0 +1,382 @@
+{
+  "source_file": "german_file_899.md",
+  "processing_timestamp": "2025-07-17T18:41:42.027484",
+  "dataset_metadata": {
+    "filepath": "german_file_899.png",
+    "country": "Germany",
+    "icp": "Global People",
+    "receipt_type": "unknown",
+    "description": "Uploaded file: german_file_899.png",
+    "dataset_file": "german_file_899.json"
+  },
+  "classification_result": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "German",
+    "language_confidence": 95,
+    "document_location": "Germany",
+    "expected_location": "Germany",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 90,
+    "reasoning": "The document contains key schema elements: supplier ('Pizzeria Pisa'), transaction amount ('Saldo 9,50 EUR'), transaction date ('20.10.2014'), item description/line items (detailed items with prices), and payment method ('Bar' indicating cash). These elements strongly indicate an expense document. The type is classified as 'meals' due to the nature of the items listed (Cola Light, Currywurst Pommes).",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionAmount",
+        "transactionDate",
+        "itemDescriptionLineItems",
+        "paymentMethod"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "icpRequirements",
+        "invoiceReceiptNumber",
+        "taxInformation"
+      ],
+      "total_fields_found": 5,
+      "expense_identification_reasoning": "The document contains 5 fields: supplier ('Pizzeria Pisa'), transaction amount ('Saldo 9,50 EUR'), transaction date ('20.10.2014'), item description/line items (items like Cola Light and Currywurst Pommes), and payment method ('Bar'). These confirmed fields surpass the 5-field requirement for expense identification."
+    }
+  },
+  "extraction_result": {
+    "customer_name_on_invoice": null,
+    "customer_name_exception": null,
+    "customer_address_on_invoice": null,
+    "customer_vat_number_on_invoice": null,
+    "currency": "EUR",
+    "amount": 9.5,
+    "receipt_type": "Rechnung",
+    "receipt_quality": null,
+    "invoice_serial_number": null,
+    "invoice_date": "2014-10-20",
+    "service_date": null,
+    "net_amount": 7.98,
+    "tax_rate": 19.0,
+    "vat_amount": 1.52,
+    "worker_name": null,
+    "worker_address": null,
+    "supplier_tax_id": "34/476/00588",
+    "expense_description": null,
+    "route_details": null,
+    "car_details": null,
+    "purpose": null,
+    "odometer_reading": null,
+    "travel_date": null,
+    "a1_certificate": null,
+    "personal_phone_proof": null,
+    "storage_period": null,
+    "supplier_name": "Pizzeria Pisa",
+    "supplier_address": "Cora-Berliner Str.2, 10117 Berlin",
+    "line_items": [
+      {
+        "description": "0,4 Cola Light",
+        "quantity": 1,
+        "unit_price": 3.6,
+        "total_price": 3.6
+      },
+      {
+        "description": "Currywurst Pommes",
+        "quantity": 1,
+        "unit_price": 5.9,
+        "total_price": 5.9
+      }
+    ],
+    "total_amount": 9.5,
+    "transaction_time": "13:45",
+    "location": "Tisch #120",
+    "special_notes": "Tip is not included",
+    "transaction_reference": "Bediener 3",
+    "citations": {
+      "citations": {
+        "currency": {
+          "field_citation": {
+            "source_text": "Receipt currency",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Currency description",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "3,60 EUR",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| 0,4 Cola Light    | 3,60 EUR |",
+            "match_type": "fuzzy"
+          }
+        },
+        "amount": {
+          "field_citation": {
+            "source_text": "Expense amount",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Description: Expense amount, Mandatory: Yes",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Saldo 9,50 EUR",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Saldo                9,50 EUR",
+            "match_type": "exact"
+          }
+        },
+        "receipt_type": {
+          "field_citation": {
+            "source_text": "Type of supporting document",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Description: Type of supporting document, Mandatory: Yes",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "# Rechnung",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "# Rechnung",
+            "match_type": "exact"
+          }
+        },
+        "invoice_date": {
+          "field_citation": {
+            "source_text": "Date of invoice",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Description: Date of invoice, Mandatory: Yes",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "13:45 20.10.2014",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "13:45 20.10.2014 Bediener 3",
+            "match_type": "fuzzy"
+          }
+        },
+        "net_amount": {
+          "field_citation": {
+            "source_text": "Amount before tax",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Description: Net Amount",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Nettoumsatz 7,98 EUR",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Nettoumsatz          7,98 EUR",
+            "match_type": "exact"
+          }
+        },
+        "tax_rate": {
+          "field_citation": {
+            "source_text": "Applicable tax rate",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Description: Tax Rate",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "MWST 19%",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "MWST 19%             1,52 EUR",
+            "match_type": "fuzzy"
+          }
+        },
+        "vat_amount": {
+          "field_citation": {
+            "source_text": "VAT amount",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Description: VAT Amount",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "MWST 19%             1,52 EUR",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "MWST 19%             1,52 EUR",
+            "match_type": "exact"
+          }
+        },
+        "supplier_tax_id": {
+          "field_citation": {
+            "source_text": "Tax ID of supplier",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Description: Supplier Tax ID",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "St.Nr.:34/476/00588",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "St.Nr.:34/476/00588",
+            "match_type": "exact"
+          }
+        },
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "Supplier Name:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Header with supplier information",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "# Pizzeria Pisa",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "# Pizzeria Pisa",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "Supplier Address:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Following supplier name",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Cora-Berliner Str.2, 10117 Berlin",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Cora-Berliner Str.2\n10117 Berlin",
+            "match_type": "fuzzy"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "Total:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Sum of all items",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Saldo 9,50 EUR",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Saldo                9,50 EUR",
+            "match_type": "exact"
+          }
+        },
+        "transaction_time": {
+          "field_citation": {
+            "source_text": "Transaction Time:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Time of transaction",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "13:45",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "13:45 20.10.2014 Bediener 3",
+            "match_type": "exact"
+          }
+        },
+        "location": {
+          "field_citation": {
+            "source_text": "Location:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Specific location on receipt",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Tisch #120",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Tisch #120",
+            "match_type": "exact"
+          }
+        },
+        "special_notes": {
+          "field_citation": {
+            "source_text": "Special Notes:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Any special notes on receipt",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Tip is not included",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Tip is not included",
+            "match_type": "exact"
+          }
+        },
+        "transaction_reference": {
+          "field_citation": {
+            "source_text": "Transaction Reference:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Reference information",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Bediener 3",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Es bediente Sie Bediener 3.",
+            "match_type": "fuzzy"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 15,
+        "fields_with_field_citations": 15,
+        "fields_with_value_citations": 15,
+        "average_confidence": 0.9
+      }
+    }
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 3,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_name_on_invoice",
+          "description": "Missing mandatory customer name on the invoice for Global People ICP in Germany.",
+          "recommendation": "It is recommended to address this issue with the supplier to include 'Global People DE GmbH' as the customer.",
+          "knowledge_base_reference": "Must show Global People DE GmbH as customer"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_address_on_invoice",
+          "description": "Missing mandatory customer address on the invoice for Global People ICP in Germany.",
+          "recommendation": "It is recommended to address this issue with the supplier to include 'Taunusanlage 8, 60329 Frankfurt, Germany' as the customer address.",
+          "knowledge_base_reference": "Must show Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "amount",
+          "description": "Meal expenses are not tax exempt according to the provided compliance requirements for Global People.",
+          "recommendation": "Meals are not tax exempt (outside business travel), hence gross-up is required.",
+          "knowledge_base_reference": "Not tax exempt (outside business travel)"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt for meals in Germany under Global People ICP is not compliant due to missing customer name and address on the invoice, and meal expenses are not tax exempt outside of business travel, requiring gross-up."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 3,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": false
+}

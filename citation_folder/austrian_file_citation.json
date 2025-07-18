@@ -1,0 +1,206 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Austrian Airlines AG",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Austrian Airlines AG, Member of IATA, registered office: Vienna, Office Park 2, A-1300 Vienna-Airport",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Austrian Airlines AG",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Austrian Airlines AG, Member of IATA, registered office: Vienna, Office Park 2, A-1300 Vienna-Airport",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Office Park 2, A-1300 Vienna-Airport",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Austrian Airlines AG, Member of IATA, registered office: Vienna, Office Park 2, A-1300 Vienna-Airport",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Office Park 2, A-1300 Vienna-Airport",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Austrian Airlines AG, Member of IATA, registered office: Vienna, Office Park 2, A-1300 Vienna-Airport",
+        "match_type": "exact"
+      }
+    },
+    "vat_number": {
+      "field_citation": {
+        "source_text": "VAT No. ATU15447707",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Austrian Airlines AG, Member of IATA, registered office: Vienna, Office Park 2, A-1300 Vienna-Airport, VAT No. ATU15447707",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "ATU15447707",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Austrian Airlines AG, Member of IATA, registered office: Vienna, Office Park 2, A-1300 Vienna-Airport, VAT No. ATU15447707",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Currency",
+        "confidence": 0.5,
+        "source_location": "requirements",
+        "context": "Mandatory - Same currency with clear exchange rate",
+        "match_type": "contextual"
+      },
+      "value_citation": null
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "Amount",
+        "confidence": 0.5,
+        "source_location": "requirements",
+        "context": "Mandatory - Must be clearly stated on receipt",
+        "match_type": "contextual"
+      },
+      "value_citation": null
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "Passenger Receipt / Invoice / Rechnung",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "# Passenger Receipt / Invoice / Rechnung",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Passenger Receipt / Invoice / Rechnung",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "# Passenger Receipt / Invoice / Rechnung",
+        "match_type": "exact"
+      }
+    },
+    "passenger_name": {
+      "field_citation": {
+        "source_text": "Name",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Name / Name: FORISEK / MICHAL DR MR",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "FORISEK / MICHAL DR MR",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Name / Name: FORISEK / MICHAL DR MR",
+        "match_type": "exact"
+      }
+    },
+    "booking_code": {
+      "field_citation": {
+        "source_text": "Booking code",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Booking code / Buchungscode: 6GHMCV",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "6GHMCV",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Booking code / Buchungscode: 6GHMCV",
+        "match_type": "exact"
+      }
+    },
+    "ticket_number": {
+      "field_citation": {
+        "source_text": "Ticket number",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Ticket number / Ticketnummer: 257-2133783831",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "257-2133783831",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Ticket number / Ticketnummer: 257-2133783831",
+        "match_type": "exact"
+      }
+    },
+    "billing_address": {
+      "field_citation": {
+        "source_text": "Billing address / Rechnungsadresse",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Billing address / Rechnungsadresse: Michal Forisek Lubovnianska 14 85107 Bratislava Slovakia",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Michal Forisek, Lubovnianska 14, 85107 Bratislava, Slovakia",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Billing address / Rechnungsadresse: Michal Forisek Lubovnianska 14 85107 Bratislava Slovakia",
+        "match_type": "fuzzy"
+      }
+    },
+    "flight_data": {
+      "field_citation": {
+        "source_text": "Flight Data / Flugdaten",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "## Flight Data / Flugdaten",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Flight OS561 on 31 Aug 13 from Vienna Intl to Zurich",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| OS561 | 31 Aug 13 | Vienna Intl | Zurich | 7:20 AM | 8:45 AM | Y (OK) | 1 PC |",
+        "match_type": "fuzzy"
+      }
+    },
+    "operated_by": {
+      "field_citation": {
+        "source_text": "operated by: TYROLEAN AIRWAYS",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| OS561 | ... operated by: TYROLEAN AIRWAYS",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "TYROLEAN AIRWAYS",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "operated by: TYROLEAN AIRWAYS",
+        "match_type": "exact"
+      }
+    },
+    "transaction_reference": {
+      "field_citation": {
+        "source_text": "213000508057",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "# Passenger Receipt / Invoice / Rechnung 213000508057",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "213000508057",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "# Passenger Receipt / Invoice / Rechnung 213000508057",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 12,
+    "fields_with_field_citations": 11,
+    "fields_with_value_citations": 10,
+    "average_confidence": 0.93
+  }
+}

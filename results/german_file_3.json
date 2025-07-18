@@ -1,6 +1,6 @@
 {
   "source_file": "german_file_3.md",
-  "processing_timestamp": "2025-07-15T16:20:51.263082",
+  "processing_timestamp": "2025-07-16T22:47:49.256800",
   "dataset_metadata": {
     "filepath": "expense_files/german_file_3.png",
     "filename": "german_file_3.png",
@@ -18,8 +18,25 @@
     "location_match": true,
     "error_type": null,
     "error_message": null,
-    "classification_confidence": 98,
-    "reasoning": "The document contains details consistent with a restaurant receipt, including items ordered, pricing, and establishment information, indicating an expense related to meals consumed. Language elements suggest it is written in German, with typical currency and word usage patterns from Germany."
+    "classification_confidence": 95,
+    "reasoning": "The document is a receipt from a restaurant with evidence of payment completed, actual amounts charged, and a transaction date, meeting the criteria for an expense document. It is classified under 'meals' due to the items listed.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionAmount",
+        "transactionDate",
+        "itemDescriptionLineItems"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "icpRequirements",
+        "invoiceReceiptNumber",
+        "taxInformation",
+        "paymentMethod"
+      ],
+      "total_fields_found": 4,
+      "expense_identification_reasoning": "Four fields were identified: 'supplier' as the restaurant name 'The Sushi Club', 'transactionAmount' as the total of \u20ac64,40, 'transactionDate' as the date '5-2-2019', and 'itemDescriptionLineItems' as the list of menu items. While the 'consumerRecipient', 'icpRequirements', and 'paymentMethod' are absent, the presence of sufficient fields, especially transaction-specific ones, classifies this as an expense document. The language is confidently identified as German based on vocabulary and structure typical for Germany, which matches the expected location."
+    }
   },
   "extraction_result": {
     "supplier_name": "THE SUSHI CLUB",
@@ -101,7 +118,97 @@
     "payment_receipt": null,
     "manager_approval": null,
     "personal_phone_proof": null,
-    "storage_period": null
+    "storage_period": null,
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "SUPPLIER NAME",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "THE SUSHI CLUB\nMohrenstr.42\n10117 Berlin",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "THE SUSHI CLUB",
+            "confidence": 1.0,
+            "source_location": "markdown",
+            "context": "THE SUSHI CLUB\nMohrenstr.42",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "SUPPLIER ADDRESS",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "THE SUSHI CLUB\nMohrenstr.42\n10117 Berlin",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Mohrenstr.42, 10117 Berlin",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Mohrenstr.42\n10117 Berlin",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "Currency",
+            "confidence": 0.7,
+            "source_location": "requirements",
+            "context": "Receipt currency",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "\u20ac",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "\u20ac 64,40",
+            "match_type": "fuzzy"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "Total",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "9 Total                          \u20ac 64,40",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "\u20ac 64,40",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "9 Total                          \u20ac 64,40",
+            "match_type": "exact"
+          }
+        },
+        "date_of_issue": {
+          "field_citation": {
+            "source_text": "Date",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Dienstag  5-2-2019 23:10:54",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "5-2-2019",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Dienstag  5-2-2019 23:10:54",
+            "match_type": "fuzzy"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 5,
+        "fields_with_field_citations": 5,
+        "fields_with_value_citations": 5,
+        "average_confidence": 0.86
+      }
+    }
   },
   "compliance_result": {
     "validation_result": {
@@ -111,34 +218,34 @@
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_name",
-          "description": "The Supplier Name does not match the mandatory requirement. Found 'THE SUSHI CLUB', expected 'Global People DE GmbH'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
+          "description": "The supplier name must be 'Global People DE GmbH' for compliance with Global People ICP requirements.",
+          "recommendation": "It is recommended to correct the supplier name to meet the ICP-specific rule.",
           "knowledge_base_reference": "Must be Global People DE GmbH"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_address",
-          "description": "The Supplier Address does not match the required address. Found 'Mohrenstr.42, 10117 Berlin', expected 'Taunusanlage 8, 60329 Frankfurt, Germany'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
+          "description": "The supplier address must be 'Taunusanlage 8, 60329 Frankfurt, Germany' for compliance with Global People ICP requirements.",
+          "recommendation": "It is recommended to correct the supplier address to meet the ICP-specific rule.",
           "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "vat_number",
-          "description": "The VAT Number is missing from the receipt.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
+          "description": "The VAT identification number is missing and must be 'DE356366640' for compliance with Global People ICP requirements.",
+          "recommendation": "It is recommended to ensure the VAT number is included and correct.",
           "knowledge_base_reference": "DE356366640"
         },
         {
           "issue_type": "Standards & Compliance | Gross-up Identified",
-          "field": "expense_type",
-          "description": "Personal meals are not tax exempt outside business travel according to Global People ICP guidelines.",
-          "recommendation": "Ensure the expense is categorized correctly and consider gross-up for tax liability.",
+          "field": "expense",
+          "description": "Meals are not tax-exempt outside of business travel under Global People ICP.",
+          "recommendation": "Meals expenses will be grossed-up as they are not tax exempt outside of business travel.",
           "knowledge_base_reference": "Not tax exempt (outside business travel)"
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt has multiple compliance violations, including incorrect supplier details, missing VAT number, and tax implications for personal meals outside business travel."
+      "compliance_summary": "The receipt has discrepancies in the supplier name, address, and missing VAT number as per Global People ICP compliance requirements. Additionally, meals expenses are not tax exempt."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
@@ -150,5 +257,5 @@
     }
   },
   "processing_status": "completed",
-  "uqlm_validation_available": true
+  "uqlm_validation_available": false
 }

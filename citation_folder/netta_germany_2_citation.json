@@ -1,0 +1,234 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "McDonalds Deutschland Inc.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "McDonalds\nDeutschland Inc.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "McDonalds Deutschland Inc.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "McDonalds\nDeutschland Inc.",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Am Ostbahnhof 9, 10243 Berlin",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Am Ostbahnhof 9\n10243 Berlin",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Am Ostbahnhof 9, 10243 Berlin",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Am Ostbahnhof 9\n10243 Berlin",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "EUR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "BETRAG\nEUR",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "EUR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "1 Cheeseburger*                   1,19\nTotal (inkl. MwSt) EUR",
+        "match_type": "exact"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "15.10.2014",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "#ORD 2487 - KS. 3-                15.10.2014",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "15.10.2014",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "#ORD 2487 - KS. 3-                15.10.2014",
+        "match_type": "fuzzy"
+      }
+    },
+    "line_items": {
+      "field_citation": {
+        "source_text": "ANZ. ARTIKEL                      BETRAG",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "ANZ. ARTIKEL                      BETRAG\n                                  EUR",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "1 Cheeseburger*                   1,19",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "1 Cheeseburger*                   1,19",
+        "match_type": "exact"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "Total (inkl. MwSt)",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Total (inkl. MwSt) EUR            1,19",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "1,19",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Total (inkl. MwSt) EUR            1,19",
+        "match_type": "exact"
+      }
+    },
+    "contact_phone": {
+      "field_citation": {
+        "source_text": "Tel. 030 29364913",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Tel. 030 29364913",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "030 29364913",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Tel. 030 29364913",
+        "match_type": "exact"
+      }
+    },
+    "tax_rate": {
+      "field_citation": {
+        "source_text": "SATZ    BRUTTO   MWST",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "SATZ    BRUTTO   MWST\nInkl. MwSt:     7,00%   1,11     0,08",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "7,00%",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Inkl. MwSt:     7,00%   1,11     0,08",
+        "match_type": "exact"
+      }
+    },
+    "vat": {
+      "field_citation": {
+        "source_text": "MWST",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "SATZ    BRUTTO   MWST\nInkl. MwSt:     7,00%   1,11     0,08",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "0,08",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Inkl. MwSt:     7,00%   1,11     0,08",
+        "match_type": "exact"
+      }
+    },
+    "transaction_reference": {
+      "field_citation": {
+        "source_text": "#DT 1485",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "#DT 1485",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "DT 1485",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "#DT 1485",
+        "match_type": "exact"
+      }
+    },
+    "order_number": {
+      "field_citation": {
+        "source_text": "#ORD 2487 - KS.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "#ORD 2487 - KS. 3-                15.10.2014",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "ORD 2487",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "#ORD 2487 - KS. 3-                15.10.2014",
+        "match_type": "exact"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "QUITTUNG",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "## QUITTUNG",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "QUITTUNG",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "## QUITTUNG",
+        "match_type": "exact"
+      }
+    },
+    "tax_id": {
+      "field_citation": {
+        "source_text": "St. Nr.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "St. Nr. 143/250/50528",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "143/250/50528",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "St. Nr. 143/250/50528",
+        "match_type": "exact"
+      }
+    },
+    "special_notes": {
+      "field_citation": {
+        "source_text": "* Rinder wurden mit GENmanipuliertem Futter gemästet.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "* Rinder wurden mit GENmanipuliertem Futter gemästet.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Rinder wurden mit GENmanipuliertem Futter gemästet.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "* Rinder wurden mit GENmanipuliertem Futter gemästet.",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 14,
+    "fields_with_field_citations": 14,
+    "fields_with_value_citations": 14,
+    "average_confidence": 0.9
+  }
+}

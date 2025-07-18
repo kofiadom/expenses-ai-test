@@ -1,0 +1,106 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Supplier Name",
+        "confidence": 0.9,
+        "source_location": "requirements|markdown",
+        "context": "# Pizzeria Pisa\nCora-Berliner Str.2\n10117 Berlin\n",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Pizzeria Pisa",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "# Pizzeria Pisa",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Supplier Address",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "# Pizzeria Pisa\nCora-Berliner Str.2\n10117 Berlin\n",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Cora-Berliner Str.2, 10117 Berlin",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Cora-Berliner Str.2\n10117 Berlin",
+        "match_type": "fuzzy"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Currency",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "| 0,4 Cola Light    | 3,60 EUR |\n| ----------------- | -------- |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "EUR",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "| 0,4 Cola Light    | 3,60 EUR |",
+        "match_type": "fuzzy"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "Saldo",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Saldo                9,50 EUR",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "9.50 EUR",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Saldo                9,50 EUR",
+        "match_type": "fuzzy"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "Date",
+        "confidence": 0.9,
+        "source_location": "requirements|markdown",
+        "context": "13:45 20.10.2014 Bediener 3",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "2014-10-20",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "13:45 20.10.2014 Bediener 3",
+        "match_type": "fuzzy"
+      }
+    },
+    "tax_number": {
+      "field_citation": {
+        "source_text": "St.Nr.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "St.Nr.:34/476/00588",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "34/476/00588",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "St.Nr.:34/476/00588",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 6,
+    "fields_with_field_citations": 6,
+    "fields_with_value_citations": 6,
+    "average_confidence": 0.93
+  }
+}

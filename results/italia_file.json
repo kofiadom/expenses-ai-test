@@ -1,6 +1,6 @@
 {
   "source_file": "italia_file.md",
-  "processing_timestamp": "2025-07-15T16:49:43.701665",
+  "processing_timestamp": "2025-07-16T22:57:14.394246",
   "dataset_metadata": {
     "filepath": "expense_files/italia_file.pdf",
     "filename": "italia_file.pdf",
@@ -18,56 +18,337 @@
     "location_match": true,
     "error_type": null,
     "error_message": null,
-    "classification_confidence": 90,
-    "reasoning": "The document is a detailed invoice with telecommunication services and a purchase of a mobile phone, listing vendor and transaction details. The language is clearly Italian with a high confidence level, and the document location matches the expected location of Italy."
+    "classification_confidence": 95,
+    "reasoning": "The document qualifies as an expense because it contains a supplier, consumer, transaction amount, transaction date, and invoice number. The content relates to telecommunications services, e.g., phone billing services including usage and device costs, meeting the criteria for expense classification.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "consumerRecipient",
+        "transactionAmount",
+        "transactionDate",
+        "invoiceReceiptNumber"
+      ],
+      "fields_missing": [
+        "icpRequirements",
+        "taxInformation",
+        "paymentMethod",
+        "itemDescriptionLineItems"
+      ],
+      "total_fields_found": 5,
+      "expense_identification_reasoning": "The document contains details of a telecommunications service provided by Telecom Italia S.p.A. to Thomas Miller, including a transaction amount (\u20ac334.19), transaction date (11/01/2013), and invoice number (D938548182). These elements constitute a valid expense. The presence of supplier and consumer information further supports its classification as an expense. While tax information and payment method are partially reflected in the document, they are not explicitly labeled."
+    }
   },
   "extraction_result": {
     "supplier_name": "Telecom Italia S.p.A.",
     "supplier_address": "Piazza degli Affari 2 - 20123 Milan (IT)",
-    "vat_number": "4213345/2",
-    "currency": "EUR",
+    "vat_number": null,
+    "tax_code": null,
+    "currency": "\u20ac",
     "amount": 334.19,
     "receipt_type": "Fattura Fiscale",
+    "payment_method": null,
+    "country": "Italy",
     "date_of_issue": "2013-01-11",
-    "payment_method": "bank debit",
+    "customer_number": "C8375751-2",
+    "invoice_number": "D938548182",
+    "due_date": "2013-02-10",
     "line_items": [
       {
-        "description": "Apple iPhone 5 Nero 32GB (SN:C7DG31W/DTWS)",
-        "quantity": 1,
-        "unit_price": 199.99,
-        "tax": 39.99,
-        "total_price": 239.98
+        "date": "11/11/2012",
+        "description": "Saldo Portato a Nuovo",
+        "item_number": "CL848676010",
+        "reference": "495843218",
+        "quantity": null,
+        "total": 69.99
       },
       {
-        "description": "Piano 12 Mesi Minuti illim. testi illim. 10 GB",
-        "quantity": 1,
-        "unit_price": 78.0,
-        "tax": 15.7,
-        "total_price": 93.7
+        "date": "10/12/2012",
+        "description": "Pagamento",
+        "item_number": "LP53045464",
+        "reference": "493854981",
+        "quantity": null,
+        "total": -69.99
+      },
+      {
+        "date": "11/01/2013",
+        "description": "Fattura",
+        "item_number": null,
+        "reference": null,
+        "quantity": null,
+        "total": 334.19
+      }
+    ],
+    "product_details": [
+      {
+        "description": "Apple iPhone 5 Nero 32GB (SN:C7DG31W/DTWS)",
+        "category": "gennaio",
+        "quantity": null,
+        "vat": 39.99,
+        "price": 199.99,
+        "total": 239.98
+      },
+      {
+        "description": "Servizi di Abbonamento Descrizione (iPhone) Piano 12 Mesi Minuti illim. testi illim. 10 GB",
+        "category": "gennaio",
+        "quantity": null,
+        "vat": 15.7,
+        "price": 78.0,
+        "total": 93.7
       },
       {
         "description": "HSPA+ Voice Tariff",
-        "quantity": 1,
-        "unit_price": 9.0,
-        "tax": 1.79,
-        "total_price": 10.79
+        "category": "gennaio",
+        "quantity": null,
+        "vat": 1.79,
+        "price": 9.0,
+        "total": 10.79
       },
       {
         "description": "Extra 5G Data Rooftop",
-        "quantity": 1,
-        "unit_price": 8.0,
-        "tax": 1.71,
-        "total_price": 9.71
+        "category": "gennaio",
+        "quantity": null,
+        "vat": 1.71,
+        "price": 8.0,
+        "total": 9.71
       }
     ],
-    "invoice_number": "D938548182",
-    "invoice_due_date": "2013-02-10",
-    "tax_rate": 20,
-    "customer_account_number": "C8375751-2",
-    "customer_phone_number": "0348439841",
-    "additional_details": {
-      "page_number": "1 of 1",
-      "payment_due_notice": "Il tuo conto in banca verr\u00e0 addebitato il 1 Febbraio 2014."
+    "total_invoice_amount": 334.19,
+    "invoice_total_with_vat": 334.19,
+    "bank_debit_date": "2014-02-01",
+    "contact_phone": "+39 02 85954131",
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "Supplier Name",
+            "confidence": 0.8,
+            "source_location": "requirements",
+            "context": "Name of the supplier/vendor on invoice",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Telecom Italia S.p.A.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Telecom Italia S.p.A.\nPiazza degli Affari\n2 - 20123 Milan (IT)",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "Supplier Address",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Address of the supplier on invoice",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Piazza degli Affari 2 - 20123 Milan (IT)",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Telecom Italia S.p.A.\nPiazza degli Affari\n2 - 20123 Milan (IT)",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "Currency",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Receipt currency",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "\u20ac",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Totale Servizi in abbonamento\n| gennaio | \u20ac278.49  |",
+            "match_type": "exact"
+          }
+        },
+        "amount": {
+          "field_citation": {
+            "source_text": "Amount",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Expense amount",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "\u20ac334.19",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Fattura totale \u20ac334.19",
+            "match_type": "exact"
+          }
+        },
+        "receipt_type": {
+          "field_citation": {
+            "source_text": "Receipt Type",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Type of supporting document",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Fattura Fiscale",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "# Fattura Fiscale",
+            "match_type": "exact"
+          }
+        },
+        "country": {
+          "field_citation": {
+            "source_text": "Italy",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Telecom Italia S.p.A.\nPiazza degli Affari\n2 - 20123 Milan (IT)",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Italy",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Piazza degli Affari\n2 - 20123 Milan (IT)",
+            "match_type": "contextual"
+          }
+        },
+        "date_of_issue": {
+          "field_citation": {
+            "source_text": "Data",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Numero di conto / cliente: C8375751-2\nData: 11/01/2013",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "11/01/2013",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Numero di conto / cliente: C8375751-2\nData: 11/01/2013",
+            "match_type": "exact"
+          }
+        },
+        "customer_number": {
+          "field_citation": {
+            "source_text": "Numero di conto / cliente",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Numero di conto / cliente: C8375751-2",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "C8375751-2",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Numero di conto / cliente: C8375751-2",
+            "match_type": "exact"
+          }
+        },
+        "invoice_number": {
+          "field_citation": {
+            "source_text": "Numero di Fattura",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Numero di Fattura: D938548182",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "D938548182",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Numero di Fattura: D938548182",
+            "match_type": "exact"
+          }
+        },
+        "due_date": {
+          "field_citation": {
+            "source_text": "Scadenza",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Scadenza: 10/02/2013",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "10/02/2013",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Scadenza: 10/02/2013",
+            "match_type": "exact"
+          }
+        },
+        "total_invoice_amount": {
+          "field_citation": {
+            "source_text": "Totale Fattura",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Fattura totale \u20ac334.19",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "\u20ac334.19",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Fattura totale \u20ac334.19",
+            "match_type": "exact"
+          }
+        },
+        "invoice_total_with_vat": {
+          "field_citation": {
+            "source_text": "Totale con IVA",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Totale parziale\n| \u20ac278.49  | \u20ac55.70    | \u20ac334.19",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "\u20ac334.19",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Fattura totale \u20ac334.19",
+            "match_type": "exact"
+          }
+        },
+        "bank_debit_date": {
+          "field_citation": {
+            "source_text": "Il tuo conto in banca verr\u00e0 addebitato",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Il tuo conto in banca verr\u00e0 addebitato con l'intero saldo che si riflette su questa dichiarazione sulla 1 Febbraio 2014.",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "1 Febbraio 2014",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Il tuo conto in banca verr\u00e0 addebitato con l'intero saldo che si riflette su questa dichiarazione sulla 1 Febbraio 2014.",
+            "match_type": "exact"
+          }
+        },
+        "contact_phone": {
+          "field_citation": {
+            "source_text": "Ph:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Ph: +39 02 85954131",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "+39 02 85954131",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Ph: +39 02 85954131",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 14,
+        "fields_with_field_citations": 13,
+        "fields_with_value_citations": 14,
+        "average_confidence": 0.888
+      }
     }
   },
   "compliance_result": {
@@ -78,27 +359,27 @@
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_name",
-          "description": "Supplier Name must be 'Global People s.r.l.' as per ICP-specific requirement.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
-          "knowledge_base_reference": "FileRelatedRequirements: 'Must be Global People s.r.l.'"
+          "description": "Supplier name must be 'Global People s.r.l.' for compliance.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure the supplier name is correctly indicated as 'Global People s.r.l.' on the receipt.",
+          "knowledge_base_reference": "Must be Global People s.r.l."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_address",
-          "description": "Supplier Address must be 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy' as per ICP-specific requirement.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
-          "knowledge_base_reference": "FileRelatedRequirements: 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy'"
+          "description": "Supplier address must be 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy' for Global People s.r.l.",
+          "recommendation": "Ensure supplier address is exact as 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy'.",
+          "knowledge_base_reference": "Mandatory address is 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy'."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "vat_number",
-          "description": "VAT Number must be 'IT12455930011' as per ICP-specific requirement.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
-          "knowledge_base_reference": "FileRelatedRequirements: 'IT12455930011'"
+          "description": "VAT number is missing but is mandatory for compliance.",
+          "recommendation": "Recommend obtaining and including VAT number 'IT12455930011'.",
+          "knowledge_base_reference": "VAT identification number is mandatory."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt is not valid due to non-compliance with the ICP-specific requirements for supplier name, address, and VAT number."
+      "compliance_summary": "The receipt fails compliance for Global People s.r.l. in Italy due to incorrect supplier name, missing VAT number, and incorrect supplier address. These issues require fixes to meet mandatory compliance standards."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
@@ -110,5 +391,5 @@
     }
   },
   "processing_status": "completed",
-  "uqlm_validation_available": true
+  "uqlm_validation_available": false
 }

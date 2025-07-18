@@ -1,0 +1,90 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "SUPPLIER NAME",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "THE SUSHI CLUB\nMohrenstr.42\n10117 Berlin",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "THE SUSHI CLUB",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "THE SUSHI CLUB\nMohrenstr.42",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "SUPPLIER ADDRESS",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "THE SUSHI CLUB\nMohrenstr.42\n10117 Berlin",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Mohrenstr.42, 10117 Berlin",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Mohrenstr.42\n10117 Berlin",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Currency",
+        "confidence": 0.7,
+        "source_location": "requirements",
+        "context": "Receipt currency",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "€",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "€ 64,40",
+        "match_type": "fuzzy"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "Total",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "9 Total                          € 64,40",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€ 64,40",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "9 Total                          € 64,40",
+        "match_type": "exact"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "Date",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Dienstag  5-2-2019 23:10:54",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "5-2-2019",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Dienstag  5-2-2019 23:10:54",
+        "match_type": "fuzzy"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 5,
+    "fields_with_field_citations": 5,
+    "fields_with_value_citations": 5,
+    "average_confidence": 0.86
+  }
+}

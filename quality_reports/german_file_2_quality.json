@@ -1,5 +1,5 @@
 {
-  "image_path": "expense_files\\german_file_2.png",
+  "image_path": "C:\\Users\\Kofi Adom\\AppData\\Local\\Temp\\tmp46_5h_yy\\german_file_2.png",
   "document_type": "receipt",
   "image_type_detection": {
     "is_digital_screenshot": "True",
@@ -19,8 +19,8 @@
       "histogram_entropy": "5.04"
     }
   },
-  "timestamp": "2025-07-16T00:20:02.228590",
-  "processing_time_seconds": 5.79,
+  "timestamp": "2025-07-17T08:58:57.126418",
+  "processing_time_seconds": 6.4,
   "overall_assessment": {
     "score": 59.1,
     "level": "Poor",

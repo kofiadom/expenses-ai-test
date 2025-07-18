@@ -1,0 +1,170 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "TRATTORIA-PIZZERIA LA PREFERITA S.A.S.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "TRATTORIA-PIZZERIA\nLA PREFERITA S.A.S.\nDI CUSCO PASQUALE & C.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "TRATTORIA-PIZZERIA LA PREFERITA S.A.S.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "TRATTORIA-PIZZERIA\nLA PREFERITA S.A.S.\nDI CUSCO PASQUALE & C.",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "PIAZZA DOGANA 11 C2 LIDO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "PIAZZA DOGANA 11 C2 LIDO",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "PIAZZA DOGANA 11 C2 LIDO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "PIAZZA DOGANA 11 C2 LIDO",
+        "match_type": "exact"
+      }
+    },
+    "vat_number": {
+      "field_citation": {
+        "source_text": "P.IVA",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "P.IVA 01797930797",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "01797930797",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "P.IVA 01797930797",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "EURO",
+        "confidence": 0.7,
+        "source_location": "markdown",
+        "context": "Operatore 1 EURO",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "EURO",
+        "confidence": 0.7,
+        "source_location": "markdown",
+        "context": "Operatore 1 EURO",
+        "match_type": "exact"
+      }
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "TOTALE EURO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "TOTALE EURO 28,70",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "28,70",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "SUBTOTALE 28,70\nTOTALE EURO 28,70\nCONTANTI 28,70",
+        "match_type": "exact"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "Receipt Type:",
+        "confidence": 0.5,
+        "source_location": "requirements",
+        "context": "Must be actual tax receipts or invoices, not booking confirmations.",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "Unknown",
+        "confidence": 0.2,
+        "source_location": "requirements",
+        "context": "Receipt Type is not clearly marked in the source.",
+        "match_type": "fuzzy"
+      }
+    },
+    "payment_method": {
+      "field_citation": {
+        "source_text": "CONTANTI",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "CONTANTI 28,70",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "CONTANTI",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "CONTANTI 28,70",
+        "match_type": "exact"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "Date:",
+        "confidence": 0.6,
+        "source_location": "requirements",
+        "context": "Part of the required receipt details.",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "21/08/14",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "21/08/14 21:56",
+        "match_type": "fuzzy"
+      }
+    },
+    "transaction_time": {
+      "field_citation": {
+        "source_text": "Time:",
+        "confidence": 0.6,
+        "source_location": "requirements",
+        "context": "Part of the required receipt details.",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "21:56",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "21/08/14 21:56",
+        "match_type": "exact"
+      }
+    },
+    "transaction_reference": {
+      "field_citation": {
+        "source_text": "N° RG",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "N° RG 96102058",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "96102058",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "N° RG 96102058",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 10,
+    "fields_with_field_citations": 10,
+    "fields_with_value_citations": 10,
+    "average_confidence": 0.82
+  }
+}

@@ -1,0 +1,234 @@
+{
+  "citations": {
+    "currency": {
+      "field_citation": {
+        "source_text": "Currency",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "\"field_type\": \"Currency\", \"description\": \"Receipt currency and exchange rate\"",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "CHF",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "B2P\tCHF 120.00",
+        "match_type": "exact"
+      }
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "Expense amount",
+        "confidence": 0.8,
+        "source_location": "requirements",
+        "context": "\"field_type\": \"Amount\", \"description\": \"Expense amount\"",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "CHF 120.00",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "B2P\tCHF 120.00",
+        "match_type": "exact"
+      }
+    },
+    "validity_period": {
+      "field_citation": {
+        "source_text": "Valid",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Valid: 2022 - 2023",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "2022 - 2023",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Valid: 2022 - 2023",
+        "match_type": "exact"
+      }
+    },
+    "holder_name": {
+      "field_citation": {
+        "source_text": "Swiss Half Fare Card",
+        "confidence": 0.7,
+        "source_location": "markdown",
+        "context": "Swiss Half Fare Card\n| GONUGUNTLA HAREESH KUMAR",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "GONUGUNTLA HAREESH KUMAR",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Swiss Half Fare Card\n| GONUGUNTLA HAREESH KUMAR",
+        "match_type": "exact"
+      }
+    },
+    "birth_date": {
+      "field_citation": {
+        "source_text": "Valid",
+        "confidence": 0.7,
+        "source_location": "markdown",
+        "context": "Valid: 2022 - 2023 | 11.06.1995",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "11.06.1995",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Valid: 2022 - 2023 | 11.06.1995",
+        "match_type": "fuzzy"
+      }
+    },
+    "discount": {
+      "field_citation": {
+        "source_text": "Up to 50% discount",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Up to 50% discount on 1st and 2nd class tickets within one month.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Up to 50% discount on 1st and 2nd class tickets",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Up to 50% discount on 1st and 2nd class tickets within one month.",
+        "match_type": "exact"
+      }
+    },
+    "order_number": {
+      "field_citation": {
+        "source_text": "Order no.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "(1/2-ABO)\nOrder no.: 25302067899",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "25302067899",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "(1/2-ABO)\nOrder no.: 25302067899",
+        "match_type": "exact"
+      }
+    },
+    "article_number": {
+      "field_citation": {
+        "source_text": "Article no.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Article no.: 11528\nincl. 7.7% VAT/SBB",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "11528",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Article no.: 11528\nincl. 7.7% VAT/SBB",
+        "match_type": "exact"
+      }
+    },
+    "vat_rate": {
+      "field_citation": {
+        "source_text": "incl. 7.7% VAT",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Article no.: 11528\nincl. 7.7% VAT/SBB",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "7.7",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "incl. 7.7% VAT/SBB",
+        "match_type": "fuzzy"
+      }
+    },
+    "ticket_id": {
+      "field_citation": {
+        "source_text": "Ticket-ID",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| ! | Ticket-ID 329584805708 |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "329584805708",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "| ! | Ticket-ID 329584805708 |",
+        "match_type": "exact"
+      }
+    },
+    "reference_number": {
+      "field_citation": {
+        "source_text": "Reference no.",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Reference no.: 67676084D / 13121548 19099",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "67676084D / 13121548 19099",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Reference no.: 67676084D / 13121548 19099",
+        "match_type": "exact"
+      }
+    },
+    "website": {
+      "field_citation": {
+        "source_text": "www.MySwitzerland.com/swisshalffarecard",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "See conditions on www.MySwitzerland.com/swisshalffarecard.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "www.MySwitzerland.com/swisshalffarecard",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "See conditions on www.MySwitzerland.com/swisshalffarecard.",
+        "match_type": "exact"
+      }
+    },
+    "tariff_note": {
+      "field_citation": {
+        "source_text": "The current tariff",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "The current tariff of Swiss transport companies, in particular the common ancillary tariff regulations for direct service and regional transport networks (TGDG) as well as the tariffs of the regional transport and fare networks, apply to the use of E-Tickets.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "The current tariff of Swiss transport companies, in particular the common ancillary tariff regulations for direct service and regional transport networks (TGDG) as well as the tariffs of the regional transport and fare networks, apply to the use of E-Tickets.",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "The current tariff of Swiss transport companies, in particular the common ancillary tariff regulations for direct service and regional transport networks (TGDG) as well as the tariffs of the regional transport and fare networks, apply to the use of E-Tickets.",
+        "match_type": "exact"
+      }
+    },
+    "refund_note": {
+      "field_citation": {
+        "source_text": "For refunds, TGDG or the conditions",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "For refunds, TGDG or the conditions of the relevant transport company or operator apply. Refunds of e-tickets in the context of international journeys are made in according with international terms and conditions.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "For refunds, TGDG or the conditions of the relevant transport company or operator apply. Refunds of e-tickets in the context of international journeys are made in accordance with international terms and conditions.",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "For refunds, TGDG or the conditions of the relevant transport company or operator apply. Refunds of e-tickets in the context of international journeys are made in according with international terms and conditions.",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 14,
+    "fields_with_field_citations": 13,
+    "fields_with_value_citations": 13,
+    "average_confidence": 0.92
+  }
+}

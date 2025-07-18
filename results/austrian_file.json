@@ -1,6 +1,6 @@
 {
   "source_file": "austrian_file.md",
-  "processing_timestamp": "2025-07-15T16:14:49.152256",
+  "processing_timestamp": "2025-07-16T22:45:00.674184",
   "dataset_metadata": {
     "filepath": "expense_files/austrian_file.png",
     "filename ": "austrian_file.png",
@@ -9,17 +9,34 @@
     "dataset_file": "austrian_file.json"
   },
   "classification_result": {
-    "is_expense": true,
-    "expense_type": "flights",
+    "is_expense": false,
+    "expense_type": null,
     "language": "German",
     "language_confidence": 95,
-    "document_location": "Austria",
+    "document_location": "Slovakia",
     "expected_location": "Austria",
-    "location_match": true,
-    "error_type": null,
-    "error_message": null,
-    "classification_confidence": 98,
-    "reasoning": "The document contains travel-related expense information including a receipt/invoice indicator, flight details, booking code, passenger name, billing address in Slovakia, flight dates, and directions to retain the receipt for a flight. It matches the 'flights' expense category as it details airline travel. Language elements indicate German as primary, with high confidence due to format and vocabulary consistent with a German legal document. Document location is Austria as indicated by the presence of Austrian Airlines and confirmation with the expected location."
+    "location_match": false,
+    "error_type": "File location is not same as project's location",
+    "error_message": "The location derived from the billing address in the document is Slovakia, which does not match the expected location of Austria.",
+    "classification_confidence": 75,
+    "reasoning": "The document is primarily a booking confirmation with flight details and lacks critical expense evidence since payment information is on the next page.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "consumerRecipient",
+        "supplier",
+        "transactionDate",
+        "invoiceReceiptNumber"
+      ],
+      "fields_missing": [
+        "icpRequirements",
+        "transactionAmount",
+        "taxInformation",
+        "paymentMethod",
+        "itemDescriptionLineItems"
+      ],
+      "total_fields_found": 4,
+      "expense_identification_reasoning": "The document includes consumerRecipient, supplier, transactionDate, and invoiceReceiptNumber fields but lacks transactionAmount, paymentMethod, and taxInformation. Additionally, item descriptions are referred to as flight data. Since only 4 fields are found and payment details are on the next page, it does not qualify as an expense document."
+    }
   },
   "extraction_result": {
     "supplier_name": "Austrian Airlines AG",
@@ -27,21 +44,11 @@
     "vat_number": "ATU15447707",
     "currency": null,
     "amount": null,
-    "receipt_type": "Invoice",
-    "receipt_quality": null,
-    "personal_information": null,
-    "business_trip_reporting": null,
-    "travel_template": null,
-    "manager_approval": null,
-    "route_map": null,
-    "kilometer_record": null,
-    "car_details": null,
-    "parking_documentation": null,
-    "transaction_reference": "213000508057",
+    "receipt_type": "Passenger Receipt / Invoice / Rechnung",
     "passenger_name": "FORISEK / MICHAL DR MR",
     "booking_code": "6GHMCV",
     "ticket_number": "257-2133783831",
-    "billing_address": "Lubovnianska 14, 85107 Bratislava, Slovakia",
+    "billing_address": "Michal Forisek, Lubovnianska 14, 85107 Bratislava, Slovakia",
     "flight_data": [
       {
         "flight_number": "OS561",
@@ -51,8 +58,7 @@
         "departure_time": "07:20",
         "arrival_time": "08:45",
         "class": "Y",
-        "baggage": "1 PC",
-        "operated_by": "TYROLEAN AIRWAYS"
+        "baggage": "1 PC"
       },
       {
         "flight_number": "OS568",
@@ -62,10 +68,11 @@
         "departure_time": "07:45",
         "arrival_time": "09:10",
         "class": "Y",
-        "baggage": "1 PC",
-        "operated_by": "TYROLEAN AIRWAYS"
+        "baggage": "1 PC"
       }
-    ]
+    ],
+    "operated_by": "TYROLEAN AIRWAYS",
+    "transaction_reference": "213000508057"
   },
   "compliance_result": {
     "validation_result": {
@@ -74,52 +81,52 @@
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "Currency",
-          "description": "The currency detail is missing which is a mandatory requirement for all receipts. Exchange rate details must also be clearly indicated.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
-          "knowledge_base_reference": "Receipt currency must be the same currency with clear exchange rate specified."
+          "field": "supplier_name",
+          "description": "The supplier name 'Austrian Airlines AG' does not match the mandatory 'Global People IT-Services GmbH' as required by the company's compliance standards.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure the correct ICP name is used on compliant receipts.",
+          "knowledge_base_reference": "Must be Global People IT-Services GmbH as per Austria Expense Reimbursement Database Tables."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "Amount",
-          "description": "The amount is missing on the receipt which is a mandatory field for compliance.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
-          "knowledge_base_reference": "Expense amount must be clearly stated on receipt."
+          "field": "supplier_address",
+          "description": "The supplier address 'Office Park 2, A-1300 Vienna-Airport' does not match the needed 'K\u00e4rntner Ring 12, A-1010 Vienna, Austria'.",
+          "recommendation": "It is recommended to update the supplier address to match the ICP compliant format.",
+          "knowledge_base_reference": "Address of the supplier on invoice must be 'K\u00e4rntner Ring 12, A-1010 Vienna, Austria'."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "Supplier Address",
-          "description": "The supplier address is incorrect; does not match the required address format for Global People: K\u00e4rntner Ring 12, A-1010 Vienna, Austria.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
-          "knowledge_base_reference": "Supplier Address must be K\u00e4rntner Ring 12, A-1010 Vienna, Austria."
-        },
-        {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "VAT Number",
-          "description": "The VAT number does not match the mandatory requirement for the company Global People IT-Services GmbH.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
+          "field": "vat_number",
+          "description": "The VAT number 'ATU15447707' provided does not comply with the required 'ATU77112189'.",
+          "recommendation": "Verify the VAT number with the supplier to ensure compliance to Global People IT-Services GmbH's standard.",
           "knowledge_base_reference": "VAT identification number must be ATU77112189."
         },
         {
-          "issue_type": "Standards & Compliance | Follow-up Action Identified",
-          "field": "Business Trip Reporting / Travel Template",
-          "description": "The submission requires the Travel Expense Report Template Austria EUR.xlsx specific to travel receipts.",
-          "recommendation": "Specify exact documentation requirements and procedures from knowledge base.",
-          "knowledge_base_reference": "Submit separate report for each trip using specified template."
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "currency",
+          "description": "Missing mandatory currency field. Must include receipt currency with a clear exchange rate where applicable.",
+          "recommendation": "Ensure that the receipt specifies the currency used for the transaction.",
+          "knowledge_base_reference": "Receipt currency must be listed and align with Austria's receipt requirements."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "amount",
+          "description": "Missing mandatory amount field. The expense amount must be clearly stated on the receipt.",
+          "recommendation": "Add the transaction amount in the required field on the receipt.",
+          "knowledge_base_reference": "Expense amount must be clearly stated on receipt as per Austria compliance rules."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "Receipt is not compliant due to missing currency and amount fields, incorrect supplier address and VAT number, and lacking required travel documentation."
+      "compliance_summary": "There are several compliance issues with the extracted receipt data for Austria under the Global People ICP requirements. Most notably, issues with supplier information, VAT number, and missing currency and amount fields. Addressing these compliance concerns is critical to ensure adherence with corporate expense reimbursement policies."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
       "country": "Austria",
       "icp": "Global People",
-      "receipt_type": "flights",
+      "receipt_type": "Travel",
       "issues_count": 5,
       "has_reasoning": true
     }
   },
   "processing_status": "completed",
-  "uqlm_validation_available": true
+  "uqlm_validation_available": false
 }

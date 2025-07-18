@@ -1,0 +1,234 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Supplier Name",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "FieldType: Supplier Name",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "THE SUSHI CLUB",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "THE SUSHI CLUB\nMohrenstr.42\n10117 Berlin",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Supplier Address",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "FieldType: Supplier Address",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Mohrenstr.42, 10117 Berlin",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "THE SUSHI CLUB\nMohrenstr.42\n10117 Berlin",
+        "match_type": "exact"
+      }
+    },
+    "vat_number": {
+      "field_citation": {
+        "source_text": "VAT Number",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "FieldType: VAT Number",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": null,
+        "confidence": 0.0,
+        "source_location": "not found",
+        "context": "",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Currency",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "FieldType: Currency",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€",
+        "confidence": 0.85,
+        "source_location": "markdown",
+        "context": "1 Miso Soup                      € 3,90",
+        "match_type": "fuzzy"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "Total",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "9 Total                          € 64,40",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€ 64,40",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "9 Total                          € 64,40",
+        "match_type": "exact"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "Date",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Date of Issue",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Dienstag  5-2-2019",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Dienstag  5-2-2019 23:10:54",
+        "match_type": "fuzzy"
+      }
+    },
+    "contact_phone": {
+      "field_citation": {
+        "source_text": "Contact Phone",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Phone and internet expenses",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "+49 30 23 916 036",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "+49 30 23 916 036",
+        "match_type": "exact"
+      }
+    },
+    "contact_email": {
+      "field_citation": {
+        "source_text": "Contact Email",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Mobile phone usage",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "info@thesushiclub.de",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "info@thesushiclub.de",
+        "match_type": "exact"
+      }
+    },
+    "contact_website": {
+      "field_citation": {
+        "source_text": "Website",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Website expenses",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "www.TheSushiClub.de",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "www.TheSushiClub.de",
+        "match_type": "exact"
+      }
+    },
+    "transaction_time": {
+      "field_citation": {
+        "source_text": "Time",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Transaction time",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "23:10:54",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Dienstag  5-2-2019 23:10:54",
+        "match_type": "exact"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "Receipt Type",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "** Rechnung **",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Rechnung",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "** Rechnung **",
+        "match_type": "exact"
+      }
+    },
+    "table_number": {
+      "field_citation": {
+        "source_text": "Table Number",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Tisch # 24",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "24",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Tisch # 24",
+        "match_type": "exact"
+      }
+    },
+    "transaction_reference": {
+      "field_citation": {
+        "source_text": "Transaction Reference",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Transaction reference number",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "L0001 FRÜH",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "L0001 FRÜH",
+        "match_type": "exact"
+      }
+    },
+    "special_notes": {
+      "field_citation": {
+        "source_text": "Special Notes",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Special notes or comments",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "TIP IS NOT INCLUDED",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "TIP IS NOT INCLUDED",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 11,
+    "fields_with_field_citations": 11,
+    "fields_with_value_citations": 11,
+    "average_confidence": 0.92
+  }
+}

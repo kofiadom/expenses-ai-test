@@ -1,0 +1,311 @@
+{
+  "source_file": "netta_germany_3.md",
+  "processing_timestamp": "2025-07-16T23:09:33.721307",
+  "dataset_metadata": {
+    "filepath": "expense_files/netta_germany_3.png",
+    "filename": "netta_germany_3.png",
+    "country": "Germany",
+    "icp": "Global People",
+    "dataset_file": "netta_germany_3.json"
+  },
+  "classification_result": {
+    "is_expense": false,
+    "expense_type": null,
+    "language": "German",
+    "language_confidence": 98,
+    "document_location": "Germany",
+    "expected_location": "Germany",
+    "location_match": true,
+    "error_type": "File identified not as an expense",
+    "error_message": "Document is a purchase confirmation without evidence of payment completed.",
+    "classification_confidence": 90,
+    "reasoning": "The document is identified as a purchase confirmation with no proof of payment completed, thus not qualifying as an expense document.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "consumerRecipient",
+        "itemDescriptionLineItems",
+        "transactionAmount",
+        "taxInformation"
+      ],
+      "fields_missing": [
+        "transactionDate",
+        "invoiceReceiptNumber",
+        "paymentMethod"
+      ],
+      "total_fields_found": 5,
+      "expense_identification_reasoning": "While the document contains fields such as supplier, consumer recipient, and item description, it lacks a transaction date, invoice/receipt number, and payment method, indicating it is a purchase confirmation rather than an expense proof."
+    }
+  },
+  "extraction_result": {
+    "supplier_name": "SCM PC-Card GmbH",
+    "supplier_address": null,
+    "vat_number": null,
+    "currency": "EUR",
+    "total_amount": 34.51,
+    "date_of_issue": "2019-08-09",
+    "line_items": [
+      {
+        "description": "SCR uTrust 2700 F Smart Card Leser",
+        "quantity": 1,
+        "unit_price": 29.0,
+        "total_price": 34.51,
+        "condition": "Neu",
+        "sold_by": "SCM PC-Card GmbH"
+      }
+    ],
+    "order_number": "304-3645210-0482704",
+    "delivery_date": "2019-08-10",
+    "shipping_method": "prime Premiumversand",
+    "shipping_address": "Anda Pfleger, Budapester Str. 21, M\u00fcnchen, 81669, Deutschland",
+    "shipping_option": "Artikel versenden, sobald sie verf\u00fcgbar sind",
+    "subtotal": 29.0,
+    "packaging_and_shipping": 0.0,
+    "subtotal_without_vat": 29.0,
+    "vat": 5.51,
+    "end_amount_incl_vat": 34.51,
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "Verkauft von:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Verkauft von: SCM PC-Card GmbH",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "SCM PC-Card GmbH",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Verkauft von: SCM PC-Card GmbH",
+            "match_type": "exact"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "Endbetrag inkl. USt.:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Endbetrag inkl. USt.: EUR 34,51",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "EUR 34,51",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Endbetrag inkl. USt.: EUR 34,51",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "EUR",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Zwischensumme: EUR 29,00",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "EUR",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Endbetrag inkl. USt.: EUR 34,51",
+            "match_type": "contextual"
+          }
+        },
+        "date_of_issue": {
+          "field_citation": {
+            "source_text": "Aufgegeben am",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Aufgegeben am 9. August 2019",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "9. August 2019",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Aufgegeben am 9. August 2019",
+            "match_type": "fuzzy"
+          }
+        },
+        "order_number": {
+          "field_citation": {
+            "source_text": "Bestellnummer",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Bestellnummer #304-3645210-0482704",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "304-3645210-0482704",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Bestellnummer #304-3645210-0482704",
+            "match_type": "exact"
+          }
+        },
+        "delivery_date": {
+          "field_citation": {
+            "source_text": "Zustellung:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Zustellung:<br/>Samstag, 10 August",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "10 August",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Zustellung:<br/>Samstag, 10 August",
+            "match_type": "fuzzy"
+          }
+        },
+        "shipping_method": {
+          "field_citation": {
+            "source_text": "Versandart:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Versandart:<br/>prime Premiumversand",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "prime Premiumversand",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Versandart:<br/>prime Premiumversand",
+            "match_type": "exact"
+          }
+        },
+        "shipping_address": {
+          "field_citation": {
+            "source_text": "Die Bestellung geht an:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Die Bestellung geht an:<br/>Anda Pfleger<br/>Budapester Str. 21<br/>M\u00fcnchen, 81669<br/>Deutschland",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Anda Pfleger, Budapester Str. 21, M\u00fcnchen, 81669, Deutschland",
+            "confidence": 0.95,
+            "source_location": "markdown",
+            "context": "Anda Pfleger<br/>Budapester Str. 21<br/>M\u00fcnchen, 81669<br/>Deutschland",
+            "match_type": "fuzzy"
+          }
+        },
+        "shipping_option": {
+          "field_citation": {
+            "source_text": "Gew\u00e4hlte Versandoption:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Gew\u00e4hlte Versandoption:<br/>Artikel versenden, sobald sie verf\u00fcgbar sind.",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Artikel versenden, sobald sie verf\u00fcgbar sind",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Gew\u00e4hlte Versandoption:<br/>Artikel versenden, sobald sie verf\u00fcgbar sind.",
+            "match_type": "exact"
+          }
+        },
+        "subtotal": {
+          "field_citation": {
+            "source_text": "Zwischensumme:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Zwischensumme: EUR 29,00",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "EUR 29,00",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Zwischensumme: EUR 29,00",
+            "match_type": "exact"
+          }
+        },
+        "vat": {
+          "field_citation": {
+            "source_text": "Umsatzsteuer:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Umsatzsteuer: EUR 5,51",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "EUR 5,51",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Umsatzsteuer: EUR 5,51",
+            "match_type": "exact"
+          }
+        },
+        "end_amount_incl_vat": {
+          "field_citation": {
+            "source_text": "Endbetrag inkl. USt.:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Endbetrag inkl. USt.: EUR 34,51",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "EUR 34,51",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Endbetrag inkl. USt.: EUR 34,51",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 13,
+        "fields_with_field_citations": 11,
+        "fields_with_value_citations": 11,
+        "average_confidence": 0.9115384615384615
+      }
+    }
+  },
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 3,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_name",
+          "description": "The supplier name must be 'Global People DE GmbH' as per ICP requirements for 'Global People' in Germany.",
+          "recommendation": "It is recommended to address this issue with the supplier to ensure the correct supplier name 'Global People DE GmbH' appears on the receipt.",
+          "knowledge_base_reference": "Must be Global People DE GmbH"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "supplier_address",
+          "description": "The supplier address 'Taunusanlage 8, 60329 Frankfurt, Germany' is mandatory and missing.",
+          "recommendation": "Ensure the supplier address 'Taunusanlage 8, 60329 Frankfurt, Germany' is included on the receipt.",
+          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "vat_number",
+          "description": "Missing mandatory VAT number 'DE356366640' for the supplier.",
+          "recommendation": "Request the supplier to include the mandatory VAT number 'DE356366640' on the receipt.",
+          "knowledge_base_reference": "DE356366640"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The receipt contains critical compliance violations due to missing supplier name, address, and VAT number as per 'Global People' ICP requirements for Germany. These need prompt correction to meet compliance standards."
+    },
+    "technical_details": {
+      "content_type": "ReceiptValidationResult",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "All",
+      "issues_count": 3,
+      "has_reasoning": true
+    }
+  },
+  "processing_status": "completed",
+  "uqlm_validation_available": false
+}

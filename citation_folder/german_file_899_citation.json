@@ -1,0 +1,250 @@
+{
+  "citations": {
+    "currency": {
+      "field_citation": {
+        "source_text": "Receipt currency",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Currency description",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "3,60 EUR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| 0,4 Cola Light    | 3,60 EUR |",
+        "match_type": "fuzzy"
+      }
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "Expense amount",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Description: Expense amount, Mandatory: Yes",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Saldo 9,50 EUR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Saldo                9,50 EUR",
+        "match_type": "exact"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "Type of supporting document",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Description: Type of supporting document, Mandatory: Yes",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "# Rechnung",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "# Rechnung",
+        "match_type": "exact"
+      }
+    },
+    "invoice_date": {
+      "field_citation": {
+        "source_text": "Date of invoice",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Description: Date of invoice, Mandatory: Yes",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "13:45 20.10.2014",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "13:45 20.10.2014 Bediener 3",
+        "match_type": "fuzzy"
+      }
+    },
+    "net_amount": {
+      "field_citation": {
+        "source_text": "Amount before tax",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Description: Net Amount",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Nettoumsatz 7,98 EUR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Nettoumsatz          7,98 EUR",
+        "match_type": "exact"
+      }
+    },
+    "tax_rate": {
+      "field_citation": {
+        "source_text": "Applicable tax rate",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Description: Tax Rate",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "MWST 19%",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "MWST 19%             1,52 EUR",
+        "match_type": "fuzzy"
+      }
+    },
+    "vat_amount": {
+      "field_citation": {
+        "source_text": "VAT amount",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Description: VAT Amount",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "MWST 19%             1,52 EUR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "MWST 19%             1,52 EUR",
+        "match_type": "exact"
+      }
+    },
+    "supplier_tax_id": {
+      "field_citation": {
+        "source_text": "Tax ID of supplier",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Description: Supplier Tax ID",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "St.Nr.:34/476/00588",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "St.Nr.:34/476/00588",
+        "match_type": "exact"
+      }
+    },
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Supplier Name:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Header with supplier information",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "# Pizzeria Pisa",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "# Pizzeria Pisa",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Supplier Address:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Following supplier name",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Cora-Berliner Str.2, 10117 Berlin",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Cora-Berliner Str.2\n10117 Berlin",
+        "match_type": "fuzzy"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "Total:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Sum of all items",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Saldo 9,50 EUR",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Saldo                9,50 EUR",
+        "match_type": "exact"
+      }
+    },
+    "transaction_time": {
+      "field_citation": {
+        "source_text": "Transaction Time:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Time of transaction",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "13:45",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "13:45 20.10.2014 Bediener 3",
+        "match_type": "exact"
+      }
+    },
+    "location": {
+      "field_citation": {
+        "source_text": "Location:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Specific location on receipt",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Tisch #120",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Tisch #120",
+        "match_type": "exact"
+      }
+    },
+    "special_notes": {
+      "field_citation": {
+        "source_text": "Special Notes:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Any special notes on receipt",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Tip is not included",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Tip is not included",
+        "match_type": "exact"
+      }
+    },
+    "transaction_reference": {
+      "field_citation": {
+        "source_text": "Transaction Reference:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Reference information",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Bediener 3",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Es bediente Sie Bediener 3.",
+        "match_type": "fuzzy"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 15,
+    "fields_with_field_citations": 15,
+    "fields_with_value_citations": 15,
+    "average_confidence": 0.9
+  }
+}

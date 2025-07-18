@@ -1,0 +1,282 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Supplier Name",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "field_type definition in extraction requirements",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Austrian Gas Grid Management AG",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Austrian Gas Grid Management AG",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Receipt currency",
+        "confidence": 0.8,
+        "source_location": "requirements",
+        "context": "field_type definition in extraction requirements",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "€ 0.951, € 7.28, € 31.05, € 3.75, €34.80",
+        "match_type": "contextual"
+      }
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "Expense amount",
+        "confidence": 0.8,
+        "source_location": "requirements",
+        "context": "field_type definition in extraction requirements",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€34.80",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Total due (includes GST) = €34.80",
+        "match_type": "exact"
+      }
+    },
+    "total_due": {
+      "field_citation": {
+        "source_text": "Total due",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| Total due | € 34.80 |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€ 34.80",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| Total due | € 34.80 |",
+        "match_type": "exact"
+      }
+    },
+    "total_gst": {
+      "field_citation": {
+        "source_text": "Total GST",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Total GST + € 3.75",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€ 3.75",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Total GST + € 3.75",
+        "match_type": "exact"
+      }
+    },
+    "new_charges_and_credits": {
+      "field_citation": {
+        "source_text": "New charges and credits",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "## New charges and credits.",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€ 31.05",
+        "confidence": 0.7,
+        "source_location": "markdown",
+        "context": "Total new charges and credits € 31.05",
+        "match_type": "exact"
+      }
+    },
+    "due_date": {
+      "field_citation": {
+        "source_text": "Due date",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| Due date | 26.10.2022 |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "26.10.2022",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| Due date | 26.10.2022 |",
+        "match_type": "fuzzy"
+      }
+    },
+    "contact_phone": {
+      "field_citation": {
+        "source_text": "Phone:",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Phone: + 43 (1) 27 560",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "+ 43 (1) 27 560",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Need an interpreter? Call + 43 (1) 27 560",
+        "match_type": "exact"
+      }
+    },
+    "contact_website": {
+      "field_citation": {
+        "source_text": "Online:",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Online: www.aggm.at",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "www.aggm.at",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Payment assistance. To find out more, visit www.aggm.at/en",
+        "match_type": "exact"
+      }
+    },
+    "biller_code": {
+      "field_citation": {
+        "source_text": "Biller Code:",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Biller Code: 3207",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "3207",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Biller Code: 3207",
+        "match_type": "exact"
+      }
+    },
+    "billpay_code": {
+      "field_citation": {
+        "source_text": "Billpay Code:",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Billpay Code: 3207",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "3207",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Billpay Code: 3207",
+        "match_type": "exact"
+      }
+    },
+    "direct_debit": {
+      "field_citation": {
+        "source_text": "Direct Debit",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Direct Debit™ Sign up to Direct Debit at www.aggm.at",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Sign up to Direct Debit",
+        "confidence": 0.7,
+        "source_location": "markdown",
+        "context": "Direct Debit™ Sign up to Direct Debit at www.aggm.at",
+        "match_type": "contextual"
+      }
+    },
+    "payment_processing_fee": {
+      "field_citation": {
+        "source_text": "Payment processing fee",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "Payment processing fee € 0.00",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "€ 0.00",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Payment processing fee € 0.00",
+        "match_type": "exact"
+      }
+    },
+    "payment_method_fee_note": {
+      "field_citation": {
+        "source_text": "fee may apply",
+        "confidence": 0.7,
+        "source_location": "markdown",
+        "context": "A 0.6% (GST incl.) fee may apply",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "A 0.6% (GST incl.) fee may apply if we incur a fee",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "A 0.6% (GST incl.) fee may apply if we incur a fee due to your payment method",
+        "match_type": "exact"
+      }
+    },
+    "nmi": {
+      "field_citation": {
+        "source_text": "NMI",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "NMI: 3175004968364728",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "3175004968364728",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "NMI: 3175004968364728",
+        "match_type": "exact"
+      }
+    },
+    "meter_number": {
+      "field_citation": {
+        "source_text": "Meter no.",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "| Meter no. | Read date | Read type |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "271058",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| 271058    | 12 Oct 22 | Actual    |",
+        "match_type": "exact"
+      }
+    },
+    "read_date": {
+      "field_citation": {
+        "source_text": "Read date",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| Read date | Read type |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "12 Oct 22",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| 271058    | 12 Oct 22 | Actual |",
+        "match_type": "fuzzy"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 22,
+    "fields_with_field_citations": 17,
+    "fields_with_value_citations": 17,
+    "average_confidence": 0.844
+  }
+}

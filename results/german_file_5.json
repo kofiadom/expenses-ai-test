@@ -1,6 +1,6 @@
 {
   "source_file": "german_file_5.md",
-  "processing_timestamp": "2025-07-15T16:26:19.259953",
+  "processing_timestamp": "2025-07-16T22:50:33.823767",
   "dataset_metadata": {
     "filepath": "expense_files/german_file_5.png",
     "filename ": "german_file_5.png",
@@ -19,7 +19,24 @@
     "error_type": null,
     "error_message": null,
     "classification_confidence": 90,
-    "reasoning": "The document is a receipt ('Quittung') from a restaurant with itemized food and drink purchases, monetary values, VAT information, and date/time of transaction, which aligns with expense criteria for a meals category. Language identified as German based on vocabulary and formatting."
+    "reasoning": "The document is a receipt from a restaurant, indicating it is an expense document for meals. It shows evidence of payment with details of items purchased and total paid amount.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionAmount",
+        "transactionDate",
+        "taxInformation",
+        "itemDescriptionLineItems"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "icpRequirements",
+        "invoiceReceiptNumber",
+        "paymentMethod"
+      ],
+      "total_fields_found": 5,
+      "expense_identification_reasoning": "The document includes the supplier 'Trachtenheim', a transaction amount 'Summe EUR 59,70', a transaction date 'Datum 20.04.2023', tax information 'inkl. 19% MwSt.', and detailed item descriptions for the meals. These five fields indicate the document is an expense receipt."
+    }
   },
   "extraction_result": {
     "supplier_name": "Trachtenheim",
@@ -30,126 +47,346 @@
     "date_of_issue": "2023-04-20",
     "line_items": [
       {
-        "description": "Cola 0,4l",
+        "description": "2 Stk Cola 0,4l",
         "quantity": 2,
-        "total_price": 6.8,
-        "tax_rate": 19.0
+        "unit_price": 6.8,
+        "total_price": 6.8
       },
       {
-        "description": "Helles Bier 0,5l",
+        "description": "1 Stk Helles Bier 0,5l",
         "quantity": 1,
-        "total_price": 4.0,
-        "tax_rate": 19.0
+        "unit_price": 4.0,
+        "total_price": 4.0
       },
       {
-        "description": "Schnitzel Wiener Art",
+        "description": "1 Stk Schnitzel Wiener Art",
         "quantity": 1,
-        "total_price": 15.9,
-        "tax_rate": 7.0
+        "unit_price": 15.9,
+        "total_price": 15.9
       },
       {
-        "description": "Schw\u00e4b. Zwiebelrostbraten",
+        "description": "1 Stk Schw\u00e4b. Zwiebelrostbraten",
         "quantity": 1,
-        "total_price": 18.9,
-        "tax_rate": 7.0
+        "unit_price": 18.9,
+        "total_price": 18.9
       },
       {
-        "description": "Abgebratener Leberk\u00e4s",
+        "description": "1 Stk Abgebratener Leberk\u00e4s",
         "quantity": 1,
-        "total_price": 9.8,
-        "tax_rate": 7.0
+        "unit_price": 9.8,
+        "total_price": 9.8
       },
       {
-        "description": "Diverse K\u00fcche",
+        "description": "1 Stk Diverse K\u00fcche",
         "quantity": 1,
-        "total_price": 1.0,
-        "tax_rate": 7.0
+        "unit_price": 1.0,
+        "total_price": 1.0
       },
       {
-        "description": "Dunkles Bier 0,25l",
+        "description": "1 Stk Dunkles Bier 0,25l",
         "quantity": 1,
-        "total_price": 3.4,
-        "tax_rate": 19.0
+        "unit_price": 3.4,
+        "total_price": 3.4
       }
     ],
-    "contact_phone": "08331/3726",
-    "transaction_reference": "Beleg 50",
     "transaction_time": "21:05",
-    "table_number": "3",
+    "transaction_reference": "Beleg 50",
     "payment_method": "BAR",
-    "change_given": 0.0,
-    "tax_details": [
-      {
-        "rate": 19.0,
-        "amount": 2.27
+    "vat_a_inclusive_amount": 11.93,
+    "vat_a_amount": 2.27,
+    "vat_a_rate": 19.0,
+    "vat_b_inclusive_amount": 42.52,
+    "vat_b_amount": 2.98,
+    "vat_b_rate": 7.0,
+    "tse_tanr": "50",
+    "tse_sigz": "267",
+    "tse_start_time": "2023-04-20 19:58:30",
+    "tse_end_time": "2023-04-20 21:05:20",
+    "tse_serial_number": "3967:987084",
+    "tse_signature": "XsNuR3iWdj53CiXti75lJI5RzHcB14XVLmF5QbyuSbfXOG3tdCpmN1AEF1/fdrFPRIOfQ4gAYeOXOSBBm9dTagyXUjuxxDMkIcWoTtEtymFhg4Gt4hmHJMizrOTfhhhU",
+    "table_number": "3",
+    "contact_phone": "08331/3726",
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "Trachtenheim",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Trachtenheim\nR\u00f6merstr.2\n87700 Memmingen\nTel. 08331/3726",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Trachtenheim",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Trachtenheim\nR\u00f6merstr.2\n87700 Memmingen\nTel. 08331/3726",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "R\u00f6merstr.2, 87700 Memmingen",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Trachtenheim\nR\u00f6merstr.2\n87700 Memmingen\nTel. 08331/3726",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "R\u00f6merstr.2, 87700 Memmingen",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Trachtenheim\nR\u00f6merstr.2\n87700 Memmingen\nTel. 08331/3726",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "EUR",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Summe EUR                                59,70",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "EUR",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| 2 Stk Cola 0,4l                 | EUR | 6,80 A  |",
+            "match_type": "exact"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "Summe EUR",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Summe EUR                                59,70",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "59,70",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Summe EUR                                59,70",
+            "match_type": "exact"
+          }
+        },
+        "date_of_issue": {
+          "field_citation": {
+            "source_text": "Datum",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Datum    20.04.2023 21:05",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "20.04.2023",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Datum    20.04.2023 21:05",
+            "match_type": "fuzzy"
+          }
+        },
+        "transaction_time": {
+          "field_citation": {
+            "source_text": "Datum",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Datum    20.04.2023 21:05",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "21:05",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Datum    20.04.2023 21:05",
+            "match_type": "fuzzy"
+          }
+        },
+        "transaction_reference": {
+          "field_citation": {
+            "source_text": "Beleg",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Beleg    50",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Beleg 50",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Beleg    50",
+            "match_type": "exact"
+          }
+        },
+        "payment_method": {
+          "field_citation": {
+            "source_text": "Gegeben BAR",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Gegeben BAR                              59,70",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "BAR",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Gegeben BAR                              59,70",
+            "match_type": "exact"
+          }
+        },
+        "vat_a_inclusive_amount": {
+          "field_citation": {
+            "source_text": "inkl. 19% MwSt.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "A inkl. 19% MwSt. auf 11,93              2,27",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "11,93",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "A inkl. 19% MwSt. auf 11,93              2,27",
+            "match_type": "exact"
+          }
+        },
+        "vat_a_amount": {
+          "field_citation": {
+            "source_text": "A inkl. 19% MwSt.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "A inkl. 19% MwSt. auf 11,93              2,27",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "2,27",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "A inkl. 19% MwSt. auf 11,93              2,27",
+            "match_type": "exact"
+          }
+        },
+        "vat_a_rate": {
+          "field_citation": {
+            "source_text": "19% MwSt.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "A inkl. 19% MwSt. auf 11,93              2,27",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "19.0",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "A inkl. 19% MwSt. auf 11,93              2,27",
+            "match_type": "fuzzy"
+          }
+        },
+        "vat_b_inclusive_amount": {
+          "field_citation": {
+            "source_text": "inkl. 7% MwSt.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "B inkl. 7% MwSt. auf 42,52               2,98",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "42,52",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "B inkl. 7% MwSt. auf 42,52               2,98",
+            "match_type": "exact"
+          }
+        },
+        "vat_b_amount": {
+          "field_citation": {
+            "source_text": "B inkl. 7% MwSt.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "B inkl. 7% MwSt. auf 42,52               2,98",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "2,98",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "B inkl. 7% MwSt. auf 42,52               2,98",
+            "match_type": "exact"
+          }
+        },
+        "vat_b_rate": {
+          "field_citation": {
+            "source_text": "7% MwSt.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "B inkl. 7% MwSt. auf 42,52               2,98",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "7.0",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "B inkl. 7% MwSt. auf 42,52               2,98",
+            "match_type": "fuzzy"
+          }
+        }
       },
-      {
-        "rate": 7.0,
-        "amount": 2.98
+      "metadata": {
+        "total_fields_analyzed": 17,
+        "fields_with_field_citations": 12,
+        "fields_with_value_citations": 12,
+        "average_confidence": 0.88
       }
-    ],
-    "tse_details": {
-      "tanr": "50",
-      "sigz": "267",
-      "start_time": "19:58:30",
-      "end_time": "21:05:20",
-      "serial_number": "3967:987084",
-      "signature": "XsNuR3iWdj53CiXti75lJI5RzHcB14XVLmF5QbyuSbfXOG3tdCpmN1AEF1/fdrFPRIOfQ4gAYeOXOSBBm9dTagyXUjuxxDMkIcWoTtEtymFhg4Gt4hmHJMizrOTfhhhU"
-    },
-    "name": null,
-    "address": null,
-    "supplier": null,
-    "expense": null,
-    "route": null,
-    "car_details": null,
-    "purpose": null,
-    "odometer_reading": null,
-    "travel_date": null,
-    "a1_certificate": null,
-    "payment_receipt": null,
-    "manager_approval": null,
-    "personal_phone_proof": null,
-    "storage_period": null
+    }
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 3,
+      "issues_count": 4,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_name",
-          "description": "Supplier name does not match the mandatory requirement for Global People (should be 'Global People DE GmbH').",
-          "recommendation": "It is recommended to address this issue with the supplier or provider to correct the supplier name.",
-          "knowledge_base_reference": "Must be Global People DE GmbH"
+          "description": "The supplier name 'Trachtenheim' does not match the mandatory requirement 'Global People DE GmbH'.",
+          "recommendation": "Contact the supplier to reissue the receipt with the correct supplier name.",
+          "knowledge_base_reference": "Must be Global People DE GmbH for supplier name requirement."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_address",
-          "description": "Supplier address is incorrect according to the mandatory requirement for Global People (should be 'Taunusanlage 8, 60329 Frankfurt, Germany').",
-          "recommendation": "It is recommended to address this issue with the supplier or provider to correct the supplier address.",
-          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
+          "description": "The supplier address does not match the mandatory requirement 'Taunusanlage 8, 60329 Frankfurt, Germany'.",
+          "recommendation": "Request the supplier to update the receipt with the correct address.",
+          "knowledge_base_reference": "Supplier address must be 'Taunusanlage 8, 60329 Frankfurt, Germany'."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "vat_number",
-          "description": "Mandatory VAT Number is missing for Global People.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider to include the VAT Number 'DE356366640'.",
-          "knowledge_base_reference": "DE356366640"
+          "description": "Missing mandatory VAT identification number 'DE356366640'.",
+          "recommendation": "Ensure the receipt includes the mandatory VAT ID.",
+          "knowledge_base_reference": "VAT number is mandatory and must be 'DE356366640'."
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "expense_type",
+          "description": "Personal meal expenses are not tax exempt as per policy for expenses outside business travel.",
+          "recommendation": "Meal expenses are not tax exempt; they should be grossed-up accordingly.",
+          "knowledge_base_reference": "Not tax exempt (outside business travel) for personal meal expenses."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt contains compliance issues specifically related to incorrect supplier information and missing VAT number, which are mandatory fields for Global People."
+      "compliance_summary": "Receipt is non-compliant due to incorrect supplier details and missing VAT number. Meal expenses are not tax-exempt per guidelines and require gross-up."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
       "country": "Germany",
       "icp": "Global People",
       "receipt_type": "meals",
-      "issues_count": 3,
+      "issues_count": 4,
       "has_reasoning": true
     }
   },
   "processing_status": "completed",
-  "uqlm_validation_available": true
+  "uqlm_validation_available": false
 }

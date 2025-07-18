@@ -1,0 +1,186 @@
+{
+  "image_path": "expense_files\\netta_germany_2.png",
+  "document_type": "receipt",
+  "image_type_detection": {
+    "is_digital_screenshot": "True",
+    "confidence": 0.67,
+    "image_subtype": "mobile_app_screenshot",
+    "indicators": {
+      "low_color_variety": true,
+      "matches_common_resolution": false,
+      "has_regular_edges": "True",
+      "has_uniform_background": true,
+      "has_many_straight_lines": true,
+      "low_histogram_entropy": "False"
+    },
+    "metadata": {
+      "unique_colors": 47898,
+      "edge_density": 0.026,
+      "histogram_entropy": "6.83"
+    }
+  },
+  "timestamp": "2025-07-16T22:26:33.179729",
+  "processing_time_seconds": 2.54,
+  "overall_assessment": {
+    "score": 89.1,
+    "level": "Good",
+    "pass_fail": "True",
+    "issues_summary": [],
+    "recommendations": [
+      "\ud83d\udcf1 This is a mobile_app_screenshot - physical document checks have been adjusted.",
+      "\ud83d\udcc8 Consider rescanning at 300 DPI or higher for better OCR accuracy.",
+      "\ud83d\udcf8 Motion blur detected (vertical). Use a tripod or scanner for better results.",
+      "\u2705 Lighting and exposure are optimal.",
+      "\u2705 Digital screenshot - no physical boundaries to check."
+    ]
+  },
+  "detailed_results": {
+    "resolution": {
+      "dimensions": {
+        "width": 1000,
+        "height": 1578,
+        "megapixels": 1.58
+      },
+      "dpi": {
+        "horizontal": 320.0,
+        "vertical": 186.0,
+        "average": 253.0
+      },
+      "quality": {
+        "score": 80.0,
+        "level": "Digital Quality",
+        "meets_ocr_requirements": false
+      },
+      "aspect_ratio": {
+        "actual": 0.63,
+        "expected": 0.37,
+        "deviation_percent": 72.4
+      },
+      "recommendations": [
+        "\ud83d\udcc8 Consider rescanning at 300 DPI or higher for better OCR accuracy."
+      ]
+    },
+    "blur": {
+      "metrics": {
+        "laplacian_variance": 376.84,
+        "is_blurry": false,
+        "blur_score": 72.63,
+        "blur_level": "Sharp"
+      },
+      "motion_blur": {
+        "detected": "True",
+        "score": 4.6733320659062105,
+        "direction": "vertical"
+      },
+      "focus_distribution": {
+        "sharp_areas_percent": 35.3,
+        "uniform_sharpness": false
+      },
+      "recommendations": [
+        "\ud83d\udcf8 Motion blur detected (vertical). Use a tripod or scanner for better results."
+      ]
+    },
+    "glare": {
+      "exposure_metrics": {
+        "mean_brightness": 143.0,
+        "overexposed_percent": "0.17",
+        "is_overexposed": "False",
+        "contrast_ratio": 0.41
+      },
+      "glare_analysis": {
+        "glare_score": "99.7",
+        "glare_level": "None",
+        "num_glare_spots": 0,
+        "glare_coverage_percent": 0.0,
+        "glare_patterns": {
+          "type": "none",
+          "description": "No glare detected"
+        }
+      },
+      "affected_regions": [],
+      "recommendations": [
+        "\u2705 Lighting and exposure are optimal."
+      ]
+    },
+    "completeness": {
+      "boundary_detected": true,
+      "completeness_score": 100.0,
+      "completeness_level": "Digital Document",
+      "edge_analysis": {
+        "edge_coverage": 100.0,
+        "has_gaps": false,
+        "num_gaps": 0
+      },
+      "corner_analysis": {
+        "visible_corners": 4,
+        "missing_corners": [],
+        "is_rectangular": true
+      },
+      "issues": [],
+      "boundary_points": [],
+      "recommendations": [
+        "\u2705 Digital screenshot - no physical boundaries to check."
+      ]
+    },
+    "damage": {
+      "damage_score": 100.0,
+      "damage_level": "Digital (No Physical Damage)",
+      "damage_types": [],
+      "stain_analysis": {
+        "count": 0,
+        "coverage_percent": 0.0,
+        "regions": []
+      },
+      "tear_analysis": {
+        "count": 0,
+        "max_length": 0,
+        "regions": []
+      },
+      "fold_analysis": {
+        "count": 0,
+        "pattern": "none",
+        "lines": []
+      },
+      "recommendations": [
+        "\u2705 Digital image - no physical damage possible."
+      ]
+    }
+  },
+  "score_breakdown": {
+    "resolution": {
+      "score": 80.0,
+      "weight": 0.2,
+      "contribution": 16.0
+    },
+    "blur": {
+      "score": 72.63,
+      "weight": 0.25,
+      "contribution": 18.1575
+    },
+    "glare": {
+      "score": "99.7",
+      "weight": 0.2,
+      "contribution": "19.94"
+    },
+    "completeness": {
+      "score": 100.0,
+      "weight": 0.2,
+      "contribution": 20.0
+    },
+    "damage": {
+      "score": 100.0,
+      "weight": 0.15,
+      "contribution": 15.0
+    }
+  },
+  "assessment_method": "opencv",
+  "quality_passed": "True",
+  "quality_score": 89.1,
+  "quality_level": "Good",
+  "main_issues": [],
+  "top_recommendations": [
+    "\ud83d\udcf1 This is a mobile_app_screenshot - physical document checks have been adjusted.",
+    "\ud83d\udcc8 Consider rescanning at 300 DPI or higher for better OCR accuracy.",
+    "\ud83d\udcf8 Motion blur detected (vertical). Use a tripod or scanner for better results."
+  ]
+}

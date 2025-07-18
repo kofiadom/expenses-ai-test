@@ -1,6 +1,6 @@
 {
   "source_file": "german_file_6.md",
-  "processing_timestamp": "2025-07-15T16:28:37.930338",
+  "processing_timestamp": "2025-07-16T22:52:04.571985",
   "dataset_metadata": {
     "filepath": "expense_files/german_file_6.png",
     "filename ": "german_file_6.png",
@@ -18,8 +18,23 @@
     "location_match": true,
     "error_type": null,
     "error_message": null,
-    "classification_confidence": 98,
-    "reasoning": "The document is a restaurant bill with vendor information, itemized costs, and contains a payment method and tax details. It clearly fits the criteria for an expense related to meals. The language is German with high confidence, and the location matches the expected location of Germany."
+    "classification_confidence": 95,
+    "reasoning": "The document contains evidence of payment completion with detailed item descriptions and total amounts, consistent with a meal expense. It matches expected location and language criteria.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "consumerRecipient",
+        "transactionAmount",
+        "transactionDate",
+        "invoiceReceiptNumber",
+        "paymentMethod",
+        "itemDescriptionLineItems",
+        "taxInformation"
+      ],
+      "fields_missing": [],
+      "total_fields_found": 8,
+      "expense_identification_reasoning": "The document contains all eight schema fields: supplier (Hotel Restaurant Nordpol), consumerRecipient (inferred as customer dining), transactionAmount (BETRAG EUR: 52,10), transactionDate (Datum: 27.08.2019), invoiceReceiptNumber (Belegnummer: 34660), paymentMethod (Zahlungsart: BAR), itemDescriptionLineItems (meal items listed), and taxInformation (Betrag MwSt. 19,00%: 8,32). This exceeds the minimum requirement for expense identification."
+    }
   },
   "extraction_result": {
     "supplier_name": "Hotel Restaurant Nordpol",
@@ -57,65 +72,302 @@
     "transaction_time": "16:50",
     "receipt_number": "34660",
     "payment_method": "BAR",
-    "tax_rate": [
-      7.0,
-      19.0
-    ],
-    "tax_amount": {
-      "7.00": 0.0,
-      "19.00": 8.32
-    },
-    "net_amount": 43.78,
     "table_number": "43",
-    "server": "kellner1",
-    "contact_phone": "04362/2075"
+    "sales_tax_7_percent": 0.0,
+    "sales_tax_19_percent": 8.32,
+    "net_amount": 43.78,
+    "thank_you_note": "Vielen Dank f\u00fcr Ihren Besuch!",
+    "masked_service_person": "kellner1",
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "Hotel Restaurant Nordpol",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Hotel Restaurant Nordpol\nWerftstra\u00dfe 5\n23774 Heiligenhafen\nTe. 04362/2075",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Hotel Restaurant Nordpol",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Hotel Restaurant Nordpol\nWerftstra\u00dfe 5\n23774 Heiligenhafen\nTe. 04362/2075",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "Werftstra\u00dfe 5, 23774 Heiligenhafen",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Hotel Restaurant Nordpol\nWerftstra\u00dfe 5\n23774 Heiligenhafen\nTe. 04362/2075",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Werftstra\u00dfe 5, 23774 Heiligenhafen",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Hotel Restaurant Nordpol\nWerftstra\u00dfe 5\n23774 Heiligenhafen\nTe. 04362/2075",
+            "match_type": "exact"
+          }
+        },
+        "vat_number": {
+          "field_citation": {
+            "source_text": "USt-IdNr.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "USt-IdNr.: DE51Z770000150923\nSteuernummer: 25284507",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "DE51Z770000150923",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "USt-IdNr.: DE51Z770000150923\nSteuernummer: 25284507",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "BETRAG EUR",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Betrag MwSt. 19,00%: 8,32\nBETRAG EUR: 52,10\nZahlungsart: BAR",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "EUR",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Betrag MwSt. 19,00%: 8,32\nBETRAG EUR: 52,10\nZahlungsart: BAR",
+            "match_type": "contextual"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "BETRAG",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "Nettobetrag: 43,78\nBetrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32\nBETRAG EUR: 52,10",
+            "match_type": "fuzzy"
+          },
+          "value_citation": {
+            "source_text": "52,10",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Betrag MwSt. 19,00%: 8,32\nBETRAG EUR: 52,10\nZahlungsart: BAR",
+            "match_type": "exact"
+          }
+        },
+        "date_of_issue": {
+          "field_citation": {
+            "source_text": "Datum:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "27.08.2019",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660",
+            "match_type": "fuzzy"
+          }
+        },
+        "transaction_time": {
+          "field_citation": {
+            "source_text": "Uhrzeit:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "16:50",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660",
+            "match_type": "exact"
+          }
+        },
+        "receipt_number": {
+          "field_citation": {
+            "source_text": "Belegnummer:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "34660",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660",
+            "match_type": "exact"
+          }
+        },
+        "payment_method": {
+          "field_citation": {
+            "source_text": "Zahlungsart:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660\nZahlungsart: BAR",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "BAR",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Datum: 27.08.2019\nUhrzeit: 16:50\nBelegnummer: 34660\nZahlungsart: BAR",
+            "match_type": "exact"
+          }
+        },
+        "table_number": {
+          "field_citation": {
+            "source_text": "Tisch Nr.",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Rechnung f\u00fcr Tisch Nr. 43",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "43",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Rechnung f\u00fcr Tisch Nr. 43",
+            "match_type": "exact"
+          }
+        },
+        "sales_tax_7_percent": {
+          "field_citation": {
+            "source_text": "MwSt. 7,00%",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Betrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "0,00",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Betrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32",
+            "match_type": "exact"
+          }
+        },
+        "sales_tax_19_percent": {
+          "field_citation": {
+            "source_text": "MwSt. 19,00%",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Betrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "8,32",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Betrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32",
+            "match_type": "exact"
+          }
+        },
+        "net_amount": {
+          "field_citation": {
+            "source_text": "Nettobetrag:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Nettobetrag: 43,78\nBetrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "43,78",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Nettobetrag: 43,78\nBetrag MwSt. 7,00%: 0,00\nBetrag MwSt. 19,00%: 8,32",
+            "match_type": "exact"
+          }
+        },
+        "thank_you_note": {
+          "field_citation": {
+            "source_text": "Vielen Dank f\u00fcr Ihren Besuch!",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Betrag MwSt. 19,00%: 8,32\nBETRAG EUR: 52,10\nZahlungsart: BAR\n\nVielen Dank f\u00fcr Ihren Besuch!",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Vielen Dank f\u00fcr Ihren Besuch!",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "Betrag MwSt. 19,00%: 8,32\nBETRAG EUR: 52,10\nZahlungsart: BAR\n\nVielen Dank f\u00fcr Ihren Besuch!",
+            "match_type": "exact"
+          }
+        },
+        "masked_service_person": {
+          "field_citation": {
+            "source_text": "Es bediente Sie:",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "USt-IdNr.: DE51Z770000150923\nSteuernummer: 25284507\nEs bediente Sie: kellner1",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "kellner1",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "USt-IdNr.: DE51Z770000150923\nSteuernummer: 25284507\nEs bediente Sie: kellner1",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 15,
+        "fields_with_field_citations": 15,
+        "fields_with_value_citations": 15,
+        "average_confidence": 0.9
+      }
+    }
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 4,
+      "issues_count": 3,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_name",
-          "description": "The supplier name 'Hotel Restaurant Nordpol' does not match the mandatory requirement for Global People receipts, which should be 'Global People DE GmbH'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "description": "The supplier name must be 'Global People DE GmbH' as per the compliance requirements for 'Global People' ICP.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure the correct name 'Global People DE GmbH' is used.",
           "knowledge_base_reference": "Must be Global People DE GmbH"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "supplier_address",
-          "description": "The supplier address 'Werftstra\u00dfe 5, 23774 Heiligenhafen' does not match the mandatory requirement for Global People receipts, which should be 'Taunusanlage 8, 60329 Frankfurt, Germany'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "description": "The supplier address must be 'Taunusanlage 8, 60329 Frankfurt, Germany' as per the compliance requirements for 'Global People' ICP.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure the correct address 'Taunusanlage 8, 60329 Frankfurt, Germany' is used.",
           "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "vat_number",
-          "description": "The VAT number 'DE51Z770000150923' does not match the required VAT number 'DE356366640' for Global People.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
+          "description": "The VAT number must be 'DE356366640' as per the compliance requirements for 'Global People' ICP.",
+          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure the correct VAT number 'DE356366640' is used.",
           "knowledge_base_reference": "DE356366640"
-        },
-        {
-          "issue_type": "Standards & Compliance | Gross-up Identified",
-          "field": "total_amount",
-          "description": "The meal expense of 52.1 EUR is not tax exempt outside business travel according to Global People's policies.",
-          "recommendation": "This expense is not tax exempt and must be grossed up according to tax compliance guidelines.",
-          "knowledge_base_reference": "Not tax exempt (outside business travel)"
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt has key compliance violations, including incorrect supplier name, address, and VAT number. Additionally, the meal expenses are not tax exempt, leading to a gross-up requirement."
+      "compliance_summary": "The receipt has compliance issues with supplier name, supplier address, and VAT number. Meal expenses are not tax exempt according to the rules for 'Global People' ICP. Resolving these issues requires communication with the supplier or a reissuance of documentation with the correct details."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
       "country": "Germany",
       "icp": "Global People",
       "receipt_type": "meals",
-      "issues_count": 4,
+      "issues_count": 3,
       "has_reasoning": true
     }
   },
   "processing_status": "completed",
-  "uqlm_validation_available": true
+  "uqlm_validation_available": false
 }

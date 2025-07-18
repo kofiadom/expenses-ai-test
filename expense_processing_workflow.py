@@ -195,7 +195,7 @@ class ExpenseProcessingWorkflow(Workflow):
             logger.info("🕐 Starting document extraction timing")
 
             # Run document extraction
-            markdown_files = process_expense_files(api_key, input_folder)
+            markdown_files = await process_expense_files(api_key, input_folder)
 
             extraction_time = time.time() - start_time
             logger.info(f"⏱️ Document extraction completed in {extraction_time:.2f} seconds")
@@ -269,12 +269,10 @@ class ExpenseProcessingWorkflow(Workflow):
                     compliance_time = time.time() - compliance_start_time
                     logger.info(f"⏱️ Compliance analysis completed in {compliance_time:.2f} seconds")
 
-                    # Handle the new return format (compliance_result, validation_result)
-                    if isinstance(compliance_analysis_result, tuple):
-                        compliance_result, validation_result = compliance_analysis_result
-                    else:
-                        compliance_result = compliance_analysis_result
-                        validation_result = {}
+                    # Validation functionality moved to standalone_validation_runner.py
+                    # Compliance analysis now returns only the response
+                    compliance_result = compliance_analysis_result
+                    validation_result = {}
 
                     logger.info(f"Compliance analysis completed for {markdown_file.name}")
                 except Exception as e:
@@ -392,7 +390,8 @@ class ExpenseProcessingWorkflow(Workflow):
 
             logger.debug(f"Extraction result keys: {list(parsed_result.keys()) if isinstance(parsed_result, dict) else 'Not a dict'}")
             
-            # Step 2: Citation generation (if filename provided)
+            #Step 2: Citation generation (if filename provided)
+            citations = None
             if filename and isinstance(parsed_result, dict) and "error" not in parsed_result:
                 try:
                     citations = generate_citations(
@@ -401,14 +400,19 @@ class ExpenseProcessingWorkflow(Workflow):
                         markdown_content=markdown_content,
                         filename=filename
                     )
-                    
+
                     # Log citation statistics
                     citation_stats = get_citation_stats(citations)
                     logger.info(f"Citations for {filename}: {citation_stats.get('fields_with_field_citations', 0)}/{citation_stats.get('total_fields', 0)} field citations, {citation_stats.get('fields_with_value_citations', 0)}/{citation_stats.get('total_fields', 0)} value citations")
-                    
+
                 except Exception as e:
                     logger.error(f"Citation generation failed for {filename}: {e}")
-            
+                    citations = None
+
+            # Include citations in the result if available
+            if citations and isinstance(parsed_result, dict):
+                parsed_result["citations"] = citations
+
             return parsed_result
             
         except json.JSONDecodeError as e:
@@ -447,12 +451,9 @@ class ExpenseProcessingWorkflow(Workflow):
             compliance_agent_time = time.time() - start_time
             logger.debug(f"⏱️ Compliance agent completed in {compliance_agent_time:.2f} seconds")
 
-            # Handle the new return format (response, validation_results)
-            if isinstance(compliance_result, tuple):
-                result, validation_results = compliance_result
-            else:
-                result = compliance_result
-                validation_results = None
+            # Validation functionality moved to standalone_validation_runner.py
+            # Compliance analysis now returns only the response
+            result = compliance_result
 
             # Handle different response formats
             if hasattr(result, 'content'):
@@ -470,19 +471,19 @@ class ExpenseProcessingWorkflow(Workflow):
 
                 parsed_result = json.loads(content)
                 logger.debug(f"Compliance analysis result: {parsed_result}")
-                return parsed_result, validation_results
+                return parsed_result
             else:
                 # If result doesn't have content attribute, assume it's already parsed
                 parsed_result = result
                 logger.debug(f"Compliance analysis result (no content attr): {parsed_result}")
-                return parsed_result, validation_results
+                return parsed_result
         except json.JSONDecodeError as e:
             logger.error(f"JSON parsing error in compliance analysis: {str(e)}")
             logger.error(f"Raw content: {getattr(result, 'content', 'No content attribute') if 'result' in locals() else 'No result'}")
-            return {"error": f"Invalid JSON response from compliance analysis agent: {str(e)}"}, None
+            return {"error": f"Invalid JSON response from compliance analysis agent: {str(e)}"}
         except Exception as e:
             logger.error(f"Compliance analysis error: {str(e)}")
-            return {"error": str(e)}, None
+            return {"error": str(e)}
 
     def _save_single_result(self, result: Dict) -> None:
         """Save a single processing result immediately after processing."""

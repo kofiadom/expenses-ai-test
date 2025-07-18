@@ -1,0 +1,170 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "TORREFAZIONE BAR MALABAR DI TURETTA SERGIO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "# TORREFAZIONE\n# BAR MALABAR\nDI TURETTA SERGIO",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "TORREFAZIONE BAR MALABAR DI TURETTA SERGIO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "# TORREFAZIONE\n# BAR MALABAR\nDI TURETTA SERGIO",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "PIAZZA CARLO FELICE 49, TORINO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "PIAZZA CARLO FELICE 49 TORINO",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "PIAZZA CARLO FELICE 49 TORINO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "PIAZZA CARLO FELICE 49 TORINO",
+        "match_type": "exact"
+      }
+    },
+    "vat_number": {
+      "field_citation": {
+        "source_text": "PARTITA IVA",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "PARTITA IVA 03747960759",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "03747960759",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "PARTITA IVA 03747960759",
+        "match_type": "exact"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "EURO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| CAFFE'   | EURO |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "EURO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| CAFFE'   | EURO |",
+        "match_type": "exact"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "TOTALE",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| TOTALE   | 1,85 |",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "1,85",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "| TOTALE   | 1,85 |",
+        "match_type": "fuzzy"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "28-02-2006",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "28-02-2006 11-50         SCONTR   47",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "28-02-2006",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "28-02-2006 11-50         SCONTR   47",
+        "match_type": "exact"
+      }
+    },
+    "transaction_time": {
+      "field_citation": {
+        "source_text": "11-50",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "28-02-2006 11-50         SCONTR   47",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "11-50",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "28-02-2006 11-50         SCONTR   47",
+        "match_type": "exact"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "SCONTR",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "28-02-2006 11-50         SCONTR   47",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "SCONTR",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "28-02-2006 11-50         SCONTR   47",
+        "match_type": "exact"
+      }
+    },
+    "contact_phone": {
+      "field_citation": {
+        "source_text": "TELEFONO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "TELEFONO 011/530701",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "011/530701",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "TELEFONO 011/530701",
+        "match_type": "exact"
+      }
+    },
+    "transaction_reference": {
+      "field_citation": {
+        "source_text": "SCONTR",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "28-02-2006 11-50         SCONTR   47",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "SCONTR 47",
+        "confidence": 0.8,
+        "source_location": "markdown",
+        "context": "28-02-2006 11-50         SCONTR   47",
+        "match_type": "contextual"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 10,
+    "fields_with_field_citations": 10,
+    "fields_with_value_citations": 10,
+    "average_confidence": 0.875
+  }
+}

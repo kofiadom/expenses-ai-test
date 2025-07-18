@@ -34,6 +34,18 @@ class ComplianceValidationResult:
     raw_response: str
     reliability_level: str  # 'high', 'medium', 'low'
 
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert to dictionary for JSON serialization."""
+        return {
+            "dimension": self.dimension.value if hasattr(self.dimension, 'value') else str(self.dimension),
+            "confidence_score": self.confidence_score,
+            "issues": self.issues,
+            "summary": self.summary,
+            "raw_response": self.raw_response,
+            "reliability_level": self.reliability_level,
+            "total_issues": len(self.issues)
+        }
+
 
 class ExpenseComplianceUQLMValidator:
     """

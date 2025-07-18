@@ -1,0 +1,72 @@
+{
+  "image_path": "expense_files\\italia_file_3.jpg",
+  "assessment_method": "LLM",
+  "model_used": "claude-3-7-sonnet-20250219",
+  "timestamp": "2025-07-16T22:30:22.964155",
+  "blur_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.1,
+    "description": "The receipt shows clear, well-defined text with minimal blur throughout.",
+    "recommendation": "No action needed regarding image focus or sharpness."
+  },
+  "contrast_assessment": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.85,
+    "description": "The receipt displays excellent contrast between black text and light background.",
+    "recommendation": "Current contrast level is ideal for OCR processing."
+  },
+  "glare_identification": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.05,
+    "description": "There is minimal to no glare affecting the receipt visibility.",
+    "recommendation": "No action needed regarding glare or reflections."
+  },
+  "water_stains": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No water stains or liquid damage visible on the receipt.",
+    "recommendation": "No remediation needed for water damage."
+  },
+  "tears_or_folds": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.05,
+    "description": "The receipt appears flat with no significant creases or folds affecting readability.",
+    "recommendation": "No action needed regarding physical damage."
+  },
+  "cut_off_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.0,
+    "description": "All edges of the receipt are visible with no content appearing to be cut off.",
+    "recommendation": "Current framing is sufficient for complete data extraction."
+  },
+  "missing_sections": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "The receipt contains all expected sections including header, item details, totals, and footer information.",
+    "recommendation": "No additional image capture needed."
+  },
+  "obstructions": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No fingers, shadows, or other obstructions appear to be covering any part of the receipt.",
+    "recommendation": "Current image is free from obstructions and suitable for processing."
+  },
+  "overall_quality_score": 9,
+  "suitable_for_extraction": true
+}

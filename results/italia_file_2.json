@@ -1,6 +1,6 @@
 {
   "source_file": "italia_file_2.md",
-  "processing_timestamp": "2025-07-15T16:52:45.582725",
+  "processing_timestamp": "2025-07-16T22:58:30.818162",
   "dataset_metadata": {
     "filepath": "expense_files/italia_file_2.jpg",
     "filename ": "italia_file_2.jpg",
@@ -9,17 +9,33 @@
     "dataset_file": "italia_file_2.json"
   },
   "classification_result": {
-    "is_expense": true,
-    "expense_type": "meals",
+    "is_expense": false,
+    "expense_type": null,
     "language": "Italian",
     "language_confidence": 95,
     "document_location": "Italy",
     "expected_location": "Italy",
     "location_match": true,
-    "error_type": null,
-    "error_message": null,
-    "classification_confidence": 95,
-    "reasoning": "The document is a receipt featuring a coffee and a brioche purchase, indicating it is a typical meal-related expense. The Italian language is used alongside an Italian address and phone number, confirming the location as Italy."
+    "error_type": "File identified not as an expense",
+    "error_message": "The document doesn't meet the minimum field requirements to classify as an expense.",
+    "classification_confidence": 90,
+    "reasoning": "Only 3 relevant schema fields were identified (supplier, transaction date, transaction amount). This document lacks a clear payment method and evidence of completed payment, which are critical for classification as an expense.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionDate",
+        "transactionAmount"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "paymentMethod",
+        "invoiceReceiptNumber",
+        "taxInformation",
+        "itemDescriptionLineItems"
+      ],
+      "total_fields_found": 3,
+      "expense_identification_reasoning": "The document contains information on the supplier (BAR MALABAR), the transaction date (28-02-2006), and the transaction amount (1,85 EURO). However, crucial information on consumerRecipient, paymentMethod, invoiceReceiptNumber, and itemDescriptionLineItems is missing, making it impossible to classify this as an expense document."
+    }
   },
   "extraction_result": {
     "supplier_name": "TORREFAZIONE BAR MALABAR DI TURETTA SERGIO",
@@ -42,12 +58,190 @@
         "total_price": 1.0
       }
     ],
-    "contact_phone": "011/530701",
     "transaction_time": "11:50",
     "receipt_type": "SCONTRINO",
-    "transaction_reference": "17 RC 13409544",
-    "number_of_items": 2,
-    "cash_register_number": 1
+    "contact_phone": "011/530701",
+    "tax_code": null,
+    "payment_method": null,
+    "vehicle_make_model": null,
+    "vehicle_fuel_type": null,
+    "distance_traveled": null,
+    "route_documentation": null,
+    "car_registration": null,
+    "personal_information": null,
+    "business_trip_reporting": null,
+    "per_diem_method": null,
+    "transaction_reference": "SCONTR 47",
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "TORREFAZIONE BAR MALABAR DI TURETTA SERGIO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "# TORREFAZIONE\n# BAR MALABAR\nDI TURETTA SERGIO",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "TORREFAZIONE BAR MALABAR DI TURETTA SERGIO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "# TORREFAZIONE\n# BAR MALABAR\nDI TURETTA SERGIO",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "PIAZZA CARLO FELICE 49, TORINO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "PIAZZA CARLO FELICE 49 TORINO",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "PIAZZA CARLO FELICE 49 TORINO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "PIAZZA CARLO FELICE 49 TORINO",
+            "match_type": "exact"
+          }
+        },
+        "vat_number": {
+          "field_citation": {
+            "source_text": "PARTITA IVA",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "PARTITA IVA 03747960759",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "03747960759",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "PARTITA IVA 03747960759",
+            "match_type": "exact"
+          }
+        },
+        "currency": {
+          "field_citation": {
+            "source_text": "EURO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| CAFFE'   | EURO |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "EURO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| CAFFE'   | EURO |",
+            "match_type": "exact"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "TOTALE",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| TOTALE   | 1,85 |",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "1,85",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "| TOTALE   | 1,85 |",
+            "match_type": "fuzzy"
+          }
+        },
+        "date_of_issue": {
+          "field_citation": {
+            "source_text": "28-02-2006",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "28-02-2006 11-50         SCONTR   47",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "28-02-2006",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "28-02-2006 11-50         SCONTR   47",
+            "match_type": "exact"
+          }
+        },
+        "transaction_time": {
+          "field_citation": {
+            "source_text": "11-50",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "28-02-2006 11-50         SCONTR   47",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "11-50",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "28-02-2006 11-50         SCONTR   47",
+            "match_type": "exact"
+          }
+        },
+        "receipt_type": {
+          "field_citation": {
+            "source_text": "SCONTR",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "28-02-2006 11-50         SCONTR   47",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "SCONTR",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "28-02-2006 11-50         SCONTR   47",
+            "match_type": "exact"
+          }
+        },
+        "contact_phone": {
+          "field_citation": {
+            "source_text": "TELEFONO",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "TELEFONO 011/530701",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "011/530701",
+            "confidence": 0.9,
+            "source_location": "markdown",
+            "context": "TELEFONO 011/530701",
+            "match_type": "exact"
+          }
+        },
+        "transaction_reference": {
+          "field_citation": {
+            "source_text": "SCONTR",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "28-02-2006 11-50         SCONTR   47",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "SCONTR 47",
+            "confidence": 0.8,
+            "source_location": "markdown",
+            "context": "28-02-2006 11-50         SCONTR   47",
+            "match_type": "contextual"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 10,
+        "fields_with_field_citations": 10,
+        "fields_with_value_citations": 10,
+        "average_confidence": 0.875
+      }
+    }
   },
   "compliance_result": {
     "validation_result": {
@@ -56,52 +250,52 @@
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "Supplier Name",
-          "description": "The supplier name on the receipt must be 'Global People s.r.l.' for compliance with ICP requirements.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider to receive a document with the correct supplier name.",
-          "knowledge_base_reference": "Must be Global People s.r.l."
+          "field": "supplier_name",
+          "description": "The supplier name does not match the mandatory ICP-specific requirement. It must be 'Global People s.r.l.' or 'GoGlobal Consulting S.r.l'.",
+          "recommendation": "It is recommended to correct the supplier name on the receipt with the mandatory ICP-specific name 'Global People s.r.l.'.",
+          "knowledge_base_reference": "FileRelatedRequirements: Supplier Name must be 'Global People s.r.l. or GoGlobal Consulting S.r.l'."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "Supplier Address",
-          "description": "The supplier address must be 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy' for compliance.",
-          "recommendation": "Recommend obtaining a corrected receipt from the supplier matching required address.",
-          "knowledge_base_reference": "Via Venti Settembre 3, Torino (TO) CAP 10121, Italy"
+          "field": "supplier_address",
+          "description": "The supplier address does not match the mandatory requirement for 'Global People s.r.l.'. It must be 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy'.",
+          "recommendation": "Contact the supplier to amend the address to meet the mandatory requirement for 'Global People s.r.l.'.",
+          "knowledge_base_reference": "FileRelatedRequirements: Supplier Address must be 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy' for Global People s.r.l."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "VAT Number",
-          "description": "VAT Number on receipt does not match mandatory VAT as 'IT12455930011'.",
-          "recommendation": "Request a receipt with the correct VAT number that corresponds with 'Global People s.r.l'.",
-          "knowledge_base_reference": "IT12455930011"
+          "field": "vat_number",
+          "description": "The VAT number '03747960759' does not match the required VAT number 'IT12455930011' for 'Global People s.r.l.'.",
+          "recommendation": "Ensure the VAT number on the receipt is 'IT12455930011' as per the compliance requirements.",
+          "knowledge_base_reference": "FileRelatedRequirements: VAT Number must be 'IT12455930011' for Global People s.r.l."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "Tax Code",
-          "description": "Tax Code is missing for 'Global People s.r.l.', which is mandatory.",
-          "recommendation": "Contact the supplier to reissue the receipt including the Tax Code: '12455930011'.",
-          "knowledge_base_reference": "12455930011"
+          "field": "receipt_type",
+          "description": "The receipt type 'SCONTRINO' does not verify if it is an actual tax receipt as required.",
+          "recommendation": "Ensure that the document is a tax receipt/invoice and not just a payment confirmation.",
+          "knowledge_base_reference": "FileRelatedRequirements: Receipt Type must be actual tax receipts or invoices."
         },
         {
-          "issue_type": "Standards & Compliance | Follow-up Action Identified",
-          "field": "Entertainment Expense Documentation",
-          "description": "Receipt alone is not enough; client or supplier entertained must be recorded for meal expenses.",
-          "recommendation": "Ensure to document the names and company details of clients entertained alongside the receipt.",
-          "knowledge_base_reference": "Receipt alone is not enough - you must also write down the name and company details of the client/supplier you entertained"
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "payment_method",
+          "description": "Missing payment method details. The method must be traceable: bank transfers, postal transfers, credit/debit cards, prepaid cards, bank/cashier's checks.",
+          "recommendation": "Include traceable payment method details in the transaction documentation.",
+          "knowledge_base_reference": "FileRelatedRequirements: Payment Method must be traceable."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "Multiple mandatory compliance violations detected, including incorrect/missing supplier details, VAT number, and missing documentation for entertainment expenses."
+      "compliance_summary": "The receipt does not comply with several key mandatory ICP-specific requirements. Supplier information, VAT number, receipt type, and payment method details must be corrected to meet compliances for 'Global People s.r.l.' in Italy."
     },
     "technical_details": {
       "content_type": "ReceiptValidationResult",
       "country": "Italy",
       "icp": "Global People",
-      "receipt_type": "meals",
+      "receipt_type": "All",
       "issues_count": 5,
       "has_reasoning": true
     }
   },
   "processing_status": "completed",
-  "uqlm_validation_available": true
+  "uqlm_validation_available": false
 }

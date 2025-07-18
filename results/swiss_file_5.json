@@ -1,6 +1,6 @@
 {
   "source_file": "swiss_file_5.md",
-  "processing_timestamp": "2025-07-15T17:17:43.041221",
+  "processing_timestamp": "2025-07-16T23:20:08.732538",
   "dataset_metadata": {
     "filepath": "expense_files/swiss_file_5.jpg",
     "filename ": "swiss_file_5.jpg",
@@ -9,119 +9,12 @@
     "dataset_file": "swiss_file_5.json"
   },
   "classification_result": {
-    "is_expense": true,
-    "expense_type": "meals",
-    "language": "German",
-    "language_confidence": 95,
-    "document_location": "Switzerland",
-    "expected_location": "Switzerland",
-    "location_match": true,
-    "error_type": null,
-    "error_message": null,
-    "classification_confidence": 98,
-    "reasoning": "The document is a restaurant receipt from Berghotel in Grindelwald, Switzerland. It contains information typical of an expense document, such as a list of purchased meals, prices, a total amount, tax details, date of transaction, and vendor information. The language is identified as German with high confidence. The location matches the expected location."
+    "error": "Connection error."
   },
   "extraction_result": {
-    "supplier_name": "Berghotel",
-    "supplier_address": "3818 Grindelwald",
-    "company_registration": null,
-    "currency": "CHF",
-    "amount": 54.5,
-    "receipt_type": "Rechnung",
-    "personal_information": null,
-    "business_trip_reporting": null,
-    "travel_template": null,
-    "manager_approval": null,
-    "route_map": null,
-    "car_details": null,
-    "logbook": null,
-    "combined_mileage": null,
-    "line_items": [
-      {
-        "description": "Latte Macchiato",
-        "quantity": 2,
-        "unit_price": 4.5,
-        "total_price": 9.0
-      },
-      {
-        "description": "Gloki",
-        "quantity": 1,
-        "unit_price": 5.0,
-        "total_price": 5.0
-      },
-      {
-        "description": "Schweinschnitzel",
-        "quantity": 1,
-        "unit_price": 22.0,
-        "total_price": 22.0
-      },
-      {
-        "description": "Ch\u00e4ssp\u00e4tzli",
-        "quantity": 1,
-        "unit_price": 18.5,
-        "total_price": 18.5
-      }
-    ],
-    "total_amount": 54.5,
-    "total_vat": 3.85,
-    "vat_rate": 7.6,
-    "vat_number": "430 234",
-    "transaction_date": "2007-07-30",
-    "transaction_time": "13:29:17",
-    "contact_phone": "033 853 67 16",
-    "contact_fax": "033 853 67 19",
-    "contact_email": "grossescheidegg@bluewin.ch",
-    "transaction_reference": "Rech.Nr. 4572",
-    "exchange_amount": 36.33,
-    "table_number": "7/01",
-    "server_name": "Ursula"
+    "error": "Connection error."
   },
-  "compliance_result": {
-    "validation_result": {
-      "is_valid": false,
-      "issues_count": 4,
-      "issues": [
-        {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_name",
-          "description": "Supplier name does not match required 'Global PPL CH GmbH'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Switzerland Expense Reimbursement Database Tables: Supplier Name (Mandatory) - Must be Global PPL CH GmbH."
-        },
-        {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_address",
-          "description": "Supplier address does not match 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Switzerland Expense Reimbursement Database Tables: Supplier Address (Mandatory) - Freigutstrasse 2 8002 Z\u00fcrich, Switzerland."
-        },
-        {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "company_registration",
-          "description": "Company registration missing, required 'CHE-295.369.918'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Switzerland Expense Reimbursement Database Tables: Company Registration (Mandatory) - CHE-295.369.918."
-        },
-        {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "vat_number",
-          "description": "VAT number '430 234' format appears incorrect.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Swiss VAT numbers require a specific format not met here."
-        }
-      ],
-      "corrected_receipt": null,
-      "compliance_summary": "The receipt has multiple compliance issues including supplier name and address discrepancies, missing mandatory company registration number, and a VAT number format issue. Currency is CHF as required, but lacks specific FX rate details, though this is advised not mandatory."
-    },
-    "technical_details": {
-      "content_type": "ReceiptValidationResult",
-      "country": "Switzerland",
-      "icp": "Global People",
-      "receipt_type": "meals",
-      "issues_count": 4,
-      "has_reasoning": true
-    }
-  },
+  "compliance_result": {},
   "processing_status": "completed",
-  "uqlm_validation_available": true
+  "uqlm_validation_available": false
 }

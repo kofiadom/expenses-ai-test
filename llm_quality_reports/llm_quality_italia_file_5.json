@@ -1,0 +1,72 @@
+{
+  "image_path": "expense_files\\italia_file_5.jpg",
+  "assessment_method": "LLM",
+  "model_used": "claude-3-7-sonnet-20250219",
+  "timestamp": "2025-07-16T22:30:48.260120",
+  "blur_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.1,
+    "description": "The receipt exhibits good clarity with well-defined text that is easily readable.",
+    "recommendation": "No action needed as text definition is sufficient for OCR processing."
+  },
+  "contrast_assessment": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.85,
+    "description": "The receipt shows good contrast between the black text and white paper background.",
+    "recommendation": "No enhancement needed as contrast is sufficient for automated text extraction."
+  },
+  "glare_identification": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.05,
+    "description": "The receipt shows minimal glare that does not significantly impact text readability.",
+    "recommendation": "No action needed as existing lighting conditions are adequate."
+  },
+  "water_stains": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No visible water stains or water damage detected on the receipt.",
+    "recommendation": "No restoration needed as document is free from water damage."
+  },
+  "tears_or_folds": {
+    "detected": true,
+    "severity_level": "medium",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.4,
+    "description": "The receipt shows noticeable wrinkles and creases throughout the paper that may affect some text recognition.",
+    "recommendation": "Consider digitally smoothing the creases or using an algorithm that can compensate for wrinkled paper."
+  },
+  "cut_off_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.0,
+    "description": "All edges of the receipt appear to be fully captured with no cut-off content.",
+    "recommendation": "No adjustment needed as document boundaries are complete."
+  },
+  "missing_sections": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.0,
+    "description": "The receipt appears complete with header, line items, subtotal, service charge, and total sections intact.",
+    "recommendation": "No additional capture needed as document structure is complete."
+  },
+  "obstructions": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No fingers, shadows, or other objects obstruct any part of the receipt content.",
+    "recommendation": "No action needed as document is free from obstructions."
+  },
+  "overall_quality_score": 8,
+  "suitable_for_extraction": true
+}

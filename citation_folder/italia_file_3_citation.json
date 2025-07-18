@@ -1,0 +1,266 @@
+{
+  "citations": {
+    "supplier_name": {
+      "field_citation": {
+        "source_text": "Supplier Name",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "fieldType: Supplier Name, description: Name of the supplier/vendor on invoice",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "la Rinascente S.p.A.",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "la Rinascente S.p.A.",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": {
+        "source_text": "Address",
+        "confidence": 0.85,
+        "source_location": "requirements",
+        "context": "fieldType: Supplier Address",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "ROMA - VIA DEL TRITONE, 61",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "ROMA - VIA DEL TRITONE, 61",
+        "match_type": "exact"
+      }
+    },
+    "vat_number": {
+      "field_citation": {
+        "source_text": "VAT Number",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "fieldType: VAT Number, description: VAT identification number",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "05034580968",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "P.IVA 05034580968",
+        "match_type": "fuzzy"
+      }
+    },
+    "currency": {
+      "field_citation": {
+        "source_text": "Currency",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "fieldType: Currency, description: Receipt currency",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "EURO",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "EURO Art/Ean 8031625015614",
+        "match_type": "fuzzy"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "Total",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Totale",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "1490,00",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Totale 1490,00",
+        "match_type": "fuzzy"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "Date",
+        "confidence": 0.85,
+        "source_location": "requirements",
+        "context": "date_of_issue",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "28-12-2017",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "28-12-2017 19:40",
+        "match_type": "exact"
+      }
+    },
+    "contact_phone": {
+      "field_citation": {
+        "source_text": "Phone",
+        "confidence": 0.85,
+        "source_location": "requirements",
+        "context": "Ph.",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "+39 (0)6 879161",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Ph. +39 (0)6 879161",
+        "match_type": "exact"
+      }
+    },
+    "store_number": {
+      "field_citation": {
+        "source_text": "Store Number",
+        "confidence": 0.85,
+        "source_location": "requirements",
+        "context": "Negozio:",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "471",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Negozio:471",
+        "match_type": "exact"
+      }
+    },
+    "pos_number": {
+      "field_citation": {
+        "source_text": "POS Number",
+        "confidence": 0.85,
+        "source_location": "requirements",
+        "context": "POS:",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "8",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "POS: 8",
+        "match_type": "exact"
+      }
+    },
+    "transaction_number": {
+      "field_citation": {
+        "source_text": "Transaction Number",
+        "confidence": 0.85,
+        "source_location": "requirements",
+        "context": "Transazione:",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "2275",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Transazione:2275",
+        "match_type": "exact"
+      }
+    },
+    "operator_number": {
+      "field_citation": {
+        "source_text": "Operator Number",
+        "confidence": 0.8,
+        "source_location": "requirements",
+        "context": "Op.:",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "1313",
+        "confidence": 0.9,
+        "source_location": "markdown",
+        "context": "Op.:1313",
+        "match_type": "exact"
+      }
+    },
+    "transaction_time": {
+      "field_citation": {
+        "source_text": "Time",
+        "confidence": 0.85,
+        "source_location": "requirements",
+        "context": "18:40",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "19:40",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "28-12-2017 19:40",
+        "match_type": "exact"
+      }
+    },
+    "receipt_type": {
+      "field_citation": {
+        "source_text": "Receipt Type",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Scontrino Non Fiscale",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "Scontrino Non Fiscale",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Scontrino Non Fiscale ai sensi Art.1",
+        "match_type": "exact"
+      }
+    },
+    "website": {
+      "field_citation": {
+        "source_text": "Website",
+        "confidence": 0.85,
+        "source_location": "requirements",
+        "context": "www.rinascente.it",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "www.rinascente.it",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Regolamento su www.rinascente.it",
+        "match_type": "exact"
+      }
+    },
+    "special_notes": {
+      "field_citation": {
+        "source_text": "Special Notes",
+        "confidence": 0.85,
+        "source_location": "requirements",
+        "context": "Scontrino Non Fiscale ai sensi",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Scontrino Non Fiscale ai sensi Art.1 comma 429 Legge N.311/2004",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Scontrino Non Fiscale ai sensi Art.1 comma 429 Legge N.311/2004",
+        "match_type": "exact"
+      }
+    },
+    "promotion": {
+      "field_citation": {
+        "source_text": "Promotion",
+        "confidence": 0.85,
+        "source_location": "requirements",
+        "context": "Partecipa al nuovo concorso",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Partecipa al nuovo concorso Rinascentecard \"LUCKY SHOPPING\"",
+        "confidence": 0.95,
+        "source_location": "markdown",
+        "context": "Partecipa al nuovo concorso\nRinascentecard \"LUCKY SHOPPING\".",
+        "match_type": "exact"
+      }
+    }
+  },
+  "metadata": {
+    "total_fields_analyzed": 15,
+    "fields_with_field_citations": 15,
+    "fields_with_value_citations": 15,
+    "average_confidence": 0.9
+  }
+}
