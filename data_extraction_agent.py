@@ -1,18 +1,54 @@
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
-from agno.models.anthropic import Claude
+from agno.models.anthropic import Claude as AnthropicClaude
+from agno.models.aws import Claude as AWSClaude
+from agno.utils.log import logger
 from textwrap import dedent
 from dotenv import load_dotenv
+import os
 
 # Load environment variables
 load_dotenv()
 
-
+def create_data_extraction_model():
+    """
+    Create the appropriate model based on DATA_EXTRACTION_MODEL_PROVIDER environment variable.
+    
+    Returns:
+        Model instance for the specified provider
+    """
+    # Check specific provider first, then global fallback
+    provider = os.getenv("DATA_EXTRACTION_MODEL_PROVIDER") or os.getenv("AGENT_MODEL_PROVIDER", "anthropic").lower()
+    
+    if provider == "openai":
+        logger.info("Using OpenAI model for data extraction")
+        return OpenAIChat(id="gpt-4o")
+    
+    elif provider == "anthropic":
+        logger.info("Using Anthropic direct API model for data extraction")
+        return AnthropicClaude(id="claude-3-7-sonnet-20250219")
+    
+    elif provider == "bedrock":
+        logger.info("Using AWS Bedrock Claude model for data extraction")
+        try:
+            bedrock_model_id = os.getenv("BEDROCK_MODEL_ID", "anthropic.claude-3-5-sonnet-20240620-v1:0")
+            aws_region = os.getenv("AWS_REGION", "us-east-1")
+            model = AWSClaude(id=bedrock_model_id)
+            logger.info(f"Bedrock model initialized for data extraction: {bedrock_model_id} in region {aws_region}")
+            return model
+            
+        except Exception as e:
+            logger.error(f"Failed to initialize Bedrock model for data extraction: {e}")
+            logger.info("Falling back to Anthropic direct API model for data extraction")
+            return AnthropicClaude(id="claude-3-7-sonnet-20250219")
+    
+    else:
+        logger.warning(f"Unknown provider '{provider}' for data extraction, falling back to Anthropic")
+        return AnthropicClaude(id="claude-3-7-sonnet-20250219")
 
 # Create the data extraction agent
 data_extraction_agent = Agent(
-    model=OpenAIChat(id="gpt-4o"),
-    #model=Claude(id="claude-3-7-sonnet-20250219"),
+    model=create_data_extraction_model(),
     instructions=dedent("""\
 Persona: You are a meticulous and highly accurate data extraction AI. You specialize in parsing unstructured text from expense documents and structuring it into a precise JSON format. Your primary function is to identify and extract data points from the receipt text, not to validate them against specific rules.
 
@@ -87,21 +123,11 @@ Include all fields from the extraction requirements (using snake_case of FieldTy
   "vat": null,
   "name": null,
   "address": null,
-  "supplier": null,
-  "expense": null,
-  "route": null,
-  "car_details": null,
-  "purpose": null,
-  "odometer_reading": null,
-  "travel_date": null,
-  "a1_certificate": null,
-  "payment_receipt": null,
-  "manager_approval": null,
-  "personal_phone_proof": null,
-  "storage_period": null
+  "supplier": null
 }"""),
     #reasoning=True,
     # Ensure clean JSON output
+    parser_model=create_data_extraction_model(),
     markdown=False,
     show_tool_calls=False
 )
@@ -128,5 +154,3 @@ RECEIPT TEXT (MARKDOWN):
     # Get the response from the agent
     response = data_extraction_agent.run(formatted_prompt)
     return response
-
-

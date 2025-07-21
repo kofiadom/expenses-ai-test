@@ -11,6 +11,18 @@ from datetime import datetime
 from pydantic import BaseModel, Field
 from PIL import Image
 from agno.utils.log import logger
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# Optional Bedrock imports
+try:
+    import boto3
+    BEDROCK_AVAILABLE = True
+except ImportError:
+    BEDROCK_AVAILABLE = False
+    logger.warning("boto3 not available. Bedrock support disabled.")
 
 
 class QualityIssue(BaseModel):
@@ -41,21 +53,58 @@ class LLMImageQualityAssessment(BaseModel):
 class LLMImageQualityAssessor:
     """LLM-based image quality assessor for integration with expense processing workflow"""
     
-    def __init__(self, api_key: str = None, model: str = "claude-3-7-sonnet-20250219"):
+    def __init__(self, api_key: str = None, model: str = None, provider: str = None):
         """
-        Initialize LLM image quality assessor
+        Initialize LLM image quality assessor with provider support
         
         Args:
-            api_key: Anthropic API key (if None, will use environment variable)
-            model: Claude model to use for assessment
+            api_key: API key (if None, will use environment variable)
+            model: Model to use for assessment (if None, will use provider default)
+            provider: Provider to use ('anthropic', 'bedrock'). If None, uses environment variable
         """
-        self.api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
-        if not self.api_key:
-            raise ValueError("Anthropic API key is required. Set ANTHROPIC_API_KEY environment variable or pass api_key parameter.")
+        # Determine provider
+        self.provider = provider or os.getenv("IMAGE_QUALITY_MODEL_PROVIDER", "anthropic").lower()
         
-        self.model = model
-        self.base_url = "https://api.anthropic.com/v1/messages"
-        logger.info(f"🤖 Initialized LLM Image Quality Assessor with model: {model}")
+        # Set up provider-specific configuration
+        if self.provider == "anthropic":
+            self.api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
+            if not self.api_key:
+                raise ValueError("Anthropic API key is required. Set ANTHROPIC_API_KEY environment variable or pass api_key parameter.")
+            
+            self.model = model or "claude-3-7-sonnet-20250219"
+            self.base_url = "https://api.anthropic.com/v1/messages"
+            logger.info(f"🤖 Initialized LLM Image Quality Assessor with Anthropic model: {self.model}")
+            
+        elif self.provider == "bedrock":
+            if not BEDROCK_AVAILABLE:
+                raise ValueError("boto3 is required for Bedrock support. Install with: pip install boto3")
+            
+            # Initialize Bedrock client
+            try:
+                aws_region = os.getenv("AWS_REGION", "us-east-1")
+                session = boto3.Session(
+                    aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
+                    aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
+                    aws_session_token=os.getenv("AWS_SESSION_TOKEN"),
+                    region_name=aws_region
+                )
+                self.bedrock_client = session.client("bedrock-runtime")
+                self.model = model or os.getenv("BEDROCK_MODEL_ID", "anthropic.claude-3-sonnet-20240229-v1:0")
+                self.aws_region = aws_region
+                logger.info(f"🤖 Initialized LLM Image Quality Assessor with Bedrock model: {self.model} in {aws_region}")
+                
+            except Exception as e:
+                logger.error(f"Failed to initialize Bedrock client: {e}")
+                logger.info("Falling back to Anthropic direct API")
+                self.provider = "anthropic"
+                self.api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
+                if not self.api_key:
+                    raise ValueError("Failed to initialize Bedrock and no Anthropic API key available")
+                self.model = "claude-3-7-sonnet-20250219"
+                self.base_url = "https://api.anthropic.com/v1/messages"
+                logger.info(f"🤖 Fallback: Initialized with Anthropic model: {self.model}")
+        else:
+            raise ValueError(f"Unknown provider '{self.provider}'. Supported providers: 'anthropic', 'bedrock'")
     
     def encode_image(self, image_path: str) -> tuple[str, str]:
         """Encode image to base64 string and return with correct media type"""
@@ -259,82 +308,144 @@ Return only the JSON response with no additional text."""
         Returns:
             LLMImageQualityAssessment object with detailed assessment results
         """
-        logger.info(f"🤖 Starting LLM-based quality assessment for: {os.path.basename(image_path)}")
+        logger.info(f"🤖 Starting LLM-based quality assessment for: {os.path.basename(image_path)} using {self.provider}")
         assessment_start_time = time.time()
 
         try:
-            # Encode image and get metadata
-            base64_image, media_type = self.encode_image(image_path)
-            img_info = self.get_image_info(image_path)
-
-            # Prepare API request
-            headers = {
-                "Content-Type": "application/json",
-                "x-api-key": self.api_key,
-                "anthropic-version": "2023-06-01"
-            }
-
-            payload = {
-                "model": self.model,
-                "max_tokens": 2000,
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": [
-                            {
-                                "type": "text",
-                                "text": f"Please analyze this receipt/invoice image for quality assessment. Image info: {img_info}\n\n{self.create_assessment_prompt()}"
-                            },
-                            {
-                                "type": "image",
-                                "source": {
-                                    "type": "base64",
-                                    "media_type": media_type,
-                                    "data": base64_image
-                                }
-                            }
-                        ]
-                    }
-                ]
-            }
-
-            # Make API request
-            async with aiohttp.ClientSession() as session:
-                async with session.post(self.base_url, headers=headers, json=payload) as response:
-                    if response.status != 200:
-                        error_text = await response.text()
-                        raise Exception(f"API request failed with status {response.status}: {error_text}")
-
-                    result = await response.json()
-                    content = result['content'][0]['text']
-
-                    # Extract JSON from response
-                    try:
-                        start_idx = content.find('{')
-                        end_idx = content.rfind('}') + 1
-                        if start_idx != -1 and end_idx != 0:
-                            json_str = content[start_idx:end_idx]
-                            assessment_data = json.loads(json_str)
-                        else:
-                            assessment_data = json.loads(content)
-                    except json.JSONDecodeError:
-                        raise Exception(f"Failed to parse JSON response: {content}")
-
-                    assessment = LLMImageQualityAssessment(**assessment_data)
-
-                    assessment_time = time.time() - assessment_start_time
-                    logger.info(f"✅ LLM quality assessment complete - Score: {assessment.overall_quality_score}/10, "
-                              f"Suitable: {assessment.suitable_for_extraction}, Time: {assessment_time:.2f}s")
-
-                    return assessment
+            if self.provider == "anthropic":
+                return await self._assess_with_anthropic_async(image_path, assessment_start_time)
+            elif self.provider == "bedrock":
+                return await self._assess_with_bedrock_async(image_path, assessment_start_time)
+            else:
+                raise ValueError(f"Unsupported provider: {self.provider}")
 
         except Exception as e:
             logger.error(f"❌ LLM quality assessment failed for {image_path}: {str(e)}")
             raise Exception(f"LLM quality assessment failed: {str(e)}")
 
+    async def _assess_with_anthropic_async(self, image_path: str, assessment_start_time: float) -> LLMImageQualityAssessment:
+        """Assess image quality using Anthropic API (async)"""
+        # Encode image and get metadata
+        base64_image, media_type = self.encode_image(image_path)
+        img_info = self.get_image_info(image_path)
+
+        # Prepare API request
+        headers = {
+            "Content-Type": "application/json",
+            "x-api-key": self.api_key,
+            "anthropic-version": "2023-06-01"
+        }
+
+        payload = {
+            "model": self.model,
+            "max_tokens": 2000,
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": f"Please analyze this receipt/invoice image for quality assessment. Image info: {img_info}\n\n{self.create_assessment_prompt()}"
+                        },
+                        {
+                            "type": "image",
+                            "source": {
+                                "type": "base64",
+                                "media_type": media_type,
+                                "data": base64_image
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+
+        # Make API request
+        async with aiohttp.ClientSession() as session:
+            async with session.post(self.base_url, headers=headers, json=payload) as response:
+                if response.status != 200:
+                    error_text = await response.text()
+                    raise Exception(f"API request failed with status {response.status}: {error_text}")
+
+                result = await response.json()
+                content = result['content'][0]['text']
+                return self._parse_assessment_response(content, assessment_start_time)
+
+    async def _assess_with_bedrock_async(self, image_path: str, assessment_start_time: float) -> LLMImageQualityAssessment:
+        """Assess image quality using AWS Bedrock (async)"""
+        # Encode image and get metadata
+        base64_image, media_type = self.encode_image(image_path)
+        img_info = self.get_image_info(image_path)
+
+        # Prepare Bedrock request
+        prompt_text = f"Please analyze this receipt/invoice image for quality assessment. Image info: {img_info}\n\n{self.create_assessment_prompt()}"
+        
+        payload = {
+            "anthropic_version": "bedrock-2023-05-31",
+            "max_tokens": 2000,
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": prompt_text
+                        },
+                        {
+                            "type": "image",
+                            "source": {
+                                "type": "base64",
+                                "media_type": media_type,
+                                "data": base64_image
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+
+        # Make Bedrock request in executor to avoid blocking
+        loop = asyncio.get_event_loop()
+        result = await loop.run_in_executor(
+            None, 
+            lambda: self.bedrock_client.invoke_model(
+                body=json.dumps(payload),
+                modelId=self.model,
+                accept="application/json",
+                contentType="application/json"
+            )
+        )
+
+        # Parse Bedrock response
+        response_body = json.loads(result.get('body').read())
+        content = response_body['content'][0]['text']
+        return self._parse_assessment_response(content, assessment_start_time)
+
+    def _parse_assessment_response(self, content: str, assessment_start_time: float) -> LLMImageQualityAssessment:
+        """Parse assessment response and create LLMImageQualityAssessment object"""
+        # Extract JSON from response
+        try:
+            start_idx = content.find('{')
+            end_idx = content.rfind('}') + 1
+            if start_idx != -1 and end_idx != 0:
+                json_str = content[start_idx:end_idx]
+                assessment_data = json.loads(json_str)
+            else:
+                assessment_data = json.loads(content)
+        except json.JSONDecodeError:
+            raise Exception(f"Failed to parse JSON response: {content}")
+
+        assessment = LLMImageQualityAssessment(**assessment_data)
+
+        assessment_time = time.time() - assessment_start_time
+        logger.info(f"✅ LLM quality assessment complete - Score: {assessment.overall_quality_score}/10, "
+                  f"Suitable: {assessment.suitable_for_extraction}, Time: {assessment_time:.2f}s")
+
+        return assessment
+
     def assess_image_quality_sync(self, image_path: str) -> LLMImageQualityAssessment:
         """
-        Synchronous version of assess_image_quality using requests instead of aiohttp
+        Synchronous version of assess_image_quality
 
         Args:
             image_path: Path to the image file
@@ -342,77 +453,113 @@ Return only the JSON response with no additional text."""
         Returns:
             LLMImageQualityAssessment object with detailed assessment results
         """
-        logger.info(f"🤖 Starting LLM-based quality assessment for: {os.path.basename(image_path)}")
+        logger.info(f"🤖 Starting LLM-based quality assessment for: {os.path.basename(image_path)} using {self.provider}")
         assessment_start_time = time.time()
 
         try:
-            # Encode image and get metadata
-            base64_image, media_type = self.encode_image(image_path)
-            img_info = self.get_image_info(image_path)
-
-            # Prepare API request
-            headers = {
-                "Content-Type": "application/json",
-                "x-api-key": self.api_key,
-                "anthropic-version": "2023-06-01"
-            }
-
-            payload = {
-                "model": self.model,
-                "max_tokens": 2000,
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": [
-                            {
-                                "type": "text",
-                                "text": f"Please analyze this receipt/invoice image for quality assessment. Image info: {img_info}\n\n{self.create_assessment_prompt()}"
-                            },
-                            {
-                                "type": "image",
-                                "source": {
-                                    "type": "base64",
-                                    "media_type": media_type,
-                                    "data": base64_image
-                                }
-                            }
-                        ]
-                    }
-                ]
-            }
-
-            # Make synchronous API request
-            response = requests.post(self.base_url, headers=headers, json=payload)
-
-            if response.status_code != 200:
-                raise Exception(f"API request failed with status {response.status_code}: {response.text}")
-
-            result = response.json()
-            content = result['content'][0]['text']
-
-            # Extract JSON from response
-            try:
-                start_idx = content.find('{')
-                end_idx = content.rfind('}') + 1
-                if start_idx != -1 and end_idx != 0:
-                    json_str = content[start_idx:end_idx]
-                    assessment_data = json.loads(json_str)
-                else:
-                    assessment_data = json.loads(content)
-            except json.JSONDecodeError:
-                raise Exception(f"Failed to parse JSON response: {content}")
-
-            assessment = LLMImageQualityAssessment(**assessment_data)
-
-            assessment_time = time.time() - assessment_start_time
-            logger.info(f"✅ LLM quality assessment complete - Score: {assessment.overall_quality_score}/10, "
-                      f"Suitable: {assessment.suitable_for_extraction}, Time: {assessment_time:.2f}s")
-
-            return assessment
+            if self.provider == "anthropic":
+                return self._assess_with_anthropic_sync(image_path, assessment_start_time)
+            elif self.provider == "bedrock":
+                return self._assess_with_bedrock_sync(image_path, assessment_start_time)
+            else:
+                raise ValueError(f"Unsupported provider: {self.provider}")
 
         except Exception as e:
             logger.error(f"❌ LLM quality assessment failed for {image_path}: {str(e)}")
             raise Exception(f"LLM quality assessment failed: {str(e)}")
+
+    def _assess_with_anthropic_sync(self, image_path: str, assessment_start_time: float) -> LLMImageQualityAssessment:
+        """Assess image quality using Anthropic API (sync)"""
+        # Encode image and get metadata
+        base64_image, media_type = self.encode_image(image_path)
+        img_info = self.get_image_info(image_path)
+
+        # Prepare API request
+        headers = {
+            "Content-Type": "application/json",
+            "x-api-key": self.api_key,
+            "anthropic-version": "2023-06-01"
+        }
+
+        payload = {
+            "model": self.model,
+            "max_tokens": 2000,
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": f"Please analyze this receipt/invoice image for quality assessment. Image info: {img_info}\n\n{self.create_assessment_prompt()}"
+                        },
+                        {
+                            "type": "image",
+                            "source": {
+                                "type": "base64",
+                                "media_type": media_type,
+                                "data": base64_image
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+
+        # Make synchronous API request
+        response = requests.post(self.base_url, headers=headers, json=payload)
+
+        if response.status_code != 200:
+            raise Exception(f"API request failed with status {response.status_code}: {response.text}")
+
+        result = response.json()
+        content = result['content'][0]['text']
+        return self._parse_assessment_response(content, assessment_start_time)
+
+    def _assess_with_bedrock_sync(self, image_path: str, assessment_start_time: float) -> LLMImageQualityAssessment:
+        """Assess image quality using AWS Bedrock (sync)"""
+        # Encode image and get metadata
+        base64_image, media_type = self.encode_image(image_path)
+        img_info = self.get_image_info(image_path)
+
+        # Prepare Bedrock request
+        prompt_text = f"Please analyze this receipt/invoice image for quality assessment. Image info: {img_info}\n\n{self.create_assessment_prompt()}"
+        
+        payload = {
+            "anthropic_version": "bedrock-2023-05-31",
+            "max_tokens": 2000,
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": prompt_text
+                        },
+                        {
+                            "type": "image",
+                            "source": {
+                                "type": "base64",
+                                "media_type": media_type,
+                                "data": base64_image
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+
+        # Make Bedrock request
+        result = self.bedrock_client.invoke_model(
+            body=json.dumps(payload),
+            modelId=self.model,
+            accept="application/json",
+            contentType="application/json"
+        )
+
+        # Parse Bedrock response
+        response_body = json.loads(result.get('body').read())
+        content = response_body['content'][0]['text']
+        return self._parse_assessment_response(content, assessment_start_time)
 
     def format_assessment_for_workflow(self, assessment: LLMImageQualityAssessment, image_path: str) -> Dict:
         """

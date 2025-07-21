@@ -4,14 +4,26 @@ import re
 import logging
 import time
 import base64
-from langchain_anthropic import ChatAnthropic
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 from enum import Enum
 from PIL import Image
 from agno.utils.log import logger
+from dotenv import load_dotenv
 
-# Import uqlm LLMPanel - based on the working example
+# Load environment variables
+load_dotenv()
+
+# Import Bedrock and UQLM
+try:
+    import boto3
+    from langchain_aws import ChatBedrock
+    BEDROCK_AVAILABLE = True
+except ImportError:
+    print("Warning: AWS Bedrock dependencies not available. Install with: pip install boto3 langchain-aws")
+    ChatBedrock = None
+    BEDROCK_AVAILABLE = False
+
 try:
     from uqlm import LLMPanel
     UQLM_AVAILABLE = True
@@ -59,7 +71,7 @@ class ImageQualityUQLMValidator:
 
     def __init__(self, primary_llm, logger: logging.Logger = None):
         """
-        Initialize UQLM quality validator with judge panel.
+        Initialize UQLM quality validator with judge panel using AWS Bedrock.
         
         Args:
             primary_llm: The primary LLM instance
@@ -69,11 +81,51 @@ class ImageQualityUQLMValidator:
         
         self.primary_llm = primary_llm
 
-        self.llm1 = ChatAnthropic(model="claude-opus-4-20250514",
-                        api_key=os.getenv("ANTHROPIC_API_KEY"))
+        if not BEDROCK_AVAILABLE:
+            raise ValueError("AWS Bedrock dependencies not available. Install with: pip install boto3 langchain-aws")
 
-        self.llm2 = ChatAnthropic(model="claude-sonnet-4-20250514",
-                        api_key=os.getenv("ANTHROPIC_API_KEY"))
+        # Initialize Bedrock judge LLMs
+        try:
+            aws_region = os.getenv("AWS_REGION", "us-east-1")
+            session = boto3.Session(
+                aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
+                aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
+                aws_session_token=os.getenv("AWS_SESSION_TOKEN"),
+                region_name=aws_region
+            )
+            
+            bedrock_client = session.client("bedrock-runtime")
+            
+            # Use the same model ID for both judges (can be different if needed)
+            bedrock_model_id = os.getenv("BEDROCK_MODEL_ID", "anthropic.claude-3-sonnet-20240229-v1:0")
+            
+            self.llm1 = ChatBedrock(
+                # client=bedrock_client,
+                region_name="eu-west-1",  # Using Ireland region as specified
+                credentials_profile_name="rgt-developers-916473541114",  # Use your SSO profile name
+                model_id=bedrock_model_id,
+                model_kwargs={
+                    "max_tokens": 4096,
+                    "temperature": 0.1
+                }
+            )
+            
+            self.llm2 = ChatBedrock(
+                # client=bedrock_client, 
+                region_name="eu-west-1",  # Using Ireland region as specified
+                credentials_profile_name="rgt-developers-916473541114",  # Use your SSO profile name
+                model_id=bedrock_model_id,
+                model_kwargs={
+                    "max_tokens": 4096,
+                    "temperature": 0.1
+                }
+            )
+            
+            self.logger.info(f"✅ Initialized Bedrock judge LLMs: {bedrock_model_id} in {aws_region}")
+            
+        except Exception as e:
+            self.logger.error(f"❌ Failed to initialize Bedrock judge LLMs: {e}")
+            raise ValueError(f"Failed to initialize Bedrock judge LLMs: {e}")
 
         # Create judge panel with multiple instances (following uqlm pattern)
         self.judge_llms = [self.llm1, self.llm2]
@@ -85,7 +137,7 @@ class ImageQualityUQLMValidator:
 
         try:
             self.panel = LLMPanel(llm=primary_llm, judges=self.judge_llms)
-            self.logger.info("🎯 UQLM LLM Panel initialized successfully with 3 judges for quality validation")
+            self.logger.info("🎯 UQLM LLM Panel initialized successfully with Bedrock judges for quality validation")
         except Exception as e:
             self.logger.error(f"❌ Failed to initialize UQLM panel: {str(e)}")
             self.panel = None

@@ -1,6 +1,7 @@
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
-from agno.models.anthropic import Claude
+from agno.models.anthropic import Claude as AnthropicClaude
+from agno.models.aws import Claude as AWSClaude
 from agno.utils.log import logger
 from langchain_anthropic import ChatAnthropic
 # Validation functionality moved to standalone_validation_runner.py
@@ -43,13 +44,49 @@ def format_expense_taxonomy():
 
     return json.dumps(taxonomy_structure, indent=2)
 
-llm_client = ChatAnthropic(model="claude-sonnet-4-20250514",
-                        api_key=os.getenv("ANTHROPIC_API_KEY"))
+def create_issue_detection_model():
+    """
+    Create the appropriate model based on ISSUE_DETECTION_MODEL_PROVIDER environment variable.
+    
+    Returns:
+        Model instance for the specified provider
+    """
+    # Check specific provider first, then global fallback
+    provider = os.getenv("ISSUE_DETECTION_MODEL_PROVIDER") or os.getenv("AGENT_MODEL_PROVIDER", "openai").lower()
+    
+    if provider == "openai":
+        logger.info("Using OpenAI model for issue detection")
+        return OpenAIChat(id="gpt-4o")
+    
+    elif provider == "anthropic":
+        logger.info("Using Anthropic direct API model for issue detection")
+        return AnthropicClaude(id="claude-3-7-sonnet-20250219")
+    
+    elif provider == "bedrock":
+        logger.info("Using AWS Bedrock Claude model for issue detection")
+        try:
+            bedrock_model_id = os.getenv("BEDROCK_MODEL_ID", "anthropic.claude-3-5-sonnet-20240620-v1:0")
+            aws_region = os.getenv("AWS_REGION", "us-east-1")
+            model = AWSClaude(id=bedrock_model_id)
+            logger.info(f"Bedrock model initialized for issue detection: {bedrock_model_id} in region {aws_region}")
+            return model
+            
+        except Exception as e:
+            logger.error(f"Failed to initialize Bedrock model for issue detection: {e}")
+            logger.info("Falling back to OpenAI model for issue detection")
+            return OpenAIChat(id="gpt-4o")
+    
+    else:
+        logger.warning(f"Unknown provider '{provider}' for issue detection, falling back to OpenAI")
+        return OpenAIChat(id="gpt-4o")
+
+# Keep the separate langchain ChatAnthropic client for specific validation purposes
+# llm_client = ChatAnthropic(model="claude-sonnet-4-20250514",
+#                         api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 # Create the issue detection and analysis agent
 issue_detection_agent = Agent(
-    model=OpenAIChat(id="gpt-4o"),
-    #model=Claude(id="claude-3-7-sonnet-20250219"),
+    model=create_issue_detection_model(),
     instructions=dedent("""\
 Persona: You are an expert compliance and tax analysis AI specializing in expense document validation. Your primary function is to analyze extracted receipt data against country-specific compliance requirements and ICP-specific rules to identify issues, violations, and recommendations.
 
@@ -170,7 +207,6 @@ Return a JSON object with the following structure:
     "icp": "analyzed_icp",
     "receipt_type": "analyzed_receipt_type",
     "issues_count": number_of_issues,
-    "has_reasoning": true
   }
 }
 
@@ -183,7 +219,8 @@ VALIDATION CHECKLIST:
 □ Cross-reference location-specific compliance rules
 □ Validate currency and amount formatting
 □ Check storage and retention requirements"""),
-    reasoning=True,
+    # reasoning=True,
+    parser_model=create_issue_detection_model(),
     markdown=False,
     show_tool_calls=False
 )
@@ -254,7 +291,3 @@ Analyze systematically and provide detailed findings in the specified format.
 
     logger.info("✅ Compliance analysis completed (validation moved to standalone runner)")
     return response
-
-
-
-

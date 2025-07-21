@@ -3,6 +3,7 @@ Citation Generator
 
 This module generates citations for extracted data by finding where field names 
 and values appear in the source documents using LLM analysis.
+Supports multiple model providers: OpenAI, Anthropic, and AWS Bedrock.
 """
 
 import json
@@ -10,6 +11,8 @@ import os
 from pathlib import Path
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
+from agno.models.anthropic import Claude as AnthropicClaude
+from agno.models.aws import Claude as AWSClaude
 from agno.utils.log import logger
 from textwrap import dedent
 from dotenv import load_dotenv
@@ -17,9 +20,44 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# Create the citation agent
+def create_citation_model():
+    """
+    Create the appropriate model based on CITATION_MODEL_PROVIDER environment variable.
+    
+    Returns:
+        Model instance for the specified provider
+    """
+    provider = os.getenv("CITATION_MODEL_PROVIDER", "openai").lower()
+    
+    if provider == "openai":
+        logger.info("Using OpenAI model for citations")
+        return OpenAIChat(id="gpt-4o")
+    
+    elif provider == "anthropic":
+        logger.info("Using Anthropic direct API model for citations")
+        return AnthropicClaude(id="claude-3-5-sonnet-20241022")
+    
+    elif provider == "bedrock":
+        logger.info("Using AWS Bedrock Claude model for citations")
+        try:
+            bedrock_model_id = os.getenv("BEDROCK_MODEL_ID", "anthropic.claude-3-5-sonnet-20240620-v1:0")
+            aws_region = os.getenv("AWS_REGION", "us-east-1")
+            model = AWSClaude(id=bedrock_model_id)
+            logger.info(f"Bedrock model initialized: {bedrock_model_id} in region {aws_region}")
+            return model
+            
+        except Exception as e:
+            logger.error(f"Failed to initialize Bedrock model: {e}")
+            logger.info("Falling back to OpenAI model")
+            return OpenAIChat(id="gpt-4o")
+    
+    else:
+        logger.warning(f"Unknown provider '{provider}', falling back to OpenAI")
+        return OpenAIChat(id="gpt-4o")
+
+# Create the citation agent with the configured model
 citation_agent = Agent(
-    model=OpenAIChat(id="gpt-4o"),
+    model=create_citation_model(),
     instructions=dedent("""\
 You are a citation expert specializing in finding where extracted data fields and their values appear in source documents.
 
@@ -74,6 +112,7 @@ Return a valid JSON object with this exact structure:
 
 CRITICAL: Your response must be ONLY valid JSON. No explanatory text, markdown formatting, or additional content.
 """),
+    parser_model=create_citation_model(),
     markdown=False,
     show_tool_calls=False
 )
@@ -93,7 +132,8 @@ def generate_citations(structured_output: dict, extraction_requirements: str, ma
         Citation analysis results
     """
     try:
-        logger.info(f"Generating citations for {filename}")
+        provider = os.getenv("CITATION_MODEL_PROVIDER", "openai").lower()
+        logger.info(f"Generating citations for {filename} using {provider} model")
         
         # Prepare the prompt with all three inputs
         prompt = f"""STRUCTURED OUTPUT (JSON):
@@ -138,7 +178,7 @@ Analyze the structured output and find field and value citations in the source d
         # Save citations to file
         save_citations(citations, filename)
         
-        logger.info(f"Citations generated successfully for {filename}")
+        logger.info(f"Citations generated successfully for {filename} using {provider}")
         return citations
         
     except Exception as e:

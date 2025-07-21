@@ -1,6 +1,8 @@
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
-from agno.models.anthropic import Claude
+from agno.models.anthropic import Claude as AnthropicClaude
+from agno.models.aws import Claude as AWSClaude
+from agno.utils.log import logger
 from textwrap import dedent
 from dotenv import load_dotenv
 import json
@@ -21,12 +23,45 @@ def load_expense_schema():
 
 EXPENSE_SCHEMA = load_expense_schema()
 
-
+def create_file_classification_model():
+    """
+    Create the appropriate model based on FILE_CLASSIFICATION_MODEL_PROVIDER environment variable.
+    
+    Returns:
+        Model instance for the specified provider
+    """
+    # Check specific provider first, then global fallback
+    provider = os.getenv("FILE_CLASSIFICATION_MODEL_PROVIDER") or os.getenv("AGENT_MODEL_PROVIDER", "openai").lower()
+    
+    if provider == "openai":
+        logger.info("Using OpenAI model for file classification")
+        return OpenAIChat(id="gpt-4o")
+    
+    elif provider == "anthropic":
+        logger.info("Using Anthropic direct API model for file classification")
+        return AnthropicClaude(id="claude-3-7-sonnet-20250219")
+    
+    elif provider == "bedrock":
+        logger.info("Using AWS Bedrock Claude model for file classification")
+        try:
+            bedrock_model_id = os.getenv("BEDROCK_MODEL_ID", "anthropic.claude-3-5-sonnet-20240620-v1:0")
+            aws_region = os.getenv("AWS_REGION", "us-east-1")
+            model = AWSClaude(id=bedrock_model_id)
+            logger.info(f"Bedrock model initialized for file classification: {bedrock_model_id} in region {aws_region}")
+            return model
+            
+        except Exception as e:
+            logger.error(f"Failed to initialize Bedrock model for file classification: {e}")
+            logger.info("Falling back to OpenAI model for file classification")
+            return OpenAIChat(id="gpt-4o")
+    
+    else:
+        logger.warning(f"Unknown provider '{provider}' for file classification, falling back to OpenAI")
+        return OpenAIChat(id="gpt-4o")
 
 # Create the file classification agent
 file_classification_agent = Agent(
-    model=OpenAIChat(id="gpt-4o"),
-    #model=Claude(id="claude-3-7-sonnet-20250219"),
+    model=create_file_classification_model(),
     instructions=dedent("""\
 Persona: You are an expert file classification AI specializing in expense document analysis. Your primary function is to determine if a file contains expense-related content and classify it appropriately.
 
@@ -142,6 +177,7 @@ CRITICAL REQUIREMENTS:
 - Follow the exact error categories specified
 - Provide clear reasoning for your decision"""),
     #reasoning=True,
+    parser_model=create_file_classification_model(),
     markdown=False,
     show_tool_calls=False
 )
@@ -195,4 +231,3 @@ Analyze the above text following the schema-based workflow and provide classific
         print(f"DEBUG: Classification content preview: {response.content[:200] if response.content else 'None'}")
 
     return response
-

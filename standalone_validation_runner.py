@@ -20,7 +20,16 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional
 
 from dotenv import load_dotenv
-from langchain_anthropic import ChatAnthropic
+
+# Import Bedrock support
+try:
+    import boto3
+    from langchain_aws import ChatBedrock
+    BEDROCK_AVAILABLE = True
+except ImportError:
+    print("Warning: AWS Bedrock dependencies not available. Install with: pip install boto3 langchain-aws")
+    ChatBedrock = None
+    BEDROCK_AVAILABLE = False
 
 # Import validation classes
 from llm_output_checker import ExpenseComplianceUQLMValidator
@@ -57,16 +66,40 @@ class StandaloneValidationRunner:
         # Create output directory
         self.validation_output_dir.mkdir(exist_ok=True)
         
-        # Initialize LLM for validation
-        self.primary_llm = ChatAnthropic(
-            model="claude-3-7-sonnet-20250219",
-            api_key=os.getenv("ANTHROPIC_API_KEY")
-        )
+        # Initialize LLM for validation using Bedrock
+        self.primary_llm = self._create_primary_llm()
         
         logger.info(f"Initialized validation runner:")
         logger.info(f"  Results directory: {self.results_dir}")
         logger.info(f"  Quality directory: {self.quality_dir}")
         logger.info(f"  Output directory: {self.validation_output_dir}")
+
+    def _create_primary_llm(self):
+        """Create primary LLM instance using Bedrock exclusively."""
+        if not BEDROCK_AVAILABLE:
+            raise ValueError("AWS Bedrock dependencies not available. Install with: pip install boto3 langchain-aws")
+        
+        try:
+            aws_region = os.getenv("AWS_REGION", "us-east-1")
+   
+            bedrock_model_id = os.getenv("BEDROCK_MODEL_ID", "anthropic.claude-3-sonnet-20240229-v1:0")
+            
+            primary_llm = ChatBedrock(
+                region_name="eu-west-1",  # Using Ireland region as specified
+                credentials_profile_name="rgt-developers-916473541114",  # Use your SSO profile name
+                model_id=bedrock_model_id,
+                model_kwargs={
+                    "max_tokens": 4096,
+                    "temperature": 0.1
+                }
+            )
+            
+            logger.info(f"✅ Initialized Bedrock primary LLM: {bedrock_model_id} in {aws_region}")
+            return primary_llm
+            
+        except Exception as e:
+            logger.error(f"❌ Failed to initialize Bedrock primary LLM: {e}")
+            raise ValueError(f"Failed to initialize Bedrock primary LLM: {e}")
     
     async def run_validation(self, validate_compliance: bool = True, 
                            validate_quality: bool = True) -> Dict[str, Any]:

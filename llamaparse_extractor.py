@@ -2,7 +2,9 @@ import requests
 import pathlib
 import time
 import json
-from typing import Dict
+import os
+import tempfile
+from typing import Dict, List
 from agno.utils.log import logger
 
 from image_quality_processor import ImageQualityProcessor, SUPPORTED_IMAGE_EXTENSIONS
@@ -10,9 +12,58 @@ from llm_image_quality_assessor import LLMImageQualityAssessor
 # Validation functionality moved to standalone_validation_runner.py
 # from llm_quality_validator import ImageQualityUQLMValidator
 # from langchain_anthropic import ChatAnthropic
-# import os
+
+# Try to import PyMuPDF for PDF processing
+try:
+    import fitz  # PyMuPDF
+    PYMUPDF_AVAILABLE = True
+except ImportError:
+    PYMUPDF_AVAILABLE = False
+    logger.warning("PyMuPDF not available. PDF quality assessment will be skipped. Install with: pip install pymupdf")
 
 SUPPORTED_EXTENSIONS = {'.pdf', '.doc', '.docx', '.png', '.jpg', '.jpeg', '.tiff', '.bmp', '.gif'}
+
+def convert_pdf_first_page_to_image(pdf_path: str, output_dir: str = None) -> str:
+    """
+    Convert the first page of a PDF to a temporary image file
+    
+    Args:
+        pdf_path: Path to the PDF file
+        output_dir: Optional directory to save the image (uses temp dir if None)
+        
+    Returns:
+        Path to the generated image file or None if conversion fails
+    """
+    if not PYMUPDF_AVAILABLE:
+        logger.warning("PyMuPDF not available. Cannot convert PDF to image.")
+        return None
+        
+    # Create temp dir if needed
+    if output_dir is None:
+        output_dir = tempfile.mkdtemp()
+    else:
+        os.makedirs(output_dir, exist_ok=True)
+        
+    # Generate output path
+    pdf_name = pathlib.Path(pdf_path).stem
+    output_path = os.path.join(output_dir, f"{pdf_name}_page1.png")
+    
+    # Open PDF and convert first page
+    try:
+        logger.info(f"Converting first page of PDF to image: {pdf_path}")
+        doc = fitz.open(pdf_path)
+        if doc.page_count > 0:
+            page = doc[0]  # First page
+            pix = page.get_pixmap(matrix=fitz.Matrix(300/72, 300/72))  # 300 DPI
+            pix.save(output_path)
+            logger.info(f"Successfully converted PDF first page to: {output_path}")
+            return output_path
+        else:
+            logger.warning(f"PDF has no pages: {pdf_path}")
+            return None
+    except Exception as e:
+        logger.error(f"Error converting PDF to image: {e}")
+        return None
 
 class LlamaIndexAPI:
     """
@@ -138,7 +189,7 @@ def assess_image_quality_before_extraction(file_path: pathlib.Path, quality_proc
 
 
 async def assess_image_quality_llm_separate(file_path: pathlib.Path, llm_quality_output_dir: pathlib.Path,
-                                     opencv_assessment: Dict = None) -> Dict:
+                                     opencv_assessment: Dict = None, temp_pdf_images: List[pathlib.Path] = None) -> Dict:
     """
     Perform separate LLM-based image quality assessment and save results
 
@@ -167,7 +218,16 @@ async def assess_image_quality_llm_separate(file_path: pathlib.Path, llm_quality
 
         # Save LLM assessment results to separate directory
         llm_quality_output_dir.mkdir(parents=True, exist_ok=True)
-        output_filename = f"llm_quality_{file_path.stem}.json"
+        
+        # Check if this is a PDF-derived image and adjust the output filename
+        if file_path in temp_pdf_images:
+            # This is a temporary image from a PDF
+            original_name = file_path.stem.replace("_page1", "")
+            output_filename = f"llm_quality_{original_name}_pdf.json"
+        else:
+            # Regular image file
+            output_filename = f"llm_quality_{file_path.stem}.json"
+            
         output_path = llm_quality_output_dir / output_filename
 
         with open(output_path, 'w', encoding='utf-8') as f:
@@ -241,7 +301,7 @@ def extract_markdown(file_path: pathlib.Path, api: LlamaIndexAPI, output_dir: pa
         f.write(markdown)
     logger.info(f"✅ Successfully saved markdown to {output_file}")
 
-async def process_expense_files(api_key: str, input_folder: str = "expense_files", output_dir: str = "llamaparse_output") -> list[pathlib.Path]:
+async def process_expense_files(api_key: str, input_folder: str = "expense_files", output_dir: str = "llamaparse_output", force_reprocess: bool = False) -> list[pathlib.Path]:
     """
     Process all expense files from the specified directory with integrated quality assessment.
     Quality assessment is performed on image files as a pre-filter before LlamaParse extraction.
@@ -251,6 +311,7 @@ async def process_expense_files(api_key: str, input_folder: str = "expense_files
         api_key: LlamaIndex API key
         input_folder: Directory containing expense files (PDFs, images)
         output_dir: Directory to save extracted markdown files
+        force_reprocess: If True, reprocess files even if markdown output already exists
 
     Returns:
         List of paths to generated markdown files
@@ -282,14 +343,27 @@ async def process_expense_files(api_key: str, input_folder: str = "expense_files
     # Separate image files from non-image files
     image_files = []
     non_image_files = []
+    temp_pdf_images = []  # Track temporary images created from PDFs
     
     for file_path in files:
         if file_path.suffix.lower() in SUPPORTED_IMAGE_EXTENSIONS:
             image_files.append(file_path)
+        elif file_path.suffix.lower() == '.pdf':
+            # Add PDF to non-image files for normal processing
+            non_image_files.append(file_path)
+            
+            # Convert first page of PDF to image for quality assessment
+            if PYMUPDF_AVAILABLE:
+                temp_img_path = convert_pdf_first_page_to_image(str(file_path))
+                if temp_img_path:
+                    # Add to image files for quality assessment
+                    temp_img_path = pathlib.Path(temp_img_path)
+                    image_files.append(temp_img_path)
+                    temp_pdf_images.append(temp_img_path)
         else:
             non_image_files.append(file_path)
     
-    logger.info(f"📊 Found {len(files)} supported files: {len(image_files)} images, {len(non_image_files)} documents")
+    logger.info(f"📊 Found {len(files)} supported files: {len(image_files)} images ({len(temp_pdf_images)} from PDFs), {len(non_image_files)} documents")
     
     # Initialize quality processor for image files
     quality_processor = None
@@ -312,7 +386,12 @@ async def process_expense_files(api_key: str, input_folder: str = "expense_files
         logger.info(f"🤖 ***** Step 1b: LLM Quality Assessment with UQLM Validation for {len(image_files)} image files...")
 
         for i, file_path in enumerate(image_files, 1):
-            logger.info(f"🤖 Assessing LLM image quality {i}/{len(image_files)}: {file_path.name}")
+            # Check if this is a PDF-derived image
+            is_pdf_image = file_path in temp_pdf_images
+            original_name = file_path.stem.replace("_page1", "") if is_pdf_image else file_path.stem
+            display_name = f"{original_name}.pdf (first page)" if is_pdf_image else file_path.name
+            
+            logger.info(f"🤖 Assessing LLM image quality {i}/{len(image_files)}: {display_name}")
 
             # Check if LLM quality result already exists (e.g., from Streamlit upload)
             existing_llm_file = llm_quality_output_dir / f"llm_quality_{file_path.stem}.json"
@@ -344,7 +423,8 @@ async def process_expense_files(api_key: str, input_folder: str = "expense_files
             llm_quality_result = await assess_image_quality_llm_separate(
                 file_path,
                 llm_quality_output_dir,
-                opencv_assessment=opencv_assessment
+                opencv_assessment=opencv_assessment,
+                temp_pdf_images=temp_pdf_images
             )
             llm_quality_results_summary.append({
                 'filename': file_path.name,
@@ -394,11 +474,24 @@ async def process_expense_files(api_key: str, input_folder: str = "expense_files
         else:
             logger.warning(f"⚠️ Failed to process {file_path.name}")
 
+    # Clean up temporary PDF image files
+    if temp_pdf_images:
+        logger.info(f"🧹 Cleaning up {len(temp_pdf_images)} temporary PDF image files...")
+        for temp_file in temp_pdf_images:
+            try:
+                if temp_file.exists():
+                    temp_file.unlink()
+                    logger.debug(f"Deleted temporary file: {temp_file}")
+            except Exception as e:
+                logger.warning(f"Failed to delete temporary file {temp_file}: {e}")
+    
     # Final summary
     logger.info(f"✅ ***** Processing completed:")
     logger.info(f"    📄 LlamaParse extraction: {len(generated_files)}/{len(files)} files processed successfully")
     if image_files:
-        logger.info(f"    🔍 Quality assessments: {len(quality_results_summary)} image files assessed")
+        pdf_image_count = len([f for f in image_files if f in temp_pdf_images])
+        logger.info(f"    🔍 Quality assessments: {len(quality_results_summary)} image files assessed ({pdf_image_count} from PDFs)")
         logger.info(f"    💾 Quality reports available in: {quality_output_dir}/")
+        logger.info(f"    🤖 LLM quality reports available in: {llm_quality_output_dir}/")
     
     return generated_files

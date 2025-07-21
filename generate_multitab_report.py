@@ -152,7 +152,6 @@ def create_issues_section(results_data, filename):
         rows.append({
             'index': i,
             'issue_type': issue.get('issue_type', ''),
-            'field': issue.get('field', ''),
             'description': issue.get('description', ''),
             'recommendation': issue.get('recommendation', ''),
             'knowledge_base_reference': issue.get('knowledge_base_reference', ''),
@@ -412,6 +411,119 @@ def create_image_quality_breakdown_section(quality_data, filename):
     
     return pd.DataFrame(rows)
 
+def create_citation_section(citation_data, filename):
+    """Create citation section dataframe with field-level citations"""
+    if not citation_data or 'citations' not in citation_data:
+        return pd.DataFrame()
+    
+    citations = citation_data['citations']
+    rows = []
+    
+    for field_name, citation_info in citations.items():
+        field_citation = citation_info.get('field_citation', {})
+        value_citation = citation_info.get('value_citation', {})
+        
+        # Handle case where value_citation might be None
+        if value_citation is None:
+            value_citation = {}
+        
+        row = {
+            'file_name': filename,
+            'field_name': field_name,
+            'field_source_text': field_citation.get('source_text', ''),
+            'field_confidence': field_citation.get('confidence', ''),
+            'field_source_location': field_citation.get('source_location', ''),
+            'field_match_type': field_citation.get('match_type', ''),
+            'value_source_text': value_citation.get('source_text', ''),
+            'value_confidence': value_citation.get('confidence', ''),
+            'value_source_location': value_citation.get('source_location', ''),
+            'value_match_type': value_citation.get('match_type', ''),
+            'context': field_citation.get('context', ''),
+            'QA': '',
+            'note': ''
+        }
+        
+        rows.append(row)
+    
+    return pd.DataFrame(rows)
+
+def create_citation_metadata_section(citation_data, filename):
+    """Create citation metadata summary section"""
+    if not citation_data or 'metadata' not in citation_data:
+        return pd.DataFrame()
+    
+    metadata = citation_data['metadata']
+    
+    data = {
+        'file_name': filename,
+        'total_fields_analyzed': metadata.get('total_fields_analyzed', 0),
+        'fields_with_field_citations': metadata.get('fields_with_field_citations', 0),
+        'fields_with_value_citations': metadata.get('fields_with_value_citations', 0),
+        'average_confidence': metadata.get('average_confidence', 0),
+        'QA': '',
+        'note': ''
+    }
+    
+    return pd.DataFrame([data])
+
+def create_llm_quality_overall_section(llm_quality_data, filename):
+    """Create LLM quality overall assessment section"""
+    if not llm_quality_data:
+        return pd.DataFrame()
+    
+    data = {
+        'file_name': filename,
+        'assessment_method': llm_quality_data.get('assessment_method', ''),
+        'model_used': llm_quality_data.get('model_used', ''),
+        'overall_quality_score': llm_quality_data.get('overall_quality_score', ''),
+        'suitable_for_extraction': llm_quality_data.get('suitable_for_extraction', ''),
+        'timestamp': llm_quality_data.get('timestamp', ''),
+        'QA': '',
+        'note': ''
+    }
+    
+    return pd.DataFrame([data])
+
+def create_llm_quality_detailed_section(llm_quality_data, filename):
+    """Create LLM quality detailed assessment section"""
+    if not llm_quality_data:
+        return pd.DataFrame()
+    
+    # Define the quality aspects to extract
+    quality_aspects = [
+        'blur_detection',
+        'contrast_assessment',
+        'glare_identification',
+        'water_stains',
+        'tears_or_folds',
+        'cut_off_detection',
+        'missing_sections',
+        'obstructions'
+    ]
+    
+    rows = []
+    
+    for aspect in quality_aspects:
+        if aspect in llm_quality_data:
+            aspect_data = llm_quality_data[aspect]
+            
+            row = {
+                'file_name': filename,
+                'quality_aspect': aspect.replace('_', ' ').title(),
+                'detected': aspect_data.get('detected', ''),
+                'severity_level': aspect_data.get('severity_level', ''),
+                'confidence_score': aspect_data.get('confidence_score', ''),
+                'quantitative_measure': aspect_data.get('quantitative_measure', ''),
+                'description': aspect_data.get('description', ''),
+                'recommendation': aspect_data.get('recommendation', ''),
+                'QA': '',
+                'note': ''
+            }
+            
+            rows.append(row)
+    
+    return pd.DataFrame(rows)
+
 def auto_adjust_column_widths(ws):
     """Auto-adjust column widths for a worksheet"""
     for col_num in range(1, ws.max_column + 1):
@@ -433,11 +545,23 @@ def create_worksheet_for_file(wb, filename):
     """Create a worksheet for a single file with all sections"""
     print(f"Processing {filename}...")
     
-    # Load data from all sources
+    # Load data from all sources with fallback patterns
     results_data = load_json_file(f'results/{filename}.json')
-    validation_data = load_json_file(f'validation_results/{filename}_validation.json')
-    quality_data = load_json_file(f'quality_reports/{filename}_quality.json')
+    
+    # Try different validation file patterns
+    validation_data = (load_json_file(f'validation_results/{filename}_compliance_validation.json') or 
+                      load_json_file(f'validation_results/{filename}_validation.json'))
+    
+    # Try different quality file patterns
+    quality_data = (load_json_file(f'quality_reports/{filename}_page1_quality.json') or 
+                   load_json_file(f'quality_reports/{filename}_quality.json'))
+    
     markdown_content = load_markdown_file(f'llamaparse_output/{filename}.md')
+    citation_data = load_json_file(f'citation_folder/{filename}_citation.json')
+    
+    # Try different LLM quality file patterns
+    llm_quality_data = (load_json_file(f'llm_quality_reports/llm_quality_{filename}_pdf.json') or 
+                       load_json_file(f'llm_quality_reports/llm_quality_{filename}.json'))
     
     # Create worksheet
     ws = wb.create_sheet(title=filename)
@@ -483,20 +607,40 @@ def create_worksheet_for_file(wb, filename):
     if not markdown_df.empty:
         current_row = add_dataframe_to_worksheet(ws, markdown_df, current_row, "MARKDOWN SECTION")
     
-    # 9. Image Quality - Overall Assessment
+    # 9. Citation Section - Field-Level Citations
+    citation_df = create_citation_section(citation_data, filename)
+    if not citation_df.empty:
+        current_row = add_dataframe_to_worksheet(ws, citation_df, current_row, "CITATION SECTION - FIELD-LEVEL CITATIONS")
+    
+    # 10. Citation Section - Metadata Summary
+    citation_metadata_df = create_citation_metadata_section(citation_data, filename)
+    if not citation_metadata_df.empty:
+        current_row = add_dataframe_to_worksheet(ws, citation_metadata_df, current_row, "CITATION SECTION - METADATA SUMMARY")
+    
+    # 11. Image Quality - Overall Assessment
     quality_overall_df = create_image_quality_overall_section(quality_data, filename)
     if not quality_overall_df.empty:
         current_row = add_dataframe_to_worksheet(ws, quality_overall_df, current_row, "IMAGE QUALITY - OVERALL ASSESSMENT")
     
-    # 10. Image Quality - Detailed Metrics
+    # 12. Image Quality - Detailed Metrics
     quality_detailed_df = create_image_quality_detailed_section(quality_data, filename)
     if not quality_detailed_df.empty:
         current_row = add_dataframe_to_worksheet(ws, quality_detailed_df, current_row, "IMAGE QUALITY - DETAILED METRICS")
     
-    # 11. Image Quality - Score Breakdown
+    # 13. Image Quality - Score Breakdown
     quality_breakdown_df = create_image_quality_breakdown_section(quality_data, filename)
     if not quality_breakdown_df.empty:
         current_row = add_dataframe_to_worksheet(ws, quality_breakdown_df, current_row, "IMAGE QUALITY - SCORE BREAKDOWN")
+    
+    # 14. LLM Quality - Overall Assessment
+    llm_quality_overall_df = create_llm_quality_overall_section(llm_quality_data, filename)
+    if not llm_quality_overall_df.empty:
+        current_row = add_dataframe_to_worksheet(ws, llm_quality_overall_df, current_row, "LLM QUALITY - OVERALL ASSESSMENT")
+    
+    # 15. LLM Quality - Detailed Assessment
+    llm_quality_detailed_df = create_llm_quality_detailed_section(llm_quality_data, filename)
+    if not llm_quality_detailed_df.empty:
+        current_row = add_dataframe_to_worksheet(ws, llm_quality_detailed_df, current_row, "LLM QUALITY - DETAILED ASSESSMENT")
     
     # Auto-adjust column widths
     auto_adjust_column_widths(ws)
@@ -505,10 +649,11 @@ def create_worksheet_for_file(wb, filename):
 
 def get_file_list():
     """Get list of all unique file names across all directories"""
+    import re
     files = set()
     
     # Check each directory for files
-    directories = ['results', 'validation_results', 'quality_reports', 'dataset']
+    directories = ['results', 'validation_results', 'quality_reports', 'dataset', 'citation_folder', 'llm_quality_reports']
     
     for directory in directories:
         if os.path.exists(directory):
@@ -516,14 +661,29 @@ def get_file_list():
                 if filename.endswith('.json'):
                     base_name = filename.replace('.json', '')
                     
-                    # Handle different naming conventions
-                    if base_name.endswith('_validation'):
+                    # Handle different naming conventions with more comprehensive pattern matching
+                    # Order matters - handle most specific patterns first
+                    
+                    # Handle compound suffixes like _compliance_validation, _page1_quality
+                    if base_name.endswith('_compliance_validation'):
+                        base_name = base_name.replace('_compliance_validation', '')
+                    elif base_name.endswith('_page1_quality'):
+                        base_name = base_name.replace('_page1_quality', '')
+                    elif base_name.endswith('_validation'):
                         base_name = base_name.replace('_validation', '')
                     elif base_name.endswith('_quality'):
                         base_name = base_name.replace('_quality', '')
+                    elif base_name.endswith('_citation'):
+                        base_name = base_name.replace('_citation', '')
+                    elif base_name.startswith('llm_quality_'):
+                        base_name = base_name.replace('llm_quality_', '')
                     
-                    # Filter out summary_report as it's not an individual file
-                    if base_name != 'summary_report':
+                    # Additional cleanup for any remaining page/pdf suffixes that might exist
+                    # Use regex to remove patterns like _page1, _pdf, _compliance at the end
+                    base_name = re.sub(r'_(?:page\d+|pdf|compliance)$', '', base_name)
+                    
+                    # Filter out summary_report and validation_summary as they're not individual files
+                    if base_name not in ['summary_report', 'validation_summary'] and base_name.strip():
                         files.add(base_name)
     
     return sorted(list(files))
@@ -536,17 +696,12 @@ def extract_results_data_summary(data):
     # Extract classification data
     classification = data.get('classification_result', {})
     
-    # Extract extraction result count (count non-null fields in extraction_result)
-    extraction_result = data.get('extraction_result', {})
-    extraction_count = sum(1 for v in extraction_result.values() if v is not None and v != "")
-    
     # Extract compliance issues count
     compliance = data.get('compliance_result', {})
     validation = compliance.get('validation_result', {})
     issues_count = validation.get('issues_count', 0)
     
     return {
-        'extraction_result_count': extraction_count,
         'issues_count': issues_count,
         'is_expense': classification.get('is_expense', False),
         'language': classification.get('language', ''),
@@ -591,6 +746,182 @@ def extract_quality_data_summary(data):
         'damage_score': detailed.get('damage', {}).get('damage_score', 0)
     }
 
+def extract_llm_quality_data_summary(data):
+    """Extract data from llm_quality_reports folder JSON for summary"""
+    if not data:
+        return {}
+    
+    return {
+        'llm_suitable_for_extraction': data.get('suitable_for_extraction', False),
+        'llm_model_used': data.get('model_used', ''),
+        'llm_blur_detected': data.get('blur_detection', {}).get('detected', False),
+        'llm_blur_severity': data.get('blur_detection', {}).get('severity_level', ''),
+        'llm_glare_detected': data.get('glare_identification', {}).get('detected', False),
+        'llm_glare_severity': data.get('glare_identification', {}).get('severity_level', ''),
+        'llm_cut_off_detected': data.get('cut_off_detection', {}).get('detected', False),
+        'llm_missing_sections': data.get('missing_sections', {}).get('detected', False)
+    }
+
+def extract_business_data(file_base):
+    """Extract business-relevant data for a single file"""
+    
+    # Initialize row data
+    row_data = {'filename': file_base}
+    
+    # Load data from each source with fallback patterns
+    results_data = load_json_file(f'results/{file_base}.json')
+    
+    # Try different validation file patterns
+    validation_data = (load_json_file(f'validation_results/{file_base}_compliance_validation.json') or 
+                      load_json_file(f'validation_results/{file_base}_validation.json'))
+    
+    # Try different quality file patterns
+    quality_data = (load_json_file(f'quality_reports/{file_base}_page1_quality.json') or 
+                   load_json_file(f'quality_reports/{file_base}_quality.json'))
+    
+    dataset_data = load_json_file(f'dataset/{file_base}.json')
+    citation_data = load_json_file(f'citation_folder/{file_base}_citation.json')
+    
+    # Try different LLM quality file patterns
+    llm_quality_data = (load_json_file(f'llm_quality_reports/llm_quality_{file_base}_pdf.json') or 
+                       load_json_file(f'llm_quality_reports/llm_quality_{file_base}.json'))
+    
+    # Extract language and isExpense from results
+    if results_data and 'classification_result' in results_data:
+        classification = results_data['classification_result']
+        row_data['language'] = classification.get('language', 'Unknown')
+        row_data['isExpense'] = classification.get('is_expense', False)
+    else:
+        row_data['language'] = 'Unknown'
+        row_data['isExpense'] = False
+    
+    # Extract document location from dataset
+    if dataset_data:
+        row_data['document_location'] = dataset_data.get('country', 'Unknown')
+    else:
+        row_data['document_location'] = 'Unknown'
+    
+    # Extract issue count from results
+    if results_data and 'compliance_result' in results_data:
+        compliance = results_data['compliance_result']
+        validation = compliance.get('validation_result', {})
+        row_data['issue_count'] = validation.get('issues_count', 0)
+    else:
+        row_data['issue_count'] = 0
+    
+    # Extract validation confidence score and normalize to percentage (0-100)
+    if validation_data and 'validation_report' in validation_data:
+        overall = validation_data['validation_report'].get('overall_assessment', {})
+        validation_score = overall.get('confidence_score', 0)
+        # Convert 0-1 scale to percentage
+        row_data['validation_confidence_score'] = round(validation_score * 100, 1)
+    else:
+        row_data['validation_confidence_score'] = 0
+    
+    # Extract average confidence from citation and normalize to percentage (0-100)
+    if citation_data and 'metadata' in citation_data:
+        metadata = citation_data['metadata']
+        citation_score = metadata.get('average_confidence', 0)
+        # Convert 0-1 scale to percentage
+        row_data['citation_average_confidence'] = round(citation_score * 100, 1)
+    else:
+        row_data['citation_average_confidence'] = 0
+    
+    # Extract image quality overall score (already 0-100 scale)
+    if quality_data and 'overall_assessment' in quality_data:
+        overall = quality_data['overall_assessment']
+        row_data['image_quality_score'] = round(overall.get('score', 0), 1)
+    else:
+        row_data['image_quality_score'] = 0
+    
+    # Extract LLM quality data and normalize to percentage (0-100)
+    if llm_quality_data:
+        llm_score = llm_quality_data.get('overall_quality_score', 0)
+        # Convert 0-10 scale to percentage
+        row_data['llm_quality_score'] = round(llm_score * 10, 1)
+        row_data['llm_suitable_for_extraction'] = llm_quality_data.get('suitable_for_extraction', False)
+    else:
+        row_data['llm_quality_score'] = 0
+        row_data['llm_suitable_for_extraction'] = False
+    
+    # Calculate overall score with specified weights
+    # Weights: validation 50%, llm_quality 25%, citation 15%, image_quality 10%
+    # All scores are now in percentage format, so normalize to 0-1 for calculation
+    validation_score = row_data['validation_confidence_score'] / 100
+    citation_score = row_data['citation_average_confidence'] / 100
+    image_score = row_data['image_quality_score'] / 100
+    llm_score_normalized = row_data['llm_quality_score'] / 100
+    
+    # Apply weights
+    weights = {
+        'validation': 0.50,
+        'llm_quality': 0.25,
+        'citation': 0.15,
+        'image_quality': 0.10
+    }
+    
+    # Calculate weighted overall score (0-1 scale)
+    overall_score = (
+        validation_score * weights['validation'] +
+        llm_score_normalized * weights['llm_quality'] +
+        citation_score * weights['citation'] +
+        image_score * weights['image_quality']
+    )
+    
+    # Convert to percentage and round
+    row_data['overall_score'] = round(overall_score * 100, 1)
+    
+    return row_data
+
+def create_business_summary_worksheet(wb, file_list):
+    """Create business summary worksheet as second tab"""
+    print("Creating business summary worksheet...")
+    
+    # Extract data for all files
+    report_data = []
+    for file_base in file_list:
+        try:
+            row_data = extract_business_data(file_base)
+            report_data.append(row_data)
+        except Exception as e:
+            print(f"Error processing {file_base} for business summary: {e}")
+    
+    # Create DataFrame
+    df = pd.DataFrame(report_data)
+    
+    # Reorder columns for better readability
+    column_order = [
+        'filename',
+        'overall_score',
+        'document_location',
+        'isExpense',
+        'issue_count',
+        'validation_confidence_score',
+        'citation_average_confidence',
+        'image_quality_score',
+        'llm_quality_score',
+        'llm_suitable_for_extraction'
+    ]
+    
+    # Only include columns that exist
+    final_columns = [col for col in column_order if col in df.columns]
+    df = df[final_columns]
+    
+    # Sort by filename for consistency
+    df = df.sort_values('filename').reset_index(drop=True)
+    
+    # Create business summary worksheet
+    ws = wb.create_sheet(title="Business Summary", index=0)
+    current_row = 1
+    
+    # Add business summary data to worksheet
+    current_row = add_dataframe_to_worksheet(ws, df, current_row, "BUSINESS SUMMARY REPORT")
+    
+    # Auto-adjust column widths
+    auto_adjust_column_widths(ws)
+    
+    print(f"Added business summary worksheet with {len(df)} files")
+
 def create_summary_worksheet(wb, file_list):
     """Create summary worksheet as first tab"""
     print("Creating summary worksheet...")
@@ -602,16 +933,28 @@ def create_summary_worksheet(wb, file_list):
         # Initialize row data
         row_data = {'file': file_base}
         
-        # Load data from each source
+        # Load data from each source with fallback patterns
         results_data = load_json_file(f'results/{file_base}.json')
-        validation_data = load_json_file(f'validation_results/{file_base}_validation.json')
-        quality_data = load_json_file(f'quality_reports/{file_base}_quality.json')
+        
+        # Try different validation file patterns
+        validation_data = (load_json_file(f'validation_results/{file_base}_compliance_validation.json') or 
+                          load_json_file(f'validation_results/{file_base}_validation.json'))
+        
+        # Try different quality file patterns
+        quality_data = (load_json_file(f'quality_reports/{file_base}_page1_quality.json') or 
+                       load_json_file(f'quality_reports/{file_base}_quality.json'))
+        
         dataset_data = load_json_file(f'dataset/{file_base}.json')
+        
+        # Try different LLM quality file patterns
+        llm_quality_data = (load_json_file(f'llm_quality_reports/llm_quality_{file_base}_pdf.json') or 
+                           load_json_file(f'llm_quality_reports/llm_quality_{file_base}.json'))
         
         # Extract data from each source
         row_data.update(extract_results_data_summary(results_data))
         row_data.update(extract_validation_data_summary(validation_data))
         row_data.update(extract_quality_data_summary(quality_data))
+        row_data.update(extract_llm_quality_data_summary(llm_quality_data))
         
         # Add dataset info if available
         if dataset_data:
@@ -626,7 +969,6 @@ def create_summary_worksheet(wb, file_list):
     # Define column order with QA columns interspersed
     columns_order = ['file']
     data_columns = [
-        'extraction_result_count',
         'issues_count',
         'is_expense',
         'language',
@@ -646,6 +988,14 @@ def create_summary_worksheet(wb, file_list):
         'glare_score',
         'completeness_score',
         'damage_score',
+        'llm_suitable_for_extraction',
+        'llm_model_used',
+        'llm_blur_detected',
+        'llm_blur_severity',
+        'llm_glare_detected',
+        'llm_glare_severity',
+        'llm_cut_off_detected',
+        'llm_missing_sections',
         'country',
         'icp'
     ]
@@ -678,7 +1028,6 @@ def create_summary_worksheet(wb, file_list):
     
     # Fill NaN values with appropriate defaults
     df = df.fillna({
-        'extraction_result_count': 0,
         'issues_count': 0,
         'is_expense': False,
         'language': '',
@@ -698,12 +1047,20 @@ def create_summary_worksheet(wb, file_list):
         'glare_score': 0,
         'completeness_score': 0,
         'damage_score': 0,
+        'llm_suitable_for_extraction': False,
+        'llm_model_used': '',
+        'llm_blur_detected': False,
+        'llm_blur_severity': '',
+        'llm_glare_detected': False,
+        'llm_glare_severity': '',
+        'llm_cut_off_detected': False,
+        'llm_missing_sections': False,
         'country': '',
         'icp': ''
     })
     
     # Create summary worksheet
-    ws = wb.create_sheet(title="Summary", index=0)
+    ws = wb.create_sheet(title="Summary", index=1)
     current_row = 1
     
     # Add summary data to worksheet
@@ -726,7 +1083,10 @@ def generate_multitab_report():
     default_sheet = wb.active
     wb.remove(default_sheet)
     
-    # Create summary worksheet first
+    # Create business summary worksheet first
+    create_business_summary_worksheet(wb, file_list)
+    
+    # Create summary worksheet second
     create_summary_worksheet(wb, file_list)
     
     # Create worksheets for each file
