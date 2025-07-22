@@ -2,137 +2,185 @@
   "citations": {
     "supplier_name": {
       "field_citation": {
-        "source_text": "GIAMAICA CAFFE' SRL",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "# BAR ACCADEMIA\nGIAMAICA CAFFE' SRL",
+        "source_text": "BAR ACCADEMIA, GIAMAICA CAFFE' SRL",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Document header",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "GIAMAICA CAFFE' SRL",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "# BAR ACCADEMIA\nGIAMAICA CAFFE' SRL",
+        "source_text": "BAR ACCADEMIA, GIAMAICA CAFFE' SRL",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Document header",
         "match_type": "exact"
       }
     },
     "supplier_address": {
       "field_citation": {
-        "source_text": "VIA DEL TRITONE,54",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+        "source_text": "VIA DEL TRITONE,54, 00187 ROMA",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Document header",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "VIA DEL TRITONE,54, 00187 ROMA",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
-        "match_type": "fuzzy"
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Document header",
+        "match_type": "exact"
       }
     },
     "vat_number": {
       "field_citation": {
-        "source_text": "P.IVA 01845911005",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "00187 ROMA\nP.IVA 01845911005",
+        "source_text": "P.IVA",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "P.IVA 01845911005",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "01845911005",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "00187 ROMA\nP.IVA 01845911005",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "P.IVA 01845911005",
         "match_type": "exact"
       }
     },
-    "currency": {
+    "contact_phone": {
       "field_citation": {
-        "source_text": "Prezzo(€)",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "| DESCRIZIONE                           | IVA    | Prezzo(€) |",
-        "match_type": "fuzzy"
+        "source_text": "TEL.",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "TEL. 06/6793585",
+        "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "€",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "| DESCRIZIONE                           | IVA    | Prezzo(€) |",
-        "match_type": "contextual"
-      }
-    },
-    "amount": {
-      "field_citation": {
-        "source_text": "TOTALE COMPLESSIVO",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| TOTALE COMPLESSIVO                    |        | 42,12     |",
-        "match_type": "contextual"
-      },
-      "value_citation": {
-        "source_text": "42,12",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| TOTALE COMPLESSIVO                    |        | 42,12     |",
+        "source_text": "06/6793585",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "TEL. 06/6793585",
         "match_type": "exact"
       }
     },
     "receipt_type": {
       "field_citation": {
-        "source_text": "DOCUMENTO COMMERCIALE",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "## DOCUMENTO COMMERCIALE\ndi vendita o prestazione",
+        "source_text": "DOCUMENTO COMMERCIALE di vendita o prestazione",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Document title",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "DOCUMENTO COMMERCIALE",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "## DOCUMENTO COMMERCIALE\ndi vendita o prestazione",
+        "source_text": "DOCUMENTO COMMERCIALE di vendita o prestazione",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Document title",
         "match_type": "exact"
       }
     },
     "payment_method": {
       "field_citation": {
         "source_text": "Pagamento contante",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| Pagamento contante                    |        | 42,12     |",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Payment details section",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "contante",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| Pagamento contante                    |        | 42,12     |",
+        "source_text": "Pagamento contante",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Payment details section",
         "match_type": "exact"
       }
     },
-    "contact_phone": {
+    "currency": {
       "field_citation": {
-        "source_text": "TEL. 06/6793585",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "00187 ROMA\nP.IVA 01845911005\nTEL. 06/6793585",
+        "source_text": "€",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Table header",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "06/6793585",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "00187 ROMA\nP.IVA 01845911005\nTEL. 06/6793585",
+        "source_text": "€",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Table header",
+        "match_type": "exact"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "TOTALE COMPLESSIVO",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "42,12",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "42,12",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "TOTALE COMPLESSIVO 42,12",
+        "match_type": "exact"
+      }
+    },
+    "subtotal": {
+      "field_citation": {
+        "source_text": "SUBTOTALE",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "36,00",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "36,00",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "SUBTOTALE 36,00",
+        "match_type": "exact"
+      }
+    },
+    "service_charge": {
+      "field_citation": {
+        "source_text": "Servizio",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Servizio 6,12",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "6,12",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Servizio 6,12",
+        "match_type": "exact"
+      }
+    },
+    "tax_amount": {
+      "field_citation": {
+        "source_text": "di cui IVA",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "di cui IVA 3,83",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "3,83",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "di cui IVA 3,83",
         "match_type": "exact"
       }
     }
   },
   "metadata": {
-    "total_fields_analyzed": 8,
-    "fields_with_field_citations": 8,
-    "fields_with_value_citations": 8,
-    "average_confidence": 0.89
+    "total_fields_analyzed": 11,
+    "fields_with_field_citations": 11,
+    "fields_with_value_citations": 11,
+    "average_confidence": 1.0
   }
 }

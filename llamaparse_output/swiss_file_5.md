@@ -14,6 +14,7 @@ Bar                          Tisch  7/01
 | 1xChässpätzli      | à | 18.50 CHF | 18.50     |
 | Total :            |   |           | CHF 54.50 |
 
+
 Incl. 7.6% MwSt  54.50 CHF:  3.85
 
 Entspricht in Euro  36.33 EUR

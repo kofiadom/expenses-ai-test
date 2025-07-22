@@ -5,6 +5,8 @@ from agno.models.aws import Claude as AWSClaude
 from agno.utils.log import logger
 from textwrap import dedent
 from dotenv import load_dotenv
+from typing import List, Optional
+from pydantic import BaseModel, Field
 import json
 import os
 
@@ -22,6 +24,29 @@ def load_expense_schema():
         raise FileNotFoundError(f"Expense schema file not found: {schema_path}")
 
 EXPENSE_SCHEMA = load_expense_schema()
+
+# Pydantic models for structured output
+class SchemaFieldAnalysis(BaseModel):
+    """Analysis of schema fields found in the document."""
+    fields_found: List[str] = Field(..., description="List of schema fields identified in document")
+    fields_missing: List[str] = Field(..., description="List of schema fields not found in document")
+    total_fields_found: int = Field(..., description="Number of schema fields found")
+    expense_identification_reasoning: str = Field(..., description="Detailed explanation citing exact fields found/missing for expense determination")
+
+class FileClassificationResult(BaseModel):
+    """Structured result for file classification analysis."""
+    is_expense: bool = Field(..., description="Whether this is an expense document")
+    expense_type: Optional[str] = Field(None, description="Category name if is_expense is true")
+    language: str = Field(..., description="Primary language of the document")
+    language_confidence: int = Field(..., description="Confidence score for language identification (0-100)")
+    document_location: Optional[str] = Field(None, description="Detected country/location from document")
+    expected_location: str = Field(..., description="Provided expected location")
+    location_match: bool = Field(..., description="Whether document location matches expected location")
+    error_type: Optional[str] = Field(None, description="Error category if any issues found")
+    error_message: Optional[str] = Field(None, description="Detailed error description if applicable")
+    classification_confidence: int = Field(..., description="Confidence score for classification (0-100)")
+    reasoning: str = Field(..., description="Brief explanation of classification decision")
+    schema_field_analysis: SchemaFieldAnalysis = Field(..., description="Analysis of schema fields found in document")
 
 def create_file_classification_model():
     """
@@ -59,9 +84,10 @@ def create_file_classification_model():
         logger.warning(f"Unknown provider '{provider}' for file classification, falling back to OpenAI")
         return OpenAIChat(id="gpt-4o")
 
-# Create the file classification agent
+# Create the file classification agent with structured output
 file_classification_agent = Agent(
     model=create_file_classification_model(),
+    response_model=FileClassificationResult,
     instructions=dedent("""\
 Persona: You are an expert file classification AI specializing in expense document analysis. Your primary function is to determine if a file contains expense-related content and classify it appropriately.
 
@@ -148,41 +174,18 @@ PROCESSING WORKFLOW:
 6. Compare document location with expected location
 7. Set appropriate error flags if any issues found
 
-OUTPUT FORMAT:
-Return a JSON object with the following structure:
-{
-  "is_expense": true/false,
-  "expense_type": "category_name" or null,
-  "language": "language_name",
-  "language_confidence": 0-100,
-  "document_location": "detected_country/location" or null,
-  "expected_location": "provided_expected_location",
-  "location_match": true/false,
-  "error_type": null or "error_category",
-  "error_message": null or "detailed_error_description",
-  "classification_confidence": 0-100,
-  "reasoning": "brief explanation of classification decision",
-  "schema_field_analysis": {
-    "fields_found": ["list of schema fields identified in document"],
-    "fields_missing": ["list of schema fields not found in document"],
-    "total_fields_found": number,
-    "expense_identification_reasoning": "detailed explanation citing exact fields found/missing for expense determination"
-  }
-}
-
 CRITICAL REQUIREMENTS:
-- Your output MUST BE ONLY a valid JSON object
-- Do not include explanatory text, greetings, or markdown formatting
 - Be conservative in classification - when in doubt, mark as not an expense
 - Follow the exact error categories specified
-- Provide clear reasoning for your decision"""),
+- Provide clear reasoning for your decision
+- Ensure all fields are properly populated according to the structured output model"""),
     #reasoning=True,
     parser_model=create_file_classification_model(),
     markdown=False,
     show_tool_calls=False
 )
 
-def classify_file(receipt_text: str, expected_country: str = None) -> str:
+def classify_file(receipt_text: str, expected_country: str = None) -> FileClassificationResult:
     """
     Classify a file to determine if it's an expense document and categorize it using schema-based field analysis.
 
@@ -191,7 +194,7 @@ def classify_file(receipt_text: str, expected_country: str = None) -> str:
         expected_country: The expected country/location for validation (optional)
 
     Returns:
-        JSON string with classification results including schema field analysis
+        FileClassificationResult object with structured classification results
     """
     # Create schema field descriptions for the prompt
     schema_fields_description = ""
@@ -219,15 +222,17 @@ ANALYSIS INSTRUCTIONS:
 
 Analyze the above text following the schema-based workflow and provide classification results in the specified JSON format."""
 
-    # Get the response from the agent
+    # Get the structured response from the agent
     response = file_classification_agent.run(formatted_prompt)
 
     # Debug logging
-    print(f"DEBUG: Classification response type: {type(response)}")
-    print(f"DEBUG: Classification response has content: {hasattr(response, 'content')}")
+    logger.info(f"Classification response type: {type(response)}")
     if hasattr(response, 'content'):
-        print(f"DEBUG: Classification content type: {type(response.content)}")
-        print(f"DEBUG: Classification content length: {len(response.content) if response.content else 'None'}")
-        print(f"DEBUG: Classification content preview: {response.content[:200] if response.content else 'None'}")
+        logger.info(f"Classification content type: {type(response.content)}")
+        if isinstance(response.content, FileClassificationResult):
+            logger.info("✅ Received structured FileClassificationResult")
+        else:
+            logger.warning(f"⚠️ Expected FileClassificationResult, got {type(response.content)}")
 
-    return response
+    # Return the structured response directly
+    return response.content if hasattr(response, 'content') else response

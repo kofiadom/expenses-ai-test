@@ -2,145 +2,97 @@
   "citations": {
     "supplier_name": {
       "field_citation": {
-        "source_text": "GIAMAICA CAFFE' SRL",
+        "source_text": "supplier_name",
         "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+        "source_location": "requirements",
+        "context": "supplier_name appears as header",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "GIAMAICA CAFFE' SRL",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "found exactly at top of receipt",
         "match_type": "exact"
       }
     },
-    "supplier_address": {
+    "address": {
       "field_citation": {
-        "source_text": "VIA DEL TRITONE,54\n00187 ROMA",
+        "source_text": "Address",
         "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+        "source_location": "requirements",
+        "context": "Address shown as standard receipt header",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "VIA DEL TRITONE,54 00187 ROMA",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
-        "match_type": "fuzzy"
-      }
-    },
-    "vat_number": {
-      "field_citation": {
-        "source_text": "P.IVA",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "00187 ROMA\nP.IVA 01845911005",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "01845911005",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "P.IVA 01845911005\nTEL. 06/6793583",
+        "source_text": "VIA DEL TRITONE,54, 00187 ROMA",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "matches exactly in header",
         "match_type": "exact"
       }
     },
-    "currency": {
+    "document_type": {
       "field_citation": {
-        "source_text": "Prezzo(€)",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "| DESCRIZIONE | IVA | Prezzo(€) |",
-        "match_type": "contextual"
-      },
-      "value_citation": {
-        "source_text": "€",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "| DESCRIZIONE | IVA | Prezzo(€) |",
-        "match_type": "contextual"
-      }
-    },
-    "total_amount": {
-      "field_citation": {
-        "source_text": "TOTALE COMPLESSIVO",
+        "source_text": "Receipt type",
         "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| TOTALE COMPLESSIVO | | 39,78 |",
+        "source_location": "requirements",
+        "context": "Receipt type shown as header",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "39,78",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| TOTALE COMPLESSIVO | | 39,78 |",
+        "source_text": "DOCUMENTO COMMERCIALE di vendita o prestazione",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "matches exactly",
         "match_type": "exact"
       }
     },
-    "date_of_issue": {
+    "line_items": {
       "field_citation": {
-        "source_text": "DATE",
-        "confidence": 0.7,
-        "source_location": "contextual",
-        "context": "12-09-2019 22:25",
-        "match_type": "contextual"
+        "source_text": "DESCRIZIONE, IVA, Prezzo(€)",
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "Table headers",
+        "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "12-09-2019",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "12-09-2019 22:25\nDOCUMENTO N. 0117-0304",
+        "source_text": "BOLOGNESE 14,00€, LASAGNA 14,00€, MINERALE CL 75 6,00€",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "Match exactly in table",
         "match_type": "exact"
       }
     },
-    "receipt_type": {
+    "amounts": {
       "field_citation": {
-        "source_text": "DOCUMENTO COMMERCIALE",
+        "source_text": "SUBTOTALE, TOTALE COMPLESSIVO",
         "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "DOCUMENTO COMMERCIALE\ndi vendita o prestazione",
+        "source_location": "requirements",
+        "context": "Amount fields shown",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "DOCUMENTO COMMERCIALE",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "DOCUMENTO COMMERCIALE\ndi vendita o prestazione",
+        "source_text": "Subtotal: 34,00€, Service charge: 5,78€, Total: 39,78€, VAT: 3,62€",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "Match exactly",
         "match_type": "exact"
       }
     },
-    "payment_method": {
+    "date_time": {
       "field_citation": {
-        "source_text": "Pagamento contante",
+        "source_text": "Date/Time",
         "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Pagamento contante | | 39,78 |",
+        "source_location": "requirements",
+        "context": "Shown at bottom",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "Contante",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Pagamento contante | | 39,78 |",
-        "match_type": "contextual"
-      }
-    },
-    "contact_phone": {
-      "field_citation": {
-        "source_text": "TEL.",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "P.IVA 01845911005\nTEL. 06/6793583",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "06/6793583",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "TEL. 06/6793583",
+        "source_text": "12-09-2019 22:25",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "matches after format standardization",
         "match_type": "exact"
       }
     },
@@ -148,23 +100,39 @@
       "field_citation": {
         "source_text": "DOCUMENTO N.",
         "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "12-09-2019 22:25\nDOCUMENTO N. 0117-0304",
+        "source_location": "requirements",
+        "context": "Document number field",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "0117-0304",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "matches exactly",
+        "match_type": "exact"
+      }
+    },
+    "payment_method": {
+      "field_citation": {
+        "source_text": "Pagamento contante",
         "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "DOCUMENTO N. 0117-0304",
+        "source_location": "requirements",
+        "context": "Payment method shown",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "39,78€ cash",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "Confirmed by payment breakdown",
         "match_type": "exact"
       }
     }
   },
   "metadata": {
-    "total_fields_analyzed": 12,
-    "fields_with_field_citations": 10,
-    "fields_with_value_citations": 10,
-    "average_confidence": 0.885
+    "total_fields_analyzed": 8,
+    "fields_with_field_citations": 8,
+    "fields_with_value_citations": 8,
+    "average_confidence": 0.925
   }
 }

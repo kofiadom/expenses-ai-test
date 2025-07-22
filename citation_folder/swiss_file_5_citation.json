@@ -1,90 +1,90 @@
 {
   "citations": {
-    "customer_name": {
+    "supplier_name": {
       "field_citation": {
-        "source_text": "Your details",
-        "confidence": 0.9,
+        "source_text": "Berghotel Grosse Scheidegg",
+        "confidence": 1.0,
         "source_location": "requirements",
-        "context": "Customer details section",
+        "context": "Header section of receipt",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "First Name last Name",
-        "confidence": 0.9,
+        "source_text": "Berghotel Grosse Scheidegg",
+        "confidence": 1.0,
         "source_location": "requirements",
-        "context": "Your details section",
+        "context": "Header section of receipt",
         "match_type": "exact"
       }
     },
-    "supplier_info": {
+    "supplier_address": {
       "field_citation": {
-        "source_text": "document header",
+        "source_text": "supplier_address",
         "confidence": 1.0,
         "source_location": "requirements",
-        "context": "Header section",
+        "context": "Address field in header",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "Austrian Gas Grid Management AG",
+        "source_text": "3818 Grindelwald",
         "confidence": 1.0,
         "source_location": "requirements",
-        "context": "Document header",
+        "context": "Header section of receipt",
         "match_type": "exact"
       }
     },
-    "billing_period": {
+    "date_of_issue": {
       "field_citation": {
-        "source_text": "Your details",
+        "source_text": "date_of_issue",
         "confidence": 1.0,
         "source_location": "requirements",
-        "context": "Billing information section",
+        "context": "Receipt header information",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "12.09.22 - 11.10.22",
+        "source_text": "30.07.2007",
         "confidence": 1.0,
         "source_location": "requirements",
-        "context": "Your details section",
+        "context": "Receipt header section",
         "match_type": "exact"
       }
     },
-    "meter_info": {
+    "receipt_number": {
       "field_citation": {
-        "source_text": "meter details table",
+        "source_text": "Rech.Nr.",
         "confidence": 1.0,
         "source_location": "requirements",
-        "context": "Meter information section",
+        "context": "Receipt identifier section",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "271058",
+        "source_text": "4572",
         "confidence": 1.0,
         "source_location": "requirements",
-        "context": "Meter details table",
+        "context": "Receipt number field",
         "match_type": "exact"
       }
     },
-    "payment_methods": {
+    "total_amount": {
       "field_citation": {
-        "source_text": "payment section",
+        "source_text": "total_amount",
         "confidence": 1.0,
         "source_location": "requirements",
-        "context": "Bottom of document",
+        "context": "Totals section",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "Direct Debit, Card, Mail, BPAY, Post Billpay, Centrepay, PayPal",
+        "source_text": "CHF 54.50",
         "confidence": 1.0,
         "source_location": "requirements",
-        "context": "Payment section at bottom",
+        "context": "Total amount field",
         "match_type": "exact"
       }
     }
   },
   "metadata": {
-    "total_fields_analyzed": 15,
-    "fields_with_field_citations": 5,
-    "fields_with_value_citations": 5,
-    "average_confidence": 0.97
+    "total_fields_analyzed": 17,
+    "fields_with_field_citations": 17,
+    "fields_with_value_citations": 17,
+    "average_confidence": 1.0
   }
 }

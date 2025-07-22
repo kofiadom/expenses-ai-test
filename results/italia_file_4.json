@@ -1,6 +1,6 @@
 {
   "source_file": "italia_file_4.md",
-  "processing_timestamp": "2025-07-16T23:01:04.713051",
+  "processing_timestamp": "2025-07-22T16:29:56.024942",
   "dataset_metadata": {
     "filepath": "expense_files/italia_file_4.jpg",
     "filename ": "italia_file_4.jpg",
@@ -18,212 +18,168 @@
     "location_match": true,
     "error_type": null,
     "error_message": null,
-    "classification_confidence": 95,
-    "reasoning": "The document contains multiple schema fields indicative of an expense such as supplier details, transaction amount, transaction date, payment method, and item description line items. These fields sufficiently categorize it as a meals-related expense. The language and location align with the expected Italian context.",
+    "classification_confidence": 90,
+    "reasoning": "This is clearly a restaurant receipt from a bar/cafe in Rome, Italy showing a completed meal transaction with payment details.",
     "schema_field_analysis": {
       "fields_found": [
         "supplier",
         "transactionAmount",
         "transactionDate",
+        "invoiceReceiptNumber",
+        "taxInformation",
         "paymentMethod",
         "itemDescriptionLineItems"
       ],
       "fields_missing": [
-        "consumerRecipient",
-        "icpRequirements",
-        "invoiceReceiptNumber",
-        "taxInformation"
+        "consumerRecipient"
       ],
-      "total_fields_found": 5,
-      "expense_identification_reasoning": "The document contains the supplier (GIAMAICA CAFFE' SRL), transaction amount (TOTALE COMPLESSIVO: \u20ac39,78), transaction date (12-09-2019), payment method (Pagamento contante), and item description/line items (menu items and prices). These factors meet the criteria for a meals expense document. However, consumerRecipient, icpRequirements, invoiceReceiptNumber, and taxInformation fields are not explicitly found in the document, but this does not affect the overall expense classification."
+      "total_fields_found": 7,
+      "expense_identification_reasoning": "The document contains 7 out of 8 schema fields, clearly identifying it as an expense document. It's a restaurant receipt showing food items (Bolognese pasta, lasagna, mineral water), with completed payment in cash, from Bar Accademia in Rome, Italy. The document matches the expected location (Italy) and is written in Italian with high confidence based on vocabulary, currency format (\u20ac), and address format."
     }
   },
   "extraction_result": {
-    "supplier_name": "GIAMAICA CAFFE' SRL",
-    "supplier_address": "VIA DEL TRITONE,54 00187 ROMA",
-    "vat_number": "01845911005",
-    "tax_code": null,
+    "customer_name_on_invoice": null,
+    "customer_name_exception": null,
+    "customer_address_on_invoice": null,
+    "customer_vat_number_on_invoice": null,
+    "customer_tax_code_on_invoice": null,
     "currency": "EUR",
-    "total_amount": 39.78,
-    "date_of_issue": "2019-09-12",
-    "receipt_type": "DOCUMENTO COMMERCIALE",
-    "payment_method": "Contante",
+    "amount": 39.78,
+    "receipt_type": "DOCUMENTO COMMERCIALE di vendita o prestazione",
+    "receipt_quality": null,
+    "payment_method": "contante",
+    "vehicle_make_model": null,
+    "vehicle_fuel_type": null,
+    "distance_traveled": null,
+    "route_documentation": null,
+    "car_registration": null,
+    "personal_information": null,
+    "business_trip_reporting": null,
+    "per_diem_method": null,
+    "supplier_name": "GIAMAICA CAFFE' SRL",
+    "supplier_address": "VIA DEL TRITONE,54, 00187 ROMA",
+    "supplier_vat": "01845911005",
+    "supplier_phone": "06/6793583",
+    "transaction_date": "2019-09-12",
+    "transaction_time": "22:25",
+    "document_number": "0117-0304",
+    "establishment_name": "BAR ACCADEMIA",
     "line_items": [
       {
         "description": "BOLOGNESE",
-        "quantity": 1,
-        "unit_price": 14.0,
-        "total_price": 14.0,
-        "vat_rate": 10.0
+        "vat_rate": 10.0,
+        "price": 14.0
       },
       {
         "description": "LASAGNA",
-        "quantity": 1,
-        "unit_price": 14.0,
-        "total_price": 14.0,
-        "vat_rate": 10.0
+        "vat_rate": 10.0,
+        "price": 14.0
       },
       {
         "description": "MINERALE CL 75",
-        "quantity": 1,
-        "unit_price": 6.0,
-        "total_price": 6.0,
-        "vat_rate": 10.0
+        "vat_rate": 10.0,
+        "price": 6.0
       }
     ],
-    "sub_total": 34.0,
+    "subtotal": 34.0,
     "service_charge": 5.78,
-    "vat": 3.62,
-    "document_number": "0117-0304",
-    "transaction_time": "22:25",
-    "contact_phone": "06/6793583",
-    "non_collected_amount": 0.0,
-    "electronic_payment": 0.0,
-    "cash_return": 0.0,
-    "amount_paid": 39.78,
+    "total_amount": 39.78,
+    "vat_amount": 3.62,
     "citations": {
       "citations": {
         "supplier_name": {
           "field_citation": {
-            "source_text": "GIAMAICA CAFFE' SRL",
+            "source_text": "supplier_name",
             "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+            "source_location": "requirements",
+            "context": "supplier_name appears as header",
             "match_type": "exact"
           },
           "value_citation": {
             "source_text": "GIAMAICA CAFFE' SRL",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+            "confidence": 0.95,
+            "source_location": "requirements",
+            "context": "found exactly at top of receipt",
             "match_type": "exact"
           }
         },
-        "supplier_address": {
+        "address": {
           "field_citation": {
-            "source_text": "VIA DEL TRITONE,54\n00187 ROMA",
+            "source_text": "Address",
             "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
+            "source_location": "requirements",
+            "context": "Address shown as standard receipt header",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "VIA DEL TRITONE,54 00187 ROMA",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "GIAMAICA CAFFE' SRL\nVIA DEL TRITONE,54\n00187 ROMA",
-            "match_type": "fuzzy"
-          }
-        },
-        "vat_number": {
-          "field_citation": {
-            "source_text": "P.IVA",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "00187 ROMA\nP.IVA 01845911005",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "01845911005",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "P.IVA 01845911005\nTEL. 06/6793583",
+            "source_text": "VIA DEL TRITONE,54, 00187 ROMA",
+            "confidence": 0.95,
+            "source_location": "requirements",
+            "context": "matches exactly in header",
             "match_type": "exact"
           }
         },
-        "currency": {
+        "document_type": {
           "field_citation": {
-            "source_text": "Prezzo(\u20ac)",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "| DESCRIZIONE | IVA | Prezzo(\u20ac) |",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "\u20ac",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "| DESCRIZIONE | IVA | Prezzo(\u20ac) |",
-            "match_type": "contextual"
-          }
-        },
-        "total_amount": {
-          "field_citation": {
-            "source_text": "TOTALE COMPLESSIVO",
+            "source_text": "Receipt type",
             "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "| TOTALE COMPLESSIVO | | 39,78 |",
+            "source_location": "requirements",
+            "context": "Receipt type shown as header",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "39,78",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "| TOTALE COMPLESSIVO | | 39,78 |",
+            "source_text": "DOCUMENTO COMMERCIALE di vendita o prestazione",
+            "confidence": 0.95,
+            "source_location": "requirements",
+            "context": "matches exactly",
             "match_type": "exact"
           }
         },
-        "date_of_issue": {
+        "line_items": {
           "field_citation": {
-            "source_text": "DATE",
-            "confidence": 0.7,
-            "source_location": "contextual",
-            "context": "12-09-2019 22:25",
-            "match_type": "contextual"
+            "source_text": "DESCRIZIONE, IVA, Prezzo(\u20ac)",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Table headers",
+            "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "12-09-2019",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "12-09-2019 22:25\nDOCUMENTO N. 0117-0304",
+            "source_text": "BOLOGNESE 14,00\u20ac, LASAGNA 14,00\u20ac, MINERALE CL 75 6,00\u20ac",
+            "confidence": 0.95,
+            "source_location": "requirements",
+            "context": "Match exactly in table",
             "match_type": "exact"
           }
         },
-        "receipt_type": {
+        "amounts": {
           "field_citation": {
-            "source_text": "DOCUMENTO COMMERCIALE",
+            "source_text": "SUBTOTALE, TOTALE COMPLESSIVO",
             "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "DOCUMENTO COMMERCIALE\ndi vendita o prestazione",
+            "source_location": "requirements",
+            "context": "Amount fields shown",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "DOCUMENTO COMMERCIALE",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "DOCUMENTO COMMERCIALE\ndi vendita o prestazione",
+            "source_text": "Subtotal: 34,00\u20ac, Service charge: 5,78\u20ac, Total: 39,78\u20ac, VAT: 3,62\u20ac",
+            "confidence": 0.95,
+            "source_location": "requirements",
+            "context": "Match exactly",
             "match_type": "exact"
           }
         },
-        "payment_method": {
+        "date_time": {
           "field_citation": {
-            "source_text": "Pagamento contante",
+            "source_text": "Date/Time",
             "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Pagamento contante | | 39,78 |",
+            "source_location": "requirements",
+            "context": "Shown at bottom",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "Contante",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Pagamento contante | | 39,78 |",
-            "match_type": "contextual"
-          }
-        },
-        "contact_phone": {
-          "field_citation": {
-            "source_text": "TEL.",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "P.IVA 01845911005\nTEL. 06/6793583",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "06/6793583",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "TEL. 06/6793583",
+            "source_text": "12-09-2019 22:25",
+            "confidence": 0.95,
+            "source_location": "requirements",
+            "context": "matches after format standardization",
             "match_type": "exact"
           }
         },
@@ -231,78 +187,100 @@
           "field_citation": {
             "source_text": "DOCUMENTO N.",
             "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "12-09-2019 22:25\nDOCUMENTO N. 0117-0304",
+            "source_location": "requirements",
+            "context": "Document number field",
             "match_type": "exact"
           },
           "value_citation": {
             "source_text": "0117-0304",
+            "confidence": 0.95,
+            "source_location": "requirements",
+            "context": "matches exactly",
+            "match_type": "exact"
+          }
+        },
+        "payment_method": {
+          "field_citation": {
+            "source_text": "Pagamento contante",
             "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "DOCUMENTO N. 0117-0304",
+            "source_location": "requirements",
+            "context": "Payment method shown",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "39,78\u20ac cash",
+            "confidence": 0.95,
+            "source_location": "requirements",
+            "context": "Confirmed by payment breakdown",
             "match_type": "exact"
           }
         }
       },
       "metadata": {
-        "total_fields_analyzed": 12,
-        "fields_with_field_citations": 10,
-        "fields_with_value_citations": 10,
-        "average_confidence": 0.885
+        "total_fields_analyzed": 8,
+        "fields_with_field_citations": 8,
+        "fields_with_value_citations": 8,
+        "average_confidence": 0.925
       }
     }
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 4,
+      "issues_count": 6,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_name",
-          "description": "The supplier name does not match the mandatory requirement: 'Global People s.r.l.'.",
-          "recommendation": "It is recommended to address this issue with the supplier or ensure invoices are issued under the name 'Global People s.r.l.'.",
-          "knowledge_base_reference": "Must be Global People s.r.l."
+          "field": "customer_name",
+          "description": "Missing mandatory customer name on invoice. Global People s.r.l. name is not present on the receipt.",
+          "recommendation": "Request a proper tax invoice with Global People s.r.l. included as the customer name.",
+          "knowledge_base_reference": "Local Employer name as customer on supplier invoice is Mandatory for All receipt types for Global People s.r.l."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_address",
-          "description": "The supplier address does not match the mandatory requirement: 'Via Venti Settembre 3, Torino (TO) CAP 10121, Italy'.",
-          "recommendation": "It is recommended to address this issue with the supplier or ensure invoices have the address 'Via Venti Settembre 3, Torino'.",
-          "knowledge_base_reference": "Via Venti Settembre 3, Torino (TO) CAP 10121, Italy"
+          "field": "customer_address",
+          "description": "Missing mandatory customer address on invoice. Global People address is not present on the receipt.",
+          "recommendation": "Request a proper tax invoice with the company address (Via Venti Settembre 3, Torino (TO) CAP 10121, Italy) included.",
+          "knowledge_base_reference": "Local Employer address as customer on supplier invoice is Mandatory for All receipt types for Global People s.r.l."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
           "field": "vat_number",
-          "description": "The VAT number does not match the mandatory VAT ID required: 'IT12455930011'.",
-          "recommendation": "Ensure the receipt has the correct VAT number: 'IT12455930011'.",
-          "knowledge_base_reference": "IT12455930011"
+          "description": "Missing mandatory VAT number on invoice. Global People VAT number is not present on the receipt.",
+          "recommendation": "Request a proper tax invoice with the company VAT number (IT12455930011) included.",
+          "knowledge_base_reference": "Local Employer VAT number as customer on supplier invoice is Mandatory for All receipt types for Global People s.r.l."
         },
         {
-          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "tax_code",
+          "description": "Missing mandatory Tax Code on invoice. Global People tax code is not present on the receipt.",
+          "recommendation": "Request a proper tax invoice with the company tax code (12455930011) included.",
+          "knowledge_base_reference": "Local Employer tax code as customer on supplier invoice is Mandatory for All receipt types for Global People s.r.l."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
           "field": "payment_method",
-          "description": "The payment method is 'Contante', which is not traceable as required for compliance.",
-          "recommendation": "Use a traceable payment method: bank transfers, credit/debit cards.",
-          "knowledge_base_reference": "Must be traceable: bank transfers, postal transfers, credit/debit cards"
+          "description": "Payment method is 'contante' (cash), which does not meet traceable payment requirements.",
+          "recommendation": "Use traceable payment methods for future expenses, such as credit/debit cards, bank transfers, or other compliant payment methods.",
+          "knowledge_base_reference": "Payment method must be traceable: bank transfers, postal transfers, credit/debit cards, prepaid cards, bank/cashier's checks."
         },
         {
           "issue_type": "Standards & Compliance | Follow-up Action Identified",
-          "field": "additional_entertainment_documentation",
-          "description": "Additional documentation is required, specifying the name and company details of the client/supplier entertained.",
-          "recommendation": "Provide additional details on the entertained parties for compliance with entertainment expenses.",
-          "knowledge_base_reference": "Receipt alone is not enough - you must also write down the name and company details of the client/supplier you entertained"
+          "field": "expense_purpose",
+          "description": "Insufficient documentation to determine expense type and tax treatment (personal meal vs. business entertainment).",
+          "recommendation": "Clarify if this was business entertainment with clients/suppliers. If so, provide name and company details of the clients/suppliers who were entertained.",
+          "knowledge_base_reference": "Receipt alone is not enough - you must also write down the name and company details of the client/supplier you entertained."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt does not comply with the Italian compliance requirements for Global People s.r.l. due to incorrect supplier information, VAT number, and untraceable payment method. Additionally, further documentation is required for entertainment expenses."
+      "compliance_summary": "This Italian meal receipt fails to meet several mandatory compliance requirements for Global People s.r.l. expenses. Critical issues include missing company identification (name, address, VAT number, tax code), non-traceable cash payment method, and insufficient documentation to determine proper tax treatment. Personal meal expenses are subject to tax gross-up, while business entertainment requires additional documentation of client/supplier details to qualify for preferential tax treatment. A proper tax invoice with the required company information should be requested from the vendor."
     },
     "technical_details": {
-      "content_type": "ReceiptValidationResult",
+      "content_type": "Receipt",
       "country": "Italy",
-      "icp": "Global People",
-      "receipt_type": "meals",
-      "issues_count": 4,
-      "has_reasoning": true
+      "icp": "Global People s.r.l.",
+      "receipt_type": "Meal Expense",
+      "issues_count": 6
     }
   },
   "processing_status": "completed",

@@ -1,6 +1,6 @@
 {
   "source_file": "swiss_file_3.md",
-  "processing_timestamp": "2025-07-16T23:18:03.904820",
+  "processing_timestamp": "2025-07-22T16:47:47.009240",
   "dataset_metadata": {
     "filepath": "expense_files/swiss_file_3.pdf",
     "filename ": "swiss_file_3.pdf",
@@ -9,293 +9,169 @@
     "dataset_file": "swiss_file_3.json"
   },
   "classification_result": {
-    "is_expense": false,
-    "expense_type": null,
+    "is_expense": true,
+    "expense_type": "travel",
     "language": "English",
     "language_confidence": 95,
     "document_location": "Switzerland",
     "expected_location": "Switzerland",
     "location_match": true,
-    "error_type": "File identified not as an expense",
-    "error_message": "The document contains a purchase order and does not provide evidence of completed payment or a transaction receipt.",
+    "error_type": null,
+    "error_message": null,
     "classification_confidence": 90,
-    "reasoning": "The document text primarily describes a Swiss Half Fare Card with conditions and details about usage, without clear indication of an expense completion such as payment confirmation or an itemized receipt.",
+    "reasoning": "This is a Swiss Half Fare Card purchase receipt showing payment confirmation with clear transaction details including supplier, amount, and tax information.",
     "schema_field_analysis": {
       "fields_found": [
         "supplier",
-        "transactionAmount",
-        "taxInformation",
-        "invoiceReceiptNumber"
-      ],
-      "fields_missing": [
         "consumerRecipient",
-        "paymentMethod",
-        "transactionDate",
+        "transactionAmount",
+        "invoiceReceiptNumber",
+        "taxInformation",
         "itemDescriptionLineItems"
       ],
-      "total_fields_found": 4,
-      "expense_identification_reasoning": "The document mentions 'Swiss Half Fare Card' and a 'CHF 120.00' amount, along with a VAT detail, aligning with the supplier and transaction amount fields. However, it lacks a consumer recipient section, payment method, transaction date, and detailed itemization that confirms an expense transaction."
+      "fields_missing": [
+        "transactionDate",
+        "paymentMethod"
+      ],
+      "total_fields_found": 6,
+      "expense_identification_reasoning": "The document contains 6 out of 8 key expense fields. It clearly shows SBB CFF FFS (Swiss Federal Railways) as supplier, GONUGUNTLA HAREESH KUMAR as recipient, CHF 120.00 as transaction amount, multiple reference numbers, VAT information (7.7%), and detailed description of the purchased item (Swiss Half Fare Card valid 2022-2023). Missing are specific transaction date and payment method."
     }
   },
   "extraction_result": {
-    "supplier_name": null,
-    "supplier_address": null,
-    "company_registration": null,
+    "customer_name_on_invoice": null,
+    "customer_address_on_invoice": null,
+    "customer_registration_on_invoice": null,
+    "customer_name_exception": "GONUGUNTLA HAREESH KUMAR",
     "currency": "CHF",
     "amount": 120.0,
-    "receipt_type": null,
-    "personal_information": null,
-    "business_trip_reporting": null,
-    "travel_template": null,
-    "manager_approval": null,
-    "route_map": null,
-    "car_details": null,
-    "logbook": null,
-    "combined_mileage": null,
+    "receipt_type": "Ticket",
+    "personal_information": {
+      "name": "GONUGUNTLA HAREESH KUMAR",
+      "date_of_birth": "11.06.1995"
+    },
+    "ticket_id": "329584805708",
+    "product_name": "Swiss Half Fare Card",
     "validity_period": "2022 - 2023",
-    "holder_name": "GONUGUNTLA HAREESH KUMAR",
-    "birth_date": "1995-06-11",
-    "discount": "Up to 50% discount on 1st and 2nd class tickets",
+    "vat_rate": 7.7,
     "order_number": "25302067899",
     "article_number": "11528",
-    "vat_rate": 7.7,
-    "ticket_id": "329584805708",
     "reference_number": "67676084D / 13121548 19099",
-    "website": "www.MySwitzerland.com/swisshalffarecard",
-    "tariff_note": "The current tariff of Swiss transport companies, in particular the common ancillary tariff regulations for direct service and regional transport networks (TGDG) as well as the tariffs of the regional transport and fare networks, apply to the use of E-Tickets.",
-    "refund_note": "For refunds, TGDG or the conditions of the relevant transport company or operator apply. Refunds of e-tickets in the context of international journeys are made in accordance with international terms and conditions.",
+    "issuer": "SBB CFF FFS",
+    "line_items": [
+      {
+        "description": "Swiss Half Fare Card (1/2-ABO)",
+        "quantity": 1,
+        "unit_price": 120.0,
+        "total_price": 120.0
+      }
+    ],
+    "ticket_description": "Up to 50% discount on 1st and 2nd class tickets within one month",
+    "website_reference": "www.MySwitzerland.com/swisshalffarecard",
+    "additional_info": "Only valid with your Passport / ID",
     "citations": {
       "citations": {
-        "currency": {
+        "personal_information": {
           "field_citation": {
-            "source_text": "Currency",
-            "confidence": 0.9,
+            "source_text": "Personal Information",
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "\"field_type\": \"Currency\", \"description\": \"Receipt currency and exchange rate\"",
+            "context": "header area showing customer details",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "CHF",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "B2P\tCHF 120.00",
-            "match_type": "exact"
-          }
-        },
-        "amount": {
-          "field_citation": {
-            "source_text": "Expense amount",
-            "confidence": 0.8,
+            "source_text": "GONUGUNTLA HAREESH KUMAR, 11.06.1995",
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "\"field_type\": \"Amount\", \"description\": \"Expense amount\"",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "CHF 120.00",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "B2P\tCHF 120.00",
+            "context": "appears in header with DOB shown directly below",
             "match_type": "exact"
           }
         },
-        "validity_period": {
+        "ticket_details": {
           "field_citation": {
-            "source_text": "Valid",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Valid: 2022 - 2023",
+            "source_text": "Ticket/Product Details",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "appears as primary header",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "2022 - 2023",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Valid: 2022 - 2023",
+            "source_text": "Swiss Half Fare Card, 2022 - 2023, 329584805708",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "appears multiple times, clearest at top of document",
             "match_type": "exact"
           }
         },
-        "holder_name": {
+        "financial_information": {
           "field_citation": {
-            "source_text": "Swiss Half Fare Card",
-            "confidence": 0.7,
-            "source_location": "markdown",
-            "context": "Swiss Half Fare Card\n| GONUGUNTLA HAREESH KUMAR",
-            "match_type": "contextual"
+            "source_text": "Financial Information",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "price shown in table format",
+            "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "GONUGUNTLA HAREESH KUMAR",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Swiss Half Fare Card\n| GONUGUNTLA HAREESH KUMAR",
+            "source_text": "CHF 120.00, 7.7% VAT",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "appears in pricing table with VAT information",
             "match_type": "exact"
           }
         },
-        "birth_date": {
+        "reference_numbers": {
           "field_citation": {
-            "source_text": "Valid",
-            "confidence": 0.7,
-            "source_location": "markdown",
-            "context": "Valid: 2022 - 2023 | 11.06.1995",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "11.06.1995",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Valid: 2022 - 2023 | 11.06.1995",
-            "match_type": "fuzzy"
-          }
-        },
-        "discount": {
-          "field_citation": {
-            "source_text": "Up to 50% discount",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Up to 50% discount on 1st and 2nd class tickets within one month.",
+            "source_text": "Reference Numbers",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "clearly labeled in document",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "Up to 50% discount on 1st and 2nd class tickets",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Up to 50% discount on 1st and 2nd class tickets within one month.",
+            "source_text": "Order no.: 25302067899, Article no.: 11528, Reference no.: 67676084D / 13121548 19099",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "clearly labeled reference numbers in document",
             "match_type": "exact"
           }
         },
-        "order_number": {
+        "additional_information": {
           "field_citation": {
-            "source_text": "Order no.",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "(1/2-ABO)\nOrder no.: 25302067899",
+            "source_text": "Additional Information",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "shown in descriptive text",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "25302067899",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "(1/2-ABO)\nOrder no.: 25302067899",
+            "source_text": "www.MySwitzerland.com/swisshalffarecard, Up to 50% discount on 1st and 2nd class tickets within one month, Only valid with your Passport / ID",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "website reference and additional details in descriptive text",
             "match_type": "exact"
           }
         },
-        "article_number": {
+        "issuer": {
           "field_citation": {
-            "source_text": "Article no.",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Article no.: 11528\nincl. 7.7% VAT/SBB",
+            "source_text": "Issuer",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "present via logo and footer",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "11528",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Article no.: 11528\nincl. 7.7% VAT/SBB",
-            "match_type": "exact"
-          }
-        },
-        "vat_rate": {
-          "field_citation": {
-            "source_text": "incl. 7.7% VAT",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Article no.: 11528\nincl. 7.7% VAT/SBB",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "7.7",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "incl. 7.7% VAT/SBB",
-            "match_type": "fuzzy"
-          }
-        },
-        "ticket_id": {
-          "field_citation": {
-            "source_text": "Ticket-ID",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "| ! | Ticket-ID 329584805708 |",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "329584805708",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "| ! | Ticket-ID 329584805708 |",
-            "match_type": "exact"
-          }
-        },
-        "reference_number": {
-          "field_citation": {
-            "source_text": "Reference no.",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Reference no.: 67676084D / 13121548 19099",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "67676084D / 13121548 19099",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Reference no.: 67676084D / 13121548 19099",
-            "match_type": "exact"
-          }
-        },
-        "website": {
-          "field_citation": {
-            "source_text": "www.MySwitzerland.com/swisshalffarecard",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "See conditions on www.MySwitzerland.com/swisshalffarecard.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "www.MySwitzerland.com/swisshalffarecard",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "See conditions on www.MySwitzerland.com/swisshalffarecard.",
-            "match_type": "exact"
-          }
-        },
-        "tariff_note": {
-          "field_citation": {
-            "source_text": "The current tariff",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "The current tariff of Swiss transport companies, in particular the common ancillary tariff regulations for direct service and regional transport networks (TGDG) as well as the tariffs of the regional transport and fare networks, apply to the use of E-Tickets.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "The current tariff of Swiss transport companies, in particular the common ancillary tariff regulations for direct service and regional transport networks (TGDG) as well as the tariffs of the regional transport and fare networks, apply to the use of E-Tickets.",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "The current tariff of Swiss transport companies, in particular the common ancillary tariff regulations for direct service and regional transport networks (TGDG) as well as the tariffs of the regional transport and fare networks, apply to the use of E-Tickets.",
-            "match_type": "exact"
-          }
-        },
-        "refund_note": {
-          "field_citation": {
-            "source_text": "For refunds, TGDG or the conditions",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "For refunds, TGDG or the conditions of the relevant transport company or operator apply. Refunds of e-tickets in the context of international journeys are made in according with international terms and conditions.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "For refunds, TGDG or the conditions of the relevant transport company or operator apply. Refunds of e-tickets in the context of international journeys are made in accordance with international terms and conditions.",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "For refunds, TGDG or the conditions of the relevant transport company or operator apply. Refunds of e-tickets in the context of international journeys are made in according with international terms and conditions.",
+            "source_text": "SBB CFF FFS",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "appears in logo and copyright notice",
             "match_type": "exact"
           }
         }
       },
       "metadata": {
-        "total_fields_analyzed": 14,
-        "fields_with_field_citations": 13,
-        "fields_with_value_citations": 13,
-        "average_confidence": 0.92
+        "total_fields_analyzed": 6,
+        "fields_with_field_citations": 6,
+        "fields_with_value_citations": 6,
+        "average_confidence": 1.0
       }
     }
   },
@@ -306,36 +182,35 @@
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_name",
-          "description": "Mandatory supplier name is missing for ICP Global PPL CH GmbH.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider to include 'Global PPL CH GmbH' as the supplier name.",
-          "knowledge_base_reference": "Name of the supplier/vendor on invoice must be 'Global PPL CH GmbH' for all receipt types."
+          "field": "Customer Information",
+          "description": "The receipt is missing mandatory Local Employer details including company name, address, and registration number.",
+          "recommendation": "Ensure the receipt includes 'Global PPL CH GmbH' as customer name, 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland' as address, and 'CHE-295.369.918' as registration number.",
+          "knowledge_base_reference": "For Switzerland receipts, the Local Employer must be listed as the customer. Exception exists for travel documents where worker's name is acceptable only when Local Employer name is not possible."
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "Travel Documentation",
+          "description": "For travel expenses in Switzerland, specific documentation requirements are not met.",
+          "recommendation": "Submit your travel expense using the Travel Expense Report Template Switzerland CHF.xlsx and ensure a separate report is submitted for this business trip.",
+          "knowledge_base_reference": "Switzerland travel expenses must use Travel Expense Report Template Switzerland CHF.xlsx and submit separate report per each business trip."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_address",
-          "description": "Mandatory supplier address is missing for ICP 'Global PPL CH GmbH'.",
-          "recommendation": "It is recommended to address this issue to include the address 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland'.",
-          "knowledge_base_reference": "Address of the supplier on invoice must be 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland' for all receipt types."
-        },
-        {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "company_registration",
-          "description": "Mandatory company registration number is missing for ICP 'Global PPL CH GmbH'.",
-          "recommendation": "It is recommended to address this issue to include the company registration number 'CHE-295.369.918'.",
-          "knowledge_base_reference": "Swiss company registration number must be 'CHE-295.369.918' for all receipt types."
+          "field": "Receipt Type",
+          "description": "The document is labeled as a 'Ticket' rather than a proper tax receipt or invoice as required by Swiss regulations.",
+          "recommendation": "Obtain an actual tax receipt or invoice that meets Swiss compliance standards instead of using a ticket or booking confirmation.",
+          "knowledge_base_reference": "Documents must be actual tax receipts or invoices, not booking confirmations."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt has several missing mandatory fields according to the compliance requirements for Switzerland under ICP 'Global People'. Necessary fields such as supplier name, address, and company registration need to be included to comply."
+      "compliance_summary": "This Swiss Half Fare Card ticket fails compliance requirements for Switzerland travel expenses. Major issues include: missing Local Employer information (Global PPL CH GmbH), document type non-compliance (ticket instead of tax receipt/invoice), and missing required travel documentation. These issues must be addressed for proper reimbursement compliance."
     },
     "technical_details": {
-      "content_type": "ReceiptValidationResult",
+      "content_type": "Travel Receipt",
       "country": "Switzerland",
-      "icp": "Global People",
-      "receipt_type": "All",
-      "issues_count": 3,
-      "has_reasoning": true
+      "icp": "Global PPL CH GmbH",
+      "receipt_type": "Swiss Half Fare Card Ticket",
+      "issues_count": 3
     }
   },
   "processing_status": "completed",

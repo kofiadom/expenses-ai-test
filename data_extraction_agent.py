@@ -127,7 +127,7 @@ Include all fields from the extraction requirements (using snake_case of FieldTy
 }"""),
     #reasoning=True,
     # Ensure clean JSON output
-    parser_model=create_data_extraction_model(),
+    #parser_model=create_data_extraction_model(),
     markdown=False,
     show_tool_calls=False
 )

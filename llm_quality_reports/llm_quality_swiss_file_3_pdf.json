@@ -1,0 +1,72 @@
+{
+  "image_path": "C:\\Users\\Kofi Adom\\AppData\\Local\\Temp\\tmpcx48m6dg\\swiss_file_3_page1.png",
+  "assessment_method": "LLM",
+  "model_used": "claude-3-7-sonnet-20250219",
+  "timestamp": "2025-07-22T15:50:38.829010",
+  "blur_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.05,
+    "description": "The text is sharp and clearly defined with excellent edge definition throughout the document.",
+    "recommendation": "No action needed as the image is sufficiently sharp for OCR processing."
+  },
+  "contrast_assessment": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.9,
+    "description": "The contrast between black text and white background is excellent, providing clear differentiation for text recognition.",
+    "recommendation": "No improvement needed for contrast as it is optimal for OCR processing."
+  },
+  "glare_identification": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.98,
+    "quantitative_measure": 0.0,
+    "description": "No visible glare, reflections, or bright spots that would obscure text or important information.",
+    "recommendation": "No action needed as the document is free from glare issues."
+  },
+  "water_stains": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.99,
+    "quantitative_measure": 0.0,
+    "description": "No water damage, staining, or discoloration is visible on the document.",
+    "recommendation": "No action needed as the document appears free from water damage."
+  },
+  "tears_or_folds": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "The document appears flat with no visible tears, creases, or fold marks that would distort text.",
+    "recommendation": "No action needed as the document is free from physical damage."
+  },
+  "cut_off_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "All document edges are visible with no content appearing to be cut off from the frame.",
+    "recommendation": "No action needed as the entire document is properly captured."
+  },
+  "missing_sections": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "The document appears complete with all standard sections of a Swiss Half Fare Card ticket visible.",
+    "recommendation": "No action needed as the document is complete."
+  },
+  "obstructions": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.98,
+    "quantitative_measure": 0.0,
+    "description": "No fingers, shadows, or other objects obstruct any portion of the document.",
+    "recommendation": "No action needed as the document is free from obstructions."
+  },
+  "overall_quality_score": 10,
+  "suitable_for_extraction": true
+}

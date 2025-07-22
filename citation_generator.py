@@ -16,9 +16,37 @@ from agno.models.aws import Claude as AWSClaude
 from agno.utils.log import logger
 from textwrap import dedent
 from dotenv import load_dotenv
+from typing import Dict, Optional
+from pydantic import BaseModel, Field
 
 # Load environment variables
 load_dotenv()
+
+# Pydantic models for structured output
+class CitationInfo(BaseModel):
+    """Information about a single citation."""
+    source_text: str = Field(..., description="Text found in source")
+    confidence: float = Field(..., description="Confidence score (0.0-1.0)")
+    source_location: str = Field(..., description="Source location: requirements|markdown")
+    context: str = Field(..., description="Surrounding text for validation")
+    match_type: str = Field(..., description="Match type: exact|fuzzy|contextual")
+
+class FieldCitation(BaseModel):
+    """Citation information for a single field."""
+    field_citation: Optional[CitationInfo] = Field(None, description="Citation for field name/concept")
+    value_citation: Optional[CitationInfo] = Field(None, description="Citation for field value")
+
+class CitationMetadata(BaseModel):
+    """Metadata about citation analysis."""
+    total_fields_analyzed: int = Field(..., description="Total number of fields analyzed")
+    fields_with_field_citations: int = Field(..., description="Number of fields with field citations")
+    fields_with_value_citations: int = Field(..., description="Number of fields with value citations")
+    average_confidence: float = Field(..., description="Average confidence score")
+
+class CitationResult(BaseModel):
+    """Structured result for citation analysis."""
+    citations: Dict[str, FieldCitation] = Field(..., description="Citations for each field")
+    metadata: CitationMetadata = Field(..., description="Analysis metadata")
 
 def create_citation_model():
     """
@@ -55,9 +83,10 @@ def create_citation_model():
         logger.warning(f"Unknown provider '{provider}', falling back to OpenAI")
         return OpenAIChat(id="gpt-4o")
 
-# Create the citation agent with the configured model
+# Create the citation agent with structured output
 citation_agent = Agent(
     model=create_citation_model(),
+    response_model=CitationResult,
     instructions=dedent("""\
 You are a citation expert specializing in finding where extracted data fields and their values appear in source documents.
 
@@ -80,37 +109,11 @@ ANALYSIS APPROACH:
 - Assess confidence based on match quality and context
 - Provide surrounding context for validation
 
-OUTPUT FORMAT:
-Return a valid JSON object with this exact structure:
-
-{
-  "citations": {
-    "field_name": {
-      "field_citation": {
-        "source_text": "text found in source",
-        "confidence": 0.9,
-        "source_location": "requirements|markdown", 
-        "context": "surrounding text for validation",
-        "match_type": "exact|fuzzy|contextual"
-      },
-      "value_citation": {
-        "source_text": "value found in source",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "surrounding text for validation", 
-        "match_type": "exact|fuzzy|contextual"
-      }
-    }
-  },
-  "metadata": {
-    "total_fields_analyzed": 0,
-    "fields_with_field_citations": 0,
-    "fields_with_value_citations": 0,
-    "average_confidence": 0.0
-  }
-}
-
-CRITICAL: Your response must be ONLY valid JSON. No explanatory text, markdown formatting, or additional content.
+CRITICAL REQUIREMENTS:
+- Provide accurate citations with proper confidence scores
+- Use semantic understanding to match field concepts
+- Handle formatting variations appropriately
+- Ensure all fields are properly populated according to the structured output model
 """),
     parser_model=create_citation_model(),
     markdown=False,
@@ -118,18 +121,18 @@ CRITICAL: Your response must be ONLY valid JSON. No explanatory text, markdown f
 )
 
 
-def generate_citations(structured_output: dict, extraction_requirements: str, markdown_content: str, filename: str) -> dict:
+def generate_citations(structured_output: dict, extraction_requirements: str, markdown_content: str, filename: str) -> CitationResult:
     """
     Generate citations using LLM analysis of structured output vs source documents.
-    
+
     Args:
         structured_output: JSON result from extract_data_from_receipt()
-        extraction_requirements: Compliance JSON string used for extraction  
+        extraction_requirements: Compliance JSON string used for extraction
         markdown_content: Markdown text used for extraction
         filename: For saving citation file
-        
+
     Returns:
-        Citation analysis results
+        CitationResult object with structured citation analysis
     """
     try:
         provider = os.getenv("CITATION_MODEL_PROVIDER", "openai").lower()
@@ -147,52 +150,80 @@ MARKDOWN TEXT:
 
 Analyze the structured output and find field and value citations in the source documents."""
 
-        # Get citation analysis from LLM
+        # Get structured citation analysis from LLM
         response = citation_agent.run(prompt)
-        
-        # Handle different response formats
+
+        # Handle structured response
         if hasattr(response, 'content'):
-            content = response.content
-            if content is None or content.strip() == "":
-                raise ValueError("Empty content returned from citation agent")
+            citations = response.content
+            logger.debug(f"Citation response content type: {type(citations)}")
+            logger.debug(f"Citation response content: {citations}")
 
-            # Handle markdown-wrapped JSON
-            content = content.strip()
-            if content.startswith('```json') and content.endswith('```'):
-                content = content[7:-3].strip()
-            elif content.startswith('```') and content.endswith('```'):
-                content = content[3:-3].strip()
-
-            response_text = content
+            if citations is None:
+                logger.warning(f"⚠️ Citation response content is None")
+                citations = CitationResult(
+                    citations={},
+                    metadata=CitationMetadata(
+                        total_fields_analyzed=0,
+                        fields_with_field_citations=0,
+                        fields_with_value_citations=0,
+                        average_confidence=0.0
+                    )
+                )
+            elif not isinstance(citations, CitationResult):
+                logger.warning(f"⚠️ Expected CitationResult, got {type(citations)}")
+                # Fallback to creating a basic structure
+                citations = CitationResult(
+                    citations={},
+                    metadata=CitationMetadata(
+                        total_fields_analyzed=0,
+                        fields_with_field_citations=0,
+                        fields_with_value_citations=0,
+                        average_confidence=0.0
+                    )
+                )
         else:
-            response_text = str(response)
-        
-        # Parse the citation results
-        try:
-            citations = json.loads(response_text)
-        except json.JSONDecodeError as e:
-            logger.error(f"Invalid JSON response from citation agent: {e}")
-            logger.error(f"Raw response: {response_text[:500]}...")
-            raise ValueError(f"Invalid JSON response from citation agent: {e}")
-        
-        # Save citations to file
-        save_citations(citations, filename)
-        
-        logger.info(f"Citations generated successfully for {filename} using {provider}")
+            logger.error("No content in citation response")
+            citations = CitationResult(
+                citations={},
+                metadata=CitationMetadata(
+                    total_fields_analyzed=0,
+                    fields_with_field_citations=0,
+                    fields_with_value_citations=0,
+                    average_confidence=0.0
+                )
+            )
+
+        # Ensure citations is never None
+        if citations is None:
+            logger.error(f"Citations is None after processing, creating fallback")
+            citations = CitationResult(
+                citations={},
+                metadata=CitationMetadata(
+                    total_fields_analyzed=0,
+                    fields_with_field_citations=0,
+                    fields_with_value_citations=0,
+                    average_confidence=0.0
+                )
+            )
+
+        # Save citations to file (convert to dict for JSON serialization)
+        save_citations(citations.model_dump(), filename)
+
+        logger.info(f"✅ Citations generated successfully for {filename} using {provider}")
         return citations
         
     except Exception as e:
         logger.error(f"Citation generation error for {filename}: {e}")
-        return {
-            "citations": {},
-            "metadata": {
-                "error": str(e),
-                "total_fields_analyzed": 0,
-                "fields_with_field_citations": 0,
-                "fields_with_value_citations": 0,
-                "average_confidence": 0.0
-            }
-        }
+        return CitationResult(
+            citations={},
+            metadata=CitationMetadata(
+                total_fields_analyzed=0,
+                fields_with_field_citations=0,
+                fields_with_value_citations=0,
+                average_confidence=0.0
+            )
+        )
 
 
 def save_citations(citations: dict, filename: str):
@@ -219,20 +250,31 @@ def save_citations(citations: dict, filename: str):
         logger.error(f"Failed to save citations for {filename}: {e}")
 
 
-def get_citation_stats(citations: dict) -> dict:
+def get_citation_stats(citations) -> dict:
     """
     Get statistics about citation quality.
-    
+
     Args:
-        citations: Citation analysis results
-        
+        citations: Citation analysis results (dict or CitationResult)
+
     Returns:
         Citation statistics
     """
-    if not citations or "citations" not in citations:
+    # Handle both structured CitationResult and legacy dict format
+    if hasattr(citations, 'model_dump'):
+        # Convert CitationResult to dict
+        citations_dict = citations.model_dump()
+    elif isinstance(citations, dict):
+        citations_dict = citations
+    else:
+        return {"error": "Invalid citation data format"}
+
+    if not citations_dict or "citations" not in citations_dict:
         return {"error": "No citation data available"}
-    
-    citation_data = citations["citations"]
+
+    citation_data = citations_dict["citations"]
+    if citation_data is None:
+        return {"error": "Citation data is None"}
     total_fields = len(citation_data)
     
     field_citations = 0
@@ -240,7 +282,7 @@ def get_citation_stats(citations: dict) -> dict:
     total_confidence = 0.0
     confidence_count = 0
     
-    for field_name, field_citations_data in citation_data.items():
+    for _, field_citations_data in citation_data.items():
         if "field_citation" in field_citations_data:
             field_citations += 1
             if "confidence" in field_citations_data["field_citation"]:

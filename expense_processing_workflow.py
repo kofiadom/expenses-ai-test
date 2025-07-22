@@ -318,23 +318,42 @@ class ExpenseProcessingWorkflow(Workflow):
             classification_time = time.time() - start_time
             logger.debug(f"⏱️ Classification agent completed in {classification_time:.2f} seconds")
 
-            # Handle different response formats
-            if hasattr(result, 'content'):
+            # Handle structured output (FileClassificationResult) and legacy formats
+            if hasattr(result, 'model_dump'):
+                # New structured output - convert Pydantic model to dict
+                parsed_result = result.model_dump()
+                logger.debug(f"✅ Received structured FileClassificationResult")
+            elif hasattr(result, 'content'):
+                # RunResponse object
                 content = result.content
-                if content is None or content.strip() == "":
-                    logger.error("Empty content returned from classification agent")
-                    return {"error": "Empty response from classification agent"}
+                if hasattr(content, 'model_dump'):
+                    # Structured content
+                    parsed_result = content.model_dump()
+                    logger.debug(f"✅ Received structured FileClassificationResult from RunResponse")
+                elif isinstance(content, str):
+                    # JSON string content
+                    if content is None or content.strip() == "":
+                        logger.error("Empty content returned from classification agent")
+                        return {"error": "Empty response from classification agent"}
 
-                # Handle markdown-wrapped JSON
-                content = content.strip()
-                if content.startswith('```json') and content.endswith('```'):
-                    content = content[7:-3].strip()  # Remove ```json and ```
-                elif content.startswith('```') and content.endswith('```'):
-                    content = content[3:-3].strip()  # Remove ``` and ```
+                    # Handle markdown-wrapped JSON
+                    content = content.strip()
+                    if content.startswith('```json') and content.endswith('```'):
+                        content = content[7:-3].strip()
+                    elif content.startswith('```') and content.endswith('```'):
+                        content = content[3:-3].strip()
 
-                parsed_result = json.loads(content)
+                    parsed_result = json.loads(content)
+                    logger.debug(f"⚠️ Parsed JSON string from classification agent")
+                else:
+                    # Already a dict
+                    parsed_result = content
+            elif isinstance(result, str):
+                # Direct JSON string
+                parsed_result = json.loads(result)
+                logger.debug(f"⚠️ Parsed direct JSON string from classification agent")
             else:
-                # If result doesn't have content attribute, assume it's already parsed
+                # Already a dict
                 parsed_result = result
 
             logger.debug(f"Classification result: {parsed_result}")
@@ -394,16 +413,29 @@ class ExpenseProcessingWorkflow(Workflow):
             citations = None
             if filename and isinstance(parsed_result, dict) and "error" not in parsed_result:
                 try:
-                    citations = generate_citations(
+                    citations_result = generate_citations(
                         structured_output=parsed_result,
                         extraction_requirements=compliance_json,
                         markdown_content=markdown_content,
                         filename=filename
                     )
 
-                    # Log citation statistics
-                    citation_stats = get_citation_stats(citations)
-                    logger.info(f"Citations for {filename}: {citation_stats.get('fields_with_field_citations', 0)}/{citation_stats.get('total_fields', 0)} field citations, {citation_stats.get('fields_with_value_citations', 0)}/{citation_stats.get('total_fields', 0)} value citations")
+                    # Handle structured citation result
+                    if hasattr(citations_result, 'model_dump'):
+                        # Convert CitationResult to dict
+                        citations = citations_result.model_dump()
+                        logger.debug(f"✅ Received structured CitationResult")
+                    else:
+                        # Legacy dict format
+                        citations = citations_result
+                        logger.debug(f"⚠️ Received legacy citation format")
+
+                    # Log citation statistics (only if citations is not None)
+                    if citations is not None:
+                        citation_stats = get_citation_stats(citations)
+                        logger.info(f"Citations for {filename}: {citation_stats.get('fields_with_field_citations', 0)}/{citation_stats.get('total_fields', 0)} field citations, {citation_stats.get('fields_with_value_citations', 0)}/{citation_stats.get('total_fields', 0)} value citations")
+                    else:
+                        logger.warning(f"Citations result is None for {filename}")
 
                 except Exception as e:
                     logger.error(f"Citation generation failed for {filename}: {e}")
@@ -455,27 +487,50 @@ class ExpenseProcessingWorkflow(Workflow):
             # Compliance analysis now returns only the response
             result = compliance_result
 
-            # Handle different response formats
-            if hasattr(result, 'content'):
+            # Handle structured output (IssueDetectionResult) and legacy formats
+            if hasattr(result, 'model_dump'):
+                # New structured output - convert Pydantic model to dict
+                parsed_result = result.model_dump()
+                logger.debug(f"✅ Received structured IssueDetectionResult")
+                return parsed_result
+            elif hasattr(result, 'content'):
+                # RunResponse object
                 content = result.content
-                if content is None or content.strip() == "":
-                    logger.error("Empty content returned from compliance analysis agent")
-                    return {"error": "Empty response from compliance analysis agent"}
+                if hasattr(content, 'model_dump'):
+                    # Structured content
+                    parsed_result = content.model_dump()
+                    logger.debug(f"✅ Received structured IssueDetectionResult from RunResponse")
+                    return parsed_result
+                elif isinstance(content, str):
+                    # JSON string content
+                    if content is None or content.strip() == "":
+                        logger.error("Empty content returned from compliance analysis agent")
+                        return {"error": "Empty response from compliance analysis agent"}
 
-                # Handle markdown-wrapped JSON
-                content = content.strip()
-                if content.startswith('```json') and content.endswith('```'):
-                    content = content[7:-3].strip()  # Remove ```json and ```
-                elif content.startswith('```') and content.endswith('```'):
-                    content = content[3:-3].strip()  # Remove ``` and ```
+                    # Handle markdown-wrapped JSON
+                    content = content.strip()
+                    if content.startswith('```json') and content.endswith('```'):
+                        content = content[7:-3].strip()
+                    elif content.startswith('```') and content.endswith('```'):
+                        content = content[3:-3].strip()
 
-                parsed_result = json.loads(content)
-                logger.debug(f"Compliance analysis result: {parsed_result}")
+                    parsed_result = json.loads(content)
+                    logger.debug(f"⚠️ Parsed JSON string from compliance analysis agent")
+                    return parsed_result
+                else:
+                    # Already a dict
+                    parsed_result = content
+                    logger.debug(f"📦 Extracted dict content from RunResponse")
+                    return parsed_result
+            elif isinstance(result, str):
+                # Direct JSON string
+                parsed_result = json.loads(result)
+                logger.debug(f"⚠️ Parsed direct JSON string from compliance analysis agent")
                 return parsed_result
             else:
-                # If result doesn't have content attribute, assume it's already parsed
+                # Already a dict
                 parsed_result = result
-                logger.debug(f"Compliance analysis result (no content attr): {parsed_result}")
+                logger.debug(f"Compliance analysis result (already dict): {parsed_result}")
                 return parsed_result
         except json.JSONDecodeError as e:
             logger.error(f"JSON parsing error in compliance analysis: {str(e)}")
@@ -598,7 +653,17 @@ class ExpenseProcessingWorkflow(Workflow):
         _seen.add(obj_id)
 
         try:
-            if hasattr(obj, '__dict__'):
+            if hasattr(obj, 'model_dump'):
+                # Handle Pydantic models
+                return obj.model_dump()
+            elif hasattr(obj, 'content'):
+                # Handle RunResponse objects
+                content = obj.content
+                if hasattr(content, 'model_dump'):
+                    return content.model_dump()
+                else:
+                    return self._make_json_serializable(content, _seen, _depth + 1)
+            elif hasattr(obj, '__dict__'):
                 # Convert dataclass or object to dict
                 result = {}
                 for key, value in obj.__dict__.items():

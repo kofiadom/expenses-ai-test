@@ -1,6 +1,6 @@
 {
   "source_file": "italia_file_5.md",
-  "processing_timestamp": "2025-07-16T23:02:07.302061",
+  "processing_timestamp": "2025-07-22T16:31:42.735703",
   "dataset_metadata": {
     "filepath": "expense_files/italia_file_5.jpg",
     "filename ": "italia_file_5.jpg",
@@ -19,32 +19,51 @@
     "error_type": null,
     "error_message": null,
     "classification_confidence": 90,
-    "reasoning": "The document is identified as an expense due to the presence of 5 or more required fields: supplier, transactionAmount, transactionDate, itemDescriptionLineItems, and invoiceReceiptNumber. The document language is Italian with a high confidence level and the location matches the expected location.",
+    "reasoning": "This is clearly a restaurant receipt from Bar Accademia in Rome, Italy. It shows a completed food transaction with specific menu items (pizza margherita, mineral water), pricing, and service charge. The document contains all necessary elements of a meal expense receipt including supplier information, transaction amount, date, and itemized purchases.",
     "schema_field_analysis": {
       "fields_found": [
         "supplier",
         "transactionAmount",
         "transactionDate",
         "invoiceReceiptNumber",
+        "taxInformation",
         "itemDescriptionLineItems"
       ],
       "fields_missing": [
         "consumerRecipient",
-        "icpRequirements",
-        "taxInformation",
         "paymentMethod"
       ],
-      "total_fields_found": 5,
-      "expense_identification_reasoning": "The document includes the supplier ('GIAMAICA CAFFE' SRL' at the top), transaction amount ('TOTALE EURO 26,33'), transaction date ('11-07-13'), invoice/receipt number ('SF. 193'), and itemized line items ('PIZZA MARGHERITA', 'MEDIUM LIGHT', 'MINERALE CL 50') making it a valid expense document. The identified language is Italian based on terms such as 'TAVOLO' and the format of the currency 'EURO'."
+      "total_fields_found": 6,
+      "expense_identification_reasoning": "The document contains 6 out of 8 key expense fields. It clearly shows the supplier 'BAR ACCADEMIA' and 'GIAMAICA CAFFE' SRL', transaction amount 'TOTALE EURO 26,33', transaction date '11-07-13', receipt number 'SF. 193', tax information 'P.I. 01845911005' (Italian VAT number), and itemized purchases including 'PIZZA MARGHERITA', 'MEDIUM LIGHT', and 'MINERALE CL 50' with corresponding prices. Missing are consumer recipient details and payment method information."
     }
   },
   "extraction_result": {
+    "customer_name_on_invoice": null,
+    "customer_name_exception": null,
+    "customer_address_on_invoice": null,
+    "customer_vat_number_on_invoice": null,
+    "customer_tax_code_on_invoice": null,
+    "currency": "EUR",
+    "amount": 26.33,
+    "receipt_type": "Receipt",
+    "receipt_quality": null,
+    "payment_method": null,
+    "vehicle_make_model": null,
+    "vehicle_fuel_type": null,
+    "distance_traveled": null,
+    "route_documentation": null,
+    "car_registration": null,
+    "personal_information": null,
+    "business_trip_reporting": null,
+    "per_diem_method": null,
     "supplier_name": "GIAMAICA CAFFE' SRL",
     "supplier_address": "Via del Tritone, 54 00187 Roma",
     "vat_number": "01845911005",
-    "currency": "EUR",
-    "total_amount": 26.33,
-    "date_of_issue": "2023-07-11",
+    "date_of_issue": "2013-07-11",
+    "time": "18:50",
+    "receipt_number": "SF. 193",
+    "fiscal_code": "MF EM 99027342",
+    "table_number": "56",
     "line_items": [
       {
         "description": "PIZZA MARGHERITA",
@@ -67,220 +86,66 @@
     ],
     "subtotal": 22.5,
     "service_charge": 3.83,
-    "payment_method": null,
-    "transaction_time": "18:50",
-    "receipt_type": null,
-    "table_number": "56",
-    "transaction_reference": "SF. 193 MF EM 99027342",
-    "contact_phone": "06/6793585",
-    "citations": {
-      "citations": {
-        "supplier_name": {
-          "field_citation": {
-            "source_text": "GIAMAICA CAFFE' SRL",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "In the header information: GIAMAICA CAFFE' SRL",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "GIAMAICA CAFFE' SRL",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "In the header information: GIAMAICA CAFFE' SRL",
-            "match_type": "exact"
-          }
-        },
-        "supplier_address": {
-          "field_citation": {
-            "source_text": "Via del Tritone, 54 00187 Roma",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "In the header information: Via del Tritone, 54 00187 Roma",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "Via del Tritone, 54 00187 Roma",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "In the header information: Via del Tritone, 54 00187 Roma",
-            "match_type": "exact"
-          }
-        },
-        "vat_number": {
-          "field_citation": {
-            "source_text": "P.I. 01845911005",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "In the header information: P.I. 01845911005",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "P.I. 01845911005",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "In the header information: P.I. 01845911005",
-            "match_type": "exact"
-          }
-        },
-        "currency": {
-          "field_citation": {
-            "source_text": "EURO",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "In the table and total section: EURO",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "EURO",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "In the table and total section: EURO",
-            "match_type": "exact"
-          }
-        },
-        "total_amount": {
-          "field_citation": {
-            "source_text": "TOTALE EURO",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Final total in table: TOTALE EURO",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "26,33",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Final total in table: 26,33",
-            "match_type": "exact"
-          }
-        },
-        "date_of_issue": {
-          "field_citation": {
-            "source_text": "11-07-13",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Date-stamped with transaction reference: 11-07-13",
-            "match_type": "fuzzy"
-          },
-          "value_citation": {
-            "source_text": "11-07-13",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Date-stamped with transaction reference: 11-07-13",
-            "match_type": "fuzzy"
-          }
-        },
-        "transaction_time": {
-          "field_citation": {
-            "source_text": "18:50",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Time-stamped with transaction reference: 18:50",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "18:50",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Time-stamped with transaction reference: 18:50",
-            "match_type": "exact"
-          }
-        },
-        "table_number": {
-          "field_citation": {
-            "source_text": "Tavolo: 56",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Adjacent to transaction details: Tavolo: 56",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "Tavolo: 56",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Adjacent to transaction details: Tavolo: 56",
-            "match_type": "exact"
-          }
-        },
-        "transaction_reference": {
-          "field_citation": {
-            "source_text": "SF. 193 MF EM 99027342",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Reference number with transaction details: SF. 193 MF EM 99027342",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "SF. 193 MF EM 99027342",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Reference number with transaction details: SF. 193 MF EM 99027342",
-            "match_type": "exact"
-          }
-        },
-        "contact_phone": {
-          "field_citation": {
-            "source_text": "Tel. 06/6793585",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Contact details: Tel. 06/6793585",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "06/6793585",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Contact details: Tel. 06/6793585",
-            "match_type": "exact"
-          }
-        }
-      },
-      "metadata": {
-        "total_fields_analyzed": 10,
-        "fields_with_field_citations": 10,
-        "fields_with_value_citations": 10,
-        "average_confidence": 0.885
-      }
-    }
+    "establishment_name": "BAR ACCADEMIA",
+    "contact_phone": "06/6793585"
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 3,
+      "issues_count": 6,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_name",
-          "description": "The supplier name on the receipt 'GIAMAICA CAFFE' SRL' does not match the mandatory requirement 'Global People s.r.l.'",
-          "recommendation": "It is recommended to address this issue with the supplier or provider",
-          "knowledge_base_reference": "Must be Global People s.r.l. (Mandatory for Global People s.r.l., Italy)"
+          "field": "Customer Name",
+          "description": "The receipt is missing the mandatory ICP customer name.",
+          "recommendation": "Request a corrected invoice showing \"Global People s.r.l.\" as the customer name.",
+          "knowledge_base_reference": "All invoices/receipts must clearly show the local employer (Global People s.r.l.) as the customer."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "payment_method",
-          "description": "The payment method is missing, which is mandatory to ensure traceability as per requirements.",
-          "recommendation": "Ensure to provide the method of payment used; must be traceable: bank transfers, postal transfers, credit/debit cards, prepaid cards, bank/cashier's checks",
-          "knowledge_base_reference": "Must be traceable: bank transfers, postal transfers, credit/debit cards, prepaid cards, bank/cashier's checks"
+          "field": "Customer Address",
+          "description": "The receipt is missing the mandatory ICP customer address.",
+          "recommendation": "Request a corrected invoice showing \"Via Venti Settembre 3, Torino (TO) CAP 10121, Italy\" as the customer address.",
+          "knowledge_base_reference": "The address \"Via Venti Settembre 3, Torino (TO) CAP 10121, Italy\" is required on all invoices."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "receipt_type",
-          "description": "Receipt type information is missing, which is mandatory to validate the document.",
-          "recommendation": "Ensure receipt type information is included; must be actual tax receipts or invoices, not booking confirmations",
-          "knowledge_base_reference": "Must be actual tax receipts or invoices, not booking confirmations"
+          "field": "VAT Number",
+          "description": "The receipt is missing the mandatory ICP VAT number.",
+          "recommendation": "Request a corrected invoice showing \"IT12455930011\" as the VAT number.",
+          "knowledge_base_reference": "The local employer's VAT number (IT12455930011) must be present on all invoices."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Tax Code",
+          "description": "The receipt is missing the mandatory ICP tax code.",
+          "recommendation": "Request a corrected invoice showing \"12455930011\" as the tax code.",
+          "knowledge_base_reference": "The local employer's tax code (12455930011) must be present on all invoices."
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Payment Method",
+          "description": "The receipt is missing the payment method used for the transaction.",
+          "recommendation": "Request a corrected invoice showing a traceable payment method (bank transfers, postal transfers, credit/debit cards, prepaid cards, bank/cashier's checks).",
+          "knowledge_base_reference": "Italian regulations require traceable payment methods on all business receipts."
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "Expense Type",
+          "description": "The receipt appears to be for a personal meal expense rather than business entertainment.",
+          "recommendation": "If this is business entertainment, provide documentation with client/supplier names and company details to qualify for the 75% tax exemption. Otherwise, be aware this expense will be grossed up.",
+          "knowledge_base_reference": "According to Italian tax regulations, personal meals are not tax exempt and will be grossed up. For meals to qualify as business entertainment and receive 75% tax exemption, they must be labeled as \"spese di rappresentanza\" and include client/supplier details."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt validation failed due to mismatched supplier name and missing mandatory fields like payment method and receipt type."
+      "compliance_summary": "This receipt fails to meet Global People s.r.l. mandatory requirements for Italian expense documentation. It's missing critical company identification information including customer name, address, VAT number, and tax code. Additionally, no payment method is specified, which is required by Italian regulations. The expense appears to be a personal meal (\u20ac26.33) rather than business entertainment, which means it does not qualify for tax exemption and will be grossed up according to Italian tax law."
     },
     "technical_details": {
-      "content_type": "ReceiptValidationResult",
+      "content_type": "Receipt",
       "country": "Italy",
-      "icp": "Global People",
-      "receipt_type": "meals",
-      "issues_count": 3,
-      "has_reasoning": true
+      "icp": "Global People s.r.l.",
+      "receipt_type": "Meal receipt",
+      "issues_count": 6
     }
   },
   "processing_status": "completed",

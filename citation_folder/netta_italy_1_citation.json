@@ -1,154 +1,104 @@
 {
   "citations": {
-    "supplier_name": {
+    "business_name": {
       "field_citation": {
-        "source_text": "GIAMAICA CAFFE' SRL",
-        "confidence": 0.9,
+        "source_text": "BAR ACCADEMIA",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "# BAR ACCADEMIA\nGIAMAICA CAFFE' SRL",
+        "context": "BAR ACCADEMIA at header",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "GIAMAICA CAFFE' SRL",
-        "confidence": 0.9,
+        "source_text": "BAR ACCADEMIA\nGIAMAICA CAFFE' SRL",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "# BAR ACCADEMIA\nGIAMAICA CAFFE' SRL",
+        "context": "Header of receipt",
         "match_type": "exact"
       }
     },
-    "supplier_address": {
-      "field_citation": {
-        "source_text": "Via del Tritone, 54 00187 Roma",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "GIAMAICA CAFFE' SRL\nVia del Tritone, 54 00187 Roma",
-        "match_type": "exact"
-      },
+    "address": {
+      "field_citation": null,
       "value_citation": {
         "source_text": "Via del Tritone, 54 00187 Roma",
-        "confidence": 0.9,
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "GIAMAICA CAFFE' SRL\nVia del Tritone, 54 00187 Roma",
+        "context": "Business address",
         "match_type": "exact"
       }
     },
-    "vat_number": {
-      "field_citation": {
+    "vat": {
+      "field_citation": null,
+      "value_citation": {
         "source_text": "P.I. 01845911005",
-        "confidence": 0.9,
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Via del Tritone, 54 00187 Roma\nP.I. 01845911005",
-        "match_type": "fuzzy"
-      },
-      "value_citation": {
-        "source_text": "01845911005",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Via del Tritone, 54 00187 Roma\nP.I. 01845911005",
+        "context": "VAT number",
         "match_type": "exact"
       }
     },
-    "currency": {
-      "field_citation": {
-        "source_text": "EURO",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "| BRIOCHE MARMELLATA |  EURO |\n| ------------------ | ----: |",
-        "match_type": "exact"
-      },
+    "phone": {
+      "field_citation": null,
       "value_citation": {
-        "source_text": "EURO",
-        "confidence": 0.8,
+        "source_text": "06/6793585",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "| BRIOCHE MARMELLATA |  EURO |\n| ------------------ | ----: |",
+        "context": "Phone number",
         "match_type": "exact"
       }
     },
-    "total_amount": {
+    "date": {
       "field_citation": {
-        "source_text": "TOTALE EURO",
+        "source_text": "Date implicit in format",
         "confidence": 0.9,
         "source_location": "markdown",
-        "context": "| Servizio           |  3,40 |\n| TOTALE EURO        | 23,40 |",
-        "match_type": "fuzzy"
-      },
-      "value_citation": {
-        "source_text": "23,40",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| Servizio           |  3,40 |\n| TOTALE EURO        | 23,40 |",
-        "match_type": "fuzzy"
-      }
-    },
-    "date_of_issue": {
-      "field_citation": {
-        "source_text": "19-10-16",
-        "confidence": 0.7,
-        "source_location": "markdown",
-        "context": "19-10-16  09:00                SF.    16",
-        "match_type": "fuzzy"
+        "context": "Receipt date field",
+        "match_type": "contextual"
       },
       "value_citation": {
         "source_text": "19-10-16",
-        "confidence": 0.7,
+        "confidence": 0.9,
         "source_location": "markdown",
-        "context": "19-10-16  09:00                SF.    16",
+        "context": "Date in DD-MM-YY format",
         "match_type": "fuzzy"
       }
     },
-    "transaction_time": {
+    "line_items": {
       "field_citation": {
-        "source_text": "09:00",
-        "confidence": 0.9,
+        "source_text": "Items in table format",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "19-10-16  09:00                SF.    16",
-        "match_type": "exact"
+        "context": "Line items section",
+        "match_type": "contextual"
       },
       "value_citation": {
-        "source_text": "09:00",
-        "confidence": 0.9,
+        "source_text": "BRIOCHE MARMELLATA (3,00)\nCAFFE 3× (12,00)\nCAPPUCCINO (5,00)",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "19-10-16  09:00                SF.    16",
+        "context": "Product lines with prices",
         "match_type": "exact"
       }
     },
-    "table_number": {
+    "totals": {
       "field_citation": {
-        "source_text": "Tavolo: 7",
-        "confidence": 0.9,
+        "source_text": "SUBTOTALE and TOTALE EURO",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Tavolo: 7",
+        "context": "Total amounts section",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "7",
-        "confidence": 0.9,
+        "source_text": "Subtotal 20,00\nService 3,40\nTotal 23,40",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Tavolo: 7",
+        "context": "Total amounts with service charge",
         "match_type": "exact"
-      }
-    },
-    "transaction_reference": {
-      "field_citation": {
-        "source_text": "/F EM 99027342",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "19-10-16  09:00                SF.    16\n         /F EM 99027342",
-        "match_type": "fuzzy"
-      },
-      "value_citation": {
-        "source_text": "F EM 99027342",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "19-10-16  09:00                SF.    16\n         /F EM 99027342",
-        "match_type": "fuzzy"
       }
     }
   },
   "metadata": {
-    "total_fields_analyzed": 10,
-    "fields_with_field_citations": 9,
-    "fields_with_value_citations": 9,
-    "average_confidence": 0.86
+    "total_fields_analyzed": 7,
+    "fields_with_field_citations": 4,
+    "fields_with_value_citations": 7,
+    "average_confidence": 0.97
   }
 }

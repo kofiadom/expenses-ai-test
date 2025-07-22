@@ -2,71 +2,71 @@
   "image_path": "expense_files\\netta_italy_2.png",
   "assessment_method": "LLM",
   "model_used": "claude-3-7-sonnet-20250219",
-  "timestamp": "2025-07-16T22:32:57.629607",
+  "timestamp": "2025-07-22T15:49:08.715227",
   "blur_detection": {
-    "detected": true,
+    "detected": false,
     "severity_level": "low",
-    "confidence_score": 0.8,
-    "quantitative_measure": 0.2,
-    "description": "The receipt exhibits slight blurring but text remains generally readable.",
-    "recommendation": "For better quality, hold the camera steady and ensure proper focus when capturing receipt images."
+    "confidence_score": 0.9,
+    "quantitative_measure": 0.15,
+    "description": "The receipt shows minimal blur with most text remaining legible despite some minor softness.",
+    "recommendation": "No action needed as the current image quality is sufficient for OCR processing."
   },
   "contrast_assessment": {
-    "detected": true,
-    "severity_level": "medium",
+    "detected": false,
+    "severity_level": "low",
     "confidence_score": 0.9,
-    "quantitative_measure": 0.6,
-    "description": "The receipt shows adequate contrast between text and background but some areas appear faded.",
-    "recommendation": "Ensure good lighting conditions when capturing receipts to improve contrast between text and background."
+    "quantitative_measure": 0.85,
+    "description": "The receipt demonstrates good contrast between the black text and white background throughout the document.",
+    "recommendation": "No improvement needed as contrast is sufficient for automatic text extraction."
   },
   "glare_identification": {
     "detected": false,
     "severity_level": "low",
-    "confidence_score": 0.9,
+    "confidence_score": 0.95,
     "quantitative_measure": 0.0,
-    "description": "No significant glare or reflections are present on the receipt image.",
-    "recommendation": "Continue capturing receipts in environments without direct light sources causing reflections."
+    "description": "No significant glare is visible on the receipt that would interfere with text recognition.",
+    "recommendation": "Current lighting conditions are acceptable for document scanning."
   },
   "water_stains": {
     "detected": false,
     "severity_level": "low",
     "confidence_score": 0.95,
     "quantitative_measure": 0.0,
-    "description": "No water damage or staining is visible on the receipt.",
-    "recommendation": "Continue to keep receipts dry and protected from liquids."
+    "description": "No water stains or water damage are visible on the receipt.",
+    "recommendation": "No action needed as the document appears free from water damage."
   },
   "tears_or_folds": {
     "detected": true,
-    "severity_level": "medium",
+    "severity_level": "low",
     "confidence_score": 0.9,
-    "quantitative_measure": 0.4,
-    "description": "The receipt shows visible creases and slight wrinkles that affect the image quality in some areas.",
-    "recommendation": "Flatten receipts before scanning or photographing to minimize the impact of creases and folds."
+    "quantitative_measure": 0.2,
+    "description": "The receipt shows minor creasing and slight wear at the edges but no significant tears that impact text readability.",
+    "recommendation": "Consider smoothing the receipt before scanning, though current condition is acceptable for OCR."
   },
   "cut_off_detection": {
     "detected": false,
     "severity_level": "low",
-    "confidence_score": 0.95,
+    "confidence_score": 0.9,
     "quantitative_measure": 0.0,
-    "description": "The receipt appears to be fully captured within the frame with no cut-off edges.",
-    "recommendation": "Continue to ensure the entire receipt is within the camera frame when capturing images."
+    "description": "The receipt appears to be fully captured within the frame with all edges visible.",
+    "recommendation": "Current framing is appropriate for document processing."
   },
   "missing_sections": {
     "detected": false,
     "severity_level": "low",
     "confidence_score": 0.9,
     "quantitative_measure": 0.0,
-    "description": "All standard receipt sections appear to be present including header, line items, and totals.",
-    "recommendation": "Continue capturing complete receipts with all relevant information visible."
+    "description": "The receipt appears complete with header, line items, totals, and footer information all visible.",
+    "recommendation": "No additional capture needed as all standard receipt sections are present."
   },
   "obstructions": {
     "detected": false,
     "severity_level": "low",
     "confidence_score": 0.95,
     "quantitative_measure": 0.0,
-    "description": "No fingers, shadows, or other obstructions are visible on the receipt image.",
-    "recommendation": "Continue to keep hands and objects away from the receipt when capturing images."
+    "description": "No fingers, shadows, or other obstructions are visible on the receipt surface.",
+    "recommendation": "Current capture technique is good with no obstructions affecting content visibility."
   },
-  "overall_quality_score": 7,
+  "overall_quality_score": 8,
   "suitable_for_extraction": true
 }

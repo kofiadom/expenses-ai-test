@@ -1,106 +1,214 @@
 {
   "citations": {
-    "supplier_name": {
-      "field_citation": {
-        "source_text": "Supplier Name",
-        "confidence": 0.9,
-        "source_location": "requirements|markdown",
-        "context": "# Pizzeria Pisa\nCora-Berliner Str.2\n10117 Berlin\n",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "Pizzeria Pisa",
-        "confidence": 1.0,
-        "source_location": "markdown",
-        "context": "# Pizzeria Pisa",
-        "match_type": "exact"
-      }
-    },
-    "supplier_address": {
-      "field_citation": {
-        "source_text": "Supplier Address",
-        "confidence": 0.9,
-        "source_location": "requirements",
-        "context": "# Pizzeria Pisa\nCora-Berliner Str.2\n10117 Berlin\n",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "Cora-Berliner Str.2, 10117 Berlin",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "Cora-Berliner Str.2\n10117 Berlin",
-        "match_type": "fuzzy"
-      }
-    },
     "currency": {
       "field_citation": {
-        "source_text": "Currency",
+        "source_text": "EUR",
         "confidence": 0.9,
         "source_location": "requirements",
-        "context": "| 0,4 Cola Light    | 3,60 EUR |\n| ----------------- | -------- |",
-        "match_type": "exact"
+        "context": "Multiple currency indicators throughout receipt",
+        "match_type": "contextual"
       },
       "value_citation": {
         "source_text": "EUR",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "| 0,4 Cola Light    | 3,60 EUR |",
-        "match_type": "fuzzy"
+        "confidence": 0.9,
+        "source_location": "requirements",
+        "context": "3,60 EUR, 5,90 EUR, 9,50 EUR",
+        "match_type": "exact"
       }
     },
     "total_amount": {
       "field_citation": {
         "source_text": "Saldo",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Saldo                9,50 EUR",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "Final balance line",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "9.50 EUR",
+        "source_text": "9,50 EUR",
         "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "Saldo                9,50 EUR",
-        "match_type": "fuzzy"
+        "source_location": "requirements",
+        "context": "9,50 EUR appears twice",
+        "match_type": "exact"
       }
     },
-    "date_of_issue": {
+    "receipt_type": {
       "field_citation": {
-        "source_text": "Date",
-        "confidence": 0.9,
-        "source_location": "requirements|markdown",
-        "context": "13:45 20.10.2014 Bediener 3",
-        "match_type": "contextual"
+        "source_text": "Rechnung",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Header section",
+        "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "2014-10-20",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "13:45 20.10.2014 Bediener 3",
-        "match_type": "fuzzy"
+        "source_text": "Rechnung",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Document header",
+        "match_type": "exact"
       }
     },
-    "tax_number": {
-      "field_citation": {
-        "source_text": "St.Nr.",
+    "invoice_date": {
+      "field_citation": null,
+      "value_citation": {
+        "source_text": "20.10.2014",
         "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "St.Nr.:34/476/00588",
+        "source_location": "requirements",
+        "context": "Date format in document",
+        "match_type": "exact"
+      }
+    },
+    "net_amount": {
+      "field_citation": {
+        "source_text": "Nettoumsatz",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "Net amount line",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "7,98 EUR",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "Net amount value",
+        "match_type": "exact"
+      }
+    },
+    "tax_rate": {
+      "field_citation": {
+        "source_text": "MWST 19%",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "Tax rate line",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "19%",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "Tax percentage",
+        "match_type": "exact"
+      }
+    },
+    "vat_amount": {
+      "field_citation": {
+        "source_text": "MWST 19%",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "VAT line",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "1,52 EUR",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "VAT amount",
+        "match_type": "exact"
+      }
+    },
+    "supplier_tax_id": {
+      "field_citation": {
+        "source_text": "St.Nr.:",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Tax ID field",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "34/476/00588",
         "confidence": 1.0,
-        "source_location": "markdown",
-        "context": "St.Nr.:34/476/00588",
+        "source_location": "requirements",
+        "context": "Tax ID value",
+        "match_type": "exact"
+      }
+    },
+    "supplier_name": {
+      "field_citation": null,
+      "value_citation": {
+        "source_text": "Pizzeria Pisa",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Header section",
+        "match_type": "exact"
+      }
+    },
+    "supplier_address": {
+      "field_citation": null,
+      "value_citation": {
+        "source_text": "Cora-Berliner Str.2, 10117 Berlin",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Address under business name",
+        "match_type": "exact"
+      }
+    },
+    "table_number": {
+      "field_citation": {
+        "source_text": "Tisch #",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Table number field",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "120",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Table number value",
+        "match_type": "exact"
+      }
+    },
+    "transaction_time": {
+      "field_citation": null,
+      "value_citation": {
+        "source_text": "13:45",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "Time in footer",
+        "match_type": "exact"
+      }
+    },
+    "payment_method": {
+      "field_citation": null,
+      "value_citation": {
+        "source_text": "Bar",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Payment method line",
+        "match_type": "exact"
+      }
+    },
+    "server_id": {
+      "field_citation": {
+        "source_text": "Es bediente Sie",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Server identification line",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Bediener 3",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Server ID value",
+        "match_type": "exact"
+      }
+    },
+    "special_notes": {
+      "field_citation": null,
+      "value_citation": {
+        "source_text": "Tip is not included",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Footer note",
         "match_type": "exact"
       }
     }
   },
   "metadata": {
-    "total_fields_analyzed": 6,
-    "fields_with_field_citations": 6,
-    "fields_with_value_citations": 6,
-    "average_confidence": 0.93
+    "total_fields_analyzed": 15,
+    "fields_with_field_citations": 9,
+    "fields_with_value_citations": 15,
+    "average_confidence": 0.96
   }
 }

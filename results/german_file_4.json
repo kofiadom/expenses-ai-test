@@ -1,6 +1,6 @@
 {
   "source_file": "german_file_4.md",
-  "processing_timestamp": "2025-07-16T22:49:14.221646",
+  "processing_timestamp": "2025-07-22T16:04:53.858143",
   "dataset_metadata": {
     "filepath": "expense_files/german_file_4.png",
     "filename": "german_file_4.png",
@@ -12,39 +12,49 @@
     "is_expense": true,
     "expense_type": "meals",
     "language": "German",
-    "language_confidence": 90,
-    "document_location": "Germany",
+    "language_confidence": 95,
+    "document_location": "Germany (Berlin)",
     "expected_location": "Germany",
     "location_match": true,
     "error_type": null,
     "error_message": null,
-    "classification_confidence": 95,
-    "reasoning": "The document contains a payment receipt for a take-away meal, with a total amount indicated, confirming this as an expense for meals. The presence of multiple schema fields like supplier, transaction amount, transaction date, and itemized descriptions supports this classification.",
+    "classification_confidence": 90,
+    "reasoning": "This is a restaurant receipt from 'BEETS AND ROOTS' in Berlin, Germany. It contains clear evidence of a completed food purchase transaction with specific items, prices, and a total amount paid.",
     "schema_field_analysis": {
       "fields_found": [
         "supplier",
+        "consumerRecipient",
         "transactionAmount",
         "transactionDate",
         "itemDescriptionLineItems"
       ],
       "fields_missing": [
-        "consumerRecipient",
-        "icpRequirements",
         "invoiceReceiptNumber",
         "taxInformation",
         "paymentMethod"
       ],
-      "total_fields_found": 4,
-      "expense_identification_reasoning": "The document includes a supplier (Beets and Roots), a transaction amount (EUR16.30), a transaction date (15.01.2025), and itemized descriptions (Japanese Salmon Bowl, Add Almond Crunch, Oneway Bowl). The fields found sufficiently represent an expense according to the schema."
+      "total_fields_found": 5,
+      "expense_identification_reasoning": "The document contains 5 out of 8 required schema fields including: supplier ('BEETS AND ROOTS'), consumerRecipient ('Angelina Jolie'), transactionAmount ('Total: EUR16.30'), transactionDate ('Date: 15.01.2025'), and itemDescriptionLineItems (Japanese Salmon Bowl, Add Almond Crunch, Oneway Bowl). Missing fields are invoiceReceiptNumber, taxInformation, and paymentMethod. The presence of these key fields clearly identifies this as a meal expense document."
     }
   },
   "extraction_result": {
-    "supplier_name": "BEETS AND ROOTS",
-    "supplier_address": "Leipziger Platz 18, 10117 Berlin",
-    "vat_number": null,
+    "customer_name_on_invoice": "Angelina Jolie",
+    "customer_address_on_invoice": null,
+    "customer_vat_number_on_invoice": null,
     "currency": "EUR",
-    "total_amount": 16.3,
-    "date_of_issue": "2025-01-15",
+    "amount": 16.3,
+    "receipt_type": "take away",
+    "receipt_quality": "clear",
+    "invoice_serial_number": null,
+    "invoice_date": "2025-01-15",
+    "service_date": "2025-01-15",
+    "net_amount": null,
+    "tax_rate": null,
+    "vat_amount": null,
+    "worker_name": "Angelina Jolie",
+    "worker_address": null,
+    "supplier_tax_id": null,
+    "expense_description": null,
     "line_items": [
       {
         "description": "Japanese Salmon Bowl",
@@ -65,168 +75,155 @@
         "total_price": 0.1
       }
     ],
+    "supplier_name": "BEETS AND ROOTS",
+    "supplier_address": "Leipziger Platz 18, 10117 Berlin",
+    "total_amount": 16.3,
     "order_code": "Angelina Jolie 6",
-    "order_type": "take away",
     "transaction_time": "13:11:44",
-    "payment_receipt": "Pickup Receipt",
-    "tax_rate": null,
-    "vat": null,
-    "name": null,
-    "address": null,
-    "supplier": null,
-    "expense": null,
-    "route": null,
-    "car_details": null,
-    "purpose": null,
-    "odometer_reading": null,
-    "travel_date": null,
-    "a1_certificate": null,
-    "manager_approval": null,
-    "personal_phone_proof": null,
-    "storage_period": null,
+    "order_type": "take away",
     "citations": {
       "citations": {
         "supplier_name": {
           "field_citation": {
-            "source_text": "Supplier Name",
-            "confidence": 0.9,
-            "source_location": "requirements",
-            "context": "FieldType: Supplier Name, Description: Name of the supplier/vendor on invoice",
-            "match_type": "exact"
+            "source_text": "Header",
+            "confidence": 1.0,
+            "source_location": "markdown",
+            "context": "Header at top of receipt",
+            "match_type": "contextual"
           },
           "value_citation": {
             "source_text": "BEETS AND ROOTS",
-            "confidence": 0.95,
+            "confidence": 1.0,
             "source_location": "markdown",
-            "context": "BEETS AND ROOTS\n\nLeipziger Platz 18\n10117 Berlin",
+            "context": "Found at top of receipt",
             "match_type": "exact"
           }
         },
         "supplier_address": {
           "field_citation": {
-            "source_text": "Supplier Address",
-            "confidence": 0.9,
-            "source_location": "requirements",
-            "context": "FieldType: Supplier Address, Description: Address of the supplier on invoice",
-            "match_type": "exact"
+            "source_text": "Below header",
+            "confidence": 1.0,
+            "source_location": "markdown",
+            "context": "Located below header section",
+            "match_type": "contextual"
           },
           "value_citation": {
             "source_text": "Leipziger Platz 18, 10117 Berlin",
-            "confidence": 0.95,
+            "confidence": 1.0,
             "source_location": "markdown",
-            "context": "BEETS AND ROOTS\n\nLeipziger Platz 18\n10117 Berlin",
-            "match_type": "fuzzy"
-          }
-        },
-        "currency": {
-          "field_citation": {
-            "source_text": "Currency",
-            "confidence": 0.9,
-            "source_location": "requirements",
-            "context": "FieldType: Currency, Description: Receipt currency",
+            "context": "Complete address string",
             "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "EUR",
-            "confidence": 0.85,
-            "source_location": "markdown",
-            "context": "| 1x | Japanese Salmon Bowl | EUR14.95 |\nTotal: EUR16.30",
-            "match_type": "fuzzy"
-          }
-        },
-        "total_amount": {
-          "field_citation": {
-            "source_text": "Total",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Total: EUR16.30",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "16.3",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Total: EUR16.30",
-            "match_type": "fuzzy"
-          }
-        },
-        "date_of_issue": {
-          "field_citation": {
-            "source_text": "Date",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Date: 15.01.2025                Time: 13:11:44",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "15.01.2025",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Date: 15.01.2025                Time: 13:11:44",
-            "match_type": "fuzzy"
           }
         },
         "order_code": {
           "field_citation": {
             "source_text": "Ordercode",
-            "confidence": 0.9,
+            "confidence": 1.0,
             "source_location": "markdown",
-            "context": "Ordercode\n\nAngelina Jolie 6",
+            "context": "Ordercode label",
             "match_type": "exact"
           },
           "value_citation": {
             "source_text": "Angelina Jolie 6",
-            "confidence": 0.95,
+            "confidence": 1.0,
             "source_location": "markdown",
-            "context": "Ordercode\n\nAngelina Jolie 6",
+            "context": "Full order code value",
             "match_type": "exact"
           }
         },
-        "order_type": {
+        "customer_name_on_invoice": {
           "field_citation": {
-            "source_text": "Order type",
-            "confidence": 0.9,
+            "source_text": "Part of order code",
+            "confidence": 1.0,
             "source_location": "markdown",
-            "context": "Order type: take away",
+            "context": "Found within order code",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Angelina Jolie",
+            "confidence": 1.0,
+            "source_location": "markdown",
+            "context": "Customer name in order code",
+            "match_type": "exact"
+          }
+        },
+        "invoice_date": {
+          "field_citation": {
+            "source_text": "Date:",
+            "confidence": 1.0,
+            "source_location": "markdown",
+            "context": "Date label",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "take away",
-            "confidence": 0.95,
+            "source_text": "15.01.2025",
+            "confidence": 1.0,
             "source_location": "markdown",
-            "context": "Order type: take away",
+            "context": "Date value",
             "match_type": "exact"
           }
         },
         "transaction_time": {
           "field_citation": {
-            "source_text": "Time",
-            "confidence": 0.9,
+            "source_text": "Time:",
+            "confidence": 1.0,
             "source_location": "markdown",
-            "context": "Date: 15.01.2025                Time: 13:11:44",
+            "context": "Time label",
             "match_type": "exact"
           },
           "value_citation": {
             "source_text": "13:11:44",
-            "confidence": 0.95,
+            "confidence": 1.0,
             "source_location": "markdown",
-            "context": "Date: 15.01.2025                Time: 13:11:44",
+            "context": "Time value",
             "match_type": "exact"
           }
         },
-        "payment_receipt": {
+        "order_type": {
           "field_citation": {
-            "source_text": "Payment Receipt",
-            "confidence": 0.9,
-            "source_location": "requirements",
-            "context": "FieldType: Payment Receipt, Description: Payment",
+            "source_text": "Order type:",
+            "confidence": 1.0,
+            "source_location": "markdown",
+            "context": "Order type label",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "Pickup Receipt",
-            "confidence": 0.95,
+            "source_text": "take away",
+            "confidence": 1.0,
             "source_location": "markdown",
-            "context": "-Pickup Receipt-",
+            "context": "Order type value",
+            "match_type": "exact"
+          }
+        },
+        "line_items": {
+          "field_citation": {
+            "source_text": "Tabular format with quantities and descriptions",
+            "confidence": 1.0,
+            "source_location": "markdown",
+            "context": "Items listed in tabular format",
+            "match_type": "contextual"
+          },
+          "value_citation": {
+            "source_text": "Japanese Salmon Bowl - EUR14.95, Add Almond Crunch - EUR1.25, Oneway Bowl - EUR0.10",
+            "confidence": 1.0,
+            "source_location": "markdown",
+            "context": "List of items with prices",
+            "match_type": "exact"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "Total:",
+            "confidence": 1.0,
+            "source_location": "markdown",
+            "context": "Total label",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "EUR16.30",
+            "confidence": 1.0,
+            "source_location": "markdown",
+            "context": "Total amount",
             "match_type": "exact"
           }
         }
@@ -235,7 +232,7 @@
         "total_fields_analyzed": 9,
         "fields_with_field_citations": 9,
         "fields_with_value_citations": 9,
-        "average_confidence": 0.9277777777777778
+        "average_confidence": 1.0
       }
     }
   },
@@ -246,43 +243,42 @@
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_name",
-          "description": "The supplier name 'BEETS AND ROOTS' does not match the mandatory requirement 'Global People DE GmbH' for Global People ICP.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "FieldType: Supplier Name, Description: Name of the supplier/vendor on invoice, Rule: Must be Global People DE GmbH"
+          "field": "Customer Name",
+          "description": "The customer name on the invoice shows \"Angelina Jolie\" instead of \"Global People DE GmbH\" which is required for Global People ICP in Germany.",
+          "recommendation": "Address this issue with the supplier to ensure the company name \"Global People DE GmbH\" appears on all meal receipts.",
+          "knowledge_base_reference": "For Global People in Germany, all receipts must show the legal entity name \"Global People DE GmbH\"."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_address",
-          "description": "The supplier address 'Leipziger Platz 18, 10117 Berlin' does not match the required 'Taunusanlage 8, 60329 Frankfurt, Germany' for Global People ICP.",
-          "recommendation": "It is recommended to update the invoice to reflect the correct supplier address as specified.",
-          "knowledge_base_reference": "FieldType: Supplier Address, Description: Address of the supplier on invoice, Rule: Taunusanlage 8, 60329 Frankfurt, Germany"
+          "field": "Customer Address",
+          "description": "The receipt is missing the mandatory customer address which is required for Global People ICP.",
+          "recommendation": "Address this issue with the supplier to ensure the company address \"Taunusanlage 8, 60329 Frankfurt, Germany\" appears on all receipts.",
+          "knowledge_base_reference": "For Global People in Germany, all receipts must include the complete business address: Taunusanlage 8, 60329 Frankfurt, Germany."
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "vat_number",
-          "description": "The VAT Number is missing from the receipt. As required for Global People ICP, it should be 'DE356366640'.",
-          "recommendation": "It is recommended to request a compliant invoice from the supplier with the correct VAT Number.",
-          "knowledge_base_reference": "FieldType: VAT Number, Description: VAT identification number, Rule: DE356366640"
+          "field": "VAT Number",
+          "description": "The receipt is missing the mandatory VAT number which is required for Global People ICP.",
+          "recommendation": "Address this issue with the supplier to ensure the company VAT number \"DE356366640\" appears on all receipts.",
+          "knowledge_base_reference": "For Global People in Germany, all receipts must include the VAT registration number DE356366640."
         },
         {
           "issue_type": "Standards & Compliance | Gross-up Identified",
-          "field": "expense_type",
-          "description": "The meal expense in Germany is not tax exempt under Global People ICP rules.",
-          "recommendation": "The meal expense will be taxed as it is not tax exempt. Ensure compliance with gross-up requirements.",
-          "knowledge_base_reference": "ExpenseTypes: Meals, Description: Personal meals, GrossUpRule: Not tax exempt (outside business travel)"
+          "field": "Tax Treatment",
+          "description": "Meal expenses for Global People in Germany are not tax exempt and will be subject to gross-up.",
+          "recommendation": "Personal meals are not tax exempt outside of business travel context for Global People in Germany. This expense will be subject to tax gross-up.",
+          "knowledge_base_reference": "Meals - Personal meals - Not tax exempt (outside business travel)"
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt presents compliance issues regarding supplier name, address, and missing VAT number against Global People ICP requirements, as well as taxable implications for meal expenses under the given ICP rules."
+      "compliance_summary": "This meal receipt from Beets and Roots fails to meet several compliance requirements for Global People in Germany. Major issues include incorrect customer name (showing individual's name instead of company name), missing company address, and missing VAT number. Additionally, the meal expense is subject to tax gross-up as personal meals are not tax-exempt for Global People in Germany outside of business travel context. These issues need to be addressed to ensure compliance with German tax regulations."
     },
     "technical_details": {
-      "content_type": "ReceiptValidationResult",
+      "content_type": "Meal Receipt",
       "country": "Germany",
       "icp": "Global People",
-      "receipt_type": "meals",
-      "issues_count": 4,
-      "has_reasoning": true
+      "receipt_type": "Take Away Receipt",
+      "issues_count": 4
     }
   },
   "processing_status": "completed",

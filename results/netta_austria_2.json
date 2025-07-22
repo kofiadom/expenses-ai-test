@@ -1,6 +1,6 @@
 {
   "source_file": "netta_austria_2.md",
-  "processing_timestamp": "2025-07-16T23:05:57.912289",
+  "processing_timestamp": "2025-07-22T16:36:26.603910",
   "dataset_metadata": {
     "filepath": "expense_files/netta_austria_2.png",
     "filename": "netta_austria_2.png",
@@ -11,7 +11,7 @@
   "classification_result": {
     "is_expense": true,
     "expense_type": "utilities",
-    "language": "English",
+    "language": "German",
     "language_confidence": 95,
     "document_location": "Austria",
     "expected_location": "Austria",
@@ -19,32 +19,32 @@
     "error_type": null,
     "error_message": null,
     "classification_confidence": 95,
-    "reasoning": "The document contains sufficient information to be identified as an expense, specifically a utility bill. This includes the supplier (Austrian Gas Grid Management AG), consumer recipient (address and name provided), transaction amount (\u20ac34.80), transaction date (12.09.22 - 11.10.22), and tax information (GST \u20ac3.75). Language patterns match English. Location details affirm it is from Austria, consistent with the expected location.",
+    "reasoning": "This document is a gas utility bill from Austrian Gas Grid Management AG with clear payment requirements, consumption details, and billing information.",
     "schema_field_analysis": {
       "fields_found": [
         "supplier",
         "consumerRecipient",
         "transactionAmount",
         "transactionDate",
+        "invoiceReceiptNumber",
         "taxInformation",
-        "paymentMethod"
+        "itemDescriptionLineItems"
       ],
       "fields_missing": [
-        "invoiceReceiptNumber",
-        "itemDescriptionLineItems",
-        "icpRequirements"
+        "paymentMethod"
       ],
-      "total_fields_found": 6,
-      "expense_identification_reasoning": "The document contains more than 5 schema fields, indicating it is an expense document. Found fields include supplier, consumer recipient, transaction amount, transaction date, tax information, and payment method but lacks an invoice/receipt number, item description, and ICP requirements."
+      "total_fields_found": 7,
+      "expense_identification_reasoning": "The document contains key expense elements: supplier (Austrian Gas Grid Management AG), recipient information, specific transaction amount (\u20ac34.80), transaction dates (billing period 12.09.22-11.10.22, due date 26.10.2022), invoice number (Meter no. 271058), tax details (GST \u20ac3.75), and itemized description of gas consumption charges. It represents a completed billing cycle with actual charges rather than an estimate or quote."
     }
   },
   "extraction_result": {
-    "supplier_name": "Austrian Gas Grid Management AG",
-    "supplier_address": null,
-    "vat_number": null,
+    "customer_name_on_invoice": null,
+    "customer_address_on_invoice": null,
+    "customer_vat_number_on_invoice": null,
+    "customer_name_exception": "First Name last Name",
     "currency": "EUR",
     "amount": 34.8,
-    "receipt_type": null,
+    "receipt_type": "Invoice",
     "receipt_quality": null,
     "personal_information": null,
     "business_trip_reporting": null,
@@ -54,6 +54,18 @@
     "kilometer_record": null,
     "car_details": null,
     "parking_documentation": null,
+    "supplier_name": "Austrian Gas Grid Management AG",
+    "supplier_address": null,
+    "billing_period": "12.09.22 - 11.10.22",
+    "due_date": "2022-10-26",
+    "customer_address": "Address, Post code City",
+    "nmi": "3175004968364728",
+    "meter_number": "271058",
+    "read_date": "2022-10-12",
+    "read_type": "Actual",
+    "start_read": 2805,
+    "end_read": 2844,
+    "next_meter_read_date": "2022-11-13",
     "line_items": [
       {
         "description": "m3",
@@ -66,306 +78,116 @@
         "quantity": 14,
         "unit_price": 0.52,
         "total_price": 7.28
+      },
+      {
+        "description": "Payment processing fee",
+        "quantity": 1,
+        "unit_price": 0,
+        "total_price": 0
       }
     ],
-    "total_due": 34.8,
-    "total_gst": 3.75,
-    "previous_balance": 0.0,
-    "new_charges_and_credits": 31.05,
-    "due_date": "2022-10-26",
+    "subtotal": 31.05,
+    "tax_amount": 3.75,
+    "total_amount": 34.8,
     "contact_phone": "+43 (1) 27 560",
-    "contact_website": "www.aggm.at",
-    "biller_code": 3207,
-    "billpay_code": 3207,
-    "direct_debit": true,
-    "payment_processing_fee": 0.0,
-    "payment_method_fee_note": "A 0.6% (GST incl.) fee may apply if we incur a fee due to your payment method, including if you pay by credit or debit card.",
-    "nmi": "3175004968364728",
-    "meter_number": "271058",
-    "read_date": "2022-10-12",
-    "read_type": "Actual",
-    "start_read": 2805,
-    "end_read": 2844,
+    "contact_website": "www.aggm.at/en",
+    "payment_methods": [
+      "Direct Debit",
+      "Card",
+      "Mail",
+      "BPAY",
+      "Post Billpay",
+      "Centrepay",
+      "PayPal"
+    ],
     "citations": {
       "citations": {
-        "supplier_name": {
+        "customer_name": {
           "field_citation": {
-            "source_text": "Supplier Name",
+            "source_text": "Your details",
             "confidence": 0.9,
             "source_location": "requirements",
-            "context": "field_type definition in extraction requirements",
+            "context": "Customer details section",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "First Name last Name",
+            "confidence": 0.9,
+            "source_location": "requirements",
+            "context": "Your details section",
+            "match_type": "exact"
+          }
+        },
+        "supplier_info": {
+          "field_citation": {
+            "source_text": "document header",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Header section",
             "match_type": "exact"
           },
           "value_citation": {
             "source_text": "Austrian Gas Grid Management AG",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Austrian Gas Grid Management AG",
-            "match_type": "exact"
-          }
-        },
-        "currency": {
-          "field_citation": {
-            "source_text": "Receipt currency",
-            "confidence": 0.8,
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "field_type definition in extraction requirements",
+            "context": "Document header",
             "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "\u20ac",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "\u20ac 0.951, \u20ac 7.28, \u20ac 31.05, \u20ac 3.75, \u20ac34.80",
-            "match_type": "contextual"
           }
         },
-        "amount": {
+        "billing_period": {
           "field_citation": {
-            "source_text": "Expense amount",
-            "confidence": 0.8,
+            "source_text": "Your details",
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "field_type definition in extraction requirements",
+            "context": "Billing information section",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "\u20ac34.80",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Total due (includes GST) = \u20ac34.80",
+            "source_text": "12.09.22 - 11.10.22",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Your details section",
             "match_type": "exact"
           }
         },
-        "total_due": {
+        "meter_info": {
           "field_citation": {
-            "source_text": "Total due",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "| Total due | \u20ac 34.80 |",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "\u20ac 34.80",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "| Total due | \u20ac 34.80 |",
-            "match_type": "exact"
-          }
-        },
-        "total_gst": {
-          "field_citation": {
-            "source_text": "Total GST",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Total GST + \u20ac 3.75",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "\u20ac 3.75",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Total GST + \u20ac 3.75",
-            "match_type": "exact"
-          }
-        },
-        "new_charges_and_credits": {
-          "field_citation": {
-            "source_text": "New charges and credits",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "## New charges and credits.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "\u20ac 31.05",
-            "confidence": 0.7,
-            "source_location": "markdown",
-            "context": "Total new charges and credits \u20ac 31.05",
-            "match_type": "exact"
-          }
-        },
-        "due_date": {
-          "field_citation": {
-            "source_text": "Due date",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "| Due date | 26.10.2022 |",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "26.10.2022",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "| Due date | 26.10.2022 |",
-            "match_type": "fuzzy"
-          }
-        },
-        "contact_phone": {
-          "field_citation": {
-            "source_text": "Phone:",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Phone: + 43 (1) 27 560",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "+ 43 (1) 27 560",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Need an interpreter? Call + 43 (1) 27 560",
-            "match_type": "exact"
-          }
-        },
-        "contact_website": {
-          "field_citation": {
-            "source_text": "Online:",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Online: www.aggm.at",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "www.aggm.at",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Payment assistance. To find out more, visit www.aggm.at/en",
-            "match_type": "exact"
-          }
-        },
-        "biller_code": {
-          "field_citation": {
-            "source_text": "Biller Code:",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Biller Code: 3207",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "3207",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Biller Code: 3207",
-            "match_type": "exact"
-          }
-        },
-        "billpay_code": {
-          "field_citation": {
-            "source_text": "Billpay Code:",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Billpay Code: 3207",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "3207",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Billpay Code: 3207",
-            "match_type": "exact"
-          }
-        },
-        "direct_debit": {
-          "field_citation": {
-            "source_text": "Direct Debit",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Direct Debit\u2122 Sign up to Direct Debit at www.aggm.at",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "Sign up to Direct Debit",
-            "confidence": 0.7,
-            "source_location": "markdown",
-            "context": "Direct Debit\u2122 Sign up to Direct Debit at www.aggm.at",
-            "match_type": "contextual"
-          }
-        },
-        "payment_processing_fee": {
-          "field_citation": {
-            "source_text": "Payment processing fee",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Payment processing fee \u20ac 0.00",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "\u20ac 0.00",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Payment processing fee \u20ac 0.00",
-            "match_type": "exact"
-          }
-        },
-        "payment_method_fee_note": {
-          "field_citation": {
-            "source_text": "fee may apply",
-            "confidence": 0.7,
-            "source_location": "markdown",
-            "context": "A 0.6% (GST incl.) fee may apply",
-            "match_type": "fuzzy"
-          },
-          "value_citation": {
-            "source_text": "A 0.6% (GST incl.) fee may apply if we incur a fee",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "A 0.6% (GST incl.) fee may apply if we incur a fee due to your payment method",
-            "match_type": "exact"
-          }
-        },
-        "nmi": {
-          "field_citation": {
-            "source_text": "NMI",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "NMI: 3175004968364728",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "3175004968364728",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "NMI: 3175004968364728",
-            "match_type": "exact"
-          }
-        },
-        "meter_number": {
-          "field_citation": {
-            "source_text": "Meter no.",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "| Meter no. | Read date | Read type |",
+            "source_text": "meter details table",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Meter information section",
             "match_type": "exact"
           },
           "value_citation": {
             "source_text": "271058",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "| 271058    | 12 Oct 22 | Actual    |",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Meter details table",
             "match_type": "exact"
           }
         },
-        "read_date": {
+        "payment_methods": {
           "field_citation": {
-            "source_text": "Read date",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "| Read date | Read type |",
+            "source_text": "payment section",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Bottom of document",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "12 Oct 22",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "| 271058    | 12 Oct 22 | Actual |",
-            "match_type": "fuzzy"
+            "source_text": "Direct Debit, Card, Mail, BPAY, Post Billpay, Centrepay, PayPal",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Payment section at bottom",
+            "match_type": "exact"
           }
         }
       },
       "metadata": {
-        "total_fields_analyzed": 22,
-        "fields_with_field_citations": 17,
-        "fields_with_value_citations": 17,
-        "average_confidence": 0.844
+        "total_fields_analyzed": 15,
+        "fields_with_field_citations": 5,
+        "fields_with_value_citations": 5,
+        "average_confidence": 0.97
       }
     }
   },
@@ -376,36 +198,35 @@
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_name",
-          "description": "The supplier name 'Austrian Gas Grid Management AG' does not match the mandatory 'Global People IT-Services GmbH' for Global People ICP.",
-          "recommendation": "It is recommended to address this issue with the supplier to include 'Global People IT-Services GmbH' as required.",
-          "knowledge_base_reference": "Must be Global People IT-Services GmbH"
+          "field": "Customer Information",
+          "description": "Missing mandatory customer details on invoice including name, address, and VAT number for Global People IT-Services GmbH.",
+          "recommendation": "Request a corrected invoice from Austrian Gas Grid Management AG that includes the proper customer name (Global People IT-Services GmbH), address (K\u00e4rntner Ring 12, A-1010 Vienna, Austria), and VAT number (ATU77112189).",
+          "knowledge_base_reference": "Mandatory fields for Austrian invoices include Local Employer details (Global People IT-Services GmbH) as the customer. Exception for personal name only applies to travel receipts, not utilities."
         },
         {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_address",
-          "description": "Missing mandatory supplier address on the receipt.",
-          "recommendation": "It is recommended to request a corrected receipt from the supplier containing the required address.",
-          "knowledge_base_reference": "K\u00e4rntner Ring 12, A-1010 Vienna, Austria"
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "Documentation Requirements",
+          "description": "The receipt shows the worker's personal name instead of the required ICP details, which is not permitted for utilities expenses in Austria.",
+          "recommendation": "Provide additional documentation to support the home office expense claim and ensure it follows Austrian regulations.",
+          "knowledge_base_reference": "Receipt alone is not enough - you must follow specific tax allowances found at government website for home office expenses."
         },
         {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "vat_number",
-          "description": "VAT identification number is missing.",
-          "recommendation": "It is recommended to ensure the VAT number 'ATU77112189' is included on future receipts.",
-          "knowledge_base_reference": "ATU77112189"
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "Tax Treatment",
+          "description": "Home office utilities expenses follow specific tax allowances and rules in Austria that may require gross-up treatment.",
+          "recommendation": "Review the expense against Austrian home office allowance limits to determine proper gross-up treatment.",
+          "knowledge_base_reference": "Home office costs in Austria follow specific allowances according to the compliance database. Follow specific tax allowances and rules for home office expenses."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The utilities receipt from 'Austrian Gas Grid Management AG' for Austria contains several compliance issues including a non-compliant supplier name, missing supplier address, and VAT number, which do not meet the Global People ICP requirements."
+      "compliance_summary": "This utilities receipt fails multiple compliance requirements for Austria. It's missing mandatory customer information for Global People IT-Services GmbH (name, address, VAT number), incorrectly shows the worker's personal name, and requires additional documentation to meet Austrian home office expense regulations. The receipt must be corrected before it can be processed."
     },
     "technical_details": {
-      "content_type": "ReceiptValidationResult",
+      "content_type": "Utilities Receipt",
       "country": "Austria",
-      "icp": "Global People",
-      "receipt_type": "utilities",
-      "issues_count": 3,
-      "has_reasoning": true
+      "icp": "Global People IT-Services GmbH",
+      "receipt_type": "Utilities",
+      "issues_count": 3
     }
   },
   "processing_status": "completed",

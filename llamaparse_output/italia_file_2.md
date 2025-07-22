@@ -12,6 +12,7 @@ PARTITA IVA 03747960759
 |          | 1.00 |
 | TOTALE   | 1,85 |
 
+
 N.PEZZI    2             CASS.    1
 28-02-2006 11-50         SCONTR   47
                 17 RC 13409544

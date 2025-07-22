@@ -1,6 +1,6 @@
 {
   "source_file": "german_file_3.md",
-  "processing_timestamp": "2025-07-16T22:47:49.256800",
+  "processing_timestamp": "2025-07-22T16:03:14.946144",
   "dataset_metadata": {
     "filepath": "expense_files/german_file_3.png",
     "filename": "german_file_3.png",
@@ -18,31 +18,46 @@
     "location_match": true,
     "error_type": null,
     "error_message": null,
-    "classification_confidence": 95,
-    "reasoning": "The document is a receipt from a restaurant with evidence of payment completed, actual amounts charged, and a transaction date, meeting the criteria for an expense document. It is classified under 'meals' due to the items listed.",
+    "classification_confidence": 90,
+    "reasoning": "This is clearly a restaurant receipt from \"THE SUSHI CLUB\" in Berlin, Germany showing a completed meal transaction with final payment amount.",
     "schema_field_analysis": {
       "fields_found": [
         "supplier",
         "transactionAmount",
         "transactionDate",
+        "invoiceReceiptNumber",
         "itemDescriptionLineItems"
       ],
       "fields_missing": [
         "consumerRecipient",
-        "icpRequirements",
-        "invoiceReceiptNumber",
         "taxInformation",
         "paymentMethod"
       ],
-      "total_fields_found": 4,
-      "expense_identification_reasoning": "Four fields were identified: 'supplier' as the restaurant name 'The Sushi Club', 'transactionAmount' as the total of \u20ac64,40, 'transactionDate' as the date '5-2-2019', and 'itemDescriptionLineItems' as the list of menu items. While the 'consumerRecipient', 'icpRequirements', and 'paymentMethod' are absent, the presence of sufficient fields, especially transaction-specific ones, classifies this as an expense document. The language is confidently identified as German based on vocabulary and structure typical for Germany, which matches the expected location."
+      "total_fields_found": 5,
+      "expense_identification_reasoning": "Found 5 out of 8 schema fields, which meets the threshold for expense classification. This is clearly a restaurant receipt showing completed food and beverage purchases with a final amount paid, making it a valid meal expense document."
     }
   },
   "extraction_result": {
+    "customer_name_on_invoice": null,
+    "customer_name_exception": null,
+    "customer_address_on_invoice": null,
+    "customer_vat_number_on_invoice": null,
+    "currency": "EUR",
+    "amount": 64.4,
+    "receipt_type": "Rechnung",
+    "receipt_quality": "Clear and readable",
+    "invoice_serial_number": "L0001 FR\u00dcH",
+    "invoice_date": "2019-02-05",
+    "service_date": "2019-02-05",
+    "net_amount": null,
+    "tax_rate": null,
+    "vat_amount": null,
+    "worker_name": null,
+    "worker_address": null,
+    "supplier_tax_id": null,
+    "expense_description": null,
     "supplier_name": "THE SUSHI CLUB",
     "supplier_address": "Mohrenstr.42, 10117 Berlin",
-    "vat_number": null,
-    "currency": "EUR",
     "total_amount": 64.4,
     "date_of_issue": "2019-02-05",
     "line_items": [
@@ -99,161 +114,157 @@
     "contact_email": "info@thesushiclub.de",
     "contact_website": "www.TheSushiClub.de",
     "transaction_time": "23:10:54",
-    "receipt_type": "Rechnung",
     "table_number": "24",
     "transaction_reference": "L0001 FR\u00dcH",
     "special_notes": "TIP IS NOT INCLUDED",
-    "tax_rate": null,
-    "vat": null,
-    "name": null,
-    "address": null,
-    "supplier": null,
-    "expense": null,
-    "route": null,
-    "car_details": null,
-    "purpose": null,
-    "odometer_reading": null,
-    "travel_date": null,
-    "a1_certificate": null,
-    "payment_receipt": null,
-    "manager_approval": null,
-    "personal_phone_proof": null,
-    "storage_period": null,
     "citations": {
       "citations": {
         "supplier_name": {
           "field_citation": {
-            "source_text": "SUPPLIER NAME",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "THE SUSHI CLUB\nMohrenstr.42\n10117 Berlin",
-            "match_type": "contextual"
+            "source_text": "THE SUSHI CLUB",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Found as header",
+            "match_type": "exact"
           },
           "value_citation": {
             "source_text": "THE SUSHI CLUB",
             "confidence": 1.0,
-            "source_location": "markdown",
-            "context": "THE SUSHI CLUB\nMohrenstr.42",
+            "source_location": "requirements",
+            "context": "Header of receipt",
             "match_type": "exact"
           }
         },
         "supplier_address": {
           "field_citation": {
-            "source_text": "SUPPLIER ADDRESS",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "THE SUSHI CLUB\nMohrenstr.42\n10117 Berlin",
-            "match_type": "contextual"
+            "source_text": "supplier_address",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Address field",
+            "match_type": "exact"
           },
           "value_citation": {
             "source_text": "Mohrenstr.42, 10117 Berlin",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Mohrenstr.42\n10117 Berlin",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Complete address line",
             "match_type": "exact"
           }
         },
-        "currency": {
+        "contact_phone": {
           "field_citation": {
-            "source_text": "Currency",
-            "confidence": 0.7,
+            "source_text": "contact_phone",
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "Receipt currency",
-            "match_type": "contextual"
+            "context": "Contact information section",
+            "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "\u20ac",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "\u20ac 64,40",
-            "match_type": "fuzzy"
+            "source_text": "+49 30 23 916 036",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Phone number field",
+            "match_type": "exact"
+          }
+        },
+        "receipt_type": {
+          "field_citation": {
+            "source_text": "receipt_type",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Document type identifier",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "** Rechnung **",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Document header",
+            "match_type": "exact"
           }
         },
         "total_amount": {
           "field_citation": {
-            "source_text": "Total",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "9 Total                          \u20ac 64,40",
+            "source_text": "total_amount",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Total section",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "\u20ac 64,40",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "9 Total                          \u20ac 64,40",
+            "source_text": "Total \u20ac 64,40",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Bottom of receipt",
             "match_type": "exact"
-          }
-        },
-        "date_of_issue": {
-          "field_citation": {
-            "source_text": "Date",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Dienstag  5-2-2019 23:10:54",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "5-2-2019",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Dienstag  5-2-2019 23:10:54",
-            "match_type": "fuzzy"
           }
         }
       },
       "metadata": {
-        "total_fields_analyzed": 5,
+        "total_fields_analyzed": 14,
         "fields_with_field_citations": 5,
         "fields_with_value_citations": 5,
-        "average_confidence": 0.86
+        "average_confidence": 1.0
       }
     }
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 4,
+      "issues_count": 6,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_name",
-          "description": "The supplier name must be 'Global People DE GmbH' for compliance with Global People ICP requirements.",
-          "recommendation": "It is recommended to correct the supplier name to meet the ICP-specific rule.",
-          "knowledge_base_reference": "Must be Global People DE GmbH"
+          "field": "Customer Name",
+          "description": "Missing mandatory Local Employer name on the invoice",
+          "recommendation": "Obtain a corrected invoice that includes 'Global People DE GmbH' as the customer name",
+          "knowledge_base_reference": "Must show Global People DE GmbH as customer"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_address",
-          "description": "The supplier address must be 'Taunusanlage 8, 60329 Frankfurt, Germany' for compliance with Global People ICP requirements.",
-          "recommendation": "It is recommended to correct the supplier address to meet the ICP-specific rule.",
-          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
+          "field": "Customer Address",
+          "description": "Missing mandatory Local Employer address on the invoice",
+          "recommendation": "Obtain a corrected invoice that includes 'Taunusanlage 8, 60329 Frankfurt, Germany' as the customer address",
+          "knowledge_base_reference": "Must show Taunusanlage 8, 60329 Frankfurt, Germany"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "vat_number",
-          "description": "The VAT identification number is missing and must be 'DE356366640' for compliance with Global People ICP requirements.",
-          "recommendation": "It is recommended to ensure the VAT number is included and correct.",
-          "knowledge_base_reference": "DE356366640"
+          "field": "VAT Number",
+          "description": "Missing mandatory Local Employer VAT number on the invoice",
+          "recommendation": "Obtain a corrected invoice that includes 'DE356366640' as the customer VAT number",
+          "knowledge_base_reference": "Must show DE356366640"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Tax Details",
+          "description": "Missing net amount, tax rate, and VAT amount which are required for proper tax documentation",
+          "recommendation": "Obtain a corrected invoice that clearly shows the net amount, applicable tax rate, and VAT amount",
+          "knowledge_base_reference": "Net amount, tax rate, and VAT amount are required fields for proper tax documentation in Germany"
         },
         {
           "issue_type": "Standards & Compliance | Gross-up Identified",
-          "field": "expense",
-          "description": "Meals are not tax-exempt outside of business travel under Global People ICP.",
-          "recommendation": "Meals expenses will be grossed-up as they are not tax exempt outside of business travel.",
-          "knowledge_base_reference": "Not tax exempt (outside business travel)"
+          "field": "Expense Type",
+          "description": "Personal meal expenses are not tax exempt according to Global People ICP rules",
+          "recommendation": "This expense will need to be grossed-up as it cannot be reimbursed tax-free",
+          "knowledge_base_reference": "Not tax exempt (outside business travel) for meals under Global People ICP"
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "Documentation",
+          "description": "If this is a business meal with external parties, additional documentation is required",
+          "recommendation": "Provide documentation proving third party involvement if claiming this as an entertainment expense",
+          "knowledge_base_reference": "Entertainment must be offered to external third party, invoice must have Global People's name, address and VAT"
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt has discrepancies in the supplier name, address, and missing VAT number as per Global People ICP compliance requirements. Additionally, meals expenses are not tax exempt."
+      "compliance_summary": "This receipt from THE SUSHI CLUB fails to meet German compliance requirements for Global People ICP. Major issues include missing mandatory employer information (name, address, VAT number), incomplete tax details (net amount, tax rate, VAT amount), and tax implications for meal expenses. Personal meals are not tax exempt and will be grossed-up unless documentation proving third party involvement is provided. A corrected invoice must be obtained with all required information to ensure compliance."
     },
     "technical_details": {
-      "content_type": "ReceiptValidationResult",
+      "content_type": "Receipt",
       "country": "Germany",
       "icp": "Global People",
-      "receipt_type": "meals",
-      "issues_count": 4,
-      "has_reasoning": true
+      "receipt_type": "Meal Receipt",
+      "issues_count": 6
     }
   },
   "processing_status": "completed",

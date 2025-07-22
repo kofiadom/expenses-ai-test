@@ -1,6 +1,6 @@
 {
   "source_file": "italia_file_3.md",
-  "processing_timestamp": "2025-07-16T22:59:50.273339",
+  "processing_timestamp": "2025-07-22T16:28:07.432532",
   "dataset_metadata": {
     "filepath": "expense_files/italia_file_3.jpg",
     "filename ": "italia_file_3.jpg",
@@ -10,7 +10,7 @@
   },
   "classification_result": {
     "is_expense": true,
-    "expense_type": "other",
+    "expense_type": "entertainment",
     "language": "Italian",
     "language_confidence": 95,
     "document_location": "Italy",
@@ -19,361 +19,224 @@
     "error_type": null,
     "error_message": null,
     "classification_confidence": 90,
-    "reasoning": "The document contains evidence of a completed payment, total amount, transaction date and time, and item description, meeting the criteria for an expense document.",
+    "reasoning": "This is a receipt from an Italian department store 'Rinascente' for a Balenciaga bag purchase. It contains transaction date, amount, merchant details, and payment confirmation, indicating a completed transaction rather than just an estimate or booking.",
     "schema_field_analysis": {
       "fields_found": [
         "supplier",
         "transactionAmount",
         "transactionDate",
         "invoiceReceiptNumber",
+        "taxInformation",
         "itemDescriptionLineItems"
       ],
       "fields_missing": [
         "consumerRecipient",
-        "icpRequirements",
-        "taxInformation",
         "paymentMethod"
       ],
-      "total_fields_found": 5,
-      "expense_identification_reasoning": "The document includes a supplier (la Rinascente S.p.A. with business identifier), transaction amount (\u20ac1490.00), transaction date (28-12-2017), an invoice/receipt number (part of the barcode or store transaction reference), and item description (BORSE BALENCIAGA). Missing consumerRecipient information, ICP requirements, tax info, and explicit payment method details."
+      "total_fields_found": 6,
+      "expense_identification_reasoning": "The document contains critical expense receipt fields including supplier (Rinascente S.p.A.), transaction amount (1490,00 Euro), transaction date (28-12-2017), receipt number (Transaction 2275), tax information (P.IVA 05034580968), and item description (BORSE BALENCIAGA). These elements clearly identify it as a completed purchase receipt for a luxury item."
     }
   },
   "extraction_result": {
+    "customer_name_on_invoice": null,
+    "customer_address_on_invoice": null,
+    "customer_vat_number_on_invoice": null,
+    "customer_tax_code_on_invoice": null,
+    "currency": "EURO",
+    "amount": 1490.0,
+    "receipt_type": "Scontrino Non Fiscale",
+    "receipt_quality": null,
+    "payment_method": null,
+    "vehicle_make_model": null,
+    "vehicle_fuel_type": null,
+    "distance_traveled": null,
+    "route_documentation": null,
+    "car_registration": null,
+    "personal_information": null,
+    "business_trip_reporting": null,
+    "per_diem_method": null,
     "supplier_name": "la Rinascente S.p.A.",
     "supplier_address": "ROMA - VIA DEL TRITONE, 61",
-    "vat_number": "05034580968",
-    "currency": "EUR",
-    "total_amount": 1490.0,
+    "supplier_vat_number": "05034580968",
     "date_of_issue": "2017-12-28",
+    "time_of_issue": "19:40",
     "line_items": [
       {
         "description": "BORSE BALENCIAGA",
+        "article_number": "8031625015614",
         "quantity": 1,
         "unit_price": 1490.0,
         "total_price": 1490.0
       }
     ],
-    "contact_phone": "+39 (0)6 879161",
+    "total_amount": 1490.0,
     "store_number": "471",
     "pos_number": "8",
     "transaction_number": "2275",
     "operator_number": "1313",
-    "transaction_time": "19:40",
-    "receipt_type": "Scontrino Non Fiscale",
-    "website": "www.rinascente.it",
-    "special_notes": "Scontrino Non Fiscale ai sensi Art.1 comma 429 Legge N.311/2004",
-    "promotion": "Partecipa al nuovo concorso Rinascentecard \"LUCKY SHOPPING\"",
+    "contact_phone": "+39 (0)6 879161",
+    "contact_website": "www.rinascente.it",
+    "special_notes": "Partecipa al nuovo concorso Rinascentecard \"LUCKY SHOPPING\". Richiedi subito la card in negozio e potrai vincere fantastici premi. Regolamento su www.rinascente.it",
+    "legal_notice": "Scontrino Non Fiscale ai sensi Art.1 comma 429 Legge N.311/2004",
     "citations": {
       "citations": {
         "supplier_name": {
           "field_citation": {
-            "source_text": "Supplier Name",
-            "confidence": 0.9,
+            "source_text": "la Rinascente S.p.A.",
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "fieldType: Supplier Name, description: Name of the supplier/vendor on invoice",
+            "context": "Found at header",
             "match_type": "exact"
           },
           "value_citation": {
             "source_text": "la Rinascente S.p.A.",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "la Rinascente S.p.A.",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Header text",
             "match_type": "exact"
           }
         },
         "supplier_address": {
           "field_citation": {
-            "source_text": "Address",
-            "confidence": 0.85,
+            "source_text": "ROMA - VIA DEL TRITONE, 61",
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "fieldType: Supplier Address",
-            "match_type": "fuzzy"
+            "context": "Address information",
+            "match_type": "exact"
           },
           "value_citation": {
             "source_text": "ROMA - VIA DEL TRITONE, 61",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "ROMA - VIA DEL TRITONE, 61",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Complete address",
             "match_type": "exact"
           }
         },
-        "vat_number": {
+        "supplier_vat_number": {
           "field_citation": {
-            "source_text": "VAT Number",
-            "confidence": 0.9,
+            "source_text": "P.IVA 05034580968",
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "fieldType: VAT Number, description: VAT identification number",
+            "context": "VAT number field",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "05034580968",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "P.IVA 05034580968",
-            "match_type": "fuzzy"
+            "source_text": "P.IVA 05034580968",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Complete VAT number",
+            "match_type": "exact"
           }
         },
         "currency": {
           "field_citation": {
-            "source_text": "Currency",
-            "confidence": 0.9,
+            "source_text": "EURO",
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "fieldType: Currency, description: Receipt currency",
+            "context": "Top of receipt",
             "match_type": "exact"
           },
           "value_citation": {
             "source_text": "EURO",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "EURO Art/Ean 8031625015614",
-            "match_type": "fuzzy"
-          }
-        },
-        "total_amount": {
-          "field_citation": {
-            "source_text": "Total",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Totale",
-            "match_type": "fuzzy"
-          },
-          "value_citation": {
-            "source_text": "1490,00",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Totale 1490,00",
-            "match_type": "fuzzy"
-          }
-        },
-        "date_of_issue": {
-          "field_citation": {
-            "source_text": "Date",
-            "confidence": 0.85,
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "date_of_issue",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "28-12-2017",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "28-12-2017 19:40",
-            "match_type": "exact"
-          }
-        },
-        "contact_phone": {
-          "field_citation": {
-            "source_text": "Phone",
-            "confidence": 0.85,
-            "source_location": "requirements",
-            "context": "Ph.",
-            "match_type": "fuzzy"
-          },
-          "value_citation": {
-            "source_text": "+39 (0)6 879161",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Ph. +39 (0)6 879161",
-            "match_type": "exact"
-          }
-        },
-        "store_number": {
-          "field_citation": {
-            "source_text": "Store Number",
-            "confidence": 0.85,
-            "source_location": "requirements",
-            "context": "Negozio:",
-            "match_type": "fuzzy"
-          },
-          "value_citation": {
-            "source_text": "471",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Negozio:471",
-            "match_type": "exact"
-          }
-        },
-        "pos_number": {
-          "field_citation": {
-            "source_text": "POS Number",
-            "confidence": 0.85,
-            "source_location": "requirements",
-            "context": "POS:",
-            "match_type": "fuzzy"
-          },
-          "value_citation": {
-            "source_text": "8",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "POS: 8",
-            "match_type": "exact"
-          }
-        },
-        "transaction_number": {
-          "field_citation": {
-            "source_text": "Transaction Number",
-            "confidence": 0.85,
-            "source_location": "requirements",
-            "context": "Transazione:",
-            "match_type": "fuzzy"
-          },
-          "value_citation": {
-            "source_text": "2275",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Transazione:2275",
-            "match_type": "exact"
-          }
-        },
-        "operator_number": {
-          "field_citation": {
-            "source_text": "Operator Number",
-            "confidence": 0.8,
-            "source_location": "requirements",
-            "context": "Op.:",
-            "match_type": "fuzzy"
-          },
-          "value_citation": {
-            "source_text": "1313",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Op.:1313",
-            "match_type": "exact"
-          }
-        },
-        "transaction_time": {
-          "field_citation": {
-            "source_text": "Time",
-            "confidence": 0.85,
-            "source_location": "requirements",
-            "context": "18:40",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "19:40",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "28-12-2017 19:40",
+            "context": "Currency indicator",
             "match_type": "exact"
           }
         },
         "receipt_type": {
           "field_citation": {
-            "source_text": "Receipt Type",
-            "confidence": 0.9,
+            "source_text": "Scontrino Non Fiscale",
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "Scontrino Non Fiscale",
-            "match_type": "fuzzy"
+            "context": "Bottom of receipt",
+            "match_type": "exact"
           },
           "value_citation": {
             "source_text": "Scontrino Non Fiscale",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Scontrino Non Fiscale ai sensi Art.1",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Receipt type indicator",
             "match_type": "exact"
           }
         },
-        "website": {
+        "description": {
           "field_citation": {
-            "source_text": "Website",
-            "confidence": 0.85,
+            "source_text": "BORSE BALENCIAGA",
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "www.rinascente.it",
-            "match_type": "contextual"
+            "context": "Item description",
+            "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "www.rinascente.it",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Regolamento su www.rinascente.it",
+            "source_text": "BORSE BALENCIAGA",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Product description",
             "match_type": "exact"
           }
         },
-        "special_notes": {
+        "article_number": {
           "field_citation": {
-            "source_text": "Special Notes",
-            "confidence": 0.85,
+            "source_text": "Art/Ean 8031625015614",
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "Scontrino Non Fiscale ai sensi",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "Scontrino Non Fiscale ai sensi Art.1 comma 429 Legge N.311/2004",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Scontrino Non Fiscale ai sensi Art.1 comma 429 Legge N.311/2004",
+            "context": "Article/EAN number",
             "match_type": "exact"
-          }
-        },
-        "promotion": {
-          "field_citation": {
-            "source_text": "Promotion",
-            "confidence": 0.85,
-            "source_location": "requirements",
-            "context": "Partecipa al nuovo concorso",
-            "match_type": "contextual"
           },
           "value_citation": {
-            "source_text": "Partecipa al nuovo concorso Rinascentecard \"LUCKY SHOPPING\"",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Partecipa al nuovo concorso\nRinascentecard \"LUCKY SHOPPING\".",
+            "source_text": "Art/Ean 8031625015614",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Product identifier",
             "match_type": "exact"
           }
         }
       },
       "metadata": {
-        "total_fields_analyzed": 15,
-        "fields_with_field_citations": 15,
-        "fields_with_value_citations": 15,
-        "average_confidence": 0.9
+        "total_fields_analyzed": 16,
+        "fields_with_field_citations": 16,
+        "fields_with_value_citations": 16,
+        "average_confidence": 1.0
       }
     }
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 4,
+      "issues_count": 3,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_name",
-          "description": "The supplier name 'la Rinascente S.p.A.' does not match the mandatory requirement for ICP 'Global People', which must be 'Global People s.r.l.' or 'GoGlobal Consulting S.r.l.'",
-          "recommendation": "It is recommended to address this issue with the supplier or provider to ensure correct naming according to compliance requirements.",
-          "knowledge_base_reference": "FieldType: Supplier Name, Must be Global People s.r.l. or GoGlobal Consulting S.r.l."
+          "field": "customer_information",
+          "description": "The receipt is missing multiple mandatory customer information fields required for Global People s.r.l.",
+          "recommendation": "Request a corrected invoice from La Rinascente S.p.A. with proper Global People s.r.l. details (name, address, VAT number, tax code)",
+          "knowledge_base_reference": "Italy's file-related requirements mandate customer name, address, VAT number, and tax code for all receipts for the Global People ICP."
         },
         {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_address",
-          "description": "The supplier address 'ROMA - VIA DEL TRITONE, 61' does not match the mandatory address required for 'Global People s.r.l.' or 'GoGlobal Consulting S.r.l.'",
-          "recommendation": "Contact the supplier to correct the address format to match one of the approved addresses.",
-          "knowledge_base_reference": "FieldType: Supplier Address, Must be Via Venti Settembre 3, Torino (TO) CAP 10121, Italy or Via Uberto Visconti Di Modrone 38, 20122 Milano, Italia"
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "expense_classification",
+          "description": "Entertainment expenses in Italy are subject to specific tax treatment with 75% tax-free rule",
+          "recommendation": "Label this expense as 'spese di rappresentanza' for proper tax treatment (75% tax-free, 25% to be grossed-up and taxable)",
+          "knowledge_base_reference": "Entertainment expenses are tax-free up to 75% of the total amount and must be labeled as 'spese di rappresentanza'. The remaining 25% will be grossed-up and taxable."
         },
         {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "vat_number",
-          "description": "The VAT number '05034580968' does not align with the required VAT number 'IT12455930011' for 'Global People s.r.l.'",
-          "recommendation": "Ensure that the VAT number on the document matches the compliance-specified VAT number for 'Global People s.r.l.'",
-          "knowledge_base_reference": "FieldType: VAT Number, Must be IT12455930011"
-        },
-        {
-          "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "receipt_type",
-          "description": "The receipt is marked as 'Scontrino Non Fiscale', which is not compliant as the compliance requires valid tax receipts or invoices.",
-          "recommendation": "Obtain a valid fiscal receipt or tax-compliant invoice as required by local regulations.",
-          "knowledge_base_reference": "FieldType: Receipt Type, Must be actual tax receipts or invoices, not booking confirmations"
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "supporting_documentation",
+          "description": "For entertainment expenses in Italy, additional documentation regarding client/supplier details is required",
+          "recommendation": "Provide documentation specifying the name and company details of the client/supplier entertained",
+          "knowledge_base_reference": "For entertainment expenses in Italy, receipt alone is not sufficient. Must provide the name and company details of the client/supplier who was entertained for proper tax treatment."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt does not comply with various mandatory standards, including incorrect supplier information, VAT number, and receipt validity. These issues need addressing to ensure adherence to Global People ICP requirements."
+      "compliance_summary": "This entertainment expense receipt fails compliance requirements for three reasons: 1) Missing mandatory customer information fields (Global People s.r.l. name, address, VAT number, tax code); 2) Entertainment expenses require specific tax treatment (75% tax-free rule applies); 3) Additional documentation with client/supplier details is needed for entertainment expenses. All issues must be addressed for compliance with Italy's requirements for the Global People ICP."
     },
     "technical_details": {
-      "content_type": "ReceiptValidationResult",
+      "content_type": "Entertainment Expense Receipt",
       "country": "Italy",
       "icp": "Global People",
-      "receipt_type": "other",
-      "issues_count": 4,
-      "has_reasoning": true
+      "receipt_type": "Scontrino Non Fiscale",
+      "issues_count": 3
     }
   },
   "processing_status": "completed",

@@ -1,0 +1,72 @@
+{
+  "image_path": "C:\\Users\\Kofi Adom\\AppData\\Local\\Temp\\tmpcnwqno1b\\german_file_9_page1.png",
+  "assessment_method": "LLM",
+  "model_used": "claude-3-7-sonnet-20250219",
+  "timestamp": "2025-07-22T15:45:28.943977",
+  "blur_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.05,
+    "description": "The invoice image is exceptionally sharp with clear text definition and high legibility throughout.",
+    "recommendation": "No action required as the text clarity is excellent for OCR processing."
+  },
+  "contrast_assessment": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.98,
+    "quantitative_measure": 0.95,
+    "description": "The contrast between black text and white background is excellent, providing optimal readability across the entire document.",
+    "recommendation": "Maintain this level of contrast in future document captures."
+  },
+  "glare_identification": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.97,
+    "quantitative_measure": 0.0,
+    "description": "No glare or reflective bright spots are present on the invoice surface.",
+    "recommendation": "Continue using even, non-direct lighting when capturing document images."
+  },
+  "water_stains": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.99,
+    "quantitative_measure": 0.0,
+    "description": "No water stains, discoloration, or water damage visible on the invoice.",
+    "recommendation": "Continue keeping documents in dry storage conditions."
+  },
+  "tears_or_folds": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.98,
+    "quantitative_measure": 0.0,
+    "description": "The invoice appears completely flat with no visible folds, creases, or tears.",
+    "recommendation": "Maintain current document handling practices to avoid physical damage."
+  },
+  "cut_off_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.99,
+    "quantitative_measure": 0.0,
+    "description": "The entire invoice is visible within the frame with adequate margins on all sides.",
+    "recommendation": "Continue capturing full-frame images of documents with sufficient border space."
+  },
+  "missing_sections": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.97,
+    "quantitative_measure": 0.0,
+    "description": "All standard invoice sections are present including header, recipient information, line items, and payment details.",
+    "recommendation": "Current capture method effectively includes all relevant invoice components."
+  },
+  "obstructions": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.99,
+    "quantitative_measure": 0.0,
+    "description": "No shadows, fingers, or objects obstruct any portion of the invoice content.",
+    "recommendation": "Maintain current unobstructed document imaging technique."
+  },
+  "overall_quality_score": 10,
+  "suitable_for_extraction": true
+}

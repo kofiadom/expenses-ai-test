@@ -7,6 +7,8 @@ from langchain_anthropic import ChatAnthropic
 # Validation functionality moved to standalone_validation_runner.py
 # from llm_output_checker import ExpenseComplianceUQLMValidator
 from textwrap import dedent
+from typing import List, Optional
+from pydantic import BaseModel, Field
 import json
 import os
 from dotenv import load_dotenv
@@ -25,6 +27,36 @@ def load_expense_schema():
         raise FileNotFoundError(f"Expense schema file not found: {schema_path}")
 
 EXPENSE_SCHEMA = load_expense_schema()
+
+# Pydantic models for structured output
+class ComplianceIssue(BaseModel):
+    """A single compliance issue found during analysis."""
+    issue_type: str = Field(..., description="Type of issue: 'Standards & Compliance | Fix Identified' or 'Standards & Compliance | Gross-up Identified' or 'Standards & Compliance | Follow-up Action Identified'")
+    field: str = Field(..., description="Specific field name where issue was found")
+    description: str = Field(..., description="Detailed description of the issue based on knowledge base")
+    recommendation: str = Field(..., description="Specific action to resolve based on compliance requirements")
+    knowledge_base_reference: str = Field(..., description="Quote from the compliance data that supports this finding")
+
+class ValidationResult(BaseModel):
+    """Result of compliance validation."""
+    is_valid: bool = Field(..., description="Whether the document passes all compliance checks")
+    issues_count: int = Field(..., description="Number of issues found")
+    issues: List[ComplianceIssue] = Field(..., description="List of compliance issues found")
+    corrected_receipt: Optional[str] = Field(None, description="Corrected receipt data if applicable")
+    compliance_summary: str = Field(..., description="Overall compliance assessment and key findings")
+
+class TechnicalDetails(BaseModel):
+    """Technical details about the analysis."""
+    content_type: str = Field(..., description="Type of content analyzed")
+    country: str = Field(..., description="Country analyzed")
+    icp: str = Field(..., description="ICP analyzed")
+    receipt_type: str = Field(..., description="Type of receipt analyzed")
+    issues_count: int = Field(..., description="Number of issues found")
+
+class IssueDetectionResult(BaseModel):
+    """Structured result for issue detection analysis."""
+    validation_result: ValidationResult = Field(..., description="Validation results")
+    technical_details: TechnicalDetails = Field(..., description="Technical analysis details")
 
 def format_expense_taxonomy():
     """Format the expense schema as structured JSON for the prompt."""
@@ -84,9 +116,10 @@ def create_issue_detection_model():
 # llm_client = ChatAnthropic(model="claude-sonnet-4-20250514",
 #                         api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-# Create the issue detection and analysis agent
+# Create the issue detection and analysis agent with structured output
 issue_detection_agent = Agent(
     model=create_issue_detection_model(),
+    response_model=IssueDetectionResult,
     instructions=dedent("""\
 Persona: You are an expert compliance and tax analysis AI specializing in expense document validation. Your primary function is to analyze extracted receipt data against country-specific compliance requirements and ICP-specific rules to identify issues, violations, and recommendations.
 
@@ -180,35 +213,13 @@ CRITICAL REQUIREMENTS:
 - Be thorough and systematic in checking every applicable requirement
 - Dynamically filter requirements based on ICP, receipt type, and expense category
 - Calculate confidence score based on clarity of violations and knowledge base coverage
-- Your output MUST BE ONLY a valid JSON object matching the specified structure
+- Ensure all fields are properly populated according to the structured output model
 
-OUTPUT FORMAT:
-Return a JSON object with the following structure:
-
-{
-  "validation_result": {
-    "is_valid": true/false,
-    "issues_count": number,
-    "issues": [
-      {
-        "issue_type": "Standards & Compliance | Fix Identified/Gross-up Identified/Follow-up Action Identified",
-        "field": "specific_field_name",
-        "description": "Detailed description of the issue based on knowledge base",
-        "recommendation": "Specific action to resolve based on compliance requirements",
-        "knowledge_base_reference": "Quote from the compliance data that supports this finding"
-      }
-    ],
-    "corrected_receipt": null,
-    "compliance_summary": "Overall compliance assessment and key findings"
-  },
-  "technical_details": {
-    "content_type": "ReceiptValidationResult",
-    "country": "analyzed_country",
-    "icp": "analyzed_icp",
-    "receipt_type": "analyzed_receipt_type",
-    "issues_count": number_of_issues,
-  }
-}
+ISSUE TYPE FORMAT REQUIREMENTS:
+- Use EXACT format: "Standards & Compliance | Fix Identified" for issues requiring fixes
+- Use EXACT format: "Standards & Compliance | Gross-up Identified" for tax gross-up issues
+- Use EXACT format: "Standards & Compliance | Follow-up Action Identified" for follow-up actions
+- Do NOT use generic formats like "Standards & Compliance" alone
 
 VALIDATION CHECKLIST:
 □ Check all mandatory fields against FileRelatedRequirements
@@ -225,19 +236,19 @@ VALIDATION CHECKLIST:
     show_tool_calls=False
 )
 
-async def analyze_compliance_issues(country: str, receipt_type: str, icp: str, compliance_json: dict, extracted_json: dict) -> str:
+async def analyze_compliance_issues(country: str, receipt_type: str, icp: str, compliance_json: dict, extracted_json: dict) -> IssueDetectionResult:
     """
     Analyze extracted receipt data against compliance requirements to detect issues.
-    
+
     Args:
         country: Country for compliance rules (e.g., "Germany")
         receipt_type: Type of receipt (e.g., "All", "Travel", "Mileage", etc.)
         icp: ICP name (e.g., "Global People", "goGlobal", "Parakar", "Atlas")
         compliance_json: Country-specific compliance requirements
         extracted_json: Extracted data from the receipt
-        
+
     Returns:
-        JSON string with detailed issue analysis
+        IssueDetectionResult object with structured compliance analysis
     """
     # Format expense taxonomy from schema
     expense_taxonomy = format_expense_taxonomy()
@@ -274,20 +285,21 @@ Analyze systematically and provide detailed findings in the specified format.
 
 """
     
-    # Get the response from the agent
+    # Get the structured response from the agent
     response = issue_detection_agent.run(formatted_prompt)
 
     # Debug logging
-    print(f"DEBUG: Compliance response type: {type(response)}")
-    print(f"DEBUG: Compliance response has content: {hasattr(response, 'content')}")
+    logger.info(f"Compliance response type: {type(response)}")
     if hasattr(response, 'content'):
-        print(f"DEBUG: Compliance content type: {type(response.content)}")
-        print(f"DEBUG: Compliance content length: {len(response.content) if response.content else 'None'}")
-        print(f"DEBUG: Compliance content preview: {response.content[:200] if response.content else 'None'}")
-        
+        logger.info(f"Compliance content type: {type(response.content)}")
+        if isinstance(response.content, IssueDetectionResult):
+            logger.info("✅ Received structured IssueDetectionResult")
+        else:
+            logger.warning(f"⚠️ Expected IssueDetectionResult, got {type(response.content)}")
+
     # Validation functionality moved to standalone_validation_runner.py
     # The main workflow now returns only the compliance response
     # Validation can be run separately using standalone_validation_runner.py
 
     logger.info("✅ Compliance analysis completed (validation moved to standalone runner)")
-    return response
+    return response.content if hasattr(response, 'content') else response

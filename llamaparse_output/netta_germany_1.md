@@ -6,6 +6,7 @@
 | Invoice date: | Jul 13th, 2021 |
 | Due:          | Feb 28th, 2022 |
 
+
 ## From
 Saldo Apps
 
@@ -26,6 +27,7 @@ North str. 32, Chicago USA
 | ----------------------------------------------------------------------------------- | --------- | --- | ------ | ------- | ----------- |
 | Prototype<br/>Prototype-based programming is a style of object-oriented programming | 50.00     | 24  | 10     | 5       | 2,200.00    |
 | Design                                                                              | 50.00     | 120 | 10     | 5       | 6,000.00    |
+
 
 ## Payment Instruction
 
@@ -50,3 +52,5 @@ Prototype-based programming is a style of object-oriented programming in which b
 | Total:          | USD 8,660.00 |
 | Amount paid:    | USD 0.00     |
 | Balance Due:    | USD 8,660.00 |
+
+

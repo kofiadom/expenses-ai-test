@@ -21,3 +21,5 @@ di vendita o prestazione
 | Non riscosso                          |        | 0,00      |
 | Resto                                 |        | 0,00      |
 | Importo pagato                        |        | 42,12     |
+
+

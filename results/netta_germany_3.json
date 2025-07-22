@@ -1,6 +1,6 @@
 {
   "source_file": "netta_germany_3.md",
-  "processing_timestamp": "2025-07-16T23:09:33.721307",
+  "processing_timestamp": "2025-07-22T16:40:45.286430",
   "dataset_metadata": {
     "filepath": "expense_files/netta_germany_3.png",
     "filename": "netta_germany_3.png",
@@ -16,294 +16,126 @@
     "document_location": "Germany",
     "expected_location": "Germany",
     "location_match": true,
-    "error_type": "File identified not as an expense",
-    "error_message": "Document is a purchase confirmation without evidence of payment completed.",
-    "classification_confidence": 90,
-    "reasoning": "The document is identified as a purchase confirmation with no proof of payment completed, thus not qualifying as an expense document.",
+    "error_type": "Not an expense document",
+    "error_message": "This document is an order confirmation (Bestellbest\u00e4tigung) without payment proof",
+    "classification_confidence": 95,
+    "reasoning": "This document is clearly an order confirmation from Amazon.de, not an expense receipt. It shows an order that has been placed but not yet shipped or paid for. There is no evidence of payment completed, just order details.",
     "schema_field_analysis": {
       "fields_found": [
         "supplier",
         "consumerRecipient",
-        "itemDescriptionLineItems",
         "transactionAmount",
-        "taxInformation"
-      ],
-      "fields_missing": [
         "transactionDate",
         "invoiceReceiptNumber",
+        "taxInformation",
+        "itemDescriptionLineItems"
+      ],
+      "fields_missing": [
         "paymentMethod"
       ],
-      "total_fields_found": 5,
-      "expense_identification_reasoning": "While the document contains fields such as supplier, consumer recipient, and item description, it lacks a transaction date, invoice/receipt number, and payment method, indicating it is a purchase confirmation rather than an expense proof."
+      "total_fields_found": 7,
+      "expense_identification_reasoning": "Despite having 7 of the 8 schema fields, this is NOT an expense document because it lacks proof of payment. This is clearly a 'Bestellbest\u00e4tigung' (order confirmation) showing what will be shipped and billed, not what has already been paid. Per the criteria, booking confirmations without payment proof are not expenses."
     }
   },
   "extraction_result": {
-    "supplier_name": "SCM PC-Card GmbH",
-    "supplier_address": null,
-    "vat_number": null,
+    "customer_name_on_invoice": "Anda Pfleger",
+    "customer_name_exception": null,
+    "customer_address_on_invoice": "Budapester Str. 21, M\u00fcnchen, 81669, Deutschland",
+    "customer_vat_number_on_invoice": null,
     "currency": "EUR",
-    "total_amount": 34.51,
-    "date_of_issue": "2019-08-09",
+    "amount": 34.51,
+    "receipt_type": "Bestellbest\u00e4tigung",
+    "receipt_quality": "Clear and readable",
+    "invoice_serial_number": "304-3645210-0482704",
+    "invoice_date": "2019-08-09",
+    "service_date": null,
+    "net_amount": 29.0,
+    "tax_rate": 19.0,
+    "vat_amount": 5.51,
+    "worker_name": "Anda Pfleger",
+    "worker_address": "Budapester Str. 21, M\u00fcnchen, 81669, Deutschland",
+    "supplier_tax_id": null,
+    "expense_description": null,
+    "route_details": null,
+    "car_details": null,
+    "purpose": null,
+    "odometer_reading": null,
+    "travel_date": null,
+    "a1_certificate": null,
+    "personal_phone_proof": null,
+    "storage_period": null,
+    "invoice_value_threshold": null,
+    "supplier_name": "Amazon.de",
+    "product_name": "SCR uTrust 2700 F Smart Card Leser",
+    "product_description": "ideal f\u00fcr OnlineBanking / sichere Zugang zu Netzwerken und PCs / Sozialversicherungs- und Treueprogramme / Flashbar / f\u00fcr DATEV Applikationen / Nachfolger des 3310",
+    "delivery_date": "2019-08-10",
+    "shipping_method": "prime Premiumversand",
     "line_items": [
       {
         "description": "SCR uTrust 2700 F Smart Card Leser",
         "quantity": 1,
-        "unit_price": 29.0,
+        "unit_price": 34.51,
         "total_price": 34.51,
         "condition": "Neu",
-        "sold_by": "SCM PC-Card GmbH"
+        "seller": "SCM PC-Card GmbH",
+        "shipped_by": "Amazon"
       }
     ],
-    "order_number": "304-3645210-0482704",
-    "delivery_date": "2019-08-10",
-    "shipping_method": "prime Premiumversand",
-    "shipping_address": "Anda Pfleger, Budapester Str. 21, M\u00fcnchen, 81669, Deutschland",
-    "shipping_option": "Artikel versenden, sobald sie verf\u00fcgbar sind",
     "subtotal": 29.0,
-    "packaging_and_shipping": 0.0,
-    "subtotal_without_vat": 29.0,
-    "vat": 5.51,
-    "end_amount_incl_vat": 34.51,
-    "citations": {
-      "citations": {
-        "supplier_name": {
-          "field_citation": {
-            "source_text": "Verkauft von:",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Verkauft von: SCM PC-Card GmbH",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "SCM PC-Card GmbH",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Verkauft von: SCM PC-Card GmbH",
-            "match_type": "exact"
-          }
-        },
-        "total_amount": {
-          "field_citation": {
-            "source_text": "Endbetrag inkl. USt.:",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Endbetrag inkl. USt.: EUR 34,51",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "EUR 34,51",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Endbetrag inkl. USt.: EUR 34,51",
-            "match_type": "exact"
-          }
-        },
-        "currency": {
-          "field_citation": {
-            "source_text": "EUR",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Zwischensumme: EUR 29,00",
-            "match_type": "fuzzy"
-          },
-          "value_citation": {
-            "source_text": "EUR",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Endbetrag inkl. USt.: EUR 34,51",
-            "match_type": "contextual"
-          }
-        },
-        "date_of_issue": {
-          "field_citation": {
-            "source_text": "Aufgegeben am",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Aufgegeben am 9. August 2019",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "9. August 2019",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Aufgegeben am 9. August 2019",
-            "match_type": "fuzzy"
-          }
-        },
-        "order_number": {
-          "field_citation": {
-            "source_text": "Bestellnummer",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Bestellnummer #304-3645210-0482704",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "304-3645210-0482704",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Bestellnummer #304-3645210-0482704",
-            "match_type": "exact"
-          }
-        },
-        "delivery_date": {
-          "field_citation": {
-            "source_text": "Zustellung:",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Zustellung:<br/>Samstag, 10 August",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "10 August",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Zustellung:<br/>Samstag, 10 August",
-            "match_type": "fuzzy"
-          }
-        },
-        "shipping_method": {
-          "field_citation": {
-            "source_text": "Versandart:",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Versandart:<br/>prime Premiumversand",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "prime Premiumversand",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Versandart:<br/>prime Premiumversand",
-            "match_type": "exact"
-          }
-        },
-        "shipping_address": {
-          "field_citation": {
-            "source_text": "Die Bestellung geht an:",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Die Bestellung geht an:<br/>Anda Pfleger<br/>Budapester Str. 21<br/>M\u00fcnchen, 81669<br/>Deutschland",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "Anda Pfleger, Budapester Str. 21, M\u00fcnchen, 81669, Deutschland",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Anda Pfleger<br/>Budapester Str. 21<br/>M\u00fcnchen, 81669<br/>Deutschland",
-            "match_type": "fuzzy"
-          }
-        },
-        "shipping_option": {
-          "field_citation": {
-            "source_text": "Gew\u00e4hlte Versandoption:",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Gew\u00e4hlte Versandoption:<br/>Artikel versenden, sobald sie verf\u00fcgbar sind.",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "Artikel versenden, sobald sie verf\u00fcgbar sind",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Gew\u00e4hlte Versandoption:<br/>Artikel versenden, sobald sie verf\u00fcgbar sind.",
-            "match_type": "exact"
-          }
-        },
-        "subtotal": {
-          "field_citation": {
-            "source_text": "Zwischensumme:",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Zwischensumme: EUR 29,00",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "EUR 29,00",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Zwischensumme: EUR 29,00",
-            "match_type": "exact"
-          }
-        },
-        "vat": {
-          "field_citation": {
-            "source_text": "Umsatzsteuer:",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Umsatzsteuer: EUR 5,51",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "EUR 5,51",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Umsatzsteuer: EUR 5,51",
-            "match_type": "exact"
-          }
-        },
-        "end_amount_incl_vat": {
-          "field_citation": {
-            "source_text": "Endbetrag inkl. USt.:",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Endbetrag inkl. USt.: EUR 34,51",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "EUR 34,51",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Endbetrag inkl. USt.: EUR 34,51",
-            "match_type": "exact"
-          }
-        }
-      },
-      "metadata": {
-        "total_fields_analyzed": 13,
-        "fields_with_field_citations": 11,
-        "fields_with_value_citations": 11,
-        "average_confidence": 0.9115384615384615
-      }
-    }
+    "shipping_cost": 0.0,
+    "order_number": "304-3645210-0482704",
+    "order_date": "2019-08-09"
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 3,
+      "issues_count": 5,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_name",
-          "description": "The supplier name must be 'Global People DE GmbH' as per ICP requirements for 'Global People' in Germany.",
-          "recommendation": "It is recommended to address this issue with the supplier to ensure the correct supplier name 'Global People DE GmbH' appears on the receipt.",
-          "knowledge_base_reference": "Must be Global People DE GmbH"
+          "field": "customer_name",
+          "description": "The customer name on invoice shows 'Anda Pfleger' instead of the required company name.",
+          "recommendation": "Request a corrected invoice from the supplier with 'Global People DE GmbH' as the customer name.",
+          "knowledge_base_reference": "According to FileRelatedRequirements for Global People in Germany, customer name must show 'Global People DE GmbH as customer'"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_address",
-          "description": "The supplier address 'Taunusanlage 8, 60329 Frankfurt, Germany' is mandatory and missing.",
-          "recommendation": "Ensure the supplier address 'Taunusanlage 8, 60329 Frankfurt, Germany' is included on the receipt.",
-          "knowledge_base_reference": "Taunusanlage 8, 60329 Frankfurt, Germany"
+          "field": "customer_address",
+          "description": "The customer address on invoice shows 'Budapester Str. 21, M\u00fcnchen, 81669, Deutschland' instead of the required company address.",
+          "recommendation": "Request a corrected invoice from the supplier with 'Taunusanlage 8, 60329 Frankfurt, Germany' as the customer address.",
+          "knowledge_base_reference": "According to FileRelatedRequirements for Global People in Germany, customer address must show 'Taunusanlage 8, 60329 Frankfurt, Germany'"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "vat_number",
-          "description": "Missing mandatory VAT number 'DE356366640' for the supplier.",
-          "recommendation": "Request the supplier to include the mandatory VAT number 'DE356366640' on the receipt.",
-          "knowledge_base_reference": "DE356366640"
+          "field": "customer_vat_number",
+          "description": "The customer VAT number is missing on the invoice.",
+          "recommendation": "Request a corrected invoice from the supplier with the company VAT number 'DE356366640' included.",
+          "knowledge_base_reference": "According to FileRelatedRequirements for Global People in Germany, customer VAT number must show 'DE356366640'"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "receipt_type",
+          "description": "The document is an order confirmation ('Bestellbest\u00e4tigung') rather than a proper tax invoice.",
+          "recommendation": "Obtain a proper tax invoice from the supplier instead of using an order confirmation.",
+          "knowledge_base_reference": "According to FileRelatedRequirements, 'Must be actual tax receipts or invoices, not booking confirmations'"
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "expense_description",
+          "description": "No expense description is provided to determine the exact expense type for the SCR uTrust 2700 F Smart Card Reader.",
+          "recommendation": "Provide a detailed expense description to classify this purchase appropriately (IT Equipment, Office Supplies, etc.) to apply correct compliance rules.",
+          "knowledge_base_reference": "Expense type classification is required to determine applicable tax exemption rules for Global People in Germany."
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The receipt contains critical compliance violations due to missing supplier name, address, and VAT number as per 'Global People' ICP requirements for Germany. These need prompt correction to meet compliance standards."
+      "compliance_summary": "This expense fails compliance validation due to five critical issues: 1) Incorrect customer name (shows employee instead of company name), 2) Incorrect customer address (shows employee address instead of company address), 3) Missing customer VAT number, 4) Invalid receipt type (order confirmation instead of tax invoice), and 5) Missing expense description. All issues must be resolved before approval. The primary concern is that this appears to be a personal purchase rather than a company expense since the employee's personal details are used instead of the company's information."
     },
     "technical_details": {
-      "content_type": "ReceiptValidationResult",
+      "content_type": "Receipt/Invoice",
       "country": "Germany",
-      "icp": "Global People",
-      "receipt_type": "All",
-      "issues_count": 3,
-      "has_reasoning": true
+      "icp": "Global People DE GmbH",
+      "receipt_type": "Order Confirmation (Bestellbest\u00e4tigung)",
+      "issues_count": 5
     }
   },
   "processing_status": "completed",

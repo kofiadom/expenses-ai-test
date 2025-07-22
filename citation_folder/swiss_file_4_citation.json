@@ -3,168 +3,152 @@
     "supplier_name": {
       "field_citation": {
         "source_text": "Restaurant Luca²",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Restaurant Luca² Asylstrasse 81",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Header line 1",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "Restaurant Luca²",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "Restaurant Luca² Asylstrasse 81",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Header line 1",
         "match_type": "exact"
       }
     },
     "supplier_address": {
       "field_citation": {
-        "source_text": "Asylstrasse 81",
-        "confidence": 0.85,
-        "source_location": "markdown",
-        "context": "Asylstrasse 81 8032 Zürich",
+        "source_text": "Asylstrasse 81, 8032 Zürich",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Lines 2-3",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "Asylstrasse 81, 8032 Zürich",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Asylstrasse 81 8032 Zürich",
-        "match_type": "contextual"
-      }
-    },
-    "company_registration": {
-      "field_citation": {
-        "source_text": "CHE-210.230.241 MWST",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "CHE-210.230.241 MWST",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "CHE-210.230.241",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "CHE-210.230.241 MWST",
-        "match_type": "exact"
-      }
-    },
-    "currency": {
-      "field_citation": {
-        "source_text": "CHF",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "Bar-Total *367,00",
-        "match_type": "contextual"
-      },
-      "value_citation": {
-        "source_text": "CHF",
-        "confidence": 0.7,
+        "confidence": 1.0,
         "source_location": "requirements",
-        "context": "Local currency with FX rate calculation",
-        "match_type": "contextual"
-      }
-    },
-    "amount": {
-      "field_citation": {
-        "source_text": "Bar-Total",
-        "confidence": 0.85,
-        "source_location": "markdown",
-        "context": "Bar-Total *367,00",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "367.0",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Zwischensumme über Alles *367,00",
-        "match_type": "fuzzy"
-      }
-    },
-    "receipt_type": {
-      "field_citation": {
-        "source_text": "Rechnung",
-        "confidence": 0.88,
-        "source_location": "markdown",
-        "context": "RechnungNr.: 11140",
-        "match_type": "contextual"
-      },
-      "value_citation": {
-        "source_text": "Rechnung",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "RechnungNr.: 11140",
+        "context": "Lines 2-3",
         "match_type": "exact"
       }
     },
-    "contact_phone": {
+    "supplier_phone": {
       "field_citation": {
-        "source_text": "Tel.",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Tel. 044 252 03 53",
+        "source_text": "Tel. 044 252 03 53",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Line 4",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "044 252 03 53",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "Tel. 044 252 03 53",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Line 4",
         "match_type": "exact"
       }
     },
-    "transaction_date": {
+    "supplier_vat": {
       "field_citation": {
-        "source_text": "02.12.2017",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "#0001 Kasse1 02.12.2017",
+        "source_text": "CHE-210.230.241 MWST",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Line 6",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "2017-12-02",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "#0001 Kasse1 02.12.2017",
-        "match_type": "fuzzy"
+        "source_text": "CHE-210.230.241 MWST",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Line 6",
+        "match_type": "exact"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": {
+        "source_text": "02.12.2017",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Line 8",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "02.12.2017",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Line 8",
+        "match_type": "exact"
       }
     },
     "table_number": {
       "field_citation": {
-        "source_text": "Tischnummer",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Tischnummer 6",
+        "source_text": "Tischnummer 6",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Line 10",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "6",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Tischnummer 6",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Line 10",
         "match_type": "exact"
       }
     },
-    "transaction_reference": {
+    "receipt_number": {
       "field_citation": {
-        "source_text": "RechnungNr.",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "RechnungNr.: 11140",
+        "source_text": "RechnungNr.: 11140",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Line 11",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "RechnungNr.: 11140",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "RechnungNr.: 11140",
+        "source_text": "11140",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Line 11",
+        "match_type": "exact"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "Bar-Total",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Final lines",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "*367,00",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Final lines",
+        "match_type": "exact"
+      }
+    },
+    "payment_method": {
+      "field_citation": {
+        "source_text": "Bar-Total",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Final line",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "Bar-Total",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Final line",
         "match_type": "exact"
       }
     }
   },
   "metadata": {
     "total_fields_analyzed": 10,
-    "fields_with_field_citations": 10,
-    "fields_with_value_citations": 10,
-    "average_confidence": 0.894
+    "fields_with_field_citations": 9,
+    "fields_with_value_citations": 9,
+    "average_confidence": 1.0
   }
 }

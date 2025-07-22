@@ -1,6 +1,6 @@
 {
   "source_file": "swiss_file_5.md",
-  "processing_timestamp": "2025-07-16T23:20:08.732538",
+  "processing_timestamp": "2025-07-22T16:50:38.654044",
   "dataset_metadata": {
     "filepath": "expense_files/swiss_file_5.jpg",
     "filename ": "swiss_file_5.jpg",
@@ -9,12 +9,237 @@
     "dataset_file": "swiss_file_5.json"
   },
   "classification_result": {
-    "error": "Connection error."
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "German",
+    "language_confidence": 95,
+    "document_location": "Switzerland",
+    "expected_location": "Switzerland",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 95,
+    "reasoning": "This is clearly a restaurant receipt for food and beverages purchased at Berghotel Grosse Scheidegg in Grindelwald, Switzerland. It contains transaction details, line items, payment method, tax information, and transaction date, meeting the criteria for an expense document.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionAmount",
+        "transactionDate",
+        "invoiceReceiptNumber",
+        "taxInformation",
+        "paymentMethod",
+        "itemDescriptionLineItems"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "icpRequirements"
+      ],
+      "total_fields_found": 7,
+      "expense_identification_reasoning": "The document contains 7 key expense fields: supplier ('Berghotel Grosse Scheidegg'), transaction amount (CHF 54.50), transaction date (30.07.2007), receipt number (Rech.Nr. 4572), tax information (7.6% MwSt), payment method (Bar/cash), and detailed line items for food and beverages. The presence of these fields in a structured receipt format clearly identifies this as a meal expense document from Switzerland."
+    }
   },
   "extraction_result": {
-    "error": "Connection error."
+    "customer_name_on_invoice": null,
+    "customer_address_on_invoice": null,
+    "customer_registration_on_invoice": null,
+    "customer_name_exception": null,
+    "currency": "CHF",
+    "amount": 54.5,
+    "receipt_type": "Receipt",
+    "personal_information": null,
+    "business_trip_reporting": null,
+    "travel_template": null,
+    "manager_approval": null,
+    "route_map": null,
+    "car_details": null,
+    "logbook": null,
+    "combined_mileage": null,
+    "supplier_name": "Berghotel Grosse Scheidegg",
+    "supplier_address": "3818 Grindelwald",
+    "supplier_contact": "Familie R.M\u00fcller",
+    "date_of_issue": "2007-07-30",
+    "transaction_time": "13:29:17",
+    "receipt_number": "4572",
+    "payment_method": "Bar",
+    "table_number": "7/01",
+    "line_items": [
+      {
+        "description": "Latte Macchiato",
+        "quantity": 2,
+        "unit_price": 4.5,
+        "total_price": 9.0
+      },
+      {
+        "description": "Gloki",
+        "quantity": 1,
+        "unit_price": 5.0,
+        "total_price": 5.0
+      },
+      {
+        "description": "Schweinschnitzel",
+        "quantity": 1,
+        "unit_price": 22.0,
+        "total_price": 22.0
+      },
+      {
+        "description": "Ch\u00e4ssp\u00e4tzli",
+        "quantity": 1,
+        "unit_price": 18.5,
+        "total_price": 18.5
+      }
+    ],
+    "total_amount": 54.5,
+    "tax_rate": 7.6,
+    "tax_amount": 3.85,
+    "euro_equivalent": 36.33,
+    "server_name": "Ursula",
+    "vat_number": "430 234",
+    "contact_phone": "033 853 67 16",
+    "contact_fax": "033 853 67 19",
+    "contact_email": "grossescheidegg@bluewin.ch",
+    "citations": {
+      "citations": {
+        "supplier_name": {
+          "field_citation": {
+            "source_text": "Berghotel Grosse Scheidegg",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Header section of receipt",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Berghotel Grosse Scheidegg",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Header section of receipt",
+            "match_type": "exact"
+          }
+        },
+        "supplier_address": {
+          "field_citation": {
+            "source_text": "supplier_address",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Address field in header",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "3818 Grindelwald",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Header section of receipt",
+            "match_type": "exact"
+          }
+        },
+        "date_of_issue": {
+          "field_citation": {
+            "source_text": "date_of_issue",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Receipt header information",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "30.07.2007",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Receipt header section",
+            "match_type": "exact"
+          }
+        },
+        "receipt_number": {
+          "field_citation": {
+            "source_text": "Rech.Nr.",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Receipt identifier section",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "4572",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Receipt number field",
+            "match_type": "exact"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "total_amount",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Totals section",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "CHF 54.50",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Total amount field",
+            "match_type": "exact"
+          }
+        }
+      },
+      "metadata": {
+        "total_fields_analyzed": 17,
+        "fields_with_field_citations": 17,
+        "fields_with_value_citations": 17,
+        "average_confidence": 1.0
+      }
+    }
   },
-  "compliance_result": {},
+  "compliance_result": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 5,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Customer Name",
+          "description": "The receipt is missing the mandatory Local Employer name as the customer on the supplier invoice.",
+          "recommendation": "Request a corrected invoice showing \"Global PPL CH GmbH\" as the customer.",
+          "knowledge_base_reference": "Must show Global PPL CH GmbH as customer"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Customer Address",
+          "description": "The receipt is missing the mandatory Local Employer address as the customer address.",
+          "recommendation": "Request a corrected invoice showing the complete employer address \"Freigutstrasse 2 8002 Z\u00fcrich, Switzerland\".",
+          "knowledge_base_reference": "Must show Freigutstrasse 2 8002 Z\u00fcrich, Switzerland"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Registration Number",
+          "description": "The receipt is missing the mandatory Local Employer registration number.",
+          "recommendation": "Request a corrected invoice showing the employer registration number \"CHE-295.369.918\".",
+          "knowledge_base_reference": "Must show CHE-295.369.918"
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "Meal Amount",
+          "description": "The meal expense of CHF 54.50 exceeds the standard per diem rates for meals in Switzerland.",
+          "recommendation": "The excess amount above per diem rates (Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40) will be grossed-up and taxed.",
+          "knowledge_base_reference": "Domestic business trips - Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40"
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "Business Purpose Documentation",
+          "description": "For meal expenses during business travel, additional documentation is required to establish the business purpose.",
+          "recommendation": "Submit separate report for this business trip using the required \"Travel Expense Report Template Switzerland CHF.xlsx\" and clarify whether this is part of domestic or international travel.",
+          "knowledge_base_reference": "Business trip documentation required for meal expenses"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "This Swiss meal receipt fails compliance requirements with 5 identified issues. Three critical ICP information fields are missing (employer name, address, and registration number). The meal expense exceeds per diem rates, triggering tax implications. Additional business travel documentation is required. The receipt shows a valid transaction from Berghotel Grosse Scheidegg dated 2007-07-30 for CHF 54.50 including 7.6% tax."
+    },
+    "technical_details": {
+      "content_type": "Meal Receipt",
+      "country": "Switzerland",
+      "icp": "Global PPL CH GmbH",
+      "receipt_type": "Business Meal",
+      "issues_count": 5
+    }
+  },
   "processing_status": "completed",
   "uqlm_validation_available": false
 }

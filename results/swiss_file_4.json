@@ -1,6 +1,6 @@
 {
   "source_file": "swiss_file_4.md",
-  "processing_timestamp": "2025-07-16T23:20:05.864147",
+  "processing_timestamp": "2025-07-22T16:49:15.152828",
   "dataset_metadata": {
     "filepath": "expense_files/swiss_file_4.jpg",
     "filename ": "swiss_file_4.jpg",
@@ -18,33 +18,48 @@
     "location_match": true,
     "error_type": null,
     "error_message": null,
-    "classification_confidence": 90,
-    "reasoning": "The document resembles a receipt from a restaurant with itemized food and beverage charges indicating it is a completed transaction. The presence of multiple food items and a total amount suggests a meal expense.",
+    "classification_confidence": 95,
+    "reasoning": "This is clearly a restaurant receipt from Restaurant Luca\u00b2 in Z\u00fcrich, Switzerland. It shows a completed meal transaction with detailed line items, prices, and a total amount paid. The document contains food and beverage items with their individual and total prices.",
     "schema_field_analysis": {
       "fields_found": [
         "supplier",
         "transactionAmount",
-        "invoiceReceiptNumber",
         "transactionDate",
+        "invoiceReceiptNumber",
+        "taxInformation",
+        "paymentMethod",
         "itemDescriptionLineItems"
       ],
       "fields_missing": [
-        "consumerRecipient",
-        "icpRequirements",
-        "taxInformation",
-        "paymentMethod"
+        "consumerRecipient"
       ],
-      "total_fields_found": 5,
-      "expense_identification_reasoning": "The document includes five critical fields: supplier ('Restaurant Luca\u00b2'), transactionAmount ('Bar-Total 367,00'), invoiceReceiptNumber ('RechnungNr.: 11140'), transactionDate ('02.12.2017'), and itemDescriptionLineItems (detailed list of food items). This complies with the schema requirements for expense identification."
+      "total_fields_found": 7,
+      "expense_identification_reasoning": "The document contains 7 out of 8 applicable schema fields, clearly qualifying it as an expense document. It identifies the restaurant (Restaurant Luca\u00b2), transaction date (02.12.2017), receipt number (11140), detailed line items for food and drinks, total amount (367.00), payment method (Bar-Total indicating cash), and tax information (Swiss VAT number CHE-210.230.241 MWST). The only missing field is the consumer recipient as no customer name is identified on the receipt."
     }
   },
   "extraction_result": {
-    "supplier_name": "Restaurant Luca\u00b2",
-    "supplier_address": "Asylstrasse 81, 8032 Z\u00fcrich",
-    "company_registration": "CHE-210.230.241",
+    "customer_name_on_invoice": null,
+    "customer_address_on_invoice": null,
+    "customer_registration_on_invoice": null,
+    "customer_name_exception": null,
     "currency": "CHF",
     "amount": 367.0,
-    "receipt_type": "Rechnung",
+    "receipt_type": "Restaurant Receipt",
+    "personal_information": null,
+    "business_trip_reporting": null,
+    "travel_template": null,
+    "manager_approval": null,
+    "route_map": null,
+    "car_details": null,
+    "logbook": null,
+    "combined_mileage": null,
+    "supplier_name": "Restaurant Luca\u00b2",
+    "supplier_address": "Asylstrasse 81, 8032 Z\u00fcrich",
+    "supplier_phone": "044 252 03 53",
+    "supplier_vat": "CHE-210.230.241 MWST",
+    "date_of_issue": "2017-12-02",
+    "table_number": "6",
+    "receipt_number": "11140",
     "line_items": [
       {
         "description": "Thunfischtatar",
@@ -149,183 +164,203 @@
         "total_price": 6.5
       }
     ],
-    "contact_phone": "044 252 03 53",
-    "transaction_date": "2017-12-02",
-    "table_number": "6",
-    "transaction_reference": "RechnungNr.: 11140",
+    "subtotal": 367.0,
+    "total_amount": 367.0,
+    "payment_method": "Bar-Total",
+    "register_number": "Kasse1",
+    "transaction_number": "0001",
     "citations": {
       "citations": {
         "supplier_name": {
           "field_citation": {
             "source_text": "Restaurant Luca\u00b2",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Restaurant Luca\u00b2 Asylstrasse 81",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Header line 1",
             "match_type": "exact"
           },
           "value_citation": {
             "source_text": "Restaurant Luca\u00b2",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Restaurant Luca\u00b2 Asylstrasse 81",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Header line 1",
             "match_type": "exact"
           }
         },
         "supplier_address": {
           "field_citation": {
-            "source_text": "Asylstrasse 81",
-            "confidence": 0.85,
-            "source_location": "markdown",
-            "context": "Asylstrasse 81 8032 Z\u00fcrich",
+            "source_text": "Asylstrasse 81, 8032 Z\u00fcrich",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Lines 2-3",
             "match_type": "exact"
           },
           "value_citation": {
             "source_text": "Asylstrasse 81, 8032 Z\u00fcrich",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Asylstrasse 81 8032 Z\u00fcrich",
-            "match_type": "contextual"
-          }
-        },
-        "company_registration": {
-          "field_citation": {
-            "source_text": "CHE-210.230.241 MWST",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "CHE-210.230.241 MWST",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "CHE-210.230.241",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "CHE-210.230.241 MWST",
-            "match_type": "exact"
-          }
-        },
-        "currency": {
-          "field_citation": {
-            "source_text": "CHF",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Bar-Total *367,00",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "CHF",
-            "confidence": 0.7,
+            "confidence": 1.0,
             "source_location": "requirements",
-            "context": "Local currency with FX rate calculation",
-            "match_type": "contextual"
-          }
-        },
-        "amount": {
-          "field_citation": {
-            "source_text": "Bar-Total",
-            "confidence": 0.85,
-            "source_location": "markdown",
-            "context": "Bar-Total *367,00",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "367.0",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Zwischensumme \u00fcber Alles *367,00",
-            "match_type": "fuzzy"
-          }
-        },
-        "receipt_type": {
-          "field_citation": {
-            "source_text": "Rechnung",
-            "confidence": 0.88,
-            "source_location": "markdown",
-            "context": "RechnungNr.: 11140",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "Rechnung",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "RechnungNr.: 11140",
+            "context": "Lines 2-3",
             "match_type": "exact"
           }
         },
-        "contact_phone": {
+        "supplier_phone": {
           "field_citation": {
-            "source_text": "Tel.",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Tel. 044 252 03 53",
+            "source_text": "Tel. 044 252 03 53",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Line 4",
             "match_type": "exact"
           },
           "value_citation": {
             "source_text": "044 252 03 53",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "Tel. 044 252 03 53",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Line 4",
             "match_type": "exact"
           }
         },
-        "transaction_date": {
+        "supplier_vat": {
           "field_citation": {
-            "source_text": "02.12.2017",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "#0001 Kasse1 02.12.2017",
+            "source_text": "CHE-210.230.241 MWST",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Line 6",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "2017-12-02",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "#0001 Kasse1 02.12.2017",
-            "match_type": "fuzzy"
+            "source_text": "CHE-210.230.241 MWST",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Line 6",
+            "match_type": "exact"
+          }
+        },
+        "date_of_issue": {
+          "field_citation": {
+            "source_text": "02.12.2017",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Line 8",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "02.12.2017",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Line 8",
+            "match_type": "exact"
           }
         },
         "table_number": {
           "field_citation": {
-            "source_text": "Tischnummer",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Tischnummer 6",
+            "source_text": "Tischnummer 6",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Line 10",
             "match_type": "exact"
           },
           "value_citation": {
             "source_text": "6",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Tischnummer 6",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Line 10",
             "match_type": "exact"
           }
         },
-        "transaction_reference": {
+        "receipt_number": {
           "field_citation": {
-            "source_text": "RechnungNr.",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "RechnungNr.: 11140",
+            "source_text": "RechnungNr.: 11140",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Line 11",
             "match_type": "exact"
           },
           "value_citation": {
-            "source_text": "RechnungNr.: 11140",
-            "confidence": 0.95,
-            "source_location": "markdown",
-            "context": "RechnungNr.: 11140",
+            "source_text": "11140",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Line 11",
+            "match_type": "exact"
+          }
+        },
+        "total_amount": {
+          "field_citation": {
+            "source_text": "Bar-Total",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Final lines",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "*367,00",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Final lines",
+            "match_type": "exact"
+          }
+        },
+        "payment_method": {
+          "field_citation": {
+            "source_text": "Bar-Total",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Final line",
+            "match_type": "exact"
+          },
+          "value_citation": {
+            "source_text": "Bar-Total",
+            "confidence": 1.0,
+            "source_location": "requirements",
+            "context": "Final line",
             "match_type": "exact"
           }
         }
       },
       "metadata": {
         "total_fields_analyzed": 10,
-        "fields_with_field_citations": 10,
-        "fields_with_value_citations": 10,
-        "average_confidence": 0.894
+        "fields_with_field_citations": 9,
+        "fields_with_value_citations": 9,
+        "average_confidence": 1.0
       }
     }
   },
   "compliance_result": {
-    "error": "Connection error."
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 3,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "Customer Information",
+          "description": "Missing mandatory customer information required for Global PPL CH GmbH receipts",
+          "recommendation": "Request an updated receipt with the required Global PPL CH GmbH information as the customer, including name, address, and registration number",
+          "knowledge_base_reference": "According to the fileRelatedRequirements for Global PPL CH GmbH, customer information fields are mandatory for all receipt types"
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "Meal Expense Amount",
+          "description": "Receipt total of CHF 367.00 significantly exceeds the standard per diem rates for meals in Switzerland",
+          "recommendation": "The excess amount above the standard per diem rates (Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40) should be grossed-up as taxable income",
+          "knowledge_base_reference": "According to complianceAndPolicies for Domestic Business Travel, there are set per diem rates that should be followed"
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "Business Purpose Documentation",
+          "description": "Missing required business travel context information",
+          "recommendation": "Provide documentation showing the business purpose of this meal and whether it was part of a domestic or international business trip",
+          "knowledge_base_reference": "According to complianceAndPolicies for Domestic Travel Alternative, 'Receipt alone is not enough - you must provide receipts for meals if not using per diem method'"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "The restaurant receipt from Switzerland fails compliance verification due to three critical issues: missing mandatory customer information for Global PPL CH GmbH (name, address, registration number), meal expense amount exceeding standard per diem rates which requires tax gross-up, and missing business purpose documentation required for meal expenses during business travel. While the receipt contains valid supplier information, date, amount, and payment method, these compliance issues must be addressed before approval."
+    },
+    "technical_details": {
+      "content_type": "Restaurant Receipt",
+      "country": "Switzerland",
+      "icp": "Global PPL CH GmbH",
+      "receipt_type": "Meal Expense",
+      "issues_count": 3
+    }
   },
   "processing_status": "completed",
   "uqlm_validation_available": false

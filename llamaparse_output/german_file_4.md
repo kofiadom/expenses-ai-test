@@ -1,5 +1,5 @@
 
-BEETS AND ROOTS
+# BEETS AND ROOTS
 
 Leipziger Platz 18
 10117 Berlin
@@ -12,7 +12,7 @@ Date: 15.01.2025                Time: 13:11:44
 
 Order type: take away
 
--Pickup Receipt-
+## -Pickup Receipt-
 
 | 1x | Japanese Salmon Bowl | EUR14.95 |
 | -- | -------------------- | -------- |

@@ -2,145 +2,145 @@
   "citations": {
     "supplier_name": {
       "field_citation": {
-        "source_text": "Supplier Name",
-        "confidence": 0.9,
-        "source_location": "requirements",
-        "context": "FieldType: Supplier Name, Description: Name of the supplier/vendor on invoice",
-        "match_type": "exact"
+        "source_text": "Header",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Header at top of receipt",
+        "match_type": "contextual"
       },
       "value_citation": {
         "source_text": "BEETS AND ROOTS",
-        "confidence": 0.95,
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "BEETS AND ROOTS\n\nLeipziger Platz 18\n10117 Berlin",
+        "context": "Found at top of receipt",
         "match_type": "exact"
       }
     },
     "supplier_address": {
       "field_citation": {
-        "source_text": "Supplier Address",
-        "confidence": 0.9,
-        "source_location": "requirements",
-        "context": "FieldType: Supplier Address, Description: Address of the supplier on invoice",
-        "match_type": "exact"
+        "source_text": "Below header",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Located below header section",
+        "match_type": "contextual"
       },
       "value_citation": {
         "source_text": "Leipziger Platz 18, 10117 Berlin",
-        "confidence": 0.95,
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "BEETS AND ROOTS\n\nLeipziger Platz 18\n10117 Berlin",
-        "match_type": "fuzzy"
-      }
-    },
-    "currency": {
-      "field_citation": {
-        "source_text": "Currency",
-        "confidence": 0.9,
-        "source_location": "requirements",
-        "context": "FieldType: Currency, Description: Receipt currency",
+        "context": "Complete address string",
         "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "EUR",
-        "confidence": 0.85,
-        "source_location": "markdown",
-        "context": "| 1x | Japanese Salmon Bowl | EUR14.95 |\nTotal: EUR16.30",
-        "match_type": "fuzzy"
-      }
-    },
-    "total_amount": {
-      "field_citation": {
-        "source_text": "Total",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Total: EUR16.30",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "16.3",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "Total: EUR16.30",
-        "match_type": "fuzzy"
-      }
-    },
-    "date_of_issue": {
-      "field_citation": {
-        "source_text": "Date",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Date: 15.01.2025                Time: 13:11:44",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "15.01.2025",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "Date: 15.01.2025                Time: 13:11:44",
-        "match_type": "fuzzy"
       }
     },
     "order_code": {
       "field_citation": {
         "source_text": "Ordercode",
-        "confidence": 0.9,
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Ordercode\n\nAngelina Jolie 6",
+        "context": "Ordercode label",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "Angelina Jolie 6",
-        "confidence": 0.95,
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Ordercode\n\nAngelina Jolie 6",
+        "context": "Full order code value",
         "match_type": "exact"
       }
     },
-    "order_type": {
+    "customer_name_on_invoice": {
       "field_citation": {
-        "source_text": "Order type",
-        "confidence": 0.9,
+        "source_text": "Part of order code",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Order type: take away",
+        "context": "Found within order code",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Angelina Jolie",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Customer name in order code",
+        "match_type": "exact"
+      }
+    },
+    "invoice_date": {
+      "field_citation": {
+        "source_text": "Date:",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Date label",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "take away",
-        "confidence": 0.95,
+        "source_text": "15.01.2025",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Order type: take away",
+        "context": "Date value",
         "match_type": "exact"
       }
     },
     "transaction_time": {
       "field_citation": {
-        "source_text": "Time",
-        "confidence": 0.9,
+        "source_text": "Time:",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Date: 15.01.2025                Time: 13:11:44",
+        "context": "Time label",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "13:11:44",
-        "confidence": 0.95,
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Date: 15.01.2025                Time: 13:11:44",
+        "context": "Time value",
         "match_type": "exact"
       }
     },
-    "payment_receipt": {
+    "order_type": {
       "field_citation": {
-        "source_text": "Payment Receipt",
-        "confidence": 0.9,
-        "source_location": "requirements",
-        "context": "FieldType: Payment Receipt, Description: Payment",
+        "source_text": "Order type:",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Order type label",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "Pickup Receipt",
-        "confidence": 0.95,
+        "source_text": "take away",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "-Pickup Receipt-",
+        "context": "Order type value",
+        "match_type": "exact"
+      }
+    },
+    "line_items": {
+      "field_citation": {
+        "source_text": "Tabular format with quantities and descriptions",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Items listed in tabular format",
+        "match_type": "contextual"
+      },
+      "value_citation": {
+        "source_text": "Japanese Salmon Bowl - EUR14.95, Add Almond Crunch - EUR1.25, Oneway Bowl - EUR0.10",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "List of items with prices",
+        "match_type": "exact"
+      }
+    },
+    "total_amount": {
+      "field_citation": {
+        "source_text": "Total:",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Total label",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "EUR16.30",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Total amount",
         "match_type": "exact"
       }
     }
@@ -149,6 +149,6 @@
     "total_fields_analyzed": 9,
     "fields_with_field_citations": 9,
     "fields_with_value_citations": 9,
-    "average_confidence": 0.9277777777777778
+    "average_confidence": 1.0
   }
 }

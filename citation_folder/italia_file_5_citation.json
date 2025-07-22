@@ -3,168 +3,156 @@
     "supplier_name": {
       "field_citation": {
         "source_text": "GIAMAICA CAFFE' SRL",
-        "confidence": 0.9,
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "In the header information: GIAMAICA CAFFE' SRL",
+        "context": "Header section of receipt",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "GIAMAICA CAFFE' SRL",
-        "confidence": 0.9,
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "In the header information: GIAMAICA CAFFE' SRL",
+        "context": "Top of receipt",
         "match_type": "exact"
       }
     },
     "supplier_address": {
       "field_citation": {
         "source_text": "Via del Tritone, 54 00187 Roma",
-        "confidence": 0.9,
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "In the header information: Via del Tritone, 54 00187 Roma",
+        "context": "Header section of receipt",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "Via del Tritone, 54 00187 Roma",
-        "confidence": 0.9,
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "In the header information: Via del Tritone, 54 00187 Roma",
+        "context": "Address line in header",
         "match_type": "exact"
       }
     },
     "vat_number": {
       "field_citation": {
-        "source_text": "P.I. 01845911005",
+        "source_text": "P.I.",
         "confidence": 0.9,
         "source_location": "markdown",
-        "context": "In the header information: P.I. 01845911005",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "P.I. 01845911005",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "In the header information: P.I. 01845911005",
-        "match_type": "exact"
-      }
-    },
-    "currency": {
-      "field_citation": {
-        "source_text": "EURO",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "In the table and total section: EURO",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "EURO",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "In the table and total section: EURO",
-        "match_type": "exact"
-      }
-    },
-    "total_amount": {
-      "field_citation": {
-        "source_text": "TOTALE EURO",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Final total in table: TOTALE EURO",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "26,33",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Final total in table: 26,33",
-        "match_type": "exact"
-      }
-    },
-    "date_of_issue": {
-      "field_citation": {
-        "source_text": "11-07-13",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "Date-stamped with transaction reference: 11-07-13",
+        "context": "P.I. 01845911005",
         "match_type": "fuzzy"
       },
       "value_citation": {
-        "source_text": "11-07-13",
-        "confidence": 0.8,
+        "source_text": "01845911005",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Date-stamped with transaction reference: 11-07-13",
-        "match_type": "fuzzy"
-      }
-    },
-    "transaction_time": {
-      "field_citation": {
-        "source_text": "18:50",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Time-stamped with transaction reference: 18:50",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "18:50",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "Time-stamped with transaction reference: 18:50",
+        "context": "P.I. 01845911005",
         "match_type": "exact"
       }
     },
-    "table_number": {
+    "establishment_name": {
       "field_citation": {
-        "source_text": "Tavolo: 56",
-        "confidence": 0.9,
+        "source_text": "BAR ACCADEMIA",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Adjacent to transaction details: Tavolo: 56",
+        "context": "Header section",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "Tavolo: 56",
-        "confidence": 0.9,
+        "source_text": "BAR ACCADEMIA",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Adjacent to transaction details: Tavolo: 56",
-        "match_type": "exact"
-      }
-    },
-    "transaction_reference": {
-      "field_citation": {
-        "source_text": "SF. 193 MF EM 99027342",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "Reference number with transaction details: SF. 193 MF EM 99027342",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "SF. 193 MF EM 99027342",
-        "confidence": 0.8,
-        "source_location": "markdown",
-        "context": "Reference number with transaction details: SF. 193 MF EM 99027342",
+        "context": "Header section",
         "match_type": "exact"
       }
     },
     "contact_phone": {
       "field_citation": {
-        "source_text": "Tel. 06/6793585",
-        "confidence": 0.9,
+        "source_text": "Tel.",
+        "confidence": 1.0,
         "source_location": "markdown",
-        "context": "Contact details: Tel. 06/6793585",
+        "context": "Tel. 06/6793585",
         "match_type": "exact"
       },
       "value_citation": {
         "source_text": "06/6793585",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Tel. 06/6793585",
+        "match_type": "exact"
+      }
+    },
+    "date_of_issue": {
+      "field_citation": null,
+      "value_citation": {
+        "source_text": "11-07-13",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Receipt date",
+        "match_type": "exact"
+      }
+    },
+    "time": {
+      "field_citation": null,
+      "value_citation": {
+        "source_text": "18:50",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Receipt time",
+        "match_type": "exact"
+      }
+    },
+    "receipt_number": {
+      "field_citation": {
+        "source_text": "SF.",
         "confidence": 0.9,
         "source_location": "markdown",
-        "context": "Contact details: Tel. 06/6793585",
+        "context": "SF. 193",
+        "match_type": "fuzzy"
+      },
+      "value_citation": {
+        "source_text": "193",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "SF. 193",
+        "match_type": "exact"
+      }
+    },
+    "table_number": {
+      "field_citation": {
+        "source_text": "Tavolo:",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Tavolo: 56",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "56",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "Tavolo: 56",
+        "match_type": "exact"
+      }
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "TOTALE EURO",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "TOTALE EURO 26,33",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "26,33",
+        "confidence": 1.0,
+        "source_location": "markdown",
+        "context": "TOTALE EURO 26,33",
         "match_type": "exact"
       }
     }
   },
   "metadata": {
     "total_fields_analyzed": 10,
-    "fields_with_field_citations": 10,
+    "fields_with_field_citations": 8,
     "fields_with_value_citations": 10,
-    "average_confidence": 0.885
+    "average_confidence": 0.98
   }
 }

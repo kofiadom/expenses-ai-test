@@ -1,170 +1,90 @@
 {
   "citations": {
+    "currency": {
+      "field_citation": {
+        "source_text": "ZU ZAHLEN EURO",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "Payment section showing euro currency",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "18,98",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "Amount in EUR format with comma decimal",
+        "match_type": "contextual"
+      }
+    },
+    "amount": {
+      "field_citation": {
+        "source_text": "ZU ZAHLEN EURO",
+        "confidence": 0.95,
+        "source_location": "requirements",
+        "context": "Total amount to pay section",
+        "match_type": "exact"
+      },
+      "value_citation": {
+        "source_text": "18,98",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Exact amount match in total section",
+        "match_type": "exact"
+      }
+    },
     "supplier_address": {
       "field_citation": {
-        "source_text": "Supplier Address",
+        "source_text": "Address section",
         "confidence": 0.9,
         "source_location": "requirements",
-        "context": "FieldType: Supplier Address, Description: Address of the supplier on invoice",
-        "match_type": "exact"
+        "context": "Header section of receipt",
+        "match_type": "contextual"
       },
       "value_citation": {
         "source_text": "BERLIN, GERICHTSTRASSE 2-3",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "BERLIN, GERICHTSTRASSE 2-3\n\nUnsere Öffnungszeiten",
-        "match_type": "exact"
-      }
-    },
-    "currency": {
-      "field_citation": {
-        "source_text": "Currency",
-        "confidence": 0.9,
+        "confidence": 1.0,
         "source_location": "requirements",
-        "context": "FieldType: Currency, Description: Receipt currency",
+        "context": "Complete address in header",
         "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "EUR",
-        "confidence": 0.8,
-        "source_location": "contextual",
-        "context": "context: inferred from monetary values on the receipt, e.g., ZE ZAHLEN EURO 19,06",
-        "match_type": "contextual"
       }
     },
-    "tax_rate": {
+    "store_hours": {
       "field_citation": {
-        "source_text": "MWST",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| MWST     | Netto | MWST-BETRAG | BRUTTO |",
+        "source_text": "Unsere Öffnungszeiten",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Store hours section",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "19,00%",
+        "source_text": "Mo. - Sa. 8.00 - 20.00 Uhr",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Operating hours listing",
+        "match_type": "exact"
+      }
+    },
+    "payment_details": {
+      "field_citation": {
+        "source_text": "BARGELD ZURÜCK",
         "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "| D 19,00% | 2,50  | 0,48        | 2,98   |",
-        "match_type": "exact"
-      }
-    },
-    "vat": {
-      "field_citation": {
-        "source_text": "MWST-BETRAG",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| MWST-BETRAG | BRUTTO |",
+        "source_location": "requirements",
+        "context": "Payment transaction details",
         "match_type": "exact"
       },
       "value_citation": {
-        "source_text": "0,48",
-        "confidence": 0.85,
-        "source_location": "markdown",
-        "context": "| D 19,00% | 2,50  | 0,48        | 2,98   |",
-        "match_type": "exact"
-      }
-    },
-    "total_amount": {
-      "field_citation": {
-        "source_text": "ZU ZAHLEN EURO",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| ZU ZAHLEN EURO            | 19,06  |",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "19,06",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "| ZU ZAHLEN EURO            | 19,06  |",
-        "match_type": "exact"
-      }
-    },
-    "cash_given": {
-      "field_citation": {
-        "source_text": "BARGELD",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| BARGELD                   | 50,00  |",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "50,00",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "| BARGELD                   | 50,00  |",
-        "match_type": "exact"
-      }
-    },
-    "change_returned": {
-      "field_citation": {
-        "source_text": "ZURÜCK",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| ZURÜCK                    | 30,94  |",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "30,94",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "| ZURÜCK                    | 30,94  |",
-        "match_type": "exact"
-      }
-    },
-    "item_count": {
-      "field_citation": {
-        "source_text": "ANZAHL ARTIKEL",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "ANZAHL ARTIKEL                16",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "16",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "ANZAHL ARTIKEL                16",
-        "match_type": "exact"
-      }
-    },
-    "net_total": {
-      "field_citation": {
-        "source_text": "ZWISCHENSUMME",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| ZWISCHENSUMME             | 19,06  |",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "14,74",
-        "confidence": 0.7,
-        "source_location": "contextual",
-        "context": "Inferred from tax calculations",
-        "match_type": "contextual"
-      }
-    },
-    "gross_total": {
-      "field_citation": {
-        "source_text": "BRUTTO",
-        "confidence": 0.9,
-        "source_location": "markdown",
-        "context": "| BRUTTO |",
-        "match_type": "exact"
-      },
-      "value_citation": {
-        "source_text": "19,06",
-        "confidence": 0.95,
-        "source_location": "markdown",
-        "context": "| ZU ZAHLEN EURO            | 19,06  |",
+        "source_text": "50,00 31,02",
+        "confidence": 1.0,
+        "source_location": "requirements",
+        "context": "Payment amount and change given",
         "match_type": "exact"
       }
     }
   },
   "metadata": {
-    "total_fields_analyzed": 10,
-    "fields_with_field_citations": 10,
-    "fields_with_value_citations": 10,
-    "average_confidence": 0.9
+    "total_fields_analyzed": 5,
+    "fields_with_field_citations": 5,
+    "fields_with_value_citations": 5,
+    "average_confidence": 0.96
   }
 }

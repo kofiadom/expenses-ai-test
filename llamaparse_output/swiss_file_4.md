@@ -29,6 +29,6 @@ RechnungNr.: 11140
 2× Still 1L               *9,50     *19,00
 1× Thee                   *6,50     *6,50
 
-Zwischensumme über Alles           *367,00
-ZWS-Euro                           *367,00
-Bar-Total                         *367,00
+Zwischensumme über Alles         *367,00
+ZWS-Euro                          *367,00
+Bar-Total                        *367,00

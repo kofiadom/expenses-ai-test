@@ -1,5 +1,5 @@
 {
-  "image_path": "expense_files\\austrian_file.png",
+  "image_path": "C:\\Users\\Kofi Adom\\AppData\\Local\\Temp\\tmp7e5ouw_t\\italia_file_page1.png",
   "document_type": "receipt",
   "image_type_detection": {
     "is_digital_screenshot": "True",
@@ -14,42 +14,42 @@
       "low_histogram_entropy": "True"
     },
     "metadata": {
-      "unique_colors": 5914,
-      "edge_density": 0.023,
-      "histogram_entropy": "0.87"
+      "unique_colors": 3541,
+      "edge_density": 0.021,
+      "histogram_entropy": "1.16"
     }
   },
-  "timestamp": "2025-07-22T15:39:05.288580",
-  "processing_time_seconds": 7.46,
+  "timestamp": "2025-07-22T15:40:38.859960",
+  "processing_time_seconds": 17.75,
   "overall_assessment": {
-    "score": 91.5,
-    "level": "Good",
-    "pass_fail": "True",
+    "score": 99.0,
+    "level": "Excellent",
+    "pass_fail": true,
     "issues_summary": [],
     "recommendations": [
       "\ud83d\udcf1 This is a mobile_app_screenshot - physical document checks have been adjusted.",
-      "\u2705 Resolution quality is excellent for document processing.",
+      "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+      "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings.",
       "\ud83d\udcf8 Motion blur detected (horizontal). Use a tripod or scanner for better results.",
-      "\u2705 Digital image with clean background.",
-      "\u2705 Digital screenshot - no physical boundaries to check."
+      "\u2705 Digital image with clean background."
     ]
   },
   "detailed_results": {
     "resolution": {
       "dimensions": {
-        "width": 1700,
-        "height": 2200,
-        "megapixels": 3.74
+        "width": 2550,
+        "height": 3300,
+        "megapixels": 8.41
       },
       "dpi": {
-        "horizontal": 544.0,
-        "vertical": 259.0,
-        "average": 401.0
+        "horizontal": 96.0,
+        "vertical": 96.0,
+        "average": 96.0
       },
       "quality": {
         "score": 100.0,
         "level": "Digital Quality",
-        "meets_ocr_requirements": true
+        "meets_ocr_requirements": false
       },
       "aspect_ratio": {
         "actual": 0.77,
@@ -57,23 +57,24 @@
         "deviation_percent": 110.2
       },
       "recommendations": [
-        "\u2705 Resolution quality is excellent for document processing."
+        "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+        "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings."
       ]
     },
     "blur": {
       "metrics": {
-        "laplacian_variance": 365.34,
+        "laplacian_variance": 805.01,
         "is_blurry": false,
-        "blur_score": 70.07,
-        "blur_level": "Sharp"
+        "blur_score": 100.0,
+        "blur_level": "Very Sharp"
       },
       "motion_blur": {
         "detected": "True",
-        "score": 2.9217336898395723,
+        "score": 3.4249029114676173,
         "direction": "horizontal"
       },
       "focus_distribution": {
-        "sharp_areas_percent": 23.7,
+        "sharp_areas_percent": 23.1,
         "uniform_sharpness": false
       },
       "recommendations": [
@@ -82,16 +83,16 @@
     },
     "glare": {
       "exposure_metrics": {
-        "mean_brightness": 247.4,
-        "overexposed_percent": "93.54",
+        "mean_brightness": 248.7,
+        "overexposed_percent": "94.95",
         "is_overexposed": "True",
-        "contrast_ratio": 0.13
+        "contrast_ratio": 0.12
       },
       "glare_analysis": {
         "glare_score": 95.0,
         "glare_level": "None (Digital)",
-        "num_glare_spots": 47,
-        "glare_coverage_percent": 92.92,
+        "num_glare_spots": 39,
+        "glare_coverage_percent": 93.25,
         "glare_patterns": {
           "type": "flash",
           "description": "Camera flash reflection detected"
@@ -102,71 +103,71 @@
           "bbox": [
             "0",
             "0",
-            "1700",
-            "2200"
+            "2550",
+            "3300"
           ],
           "center": [
-            854,
-            1104
+            1318,
+            1659
           ],
-          "area": "3298782",
-          "intensity": 250.1054090909091
+          "area": "7542999",
+          "intensity": 249.229776114082
         },
         {
           "bbox": [
-            "1260",
-            "377",
+            "973",
+            "374",
+            "25",
+            "45"
+          ],
+          "center": [
+            985,
+            395
+          ],
+          "area": "767",
+          "intensity": 232.25244444444445
+        },
+        {
+          "bbox": [
+            "1788",
+            "470",
             "10",
-            "24"
+            "18"
           ],
           "center": [
-            1264,
-            388
+            1793,
+            478
           ],
-          "area": "206",
-          "intensity": 252.6625
+          "area": "103",
+          "intensity": 248.9777777777778
         },
         {
           "bbox": [
-            "795",
-            "526",
-            "12",
-            "14"
+            "1872",
+            "513",
+            "10",
+            "18"
           ],
           "center": [
-            799,
-            533
+            1876,
+            521
           ],
-          "area": "105",
-          "intensity": 246.79166666666666
+          "area": "113",
+          "intensity": 247.51666666666668
         },
         {
           "bbox": [
-            "295",
-            "1014",
-            "95",
-            "28"
+            "744",
+            "643",
+            "5",
+            "53"
           ],
           "center": [
-            348,
-            1026
+            745,
+            672
           ],
-          "area": "1695",
-          "intensity": 224.84624060150375
-        },
-        {
-          "bbox": [
-            "395",
-            "1014",
-            "162",
-            "28"
-          ],
-          "center": [
-            483,
-            1026
-          ],
-          "area": "3444",
-          "intensity": 234.5462962962963
+          "area": "219",
+          "intensity": 253.38490566037737
         }
       ],
       "recommendations": [
@@ -224,9 +225,9 @@
       "contribution": 20.0
     },
     "blur": {
-      "score": 70.07,
+      "score": 100.0,
       "weight": 0.25,
-      "contribution": 17.5175
+      "contribution": 25.0
     },
     "glare": {
       "score": 95.0,
@@ -245,13 +246,13 @@
     }
   },
   "assessment_method": "opencv",
-  "quality_passed": "True",
-  "quality_score": 91.5,
-  "quality_level": "Good",
+  "quality_passed": true,
+  "quality_score": 99.0,
+  "quality_level": "Excellent",
   "main_issues": [],
   "top_recommendations": [
     "\ud83d\udcf1 This is a mobile_app_screenshot - physical document checks have been adjusted.",
-    "\u2705 Resolution quality is excellent for document processing.",
-    "\ud83d\udcf8 Motion blur detected (horizontal). Use a tripod or scanner for better results."
+    "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+    "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings."
   ]
 }

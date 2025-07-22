@@ -1,0 +1,72 @@
+{
+  "image_path": "C:\\Users\\Kofi Adom\\AppData\\Local\\Temp\\tmp7e5ouw_t\\italia_file_page1.png",
+  "assessment_method": "LLM",
+  "model_used": "claude-3-7-sonnet-20250219",
+  "timestamp": "2025-07-22T15:45:45.511967",
+  "blur_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.05,
+    "description": "The invoice displays crisp, well-defined text with excellent edge definition throughout the document.",
+    "recommendation": "No action needed; current sharpness is suitable for OCR processing."
+  },
+  "contrast_assessment": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.95,
+    "description": "The invoice exhibits excellent black text on white background contrast with clear differentiation between elements.",
+    "recommendation": "Maintain current scanning/photography settings for future documents."
+  },
+  "glare_identification": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "No visible glare, reflections, or overexposed areas detected on the invoice surface.",
+    "recommendation": "Continue using current lighting conditions for document capture."
+  },
+  "water_stains": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.98,
+    "quantitative_measure": 0.0,
+    "description": "No water damage, discoloration, or staining visible on any part of the invoice.",
+    "recommendation": "Continue maintaining document in dry conditions."
+  },
+  "tears_or_folds": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "The invoice appears flat with no visible creases, folds, tears, or physical damage.",
+    "recommendation": "Continue current handling and storage practices to maintain document integrity."
+  },
+  "cut_off_detection": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "All invoice edges are fully visible with adequate margins around the content.",
+    "recommendation": "Maintain current scanning frame positioning for complete document capture."
+  },
+  "missing_sections": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.95,
+    "quantitative_measure": 0.0,
+    "description": "The invoice appears complete with all expected sections present including header, customer details, line items, and totals.",
+    "recommendation": "No action needed; document completeness is excellent."
+  },
+  "obstructions": {
+    "detected": false,
+    "severity_level": "low",
+    "confidence_score": 0.98,
+    "quantitative_measure": 0.0,
+    "description": "No fingers, shadows, or other obstructions blocking any part of the invoice content.",
+    "recommendation": "Continue current capturing technique to maintain obstruction-free images."
+  },
+  "overall_quality_score": 10,
+  "suitable_for_extraction": true
+}

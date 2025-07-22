@@ -24,5 +24,6 @@ di vendita o prestazione
 | Resto                 |        | 0,00      |
 | Importo pagato        |        | 39,78     |
 
+
 12-09-2019 22:25
 DOCUMENTO N. 0117-0304

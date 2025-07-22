@@ -1,57 +1,58 @@
 {
-  "image_path": "C:\\Users\\Kofi Adom\\AppData\\Local\\Temp\\tmp95xqs_ee\\german_file_677.png",
+  "image_path": "C:\\Users\\Kofi Adom\\AppData\\Local\\Temp\\tmpcnwqno1b\\german_file_9_page1.png",
   "document_type": "receipt",
   "image_type_detection": {
     "is_digital_screenshot": "True",
-    "confidence": 0.67,
+    "confidence": 0.83,
     "image_subtype": "mobile_app_screenshot",
     "indicators": {
       "low_color_variety": true,
       "matches_common_resolution": false,
-      "has_regular_edges": "False",
+      "has_regular_edges": "True",
       "has_uniform_background": true,
       "has_many_straight_lines": true,
       "low_histogram_entropy": "True"
     },
     "metadata": {
-      "unique_colors": 113890,
-      "edge_density": 0.051,
-      "histogram_entropy": "5.33"
+      "unique_colors": 1344,
+      "edge_density": 0.008,
+      "histogram_entropy": "1.67"
     }
   },
-  "timestamp": "2025-07-17T18:16:18.200908",
-  "processing_time_seconds": 6.34,
+  "timestamp": "2025-07-22T15:40:21.086459",
+  "processing_time_seconds": 24.26,
   "overall_assessment": {
-    "score": 66.1,
+    "score": 58.4,
     "level": "Poor",
     "pass_fail": "False",
     "issues_summary": [
+      "Image blur detected (Slightly Blurry)",
       "Severe glare detected"
     ],
     "recommendations": [
       "\ud83d\udcf1 This is a mobile_app_screenshot - physical document checks have been adjusted.",
+      "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
       "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture.",
-      "\u2705 Resolution quality is excellent for document processing.",
-      "\ud83d\udcf8 Motion blur detected (vertical). Use a tripod or scanner for better results.",
-      "\ud83d\udcf7 Image is overexposed. Reduce camera exposure or lighting."
+      "\ud83d\udcc8 Image is slightly blurry. Consider recapturing for optimal results.",
+      "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings."
     ]
   },
   "detailed_results": {
     "resolution": {
       "dimensions": {
-        "width": 1700,
-        "height": 2200,
-        "megapixels": 3.74
+        "width": 2550,
+        "height": 3300,
+        "megapixels": 8.41
       },
       "dpi": {
-        "horizontal": 544.0,
-        "vertical": 259.0,
-        "average": 401.0
+        "horizontal": 96.0,
+        "vertical": 96.0,
+        "average": 96.0
       },
       "quality": {
         "score": 100.0,
         "level": "Digital Quality",
-        "meets_ocr_requirements": true
+        "meets_ocr_requirements": false
       },
       "aspect_ratio": {
         "actual": 0.77,
@@ -59,41 +60,44 @@
         "deviation_percent": 110.2
       },
       "recommendations": [
-        "\u2705 Resolution quality is excellent for document processing."
+        "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+        "\ud83d\udd04 Image quality insufficient. Please capture again with better camera/scanner settings."
       ]
     },
     "blur": {
       "metrics": {
-        "laplacian_variance": 249.94,
-        "is_blurry": false,
-        "blur_score": 44.43,
-        "blur_level": "Sharp"
+        "laplacian_variance": 110.71,
+        "is_blurry": true,
+        "blur_score": 13.49,
+        "blur_level": "Slightly Blurry"
       },
       "motion_blur": {
         "detected": "True",
-        "score": 4.221104010695187,
-        "direction": "vertical"
+        "score": 1.978402970885324,
+        "direction": "horizontal"
       },
       "focus_distribution": {
-        "sharp_areas_percent": 26.2,
-        "uniform_sharpness": false
+        "sharp_areas_percent": 16.7,
+        "uniform_sharpness": true
       },
       "recommendations": [
-        "\ud83d\udcf8 Motion blur detected (vertical). Use a tripod or scanner for better results."
+        "\ud83d\udd04 Image is blurry. Ensure camera is focused and stable during capture.",
+        "\ud83d\udcf8 Motion blur detected (horizontal). Use a tripod or scanner for better results.",
+        "\ud83d\udcc8 Image is slightly blurry. Consider recapturing for optimal results."
       ]
     },
     "glare": {
       "exposure_metrics": {
-        "mean_brightness": 169.1,
-        "overexposed_percent": "39.68",
+        "mean_brightness": 246.5,
+        "overexposed_percent": "97.06",
         "is_overexposed": "True",
-        "contrast_ratio": 0.52
+        "contrast_ratio": 0.11
       },
       "glare_analysis": {
         "glare_score": 0,
         "glare_level": "Severe",
-        "num_glare_spots": 1,
-        "glare_coverage_percent": 39.68,
+        "num_glare_spots": 18,
+        "glare_coverage_percent": 38.9,
         "glare_patterns": {
           "type": "flash",
           "description": "Camera flash reflection detected"
@@ -104,21 +108,78 @@
           "bbox": [
             "0",
             "0",
-            "1700",
-            "2200"
+            "2550",
+            "3300"
           ],
           "center": [
-            848,
-            1149
+            1306,
+            1649
           ],
-          "area": "1484066",
-          "intensity": 180.08911764705883
+          "area": "3260700",
+          "intensity": 246.50183505644682
+        },
+        {
+          "bbox": [
+            "624",
+            "515",
+            "1",
+            "129"
+          ],
+          "center": [
+            624,
+            579
+          ],
+          "area": "129",
+          "intensity": 251.7906976744186
+        },
+        {
+          "bbox": [
+            "1406",
+            "515",
+            "1",
+            "138"
+          ],
+          "center": [
+            1406,
+            583
+          ],
+          "area": "138",
+          "intensity": 252.69565217391303
+        },
+        {
+          "bbox": [
+            "874",
+            "517",
+            "1",
+            "134"
+          ],
+          "center": [
+            874,
+            583
+          ],
+          "area": "134",
+          "intensity": 252.9179104477612
+        },
+        {
+          "bbox": [
+            "984",
+            "516",
+            "1",
+            "135"
+          ],
+          "center": [
+            984,
+            583
+          ],
+          "area": "135",
+          "intensity": 253.9777777777778
         }
       ],
       "recommendations": [
         "\ud83d\udcf7 Image is overexposed. Reduce camera exposure or lighting.",
         "\ud83d\udd26 Disable camera flash to avoid reflections.",
-        "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture."
+        "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture.",
+        "\ud83c\udfa8 Low contrast detected. Ensure even lighting across document."
       ]
     },
     "completeness": {
@@ -172,9 +233,9 @@
       "contribution": 20.0
     },
     "blur": {
-      "score": 44.43,
+      "score": 13.49,
       "weight": 0.25,
-      "contribution": 11.1075
+      "contribution": 3.3725
     },
     "glare": {
       "score": 0,
@@ -194,14 +255,15 @@
   },
   "assessment_method": "opencv",
   "quality_passed": "False",
-  "quality_score": 66.1,
+  "quality_score": 58.4,
   "quality_level": "Poor",
   "main_issues": [
+    "Image blur detected (Slightly Blurry)",
     "Severe glare detected"
   ],
   "top_recommendations": [
     "\ud83d\udcf1 This is a mobile_app_screenshot - physical document checks have been adjusted.",
-    "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture.",
-    "\u2705 Resolution quality is excellent for document processing."
+    "\u26a0\ufe0f Resolution too low for reliable OCR. Rescan at higher resolution.",
+    "\u26a0\ufe0f Significant glare detected. Adjust lighting and recapture."
   ]
 }

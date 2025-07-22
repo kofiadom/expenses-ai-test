@@ -38,8 +38,8 @@ load_dotenv()
 # CONFIGURATION PLACEHOLDERS - MODIFY THESE VALUES
 # ============================================================================
 
-FILENAME = "switzerland"  # File name without extension (e.g., "receipt_001", "german_file_2")
-COUNTRY = "Switzerland"   # Country for compliance rules (e.g., "Germany", "Switzerland")
+FILENAME = "german_file_5"  # File name without extension (e.g., "receipt_001", "german_file_2")
+COUNTRY = "Germany"   # Country for compliance rules (e.g., "Germany", "Switzerland")
 ICP = "Global People"     # ICP name: "Global People", "goGlobal", "Parakar", "Atlas"
 
 # Optional: Override default directories

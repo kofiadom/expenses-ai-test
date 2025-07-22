@@ -12,19 +12,19 @@ Mo. - Sa. 8.00 - 20.00 Uhr
 | URSI PUDDING MIT SAHNE.   | 0,79 C |
 | URSI PUDDING MIT SAHNE.   | 0,79 C |
 | URSI PUDDING MIT SAHNE.   | 0,79 C |
-| HAFERBRÖTCHEN             | 0,79 C |
-| HAFERBRÖTCHEN             | 0,79 C |
+| BÄCKERBRÖTCHEN            | 0,45 C |
+| BÄCKERBRÖTCHEN            | 0,45 C |
 | ECHT GEWALZTE BANDNUDELN  | 1,29 C |
 | BIO-EIER, 6 STÜCK         | 1,89 C |
 | FRISCHE PASTA             | 1,19 C |
 | FRISCHE PASTA             | 1,19 C |
 | KÄSEABSCHNITT             | 1,29 C |
 | NUDELSAUCE                | 0,79 C |
-| LANDBROT                  | 1,5 C  |
-| ZWISCHENSUMME             | 19,06  |
-| ZU ZAHLEN EURO            | 19,06  |
+| LANDBROT                  | 1,15 C |
+| ZWISCHENSUMME             | 18,98  |
+| ZU ZAHLEN EURO            | 18,98  |
 | BARGELD                   | 50,00  |
-| ZURÜCK                    | 30,94  |
+| ZURÜCK                    | 31,02  |
 
 
 | MWST     | Netto | MWST-BETRAG | BRUTTO |

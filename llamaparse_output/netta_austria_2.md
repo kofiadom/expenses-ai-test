@@ -24,6 +24,7 @@ NMI: 3175004968364728
 | --------- | --------- | --------- | ---------------- | ---------- | -------- |
 | 271058    | 12 Oct 22 | Actual    |                  | 2805       | 2844     |
 
+
 Your next meter read is due between 13 Nov 22. Please ensure easy access to your meter on these days.
 
 # How we've worked out your bill.
@@ -33,24 +34,28 @@ Previous balance
 Balance brought forward                                                € 0.00
 
 ## New charges and credits.
+
 | Usage and supply charges | Units | Price   | Amount  |
 | ------------------------ | ----- | ------- | ------- |
 | m3                       | 25    | € 0.951 | € 23.77 |
 | Supply charge            | 14    | € 0.52  | € 7.28  |
 
+
 Other charges
 Payment processing fee                                                € 0.00
-Total charges                                                    +    € 31.05
+Total charges                                                  +      € 31.05
 Credits
 
 Total new charges and credits                                         € 31.05
-Total GST                                                        +    € 3.75
+Total GST                                                     +      € 3.75
+
 Total due
-(includes GST)                                                   =    €34.80
+(includes GST)                                                =      €34.80
 
 | Total due | € 34.80    |
 | --------- | ---------- |
 | Due date  | 26.10.2022 |
+
 
 Direct Debit™
 Sign up to Direct Debit at www.aggm.at

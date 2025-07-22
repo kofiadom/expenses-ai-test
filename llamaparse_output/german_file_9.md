@@ -18,6 +18,7 @@ JEDE STRASSE 123
 | Steuer (0 %)                        |        |       | 0 €      |
 | **Summe**                           |        |       | **860€** |
 
+
 ZAHLUNGSINFORMATIONEN:
 EMPFÄNGER: SARAH MARCHSREITER
 KONTONUMMER: 0123 4567 8901

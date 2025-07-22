@@ -1,6 +1,6 @@
 {
   "source_file": "swiss_file_2.md",
-  "processing_timestamp": "2025-07-16T23:16:31.884130",
+  "processing_timestamp": "2025-07-22T16:46:27.708772",
   "dataset_metadata": {
     "filepath": "expense_files/swiss_file_2.png",
     "filename ": "swiss_file_2.png",
@@ -11,40 +11,64 @@
   "classification_result": {
     "is_expense": true,
     "expense_type": "meals",
-    "language": "German",
-    "language_confidence": 90,
+    "language": "German (with some English)",
+    "language_confidence": 95,
     "document_location": "Switzerland",
     "expected_location": "Switzerland",
     "location_match": true,
     "error_type": null,
     "error_message": null,
     "classification_confidence": 95,
-    "reasoning": "The document contains sufficient evidence of payment and detail to classify it as an expense. The fields present suggest it is a meal expense, consistent with a restaurant receipt.",
+    "reasoning": "This is clearly a restaurant receipt showing food items purchased, payment completed, and total amount paid. The document contains multiple expense schema fields including supplier, transaction amount, transaction date, tax information, payment method, and item descriptions.",
     "schema_field_analysis": {
       "fields_found": [
         "supplier",
-        "transactionDate",
         "transactionAmount",
+        "transactionDate",
+        "invoiceReceiptNumber",
         "taxInformation",
+        "paymentMethod",
         "itemDescriptionLineItems"
       ],
       "fields_missing": [
-        "consumerRecipient",
-        "icpRequirements",
-        "invoiceReceiptNumber",
-        "paymentMethod"
+        "consumerRecipient"
       ],
-      "total_fields_found": 5,
-      "expense_identification_reasoning": "The document is a restaurant receipt with the supplier identified as 'Bebbis Restaurant'. The transaction date is present (04.04.2023), along with transaction amount (92.80 Fr) and tax information (ENTHALTENE MWST 7.7%). Itemized line items are listed for meal purchases. Although consumer details are absent, and without explicit payment method details, the fields found are sufficient to classify this as an expense."
+      "total_fields_found": 7,
+      "expense_identification_reasoning": "The document contains 7 out of 8 schema fields, exceeding the threshold for expense classification. Key fields include supplier ('Bebbis Restaurant, Boesch Hospitality AG'), transaction amount ('Summe: 92.80 Fr.'), transaction date ('04.04.2023 17:11'), receipt number ('Rg.: 54'), tax information ('ENTHALTENE MWST 7.7%: 6.63 Fr.' and 'MWST-Nr:CHE-105.722.791'), payment method ('BAR TOTAL: 92.80 Fr.'), and detailed item descriptions (Meat Fondue, Wiener Schnitzel, etc.). The location is confirmed as Switzerland based on the address, Swiss Francs currency, and Swiss VAT number format."
     }
   },
   "extraction_result": {
-    "supplier_name": "Bebbis Restaurant",
-    "supplier_address": "Dorfstrasse 130, 3818 Grindelwald",
-    "company_registration": "CHE-105.722.791",
+    "customer_name_on_invoice": null,
+    "customer_address_on_invoice": null,
+    "customer_registration_on_invoice": null,
+    "customer_name_exception": null,
     "currency": "CHF",
+    "amount": 92.8,
+    "receipt_type": "Receipt",
+    "personal_information": null,
+    "business_trip_reporting": null,
+    "travel_template": null,
+    "manager_approval": null,
+    "route_map": null,
+    "car_details": null,
+    "logbook": null,
+    "combined_mileage": null,
+    "supplier_name": "Bebbis Restaurant",
+    "supplier_company": "Boesch Hospitality AG",
+    "supplier_address": "Dorfstrasse 130, 3818 Grindelwald",
+    "supplier_phone": "+41(0) 33 525 08 25",
+    "supplier_email": "admin@bebbis.com",
+    "supplier_website": "www.bebbis.com",
+    "date_of_issue": "2023-04-04",
+    "time_of_issue": "17:11",
+    "table_number": "14",
+    "receipt_number": "54",
+    "server_number": "7",
+    "vat_number": "CHE-105.722.791",
+    "vat_rate": 7.7,
+    "vat_amount": 6.63,
     "total_amount": 92.8,
-    "receipt_type": "invoice",
+    "payment_method": "CASH",
     "line_items": [
       {
         "description": "Meat Fondue",
@@ -70,321 +94,65 @@
         "unit_price": 9.8,
         "total_price": 9.8
       }
-    ],
-    "vat_number": "CHE-105.722.791",
-    "vat_rate": 7.7,
-    "vat_amount": 6.63,
-    "transaction_date": "2023-04-04",
-    "transaction_time": "17:11",
-    "contact_phone": "+41 33 525 08 25",
-    "contact_email": "admin@bebbis.com",
-    "contact_website": "www.bebbis.com",
-    "table_number": "14",
-    "transaction_reference": "Rg. 54",
-    "citations": {
-      "citations": {
-        "supplier_name": {
-          "field_citation": {
-            "source_text": "# Bebbis Restaurant",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "The heading in the markdown text which indicates the supplier name.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "Bebbis Restaurant",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Appears as a header indicating the supplier.",
-            "match_type": "exact"
-          }
-        },
-        "supplier_address": {
-          "field_citation": {
-            "source_text": "Dorfstrasse 130\n3818 Grindelwald",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Listed below the supplier name in the markdown text.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "Dorfstrasse 130\n3818 Grindelwald",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Address is directly shown after the supplier heading.",
-            "match_type": "exact"
-          }
-        },
-        "company_registration": {
-          "field_citation": {
-            "source_text": "MWST-Nr:",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "This indicates the company registration number on invoices.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "CHE-105.722.791",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Listed after 'MWST-Nr:' signifying the registration number.",
-            "match_type": "exact"
-          }
-        },
-        "currency": {
-          "field_citation": {
-            "source_text": "Summe :",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Sum amount on the receipt indicates use of currency.",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "Fr.",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Fr. is used alongside totals indicating CHF currency.",
-            "match_type": "exact"
-          }
-        },
-        "total_amount": {
-          "field_citation": {
-            "source_text": "Summe :",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Label for total amount on receipt.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "92.80 Fr.",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "The total amount is clearly indicated in final totals.",
-            "match_type": "fuzzy"
-          }
-        },
-        "receipt_type": {
-          "field_citation": {
-            "source_text": "Rg.:",
-            "confidence": 0.7,
-            "source_location": "markdown",
-            "context": "Typically used to denote invoice numbers in documentation.",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "invoice",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "The context of 'Rg.' implies an invoice due to transaction format.",
-            "match_type": "contextual"
-          }
-        },
-        "vat_number": {
-          "field_citation": {
-            "source_text": "MWST-Nr:",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "The label for the VAT business identification number.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "CHE-105.722.791",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "This value follows the VAT number label.",
-            "match_type": "exact"
-          }
-        },
-        "vat_rate": {
-          "field_citation": {
-            "source_text": "ENTHALTENE MWST 7.7% :",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Label indicating the VAT rate on receipt.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "7.7%",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "The VAT percentage used in calculation.",
-            "match_type": "exact"
-          }
-        },
-        "vat_amount": {
-          "field_citation": {
-            "source_text": "ENTHALTENE MWST 7.7% :",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Label indicating the VAT amount derived at 7.7% rate.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "6.63 Fr.",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Calculated and displayed in relation to VAT rate.",
-            "match_type": "fuzzy"
-          }
-        },
-        "transaction_date": {
-          "field_citation": {
-            "source_text": "04.04.2023",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Date on the receipt providing transaction date.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "04.04.2023",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Listed as the transaction date on receipt.",
-            "match_type": "exact"
-          }
-        },
-        "transaction_time": {
-          "field_citation": {
-            "source_text": "17:11",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Time on the receipt providing transaction time.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "17:11",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "The exact time the transaction was recorded.",
-            "match_type": "exact"
-          }
-        },
-        "contact_phone": {
-          "field_citation": {
-            "source_text": "TEL:",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Field label for contact telephone number.",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "+41 33 525 08 25",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Phone number provided directly under contact details.",
-            "match_type": "exact"
-          }
-        },
-        "contact_email": {
-          "field_citation": {
-            "source_text": "admin@bebbis.com",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Email address provided in contact details.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "admin@bebbis.com",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Directly visible as the contact email.",
-            "match_type": "exact"
-          }
-        },
-        "contact_website": {
-          "field_citation": {
-            "source_text": "www.bebbis.com",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Listed as business website in contact details.",
-            "match_type": "exact"
-          },
-          "value_citation": {
-            "source_text": "www.bebbis.com",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Direct contact website provided.",
-            "match_type": "exact"
-          }
-        },
-        "table_number": {
-          "field_citation": {
-            "source_text": "Tisch:",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Indicates the table number for the transaction.",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "14",
-            "confidence": 0.9,
-            "source_location": "markdown",
-            "context": "Provided as part of table information in transaction.",
-            "match_type": "exact"
-          }
-        },
-        "transaction_reference": {
-          "field_citation": {
-            "source_text": "Rg.:",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "Field indicating the transaction reference",
-            "match_type": "contextual"
-          },
-          "value_citation": {
-            "source_text": "54",
-            "confidence": 0.8,
-            "source_location": "markdown",
-            "context": "The reference number for the transaction listed post receipt header.",
-            "match_type": "exact"
-          }
-        }
-      },
-      "metadata": {
-        "total_fields_analyzed": 17,
-        "fields_with_field_citations": 17,
-        "fields_with_value_citations": 17,
-        "average_confidence": 0.87
-      }
-    }
+    ]
   },
   "compliance_result": {
     "validation_result": {
       "is_valid": false,
-      "issues_count": 3,
+      "issues_count": 6,
       "issues": [
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_name",
-          "description": "The supplier name does not match the mandatory requirement. Extracted 'Bebbis Restaurant', but should be 'Global PPL CH GmbH'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Must be Global PPL CH GmbH"
+          "field": "Customer Name",
+          "description": "Missing mandatory Local Employer name on supplier invoice",
+          "recommendation": "Ensure receipt shows 'Global PPL CH GmbH' as customer name",
+          "knowledge_base_reference": "Must show Global PPL CH GmbH as customer"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "supplier_address",
-          "description": "The supplier address does not match the mandatory requirement. Extracted 'Dorfstrasse 130, 3818 Grindelwald', but should be 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "Freigutstrasse 2 8002 Z\u00fcrich, Switzerland"
+          "field": "Customer Address",
+          "description": "Missing mandatory Local Employer address on supplier invoice",
+          "recommendation": "Ensure receipt shows 'Freigutstrasse 2 8002 Z\u00fcrich, Switzerland' as address",
+          "knowledge_base_reference": "Must show Freigutstrasse 2 8002 Z\u00fcrich, Switzerland"
         },
         {
           "issue_type": "Standards & Compliance | Fix Identified",
-          "field": "company_registration",
-          "description": "The company registration number does not match the mandatory requirement. Extracted 'CHE-105.722.791', but should be 'CHE-295.369.918'.",
-          "recommendation": "It is recommended to address this issue with the supplier or provider.",
-          "knowledge_base_reference": "CHE-295.369.918"
+          "field": "Registration Number",
+          "description": "Missing mandatory Local Employer registration on supplier invoice",
+          "recommendation": "Ensure receipt shows registration number 'CHE-295.369.918'",
+          "knowledge_base_reference": "Must show CHE-295.369.918"
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "Meal Expense Amount",
+          "description": "Meal expense of CHF 92.80 exceeds standard domestic business travel meal allowances",
+          "recommendation": "The excess amount above standard per diem rates (Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40) will need to be grossed up for taxation purposes",
+          "knowledge_base_reference": "Breakfast CHF 15, Lunch CHF 35, Dinner CHF 40"
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "Trip Context",
+          "description": "Missing information about whether this is part of domestic or international business travel",
+          "recommendation": "Specify if this meal expense is part of a business trip and its nature (domestic/international)",
+          "knowledge_base_reference": "Submit separate report per each business trip"
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "Travel Documentation",
+          "description": "Missing travel expense documentation if part of a business trip",
+          "recommendation": "Provide the required Travel Expense Report Template Switzerland CHF.xlsx if this meal is part of a business trip",
+          "knowledge_base_reference": "Must use Travel Expense Report Template Switzerland CHF.xlsx"
         }
       ],
       "corrected_receipt": null,
-      "compliance_summary": "The extracted receipt data did not meet three mandatory compliance requirements for supplier name, address, and company registration number specific to Global People (CH) GmbH in Switzerland. These need to be addressed for compliance validation."
+      "compliance_summary": "The receipt from Bebbis Restaurant fails to meet Global PPL CH GmbH compliance requirements. It's missing mandatory Local Employer information (company name, address, registration number), exceeds standard meal allowances (CHF 92.80), and lacks business trip context. All issues must be addressed before approval, with potential tax implications for the excess meal amount."
     },
     "technical_details": {
-      "content_type": "ReceiptValidationResult",
+      "content_type": "Receipt",
       "country": "Switzerland",
       "icp": "Global People",
-      "receipt_type": "meals",
-      "issues_count": 3,
-      "has_reasoning": true
+      "receipt_type": "Restaurant/Meal",
+      "issues_count": 6
     }
   },
   "processing_status": "completed",
