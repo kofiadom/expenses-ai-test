@@ -430,16 +430,19 @@ class ExpenseProcessingWorkflow(Workflow):
                         citations = citations_result
                         logger.debug(f"⚠️ Received legacy citation format")
 
-                    # Log citation statistics (only if citations is not None)
-                    if citations is not None:
-                        citation_stats = get_citation_stats(citations)
-                        logger.info(f"Citations for {filename}: {citation_stats.get('fields_with_field_citations', 0)}/{citation_stats.get('total_fields', 0)} field citations, {citation_stats.get('fields_with_value_citations', 0)}/{citation_stats.get('total_fields', 0)} value citations")
-                    else:
-                        logger.warning(f"Citations result is None for {filename}")
-
                 except Exception as e:
                     logger.error(f"Citation generation failed for {filename}: {e}")
                     citations = None
+
+            # Log citation statistics separately (outside the try-catch to avoid affecting citation inclusion)
+            if citations is not None:
+                try:
+                    citation_stats = get_citation_stats(citations)
+                    logger.info(f"Citations for {filename}: {citation_stats.get('fields_with_field_citations', 0)}/{citation_stats.get('total_fields', 0)} field citations, {citation_stats.get('fields_with_value_citations', 0)}/{citation_stats.get('total_fields', 0)} value citations")
+                except Exception as e:
+                    logger.warning(f"Failed to calculate citation statistics for {filename}: {e}")
+            else:
+                logger.debug(f"No citations to include for {filename}")
 
             # Include citations in the result if available
             if citations and isinstance(parsed_result, dict):
