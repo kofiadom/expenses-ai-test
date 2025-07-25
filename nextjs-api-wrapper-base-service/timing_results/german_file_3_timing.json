@@ -1,0 +1,55 @@
+{
+  "phase_timings": {
+    "image_quality_assessment_minutes": "0.17",
+    "file_classification_minutes": "0.13",
+    "data_extraction_minutes": "0.17",
+    "issue_detection_minutes": "0.17",
+    "citation_generation_minutes": "0.18"
+  },
+  "agent_performance": {
+    "image_quality_assessment": {
+      "start_time": "2025-07-25T16:23:42.651Z",
+      "end_time": "2025-07-25T16:23:52.694Z",
+      "duration_minutes": "0.17",
+      "model_used": "claude-3-5-sonnet-20241022"
+    },
+    "file_classification": {
+      "start_time": "2025-07-25T16:23:52.696Z",
+      "end_time": "2025-07-25T16:24:00.394Z",
+      "duration_minutes": "0.13",
+      "model_used": "claude-3-5-sonnet-20241022"
+    },
+    "data_extraction": {
+      "start_time": "2025-07-25T16:24:00.395Z",
+      "end_time": "2025-07-25T16:24:10.805Z",
+      "duration_minutes": "0.17",
+      "model_used": "claude-3-5-sonnet-20241022"
+    },
+    "issue_detection": {
+      "start_time": "2025-07-25T16:24:10.805Z",
+      "end_time": "2025-07-25T16:24:20.791Z",
+      "duration_minutes": "0.17",
+      "model_used": "claude-3-5-sonnet-20241022"
+    },
+    "citation_generation": {
+      "start_time": "2025-07-25T16:24:20.791Z",
+      "end_time": "2025-07-25T16:24:31.756Z",
+      "duration_minutes": "0.18",
+      "model_used": "claude-3-5-sonnet-20241022"
+    }
+  },
+  "total_processing_time_minutes": "0.82",
+  "summary": {
+    "total_time_minutes": "0.82",
+    "fastest_phase": {
+      "phase": "file_classification_minutes",
+      "time_minutes": "0.13"
+    },
+    "slowest_phase": {
+      "phase": "citation_generation_minutes",
+      "time_minutes": "0.18"
+    },
+    "average_phase_time_minutes": "0.16"
+  },
+  "generated_at": "2025-07-25T16:24:31.759Z"
+}

@@ -17,18 +17,20 @@ export class DocumentService {
   private readonly logger = new Logger(DocumentService.name);
 
   constructor(
-    @InjectQueue(QUEUE_NAMES.MEDICAL_PROCESSING)
-    private medicalQueue: Queue,
+    @InjectQueue(QUEUE_NAMES.EXPENSE_PROCESSING)
+    private expenseQueue: Queue,
     private configService: ConfigService,
   ) {}
 
   async queueDocumentProcessing(request: {
     file: Express.Multer.File;
     userId: string;
-    language: string;
+    country: string;
+    icp: string;
   }): Promise<{ jobId: string; status: string }> {
     try {
-      const jobId = request.userId;
+      const { file, userId, country, icp } = request;
+      const jobId = userId;
       const uploadPath = this.configService.get("UPLOAD_PATH", "./uploads");
 
       // Ensure upload directory exists
@@ -37,23 +39,55 @@ export class DocumentService {
       }
 
       // Save file to permanent location
-      const fileName = `${jobId}_${request.file.originalname}`;
+      const fileName = `${jobId}_${file.originalname}`;
       const filePath = path.join(uploadPath, fileName);
 
-      // Move file from temp location to permanent location
-      fs.renameSync(request.file.path, filePath);
+      // Ensure upload directory exists
+      if (!fs.existsSync(uploadPath)) {
+        fs.mkdirSync(uploadPath, { recursive: true });
+      }
+
+      // Handle file path - check if file.path exists (from multer temp storage)
+      let sourceFilePath = file.path;
+
+      if (!sourceFilePath) {
+        // If no temp path, file might be in buffer - save it directly
+        if (file.buffer) {
+          this.logger.log(`Saving file buffer to ${filePath}`);
+          fs.writeFileSync(filePath, file.buffer);
+        } else {
+          throw new Error('No file path or buffer available from uploaded file');
+        }
+      } else {
+        // Move file from temp location to permanent location
+        this.logger.log(`Moving file from ${sourceFilePath} to ${filePath}`);
+
+        try {
+          // Ensure temp file exists
+          if (!fs.existsSync(sourceFilePath)) {
+            throw new Error(`Temp file not found: ${sourceFilePath}`);
+          }
+
+          fs.renameSync(sourceFilePath, filePath);
+          this.logger.log(`File successfully moved to ${filePath}`);
+        } catch (error) {
+          this.logger.error(`Failed to move file: ${error.message}`);
+          throw new Error(`Failed to save uploaded file: ${error.message}`);
+        }
+      }
 
       const jobData: DocumentProcessingData = {
         jobId,
         filePath,
-        fileName: request.file.originalname,
-        userId: request.userId,
-        language: request.language,
+        fileName: file.originalname,
+        userId,
+        country,
+        icp,
         uploadedAt: new Date(),
       };
 
-      // Add job to medical processing queue
-      const job = await this.medicalQueue.add(
+      // Add job to expense processing queue
+      const job = await this.expenseQueue.add(
         JOB_TYPES.PROCESS_DOCUMENT,
         jobData,
         {
@@ -83,8 +117,8 @@ export class DocumentService {
 
   async getProcessingStatus(jobId: string): Promise<ProcessingStatus | null> {
     try {
-      // Get all jobs from the medical queue
-      const allJobs = await this.medicalQueue.getJobs([
+      // Get all jobs from the expense queue
+      const allJobs = await this.expenseQueue.getJobs([
         "waiting",
         "active",
         "completed",
@@ -109,14 +143,10 @@ export class DocumentService {
       // Calculate progress based on job progress
       const progressValue = typeof jobProgress === "number" ? jobProgress : 0;
       const progress = {
-        documentSummary: progressValue >= 25,
-        physicianMatching: progressValue >= 50,
-        facilityMatching: progressValue >= 65,
-        labParameterMatching: {
-          total: 1,
-          completed: progressValue >= 90 ? 1 : 0,
-          percentage: progressValue >= 90 ? 100 : 0,
-        },
+        fileClassification: progressValue >= 25,
+        dataExtraction: progressValue >= 50,
+        issueDetection: progressValue >= 75,
+        citationGeneration: progressValue >= 90,
       };
 
       // Collect results from the single job
@@ -124,11 +154,8 @@ export class DocumentService {
       if (documentJob.finishedOn && documentJob.returnvalue) {
         const jobResult = documentJob.returnvalue;
         if (jobResult.data) {
-          results.summary = jobResult.data.summary;
-          results.physicianMatch = jobResult.data.physicianMatch;
-          results.facilityMatch = jobResult.data.facilityMatch;
-          results.labMatches = jobResult.data.labMatches;
-          results.markdownContent = jobResult.data.markdownContent;
+          // Return the complete expense processing result
+          Object.assign(results, jobResult.data);
         }
       }
 
@@ -198,11 +225,11 @@ export class DocumentService {
     try {
       const { status, userId, limit, offset } = filters;
 
-      // Get jobs from medical processing queue
+      // Get jobs from expense processing queue
       const allStates = ["waiting", "active", "completed", "failed", "delayed"];
       const states = status ? [status] : allStates;
 
-      const jobs = await this.medicalQueue.getJobs(
+      const jobs = await this.expenseQueue.getJobs(
         states as any,
         offset,
         offset + limit - 1
@@ -227,7 +254,7 @@ export class DocumentService {
       ) as ProcessingStatus[];
 
       // Get total count
-      const totalCounts = await this.medicalQueue.getJobCounts();
+      const totalCounts = await this.expenseQueue.getJobCounts();
       const total = Object.values(totalCounts).reduce(
         (sum: number, count: number) => sum + count,
         0
@@ -246,7 +273,7 @@ export class DocumentService {
   async cancelJob(jobId: string): Promise<boolean> {
     try {
       // Get all jobs related to this jobId
-      const allJobs = await this.medicalQueue.getJobs(["waiting", "active"]);
+      const allJobs = await this.expenseQueue.getJobs(["waiting", "active"]);
       const relatedJobs = allJobs.filter((job) => job.data.jobId === jobId);
 
       if (relatedJobs.length === 0) {
@@ -270,10 +297,10 @@ export class DocumentService {
 
   async getProcessingMetrics(): Promise<ProcessingMetrics> {
     try {
-      const counts = await this.medicalQueue.getJobCounts();
+      const counts = await this.expenseQueue.getJobCounts();
 
       const queueHealth: ProcessingMetrics["queueHealth"] = {
-        [QUEUE_NAMES.MEDICAL_PROCESSING]: {
+        [QUEUE_NAMES.EXPENSE_PROCESSING]: {
           waiting: counts.waiting || 0,
           active: counts.active || 0,
           completed: counts.completed || 0,
@@ -289,7 +316,7 @@ export class DocumentService {
       const failedJobs = counts.failed || 0;
 
       // Calculate average processing time (simplified)
-      const recentCompletedJobs = await this.medicalQueue.getJobs(
+      const recentCompletedJobs = await this.expenseQueue.getJobs(
         ["completed"],
         0,
         99
@@ -327,8 +354,8 @@ export class DocumentService {
         timestamp: new Date().toISOString(),
         metrics,
         queues: {
-          [QUEUE_NAMES.MEDICAL_PROCESSING]:
-            await this.medicalQueue.getJobCounts(),
+          [QUEUE_NAMES.EXPENSE_PROCESSING]:
+            await this.expenseQueue.getJobCounts(),
         },
       };
     } catch (error) {

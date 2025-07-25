@@ -3,39 +3,35 @@ export interface DocumentProcessingData {
   filePath: string;
   fileName: string;
   userId: string;
-  language: string;
+  country: string;
+  icp: string;
   uploadedAt: Date;
 }
 
-export interface LabParameterData {
-  name: string;
-  result?: string;
-  units?: string;
-  range?: string;
-  comment?: string;
+export interface ExpenseLineItem {
+  description: string;
+  amount: string;
+  quantity?: number;
+  category?: string;
 }
 
 // Only one job data type needed now
-export type MedicalProcessingJobData = DocumentProcessingData;
+export type ExpenseProcessingJobData = DocumentProcessingData;
 
 export interface ProcessingStatus {
   jobId: string;
   status: 'waiting' | 'active' | 'completed' | 'failed' | 'delayed';
   progress: {
-    documentSummary: boolean;
-    physicianMatching: boolean;
-    facilityMatching: boolean;
-    labParameterMatching: {
-      total: number;
-      completed: number;
-      percentage: number;
-    };
+    fileClassification: boolean;
+    dataExtraction: boolean;
+    issueDetection: boolean;
+    citationGeneration: boolean;
   };
   results?: {
-    summary?: any;
-    physicianMatch?: any;
-    facilityMatch?: any;
-    labMatches?: any[];
+    classification?: any;
+    extraction?: any;
+    compliance?: any;
+    citations?: any;
   };
   error?: string;
   createdAt: Date;
@@ -51,7 +47,7 @@ export interface JobResult {
 
 // Single queue name
 export const QUEUE_NAMES = {
-  MEDICAL_PROCESSING: 'medical-processing',
+  EXPENSE_PROCESSING: 'expense-processing',
 } as const;
 
 // Job types for the single queue - now only one job type needed

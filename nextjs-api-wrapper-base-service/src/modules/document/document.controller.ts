@@ -39,8 +39,9 @@ export class DocumentController {
   @Post("process")
   @UseInterceptors(
     FileInterceptor("file", {
+      dest: "./uploads/temp", // Temporary upload directory
       limits: {
-        fileSize: 10 * 1024 * 1024, // 10MB limit
+        fileSize: 50 * 1024 * 1024, // 50MB limit (matching env config)
       },
       fileFilter: (req, file, cb) => {
         const allowedMimes = [
@@ -48,13 +49,14 @@ export class DocumentController {
           "image/png",
           "image/jpeg",
           "image/jpg",
+          "image/tiff",
         ];
         if (allowedMimes.includes(file.mimetype)) {
           cb(null, true);
         } else {
           cb(
             new Error(
-              "Invalid file type. Only PDF, PNG, JPG, and JPEG files are allowed."
+              "Invalid file type. Only PDF, PNG, JPG, JPEG, and TIFF files are allowed."
             ),
             false
           );
@@ -64,31 +66,37 @@ export class DocumentController {
   )
   @UsePipes(new ValidationPipe({ transform: true }))
   @ApiOperation({
-    summary: "Upload and process a medical document",
+    summary: "Upload and process an expense document",
     description:
-      "Upload a medical document (PDF, PNG, JPG, JPEG) for AI-powered processing. The document will be analyzed to extract patient information, physician details, medical facility information, and lab test results with parameter matching.",
+      "Upload an expense document (PDF, PNG, JPG, JPEG, TIFF) for AI-powered processing. The document will be analyzed to classify the expense type, extract structured data, detect compliance issues, and generate citations linking extracted data to source content.",
   })
   @ApiConsumes("multipart/form-data")
   @ApiBody({
-    description: "Medical document upload with processing parameters",
+    description: "Expense document upload with processing parameters",
     schema: {
       type: "object",
       properties: {
         file: {
           type: "string",
           format: "binary",
-          description: "Medical document file (PDF, PNG, JPG, JPEG, max 10MB)",
+          description: "Expense document file (PDF, PNG, JPG, JPEG, TIFF, max 10MB)",
         },
         userId: {
           type: "string",
           description: "User ID for processing context",
           example: "user123",
         },
-        language: {
+        country: {
           type: "string",
-          description: "Processing language (default: en)",
-          enum: ["en", "he"],
-          default: "en",
+          description: "Country for compliance requirements (default: Germany)",
+          example: "Germany",
+          default: "Germany",
+        },
+        icp: {
+          type: "string",
+          description: "ICP provider for compliance rules (default: Global People)",
+          example: "Global People",
+          default: "Global People",
         },
       },
       required: ["file", "userId"],
@@ -118,7 +126,7 @@ export class DocumentController {
       example: {
         success: false,
         message:
-          "Invalid file type. Only PDF, PNG, JPG, and JPEG files are allowed.",
+          "Invalid file type. Only PDF, PNG, JPG, JPEG, and TIFF files are allowed.",
         statusCode: 400,
         timestamp: "2025-01-15T10:30:00Z",
         path: "/documents/process",
@@ -171,7 +179,7 @@ export class DocumentController {
   })
   async processDocument(
     @UploadedFile() file: Express.Multer.File,
-    @Body() body: { userId: string; language?: string }
+    @Body() body: { userId: string; country?: string; icp?: string }
   ) {
     if (!file) {
       throw new HttpException("No file uploaded", HttpStatus.BAD_REQUEST);
@@ -185,17 +193,18 @@ export class DocumentController {
       const result = await this.documentService.queueDocumentProcessing({
         file,
         userId: body.userId,
-        language: body.language || "en",
+        country: body.country || "Germany",
+        icp: body.icp || "Global People",
       });
 
       return {
         success: true,
-        message: "Document processing job created successfully",
+        message: "Expense document processing job created successfully",
         data: result,
       };
     } catch (error) {
       throw new HttpException(
-        `Failed to queue document processing: ${error.message}`,
+        `Failed to queue expense document processing: ${error.message}`,
         HttpStatus.INTERNAL_SERVER_ERROR
       );
     }
@@ -205,7 +214,7 @@ export class DocumentController {
   @ApiOperation({
     summary: "Get processing status for a job",
     description:
-      "Retrieve the current processing status and progress for a specific job. Returns detailed information about each processing stage including document summary, physician matching, facility matching, and lab parameter matching progress.",
+      "Retrieve the current processing status and progress for a specific job. Returns detailed information about each processing stage including file classification, data extraction, issue detection, and citation generation progress.",
   })
   @ApiParam({
     name: "jobId",
@@ -223,21 +232,17 @@ export class DocumentController {
           jobId: "job_123456789",
           status: "active",
           progress: {
-            documentSummary: true,
-            physicianMatching: true,
-            facilityMatching: false,
-            labParameterMatching: {
-              total: 25,
-              completed: 15,
-              percentage: 60,
-            },
+            fileClassification: true,
+            dataExtraction: true,
+            issueDetection: false,
+            citationGeneration: false,
           },
           results: {
-            summary: {
-              /* document summary data */
+            classification: {
+              /* file classification data */
             },
-            physicianMatch: {
-              /* physician match data */
+            extraction: {
+              /* extracted expense data */
             },
           },
           createdAt: "2025-01-15T10:30:00Z",

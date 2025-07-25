@@ -1,15 +1,16 @@
 import { Module } from "@nestjs/common";
 import { BullModule } from "@nestjs/bull";
-import { MedicalProcessor } from "./processors/medical.processor";
+import { ExpenseProcessor } from "./processors/expense.processor";
 import { ProcessingService } from "./services/processing.service";
+import { ExpenseProcessingService } from "../../services/expense-processing.service";
 import { QUEUE_NAMES } from "../../types";
 import { DocumentModule } from "../document/document.module";
 
 @Module({
   imports: [
-    // Register single queue for all medical processing with extended timeouts
+    // Register single queue for all expense processing with extended timeouts
     BullModule.registerQueue({
-      name: QUEUE_NAMES.MEDICAL_PROCESSING,
+      name: QUEUE_NAMES.EXPENSE_PROCESSING,
       defaultJobOptions: {
         removeOnComplete: 10,
         removeOnFail: 5,
@@ -28,7 +29,7 @@ import { DocumentModule } from "../document/document.module";
     // Import Document services
     DocumentModule,
   ],
-  providers: [ProcessingService, MedicalProcessor],
-  exports: [ProcessingService],
+  providers: [ProcessingService, ExpenseProcessor, ExpenseProcessingService],
+  exports: [ProcessingService, ExpenseProcessingService],
 })
 export class ProcessingModule {}

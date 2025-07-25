@@ -31,10 +31,10 @@ async function bootstrap() {
   // Swagger documentation
   if (configService.get('ENABLE_SWAGGER') === 'true') {
     const config = new DocumentBuilder()
-      .setTitle('Medical Processing Service')
-      .setDescription('Background service for medical document processing with BullMQ')
+      .setTitle('Expense Processing Service')
+      .setDescription('AI-powered expense document processing service with multi-agent workflow')
       .setVersion('1.0')
-      .addTag('documents', 'Document processing endpoints')
+      .addTag('documents', 'Expense document processing endpoints')
       .addTag('jobs', 'Job management endpoints')
       .addTag('health', 'Health check endpoints')
       .build();
@@ -47,7 +47,7 @@ async function bootstrap() {
   const port = configService.get('PORT') || 3000;
   await app.listen(port);
   
-  console.log(`🚀 Medical Processing Service is running on: http://localhost:${port}`);
+  console.log(`🚀 Expense Processing Service is running on: http://localhost:${port}`);
   console.log(`📚 API Documentation available at: http://localhost:${port}/api/docs`);
 }
 

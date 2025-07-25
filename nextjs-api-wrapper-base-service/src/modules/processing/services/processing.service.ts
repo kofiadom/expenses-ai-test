@@ -8,7 +8,7 @@ export class ProcessingService {
   private readonly logger = new Logger(ProcessingService.name);
 
   constructor(
-    @InjectQueue(QUEUE_NAMES.MEDICAL_PROCESSING)
+    @InjectQueue(QUEUE_NAMES.EXPENSE_PROCESSING)
     private medicalQueue: Queue,
   ) {}
 
@@ -40,7 +40,7 @@ export class ProcessingService {
       });
 
       return {
-        [QUEUE_NAMES.MEDICAL_PROCESSING]: {
+        [QUEUE_NAMES.EXPENSE_PROCESSING]: {
           total: counts,
           byJobType: jobsByType,
           waiting: counts.waiting || 0,
@@ -117,7 +117,7 @@ export class ProcessingService {
   async getHealthStatus() {
     try {
       const stats = await this.getQueueStats();
-      const queueStats = stats[QUEUE_NAMES.MEDICAL_PROCESSING];
+      const queueStats = stats[QUEUE_NAMES.EXPENSE_PROCESSING];
       
       // Check if queue has too many failed jobs
       const totalJobs = queueStats.completed + queueStats.failed;
@@ -145,7 +145,7 @@ export class ProcessingService {
         status: overallHealthy ? 'healthy' : 'degraded',
         timestamp: new Date().toISOString(),
         queue: {
-          name: QUEUE_NAMES.MEDICAL_PROCESSING,
+          name: QUEUE_NAMES.EXPENSE_PROCESSING,
           healthy: isHealthy,
           failureRate: Math.round(failureRate * 100),
           counts: queueStats.total,
@@ -192,7 +192,7 @@ export class ProcessingService {
   async getQueueMetrics() {
     try {
       const stats = await this.getQueueStats();
-      const queueStats = stats[QUEUE_NAMES.MEDICAL_PROCESSING];
+      const queueStats = stats[QUEUE_NAMES.EXPENSE_PROCESSING];
       
       // Get recent completed jobs for timing analysis
       const recentJobs = await this.medicalQueue.getJobs(['completed'], 0, 99);
@@ -205,7 +205,7 @@ export class ProcessingService {
         : 0;
 
       return {
-        queueName: QUEUE_NAMES.MEDICAL_PROCESSING,
+        queueName: QUEUE_NAMES.EXPENSE_PROCESSING,
         totalJobs: Object.values(queueStats.total).reduce((sum: number, count: number) => sum + count, 0),
         averageProcessingTime,
         jobTypeBreakdown: queueStats.byJobType,
