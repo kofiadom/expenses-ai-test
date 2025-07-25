@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  # Medical Processing Service
+  medical-processing-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: medical-processing-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      # Redis Configuration (provided externally)
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_PASSWORD=${REDIS_PASSWORD:-}
+      - REDIS_DB=${REDIS_DB:-0}
+      # AI Service API Keys
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_KEY=${ANTHROPIC_KEY}
+      - LLAMAINDEX_API_KEY=${LLAMAINDEX_API_KEY}
+      # File Upload Configuration
+      - MAX_FILE_SIZE=${MAX_FILE_SIZE:-50MB}
+      - UPLOAD_PATH=/app/uploads
+      # Job Queue Configuration
+      - QUEUE_CONCURRENCY=${QUEUE_CONCURRENCY:-10}
+      - MAX_RETRY_ATTEMPTS=${MAX_RETRY_ATTEMPTS:-3}
+      - JOB_TIMEOUT=${JOB_TIMEOUT:-300000}
+      # Monitoring
+      - ENABLE_SWAGGER=${ENABLE_SWAGGER:-true}
+      - ENABLE_THROTTLING=${ENABLE_THROTTLING:-true}
+      - THROTTLE_TTL=${THROTTLE_TTL:-60}
+      - THROTTLE_LIMIT=${THROTTLE_LIMIT:-100}
+      # Webhook URLs (optional)
+      - WEBHOOK_URLS=${WEBHOOK_URLS:-}
+    volumes:
+      # Persistent storage for uploads and results
+      - uploads_data:/app/uploads
+      - results_data:/app/results
+      - logs_data:/app/logs
+    healthcheck:
+      test: ["CMD", "node", "/app/healthcheck.js"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    networks:
+      - medical-network
+
+volumes:
+  uploads_data:
+    driver: local
+  results_data:
+    driver: local
+  logs_data:
+    driver: local
+
+networks:
+  medical-network:
+    driver: bridge
