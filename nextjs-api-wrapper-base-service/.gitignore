@@ -11,8 +11,6 @@ google_credentials.json
 models.yaml
 
 # Data and model files
-data
-/results
 eng.traineddata
 scripts
 

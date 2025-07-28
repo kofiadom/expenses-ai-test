@@ -1,0 +1,348 @@
+{
+  "image_quality_assessment": {
+    "image_path": "uploads\\user172_multi_page_receipt_TS.pdf",
+    "assessment_method": "LLM",
+    "model_used": "claude-3-5-sonnet-20241022",
+    "timestamp": "2025-07-25T16:18:03.552Z",
+    "quality_score": 82,
+    "quality_level": "excellent",
+    "suitable_for_extraction": true,
+    "blur_detection": {
+      "detected": true,
+      "severity_level": "low",
+      "confidence_score": 0.92,
+      "quantitative_measure": 0.15,
+      "description": "Slight motion blur detected in bottom section of document",
+      "recommendation": "Consider using a document scanner or stabilized camera setup"
+    },
+    "contrast_assessment": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.95,
+      "quantitative_measure": 0.85,
+      "description": "Good contrast between text and background",
+      "recommendation": "No action needed - contrast levels are sufficient for OCR"
+    },
+    "glare_identification": {
+      "detected": true,
+      "severity_level": "medium",
+      "confidence_score": 0.88,
+      "quantitative_measure": 0.35,
+      "description": "Moderate glare detected in upper right corner",
+      "recommendation": "Retake photo under diffused lighting conditions"
+    },
+    "water_stains": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.98,
+      "quantitative_measure": 0,
+      "description": "No water damage or stains detected",
+      "recommendation": "No action needed"
+    },
+    "tears_or_folds": {
+      "detected": true,
+      "severity_level": "low",
+      "confidence_score": 0.94,
+      "quantitative_measure": 0.12,
+      "description": "Minor fold detected in bottom right corner",
+      "recommendation": "Flatten document before scanning"
+    },
+    "cut_off_detection": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.96,
+      "quantitative_measure": 0,
+      "description": "All document edges are visible and complete",
+      "recommendation": "No action needed"
+    },
+    "missing_sections": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.97,
+      "quantitative_measure": 0,
+      "description": "All sections of document are present",
+      "recommendation": "No action needed"
+    },
+    "obstructions": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.95,
+      "quantitative_measure": 0,
+      "description": "No obstructions detected in document area",
+      "recommendation": "No action needed"
+    },
+    "overall_quality_score": 8.2
+  },
+  "classification": {
+    "is_expense": true,
+    "expense_type": "telecommunications",
+    "language": "Italian",
+    "language_confidence": 95,
+    "document_location": "Roma, Italy",
+    "expected_location": "Germany",
+    "location_match": false,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 90,
+    "reasoning": "This is clearly an internet service bill from Sky Italia with clear payment requirements, monthly subscription details, and complete transaction information. The document contains multiple required expense elements including precise amounts, tax details, and payment method information.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier: Sky Italia Srl",
+        "consumerRecipient: MARIA PILAR FOCANTI",
+        "transactionAmount: 31,84€",
+        "transactionDate: 01/02/2024",
+        "invoiceReceiptNumber: 4500143250",
+        "taxInformation: IVA 22%, 6,18€",
+        "paymentMethod: addebito su cc/bancario ****4647",
+        "itemDescriptionLineItems: Internet subscription details with breakdown"
+      ],
+      "fields_missing": [],
+      "total_fields_found": 8,
+      "expense_identification_reasoning": "Document matches all 8 schema fields: contains supplier details (Sky Italia), recipient info (Maria Pilar Focanti), clear transaction amount (31,84€), invoice date (01/02/2024), invoice number (4500143250), detailed tax breakdown (22% IVA), payment method (bank account ending 4647), and itemized service description. The document is a formal telecommunication service invoice with complete expense documentation."
+    }
+  },
+  "extraction": {
+    "customer_name": "MARIA PILAR FOCANTI",
+    "customer_name_on_invoice": "MARIA PILAR FOCANTI",
+    "customer_address_on_invoice": "VIA TULLIO MARTELLO 2, 00191 ROMA RM",
+    "customer_vat_number_on_invoice": null,
+    "currency": "EUR",
+    "amount": 31.84,
+    "receipt_type": "Invoice",
+    "receipt_quality": "Clear and readable",
+    "invoice_serial_number": "4500143250",
+    "invoice_date": "2024-02-01",
+    "service_date": "2024-02-01",
+    "net_amount": 28.07,
+    "tax_rate": 22,
+    "vat_amount": 6.18,
+    "worker_name": "MARIA PILAR FOCANTI",
+    "worker_address": "VIA TULLIO MARTELLO 2, 00191 ROMA RM",
+    "supplier_tax_id": null,
+    "expense_description": "Internet Subscription",
+    "supplier_name": "Sky Italia Srl",
+    "supplier_address": "Via Monte Penice, 7 - 20138 Milano",
+    "supplier_details": {
+      "registration": "REA 1726765",
+      "fiscal_code": "04619241005",
+      "capital": "261.507.000,00"
+    },
+    "customer_id": "11217708",
+    "fiscal_code": "FCNMPL75R64H501W",
+    "phone_number": "0693571001",
+    "migration_code": "86106125573270111T",
+    "billing_frequency": "MONTHLY",
+    "billing_period": "February 2024",
+    "payment_method": "Bank account debit ****4647",
+    "payment_due_date": "2024-02-28",
+    "line_items": [
+      {
+        "description": "Mese parziale Ultra Wifi",
+        "period": "2024-01-18 to 2024-01-31",
+        "amount": 1.35,
+        "tax_rate": 22
+      },
+      {
+        "description": "Super Internet 200",
+        "period": "2024-02-01 to 2024-02-29",
+        "amount": 29.9,
+        "tax_rate": 22
+      },
+      {
+        "description": "Ultra Wifi",
+        "period": "2024-02-01 to 2024-02-29",
+        "amount": 3,
+        "tax_rate": 22
+      }
+    ],
+    "previous_credit": -2.41,
+    "total_before_tax": 28.07,
+    "total_tax": 6.18,
+    "total_amount": 34.25,
+    "final_amount": 31.84
+  },
+  "compliance": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 4,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_name_on_invoice",
+          "description": "Invoice is in worker's name instead of required company name",
+          "recommendation": "Request new invoice with 'Global People DE GmbH' as customer name",
+          "knowledge_base_reference": "Must show Global People DE GmbH as customer"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_address_on_invoice",
+          "description": "Invoice shows worker's address instead of company address",
+          "recommendation": "Request new invoice with correct company address: Taunusanlage 8, 60329 Frankfurt, Germany",
+          "knowledge_base_reference": "Must show Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_vat_number_on_invoice",
+          "description": "Missing company VAT number on invoice",
+          "recommendation": "Request new invoice including Global People's VAT number DE356366640",
+          "knowledge_base_reference": "Must show DE356366640"
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "amount",
+          "description": "Internet expenses require tax gross-up calculation",
+          "recommendation": "Apply tax-free rate of 25% of invoice amount, remaining amount should be grossed up",
+          "knowledge_base_reference": "Tax-free at flat rate of 25% of invoice"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "Major compliance issues found with customer information on invoice. Invoice must be reissued under Global People DE GmbH with correct company details. Internet expenses are partially tax-exempt (25%) with remainder requiring gross-up."
+    },
+    "technical_details": {
+      "content_type": "expense_receipt",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "telecommunications",
+      "issues_count": 4
+    }
+  },
+  "citations": {
+    "citations": {
+      "customer_name": {
+        "field_citation": {
+          "source_text": "Customer Name on Invoice",
+          "confidence": 0.9,
+          "source_location": "requirements",
+          "context": "Local Employer name as customer on supplier invoice",
+          "match_type": "exact"
+        },
+        "value_citation": {
+          "source_text": "MARIA PILAR FOCANTI",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "MARIA PILAR FOCANTI\n\nVIA TULLIO MARTELLO 2",
+          "match_type": "exact"
+        }
+      },
+      "invoice_serial_number": {
+        "field_citation": {
+          "source_text": "Fattura n°",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Fattura n° | 4500143250",
+          "match_type": "exact"
+        },
+        "value_citation": {
+          "source_text": "4500143250",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Fattura n° | 4500143250",
+          "match_type": "exact"
+        }
+      },
+      "amount": {
+        "field_citation": {
+          "source_text": "Totale da pagare",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Totale da pagare<br/>31,84€",
+          "match_type": "exact"
+        },
+        "value_citation": {
+          "source_text": "31,84€",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Totale da pagare<br/>31,84€",
+          "match_type": "exact"
+        }
+      },
+      "supplier_name": {
+        "field_citation": {
+          "source_text": "Sky Italia Srl",
+          "confidence": 0.9,
+          "source_location": "markdown",
+          "context": "Sky Italia Srl, società con socio unico",
+          "match_type": "exact"
+        },
+        "value_citation": {
+          "source_text": "Sky Italia Srl",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Sky Italia Srl, società con socio unico",
+          "match_type": "exact"
+        }
+      },
+      "tax_rate": {
+        "field_citation": {
+          "source_text": "Aliquota IVA",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "RIEPILOGO IVA | Imponibile IVA | Aliquota IVA",
+          "match_type": "exact"
+        },
+        "value_citation": {
+          "source_text": "22%",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Aliquota IVA | 22%",
+          "match_type": "exact"
+        }
+      }
+    },
+    "metadata": {
+      "total_fields_analyzed": 5,
+      "fields_with_field_citations": 5,
+      "fields_with_value_citations": 5,
+      "average_confidence": 0.96
+    }
+  },
+  "timing": {
+    "phase_timings": {
+      "image_quality_assessment_minutes": "0.15",
+      "file_classification_minutes": "0.15",
+      "data_extraction_minutes": "0.22",
+      "issue_detection_minutes": "0.18",
+      "citation_generation_minutes": "0.20"
+    },
+    "agent_performance": {
+      "image_quality_assessment": {
+        "start_time": "2025-07-25T16:17:54.337Z",
+        "end_time": "2025-07-25T16:18:03.551Z",
+        "duration_minutes": "0.15",
+        "model_used": "claude-3-5-sonnet-20241022"
+      },
+      "file_classification": {
+        "start_time": "2025-07-25T16:18:03.552Z",
+        "end_time": "2025-07-25T16:18:12.465Z",
+        "duration_minutes": "0.15",
+        "model_used": "claude-3-5-sonnet-20241022"
+      },
+      "data_extraction": {
+        "start_time": "2025-07-25T16:18:12.465Z",
+        "end_time": "2025-07-25T16:18:25.763Z",
+        "duration_minutes": "0.22",
+        "model_used": "claude-3-5-sonnet-20241022"
+      },
+      "issue_detection": {
+        "start_time": "2025-07-25T16:18:25.764Z",
+        "end_time": "2025-07-25T16:18:36.785Z",
+        "duration_minutes": "0.18",
+        "model_used": "claude-3-5-sonnet-20241022"
+      },
+      "citation_generation": {
+        "start_time": "2025-07-25T16:18:36.785Z",
+        "end_time": "2025-07-25T16:18:48.997Z",
+        "duration_minutes": "0.20",
+        "model_used": "claude-3-5-sonnet-20241022"
+      }
+    },
+    "total_processing_time_minutes": "0.91"
+  },
+  "metadata": {
+    "filename": "multi_page_receipt_TS.pdf",
+    "processing_time": 54662,
+    "country": "Germany",
+    "icp": "Global People",
+    "processed_at": "2025-07-25T16:18:48.998Z"
+  }
+}

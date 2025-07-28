@@ -1,0 +1,355 @@
+{
+  "image_quality_assessment": {
+    "image_path": "uploads\\user173_MultiPageInvoice.pdf",
+    "assessment_method": "LLM",
+    "model_used": "claude-3-5-sonnet-20241022",
+    "timestamp": "2025-07-25T16:20:51.696Z",
+    "quality_score": 92,
+    "quality_level": "excellent",
+    "suitable_for_extraction": true,
+    "blur_detection": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.95,
+      "quantitative_measure": 0.02,
+      "description": "No significant blur detected in the PDF document",
+      "recommendation": "No action needed - document clarity is sufficient"
+    },
+    "contrast_assessment": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.92,
+      "quantitative_measure": 0.85,
+      "description": "Good contrast between text and background",
+      "recommendation": "No improvement needed for contrast"
+    },
+    "glare_identification": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.9,
+      "quantitative_measure": 0.05,
+      "description": "No significant glare issues detected",
+      "recommendation": "No action needed for glare reduction"
+    },
+    "water_stains": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.98,
+      "quantitative_measure": 0,
+      "description": "No water damage or stains detected",
+      "recommendation": "No restoration needed"
+    },
+    "tears_or_folds": {
+      "detected": true,
+      "severity_level": "low",
+      "confidence_score": 0.88,
+      "quantitative_measure": 0.15,
+      "description": "Minor fold marks detected but not affecting readability",
+      "recommendation": "Document is usable as-is, but consider flattening for optimal results"
+    },
+    "cut_off_detection": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.95,
+      "quantitative_measure": 0,
+      "description": "All document edges are present and complete",
+      "recommendation": "No action needed - full document visible"
+    },
+    "missing_sections": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.96,
+      "quantitative_measure": 0,
+      "description": "All sections of the document are present",
+      "recommendation": "No action needed - document is complete"
+    },
+    "obstructions": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.94,
+      "quantitative_measure": 0,
+      "description": "No obstructions detected in the document",
+      "recommendation": "No action needed - clear view of all content"
+    },
+    "overall_quality_score": 9.2
+  },
+  "classification": {
+    "is_expense": true,
+    "expense_type": "training",
+    "language": "English",
+    "language_confidence": 98,
+    "document_location": "San Francisco, CA, United States",
+    "expected_location": "Germany",
+    "location_match": false,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 95,
+    "reasoning": "This is clearly an invoice for accounting software training and customization services. It contains detailed line items for training sessions, support hours, and software subscriptions. The document contains all essential expense elements including invoice number, dates, amounts, and complete supplier/recipient information.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier (Metalegal Finance, with address and contact details)",
+        "consumerRecipient (Abstractors and Design Co., Ronald Davis)",
+        "transactionAmount ($5,715.00 total)",
+        "transactionDate (12 March 2024)",
+        "invoiceReceiptNumber (00000135)",
+        "itemDescriptionLineItems (detailed breakdown of services)",
+        "paymentMethod (implied by payment terms: 14 days)",
+        "taxInformation (included in package descriptions)"
+      ],
+      "fields_missing": [],
+      "total_fields_found": 8,
+      "expense_identification_reasoning": "Document contains all 8 schema fields: clear supplier details, recipient information, transaction amount, date, invoice number, detailed line items, payment terms, and tax-inclusive pricing. The presence of these elements, particularly the payment terms and total amount due, confirms this as a valid expense document rather than just a quote or estimate."
+    }
+  },
+  "extraction": {
+    "customer_name": "Ronald Davis",
+    "customer_name_on_invoice": "Abstractors and Design Co.",
+    "customer_address_on_invoice": "Suite 8, 611 Maine St, San Francisco CA 94105",
+    "currency": "USD",
+    "amount": 5715,
+    "receipt_type": "invoice",
+    "invoice_serial_number": "00000135",
+    "invoice_date": "2024-03-12",
+    "service_date": null,
+    "net_amount": null,
+    "tax_rate": null,
+    "vat_amount": null,
+    "worker_name": null,
+    "worker_address": null,
+    "supplier_name": "Meta Legal Finance",
+    "supplier_address": "154-164 The Embarcadero, San Francisco, CA 94105",
+    "supplier_phone": "(1) 555-123-1234",
+    "supplier_email": "admin@metalegalfinance.com",
+    "supplier_tax_id": null,
+    "expense_description": "Accounting software packages, training, and customization services",
+    "purchase_order_number": "F0016",
+    "payment_terms": "14 days",
+    "payment_due_date": "2024-03-26",
+    "line_items": [
+      {
+        "description": "ACP101 Accounting Package - Annual Subscription to Premier Version with Tax, Inventory and Payroll Plugins",
+        "quantity": 3,
+        "amount": 1350
+      },
+      {
+        "description": "ACP101T Online Training - Hours of Training in Premier Version - Interactive Demos with Q&A Sessions",
+        "quantity": 4.5,
+        "amount": 495
+      },
+      {
+        "description": "ACP101S Standard Support - Initial Hours allocated for access to email and phone support for Premier Version",
+        "quantity": 10,
+        "amount": 1100
+      },
+      {
+        "description": "ACP101C Screen Customization - Hours spent customizing screens in Premier Version for client requirements",
+        "quantity": 6,
+        "amount": 660
+      },
+      {
+        "description": "ACP101R Report Customization - Hours spent customizing reports in Premier Version for client requirements",
+        "quantity": 4.5,
+        "amount": 495
+      },
+      {
+        "description": "ACP101I System Imports - Hours spent importing customer records into Premier Version",
+        "quantity": 2,
+        "amount": 220
+      },
+      {
+        "description": "ACP100 Accounting Package - Annual Subscription to Standard Version of Accounts System",
+        "quantity": 3,
+        "amount": 900
+      },
+      {
+        "description": "ACP100T Online Training - Hours of Training in Standard Version - Interactive Demos with Q&A Sessions",
+        "quantity": 4.5,
+        "amount": 495
+      }
+    ]
+  },
+  "compliance": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 4,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_name_on_invoice",
+          "description": "Incorrect customer name on invoice. For Global People in Germany, the invoice must show the correct legal entity name.",
+          "recommendation": "Request new invoice with correct customer name: 'Global People DE GmbH'",
+          "knowledge_base_reference": "Must show Global People DE GmbH as customer"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_address_on_invoice",
+          "description": "Incorrect customer address on invoice. For Global People in Germany, the invoice must show the correct legal address.",
+          "recommendation": "Request new invoice with correct address: 'Taunusanlage 8, 60329 Frankfurt, Germany'",
+          "knowledge_base_reference": "Must show Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "currency",
+          "description": "Invoice is in USD instead of EUR. For German expenses, currency must be in EUR or include clear exchange rate.",
+          "recommendation": "Request new invoice in EUR or ensure clear exchange rate is provided",
+          "knowledge_base_reference": "Same currency with clear exchange rate"
+        },
+        {
+          "issue_type": "Standards & Compliance | Follow-up Action Identified",
+          "field": "approval",
+          "description": "Training expenses require direct manager approval for Global People",
+          "recommendation": "Obtain approval from direct manager before proceeding with reimbursement",
+          "knowledge_base_reference": "Receipt alone is not enough - you must get approval from your direct manager"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "Multiple compliance issues identified: incorrect customer details, currency issues, and missing manager approval. Invoice must be reissued with correct Global People DE GmbH entity details and address. Training expenses require explicit manager approval per policy."
+    },
+    "technical_details": {
+      "content_type": "expense_receipt",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "training",
+      "issues_count": 4
+    }
+  },
+  "citations": {
+    "citations": {
+      "invoice_serial_number": {
+        "field_citation": {
+          "source_text": "Invoice No:",
+          "confidence": 0.9,
+          "source_location": "markdown",
+          "context": "Invoice No: 00000135",
+          "match_type": "fuzzy"
+        },
+        "value_citation": {
+          "source_text": "00000135",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Invoice No: 00000135",
+          "match_type": "exact"
+        }
+      },
+      "invoice_date": {
+        "field_citation": {
+          "source_text": "Invoice Date:",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Invoice Date: 12 March 2024",
+          "match_type": "exact"
+        },
+        "value_citation": {
+          "source_text": "12 March 2024",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Invoice Date: 12 March 2024",
+          "match_type": "exact"
+        }
+      },
+      "customer_name_on_invoice": {
+        "field_citation": {
+          "source_text": "Customer Name on Invoice",
+          "confidence": 1,
+          "source_location": "requirements",
+          "context": "Local Employer name as customer on supplier invoice",
+          "match_type": "exact"
+        },
+        "value_citation": {
+          "source_text": "Abstractors and Design Co.",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Abstractors and Design Co.\nAttn: Ronald Davis",
+          "match_type": "exact"
+        }
+      },
+      "amount": {
+        "field_citation": {
+          "source_text": "Total:",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Total: $5,715.00",
+          "match_type": "exact"
+        },
+        "value_citation": {
+          "source_text": "$5,715.00",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Total: $5,715.00",
+          "match_type": "exact"
+        }
+      },
+      "supplier_name": {
+        "field_citation": {
+          "source_text": "Meta Legal Finance",
+          "confidence": 0.8,
+          "source_location": "markdown",
+          "context": "admin@metalegalfinance.com",
+          "match_type": "fuzzy"
+        },
+        "value_citation": {
+          "source_text": "Meta Legal Finance",
+          "confidence": 0.8,
+          "source_location": "markdown",
+          "context": "admin@metalegalfinance.com",
+          "match_type": "contextual"
+        }
+      }
+    },
+    "metadata": {
+      "total_fields_analyzed": 5,
+      "fields_with_field_citations": 5,
+      "fields_with_value_citations": 5,
+      "average_confidence": 0.94
+    }
+  },
+  "timing": {
+    "phase_timings": {
+      "image_quality_assessment_minutes": "0.15",
+      "file_classification_minutes": "0.13",
+      "data_extraction_minutes": "0.17",
+      "issue_detection_minutes": "0.19",
+      "citation_generation_minutes": "0.18"
+    },
+    "agent_performance": {
+      "image_quality_assessment": {
+        "start_time": "2025-07-25T16:20:42.616Z",
+        "end_time": "2025-07-25T16:20:51.695Z",
+        "duration_minutes": "0.15",
+        "model_used": "claude-3-5-sonnet-20241022"
+      },
+      "file_classification": {
+        "start_time": "2025-07-25T16:20:51.696Z",
+        "end_time": "2025-07-25T16:20:59.772Z",
+        "duration_minutes": "0.13",
+        "model_used": "claude-3-5-sonnet-20241022"
+      },
+      "data_extraction": {
+        "start_time": "2025-07-25T16:20:59.773Z",
+        "end_time": "2025-07-25T16:21:10.069Z",
+        "duration_minutes": "0.17",
+        "model_used": "claude-3-5-sonnet-20241022"
+      },
+      "issue_detection": {
+        "start_time": "2025-07-25T16:21:10.069Z",
+        "end_time": "2025-07-25T16:21:21.527Z",
+        "duration_minutes": "0.19",
+        "model_used": "claude-3-5-sonnet-20241022"
+      },
+      "citation_generation": {
+        "start_time": "2025-07-25T16:21:21.528Z",
+        "end_time": "2025-07-25T16:21:32.147Z",
+        "duration_minutes": "0.18",
+        "model_used": "claude-3-5-sonnet-20241022"
+      }
+    },
+    "total_processing_time_minutes": "0.83"
+  },
+  "metadata": {
+    "filename": "MultiPageInvoice.pdf",
+    "processing_time": 49532,
+    "country": "Germany",
+    "icp": "Global People",
+    "processed_at": "2025-07-25T16:21:32.147Z"
+  }
+}

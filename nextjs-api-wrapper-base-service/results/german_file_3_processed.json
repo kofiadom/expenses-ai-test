@@ -1,0 +1,369 @@
+{
+  "image_quality_assessment": {
+    "image_path": "uploads\\user174_german_file_3.png",
+    "assessment_method": "LLM",
+    "model_used": "claude-3-5-sonnet-20241022",
+    "timestamp": "2025-07-25T16:23:52.695Z",
+    "quality_score": 75,
+    "quality_level": "good",
+    "suitable_for_extraction": true,
+    "blur_detection": {
+      "detected": true,
+      "severity_level": "medium",
+      "confidence_score": 0.85,
+      "quantitative_measure": 3.2,
+      "description": "Moderate motion blur detected, affecting text clarity in some areas",
+      "recommendation": "Retake photo with steady hand or use document scanner"
+    },
+    "contrast_assessment": {
+      "detected": true,
+      "severity_level": "low",
+      "confidence_score": 0.92,
+      "quantitative_measure": 0.82,
+      "description": "Good contrast between text and background, minor variations in some areas",
+      "recommendation": "No action needed, contrast is sufficient for OCR"
+    },
+    "glare_identification": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.95,
+      "quantitative_measure": 0.1,
+      "description": "No significant glare or reflective issues detected",
+      "recommendation": "Current lighting conditions are adequate"
+    },
+    "water_stains": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.98,
+      "quantitative_measure": 0,
+      "description": "No water damage or stains visible",
+      "recommendation": "No action needed"
+    },
+    "tears_or_folds": {
+      "detected": true,
+      "severity_level": "medium",
+      "confidence_score": 0.88,
+      "quantitative_measure": 15.5,
+      "description": "Minor creases detected across document, affecting approximately 15% of surface",
+      "recommendation": "Try to flatten document before scanning"
+    },
+    "cut_off_detection": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.96,
+      "quantitative_measure": 0,
+      "description": "All document edges are visible and complete",
+      "recommendation": "No action needed"
+    },
+    "missing_sections": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.97,
+      "quantitative_measure": 0,
+      "description": "Document appears complete with no missing sections",
+      "recommendation": "No action needed"
+    },
+    "obstructions": {
+      "detected": false,
+      "severity_level": "low",
+      "confidence_score": 0.94,
+      "quantitative_measure": 0,
+      "description": "No obstructions or shadows detected in image",
+      "recommendation": "No action needed"
+    },
+    "overall_quality_score": 7.5
+  },
+  "classification": {
+    "is_expense": true,
+    "expense_type": "meals",
+    "language": "German",
+    "language_confidence": 90,
+    "document_location": "Berlin, Germany",
+    "expected_location": "Germany",
+    "location_match": true,
+    "error_type": null,
+    "error_message": null,
+    "classification_confidence": 95,
+    "reasoning": "This is clearly a restaurant receipt from The Sushi Club in Berlin. It contains all key elements of a meal expense including itemized food/drinks, total amount, date, and location. The document is primarily in German ('Rechnung' = invoice) with some English phrases.",
+    "schema_field_analysis": {
+      "fields_found": [
+        "supplier",
+        "transactionAmount",
+        "transactionDate",
+        "itemDescriptionLineItems",
+        "taxInformation"
+      ],
+      "fields_missing": [
+        "consumerRecipient",
+        "invoiceReceiptNumber",
+        "paymentMethod",
+        "icpRequirements"
+      ],
+      "total_fields_found": 5,
+      "expense_identification_reasoning": "Document contains 5 required schema fields: 1) supplier (The Sushi Club with full address), 2) transactionAmount (€64.40 total), 3) transactionDate (5-2-2019 23:10:54), 4) itemDescriptionLineItems (detailed food/drink items with prices), 5) taxInformation (implied in total amount per German requirements). The presence of these fields, particularly the detailed items and final amount, clearly identifies this as a completed transaction rather than just a menu or estimate."
+    }
+  },
+  "extraction": {
+    "customer_name_on_invoice": null,
+    "customer_address_on_invoice": null,
+    "customer_vat_number_on_invoice": null,
+    "currency": "EUR",
+    "amount": 64.4,
+    "receipt_type": "Restaurant Receipt",
+    "receipt_quality": "Clear and readable",
+    "invoice_serial_number": "L0001",
+    "invoice_date": "2019-02-05",
+    "service_date": "2019-02-05",
+    "net_amount": null,
+    "tax_rate": null,
+    "vat_amount": null,
+    "worker_name": null,
+    "worker_address": null,
+    "supplier_tax_id": null,
+    "expense_description": "Restaurant meal at The Sushi Club",
+    "supplier_name": "THE SUSHI CLUB",
+    "supplier_address": "Mohrenstr.42, 10117 Berlin",
+    "supplier_phone": "+49 30 23 916 036",
+    "supplier_email": "info@thesushiclub.de",
+    "supplier_website": "www.TheSushiClub.de",
+    "table_number": "24",
+    "transaction_time": "23:10:54",
+    "server_id": "FRÜH",
+    "line_items": [
+      {
+        "description": "Miso Soup",
+        "quantity": 1,
+        "unit_price": 3.9,
+        "total_amount": 3.9
+      },
+      {
+        "description": "Rock Shrimps",
+        "quantity": 1,
+        "unit_price": 11.5,
+        "total_amount": 11.5
+      },
+      {
+        "description": "Tuna Tataki",
+        "quantity": 1,
+        "unit_price": 12,
+        "total_amount": 12
+      },
+      {
+        "description": "Sake Tataki",
+        "quantity": 1,
+        "unit_price": 10,
+        "total_amount": 10
+      },
+      {
+        "description": "Cola Light",
+        "quantity": 2,
+        "unit_price": 3,
+        "total_amount": 6
+      },
+      {
+        "description": "Dessert",
+        "quantity": 1,
+        "unit_price": 4.5,
+        "total_amount": 4.5
+      },
+      {
+        "description": "Küche Divers",
+        "quantity": 1,
+        "unit_price": 12,
+        "total_amount": 12
+      },
+      {
+        "description": "Ice & Sorbet",
+        "quantity": 1,
+        "unit_price": 4.5,
+        "total_amount": 4.5
+      }
+    ],
+    "total_items": 9,
+    "payment_notes": "TIP IS NOT INCLUDED"
+  },
+  "compliance": {
+    "validation_result": {
+      "is_valid": false,
+      "issues_count": 4,
+      "issues": [
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_name_on_invoice",
+          "description": "Missing mandatory Global People DE GmbH as customer name on invoice",
+          "recommendation": "Request new invoice with Global People DE GmbH as customer name",
+          "knowledge_base_reference": "Must show Global People DE GmbH as customer"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_address_on_invoice",
+          "description": "Missing mandatory Global People address on invoice",
+          "recommendation": "Request new invoice with address: Taunusanlage 8, 60329 Frankfurt, Germany",
+          "knowledge_base_reference": "Must show Taunusanlage 8, 60329 Frankfurt, Germany"
+        },
+        {
+          "issue_type": "Standards & Compliance | Fix Identified",
+          "field": "customer_vat_number_on_invoice",
+          "description": "Missing mandatory Global People VAT number on invoice",
+          "recommendation": "Request new invoice with VAT number: DE356366640",
+          "knowledge_base_reference": "Must show DE356366640"
+        },
+        {
+          "issue_type": "Standards & Compliance | Gross-up Identified",
+          "field": "expense_type",
+          "description": "Personal meals are not tax exempt for Global People",
+          "recommendation": "This expense needs to be grossed up as it's a personal meal outside of business travel",
+          "knowledge_base_reference": "Not tax exempt (outside business travel)"
+        }
+      ],
+      "corrected_receipt": null,
+      "compliance_summary": "Receipt fails multiple mandatory requirements for Global People in Germany. Missing required company details (name, address, VAT number) and meal expenses are subject to taxation. New compliant invoice needed with proper company information and expense must be grossed up for tax purposes."
+    },
+    "technical_details": {
+      "content_type": "expense_receipt",
+      "country": "Germany",
+      "icp": "Global People",
+      "receipt_type": "meals",
+      "issues_count": 4
+    }
+  },
+  "citations": {
+    "citations": {
+      "supplier_name": {
+        "field_citation": {
+          "source_text": "THE SUSHI CLUB",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "THE SUSHI CLUB\nMohrenstr.42",
+          "match_type": "exact"
+        },
+        "value_citation": {
+          "source_text": "THE SUSHI CLUB",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "THE SUSHI CLUB\nMohrenstr.42",
+          "match_type": "exact"
+        }
+      },
+      "supplier_address": {
+        "field_citation": {
+          "source_text": "Mohrenstr.42\n10117 Berlin",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "THE SUSHI CLUB\nMohrenstr.42\n10117 Berlin",
+          "match_type": "exact"
+        },
+        "value_citation": {
+          "source_text": "Mohrenstr.42\n10117 Berlin",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "THE SUSHI CLUB\nMohrenstr.42\n10117 Berlin",
+          "match_type": "exact"
+        }
+      },
+      "amount": {
+        "field_citation": {
+          "source_text": "Total",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "9 Total                          € 64,40",
+          "match_type": "exact"
+        },
+        "value_citation": {
+          "source_text": "€ 64,40",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "9 Total                          € 64,40",
+          "match_type": "exact"
+        }
+      },
+      "invoice_date": {
+        "field_citation": {
+          "source_text": "Dienstag  5-2-2019",
+          "confidence": 0.9,
+          "source_location": "markdown",
+          "context": "Dienstag  5-2-2019 23:10:54",
+          "match_type": "fuzzy"
+        },
+        "value_citation": {
+          "source_text": "5-2-2019",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "Dienstag  5-2-2019 23:10:54",
+          "match_type": "exact"
+        }
+      },
+      "invoice_serial_number": {
+        "field_citation": {
+          "source_text": "L0001",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "L0001 FRÜH",
+          "match_type": "exact"
+        },
+        "value_citation": {
+          "source_text": "L0001",
+          "confidence": 1,
+          "source_location": "markdown",
+          "context": "L0001 FRÜH",
+          "match_type": "exact"
+        }
+      }
+    },
+    "metadata": {
+      "total_fields_analyzed": 5,
+      "fields_with_field_citations": 5,
+      "fields_with_value_citations": 5,
+      "average_confidence": 0.98
+    }
+  },
+  "timing": {
+    "phase_timings": {
+      "image_quality_assessment_minutes": "0.17",
+      "file_classification_minutes": "0.13",
+      "data_extraction_minutes": "0.17",
+      "issue_detection_minutes": "0.17",
+      "citation_generation_minutes": "0.18"
+    },
+    "agent_performance": {
+      "image_quality_assessment": {
+        "start_time": "2025-07-25T16:23:42.651Z",
+        "end_time": "2025-07-25T16:23:52.694Z",
+        "duration_minutes": "0.17",
+        "model_used": "claude-3-5-sonnet-20241022"
+      },
+      "file_classification": {
+        "start_time": "2025-07-25T16:23:52.696Z",
+        "end_time": "2025-07-25T16:24:00.394Z",
+        "duration_minutes": "0.13",
+        "model_used": "claude-3-5-sonnet-20241022"
+      },
+      "data_extraction": {
+        "start_time": "2025-07-25T16:24:00.395Z",
+        "end_time": "2025-07-25T16:24:10.805Z",
+        "duration_minutes": "0.17",
+        "model_used": "claude-3-5-sonnet-20241022"
+      },
+      "issue_detection": {
+        "start_time": "2025-07-25T16:24:10.805Z",
+        "end_time": "2025-07-25T16:24:20.791Z",
+        "duration_minutes": "0.17",
+        "model_used": "claude-3-5-sonnet-20241022"
+      },
+      "citation_generation": {
+        "start_time": "2025-07-25T16:24:20.791Z",
+        "end_time": "2025-07-25T16:24:31.756Z",
+        "duration_minutes": "0.18",
+        "model_used": "claude-3-5-sonnet-20241022"
+      }
+    },
+    "total_processing_time_minutes": "0.82"
+  },
+  "metadata": {
+    "filename": "german_file_3.png",
+    "processing_time": 49105,
+    "country": "Germany",
+    "icp": "Global People",
+    "processed_at": "2025-07-25T16:24:31.756Z"
+  }
+}
